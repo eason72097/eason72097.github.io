@@ -1,0 +1,1858 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>小說地圖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --bg:#fafafa;--bg-sub:#f0f0f0;--ink:#0a0a0a;--ink-soft:#5a5a5a;--card:#ffffff;--border:#e0e0e0;
+  --zh:#7c3aed;--zh-soft:#ede9fe;--zh-ink:#4c1d95;
+  --en:#e11d48;--en-soft:#ffe4e6;--en-ink:#881337;
+  --lv1:#15803d;--lv2:#b45309;--lv3:#b91c1c;--lib:#2563eb;
+  --shadow:0 16px 48px rgba(0,0,0,.16);
+  --reserve:0px;
+  --display:"Syne","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --body:"Noto Sans TC","Helvetica Neue",Arial,"PingFang TC","Microsoft JhengHei",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c0c0e;--bg-sub:#18181b;--ink:#f4f4f5;--ink-soft:#a1a1aa;--card:#18181b;--border:#2e2e33;
+  --zh:#a78bfa;--zh-soft:#2a1d4d;--zh-ink:#ddd6fe;
+  --en:#fb7185;--en-soft:#4a1a26;--en-ink:#fecdd3;
+  --lv1:#4ade80;--lv2:#fbbf24;--lv3:#f87171;--lib:#60a5fa;
+  --shadow:0 16px 48px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --bg:#0c0c0e;--bg-sub:#18181b;--ink:#f4f4f5;--ink-soft:#a1a1aa;--card:#18181b;--border:#2e2e33;
+  --zh:#a78bfa;--zh-soft:#2a1d4d;--zh-ink:#ddd6fe;
+  --en:#fb7185;--en-soft:#4a1a26;--en-ink:#fecdd3;
+  --lv1:#4ade80;--lv2:#fbbf24;--lv3:#f87171;--lib:#60a5fa;
+  --shadow:0 16px 48px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;padding-inline:20px;padding-block:0 64px}
+body.lang-zh{--acc:var(--zh);--acc-soft:var(--zh-soft);--acc-ink:var(--zh-ink)}
+body.lang-en{--acc:var(--en);--acc-soft:var(--en-soft);--acc-ink:var(--en-ink)}
+@media (min-width:1400px){body.reserve{--reserve:340px}}
+.page{max-width:calc(1240px + var(--reserve));margin:0;padding-right:var(--reserve)}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05;letter-spacing:-.01em}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.25}
+h3{font-weight:700;font-size:1.05rem}
+p{margin:0}
+button{font-family:inherit;font-size:inherit;color:inherit}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.num{font-family:var(--display);font-variant-numeric:tabular-nums}
+
+/* ---- header ---- */
+.hero{padding-block:40px 24px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end}
+.hero .lead{max-width:62ch;color:var(--ink-soft);margin-top:12px}
+.hero .lead b{color:var(--ink);font-weight:500}
+.hero-tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.tbtn{border:1px solid var(--border);background:var(--card);border-radius:6px;padding:6px 10px;font-size:.8rem;cursor:pointer;color:var(--ink-soft)}
+.tbtn[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
+.stamp{display:inline-flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--ink-soft);margin-top:14px}
+.stamp span b{font-family:var(--display);font-weight:700;color:var(--ink)}
+
+/* ---- starters ---- */
+.starters{margin-top:28px;border-top:3px solid var(--ink);padding-top:16px}
+.starters-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.starters-head p{color:var(--ink-soft);font-size:.9rem;max-width:60ch}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:14px}
+.scard{text-align:left;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;flex-direction:column;gap:6px;transition:box-shadow .2s,transform .2s;position:relative;overflow:hidden}
+.scard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--sc)}
+.scard:hover{box-shadow:0 4px 18px rgba(0,0,0,.08);transform:translateY(-1px)}
+.scard .who{font-size:.8rem;color:var(--ink-soft);display:flex;justify-content:space-between;gap:8px}
+.scard .who .lang{font-family:var(--display);font-weight:700;color:var(--sc)}
+.scard .book{font-weight:700;font-size:1.05rem;line-height:1.35}
+.scard .why{font-size:.85rem;color:var(--ink-soft);line-height:1.55}
+.scard .size{font-size:.72rem;color:var(--ink-soft);border:1px solid var(--border);border-radius:4px;padding:0 6px;align-self:flex-start}
+
+/* ---- control bar ---- */
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--border);padding-block:12px 10px;margin-top:36px}
+.bar-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;padding-right:118px}
+/* fold / summary row */
+.bar-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:absolute;right:0;top:12px}
+.bar .fold{margin-left:auto;flex:none;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 12px;font-family:var(--display);font-weight:700;font-size:.8rem;letter-spacing:.02em;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.bar .fold:hover{background:var(--ink);color:var(--bg)}
+.bar .fold .ar{display:inline-block;transition:transform .2s}
+.bar.fold .bar-head .fold .ar{transform:rotate(180deg)}
+.bar-row .fold-in{display:none}
+.bar-sum{display:none;font-size:.82rem;color:var(--ink-soft);gap:6px 10px;flex-wrap:wrap;align-items:center;min-width:0;cursor:pointer;line-height:1.5}
+.bar-sum b{font-family:var(--display);font-weight:800;color:var(--ink);font-size:.95rem}
+.bar-sum .f{border:1px solid var(--acc);color:var(--acc-ink);background:var(--acc-soft);border-radius:999px;padding:0 8px;font-size:.72rem;white-space:nowrap}
+.bar-sum .sep{color:var(--border)}
+.bar.fold{padding-block:8px}
+.bar.fold .bar-head{position:static;justify-content:space-between;flex-wrap:nowrap;align-items:flex-start}
+.bar.fold .bar-sum{flex:1 1 auto;padding-top:4px}
+.bar.fold .bar-sum{display:flex}
+.bar.fold .bar-body{display:none}
+.langs{display:flex;border:1.5px solid var(--ink);border-radius:8px;overflow:hidden}
+.langs button{border:0;background:transparent;padding:8px 16px;cursor:pointer;font-family:var(--display);font-weight:800;font-size:1rem;letter-spacing:.02em;display:flex;align-items:baseline;gap:6px}
+.langs button small{font-family:var(--body);font-weight:500;font-size:.75rem;color:var(--ink-soft)}
+.langs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.langs button[aria-pressed="true"] small{color:var(--bg);opacity:.75}
+.slider{flex:1 1 380px;min-width:260px}
+.slider-top{display:flex;justify-content:space-between;align-items:baseline;font-size:.8rem;color:var(--ink-soft)}
+.slider-top .range{font-family:var(--display);font-weight:800;font-size:1.15rem;color:var(--acc)}
+.dual{position:relative;height:36px;margin-top:2px}
+.dual .track{position:absolute;left:8px;right:8px;top:15px;height:6px;border-radius:3px;background:var(--bg-sub);border:1px solid var(--border)}
+.dual .fill{position:absolute;top:15px;height:6px;border-radius:3px;background:var(--acc)}
+.dual input[type=range]{position:absolute;left:0;right:0;top:0;width:100%;height:36px;margin:0;-webkit-appearance:none;appearance:none;background:transparent;pointer-events:none}
+.dual input[type=range]::-webkit-slider-runnable-track{height:36px;background:transparent}
+.dual input[type=range]::-moz-range-track{height:36px;background:transparent}
+.dual input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;pointer-events:auto;width:20px;height:20px;margin-top:8px;border-radius:50%;background:var(--card);border:3px solid var(--acc);cursor:grab;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.dual input[type=range]::-moz-range-thumb{pointer-events:auto;width:14px;height:14px;border-radius:50%;background:var(--card);border:3px solid var(--acc);cursor:grab;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.ticks{display:grid;grid-template-columns:repeat(6,1fr);font-size:.72rem;color:var(--ink-soft);margin-top:-4px}
+.ticks button{border:0;background:transparent;padding:2px 0;cursor:pointer;text-align:center;color:inherit;font-family:var(--display);font-weight:700;font-size:.72rem;letter-spacing:.02em}
+.ticks button.on{color:var(--acc)}
+.ticks button:hover{color:var(--ink)}
+.search{display:flex;align-items:center;gap:6px}
+.search input{border:1px solid var(--border);background:var(--card);border-radius:8px;padding:7px 10px;font-family:inherit;font-size:.9rem;width:170px;color:var(--ink)}
+.count{font-size:.8rem;color:var(--ink-soft);white-space:nowrap}
+.count b{font-family:var(--display);font-weight:800;color:var(--ink);font-size:1rem}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.75rem;color:var(--ink-soft);margin-top:8px;align-items:center}
+.legend .lv{display:inline-flex;align-items:center;gap:4px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex:none}
+.dot.l1{background:var(--lv1)}.dot.l2{background:var(--lv2)}.dot.l3{background:var(--lv3)}
+.legend .chip{pointer-events:none;font-size:.72rem;padding:1px 8px}
+
+/* ---- matrix ---- */
+.mwrap{overflow-x:auto;margin-top:10px;padding-bottom:6px}
+.matrix{display:grid;grid-template-columns:200px repeat(var(--cols),minmax(160px,1fr));min-width:640px}
+.matrix > div{border-bottom:1px solid var(--border);padding:12px 10px}
+.matrix .hd{position:sticky;top:0;padding-top:14px;border-bottom:2px solid var(--ink)}
+.matrix .hd .era{font-family:var(--display);font-weight:800;font-size:1.35rem;letter-spacing:-.01em;line-height:1.1}
+.matrix .hd .hnote{font-size:.72rem;color:var(--ink-soft);margin-top:2px}
+.matrix .gl{padding-left:0}
+.matrix .gl .gname{font-weight:700;line-height:1.3}
+.matrix .gl .gen{font-family:var(--display);font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:var(--acc);margin-top:2px;font-weight:700}
+.matrix .gl .gdesc{font-size:.76rem;color:var(--ink-soft);line-height:1.5;margin-top:6px}
+.matrix .cell{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+.matrix .cell.empty::after{content:"—";color:var(--border)}
+.matrix .odd{background:var(--bg-sub)}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--acc);border-radius:999px;padding:3px 10px 3px 8px;font-size:.84rem;background:var(--card);color:var(--ink);cursor:pointer;line-height:1.4;transition:transform .12s,box-shadow .12s;white-space:nowrap}
+.chip:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.12)}
+.chip.primary{background:var(--acc);color:#fff;border-color:var(--acc)}
+.chip.primary .dot{outline:1.5px solid rgba(255,255,255,.85)}
+.chip .tg{font-size:.66rem;opacity:.7;font-weight:500}
+.chip.primary .tg{opacity:.85}
+.chip.dim{opacity:.28}
+.matrix .gl.stuck{position:sticky;left:0;background:var(--bg);z-index:1}
+
+.matrix .cell.hotrow,.matrix .gl.hotrow{background:var(--acc-soft)}
+.matrix .gl.hotrow .gen{color:var(--acc-ink)}
+.chip .tg .hot{color:inherit;font-weight:700;margin-left:2px}
+.legend button.chip#hot-only[aria-pressed="true"]{background:var(--en);border-color:var(--en);color:#fff}
+.pdpill.hot{color:var(--en);border:1px solid var(--en)}
+.chip .ad{font-size:.62rem;letter-spacing:.06em;color:var(--acc);background:var(--acc-soft);border-radius:3px;padding:0 4px;margin-left:2px;font-weight:600}
+.chip.primary .ad{background:rgba(255,255,255,.22);color:#fff}
+.adbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.78rem;color:var(--ink-soft);margin-top:8px}
+.adbar .chip{font-size:.74rem;padding:1px 9px;cursor:pointer;pointer-events:auto}
+.adbar .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.adbar .chip[aria-pressed="true"] .ad{background:rgba(255,255,255,.2);color:var(--bg)}
+.wlist .adl{display:block;font-size:.8rem;margin-top:3px;line-height:1.6}
+.wlist .adk,.adx .adk{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.04em;color:var(--acc-ink);background:var(--acc-soft);border-radius:3px;padding:0 5px;margin-right:4px;vertical-align:1px}
+.wlist .adl .yr2{font-family:var(--display);font-variant-numeric:tabular-nums;color:var(--ink-soft);margin-left:4px}
+.wlist .adl .adn{color:var(--ink-soft)}
+.wlist .adl .adi{display:inline-block;margin-right:10px}
+.modal .adx{margin-top:12px;font-size:.8rem;line-height:1.6}
+.modal .adx .eyebrow{margin-bottom:4px}
+.pdpill.ad{color:var(--acc-ink);background:var(--acc-soft);border:1px solid transparent}
+/* ---- explainer ---- */
+.section{margin-top:48px}
+.section > .eyebrow{margin-bottom:6px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:16px}
+.cols .col h3{display:flex;align-items:center;gap:8px}
+.cols .col h3 .sw{width:14px;height:14px;border-radius:3px;display:inline-block}
+.cols .col p{margin-top:8px;color:var(--ink);max-width:60ch}
+.cols .col p + p{margin-top:10px}
+.eratable{width:100%;border-collapse:collapse;margin-top:16px;font-size:.88rem}
+.eratable th{text-align:left;font-family:var(--display);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);padding:8px 10px;border-bottom:2px solid var(--ink);font-weight:700}
+.eratable td{padding:10px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}
+.eratable td:first-child{font-family:var(--display);font-weight:800;font-size:1rem;white-space:nowrap;width:110px}
+.eratable td.zh{border-left:3px solid var(--zh)}
+.eratable td.en{border-left:3px solid var(--en)}
+.twrap{overflow-x:auto}
+.note{background:var(--bg-sub);border-radius:8px;padding:14px 16px;font-size:.86rem;color:var(--ink-soft);line-height:1.65;margin-top:16px;max-width:76ch}
+.note b{color:var(--ink);font-weight:600}
+.note code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:0 5px}
+
+
+/* ---- resources ---- */
+#resources{scroll-margin-top:150px}
+.res-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.res-head p{color:var(--ink-soft);font-size:.9rem;max-width:62ch;margin-top:6px}
+.res-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:18px}
+.rgroup{border-top:3px solid var(--rc);padding-top:10px}
+.rgroup h3{display:flex;align-items:baseline;gap:8px;font-size:1rem}
+.rgroup h3 .en{font-family:var(--display);font-weight:700;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rc)}
+.rgroup .gdesc{font-size:.8rem;color:var(--ink-soft);margin:4px 0 10px;line-height:1.5}
+.rlist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.rcard{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px;transition:box-shadow .2s}
+.rcard:hover{box-shadow:0 3px 14px rgba(0,0,0,.08)}
+.rcard .rt{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.rcard a.rn{font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--rc)}
+.rcard a.rn:hover{color:var(--rc)}
+.rcard .url{font-family:var(--display);font-size:.7rem;color:var(--ink-soft);word-break:break-all}
+.rcard .rd{font-size:.84rem;line-height:1.55;margin-top:4px}
+.rcard .rtags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.rtag{font-size:.68rem;padding:0 7px;border-radius:4px;border:1px solid var(--border);color:var(--ink-soft)}
+.rtag.ok{color:var(--lv1);border-color:var(--lv1)}
+.rtag.warn{color:var(--lv2);border-color:var(--lv2)}
+.rtag.bad{color:var(--lv3);border-color:var(--lv3)}
+.rtag.pay{color:var(--acc-ink);background:var(--acc-soft);border-color:transparent}
+.rcard .rnote{font-size:.76rem;color:var(--ink-soft);margin-top:5px;line-height:1.5}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:18px}
+.step{background:var(--bg-sub);border-radius:8px;padding:10px 12px;font-size:.84rem;line-height:1.55}
+.step b{display:block;font-family:var(--display);font-weight:800;color:var(--acc);font-size:.8rem;letter-spacing:.04em;margin-bottom:2px}
+.pdpill{font-size:.68rem;padding:0 7px;border-radius:4px;font-weight:600}
+.pdpill.pd{color:var(--lv1);border:1px solid var(--lv1)}
+.pdpill.cr{color:var(--ink-soft);border:1px solid var(--border)}
+.chip .tg .pd{color:inherit;font-weight:700;margin-left:2px}
+.chip.primary .tg .pd{color:#fff}
+.legend button.chip{pointer-events:auto;cursor:pointer}
+.legend button.chip[aria-pressed="true"]{background:var(--lv1);border-color:var(--lv1);color:#fff}
+.modal .get{margin-top:14px;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.84rem;line-height:1.6}
+.modal .get b{color:var(--ink)}
+.modal .get a{color:var(--acc);font-weight:600;text-decoration:none;border-bottom:1px solid var(--acc)}
+
+.media-head{margin-top:36px;padding-top:18px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.media-head p{color:var(--ink-soft);font-size:.9rem;max-width:62ch;margin-top:6px}
+.rcard .rgen{font-size:.7rem;color:var(--ink-soft);margin-top:5px}
+.rcard .rgen span{display:inline-block;background:var(--bg-sub);border-radius:3px;padding:0 6px;margin:2px 4px 0 0}
+.res-jump{font-size:.8rem;color:var(--ink-soft)}
+.res-jump a{color:var(--acc);text-decoration:none;font-weight:600}
+.modal .rel{margin-top:14px;font-size:.84rem;line-height:1.6}
+.modal .rel .eyebrow{margin-bottom:4px}
+.modal .rel a{color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--acc);font-weight:600}
+.modal .rel .kind{font-size:.7rem;color:var(--ink-soft);margin-left:6px}
+/* ---- modal ---- */
+.overlay{position:fixed;inset:0;right:var(--reserve);background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;padding:6vh 16px 16px;z-index:50;overflow-y:auto}
+.overlay[hidden]{display:none}
+.modal{background:var(--card);color:var(--ink);border-radius:14px;max-width:700px;width:100%;box-shadow:var(--shadow);border-top:8px solid var(--acc);padding:24px 28px 28px;position:relative}
+.modal .close{position:absolute;top:12px;right:12px;border:1px solid var(--border);background:var(--bg);border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1.1rem;line-height:1}
+.modal .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:.8rem;color:var(--ink-soft);margin-bottom:8px}
+.modal .meta .pill{background:var(--acc-soft);color:var(--acc-ink);border-radius:4px;padding:1px 8px;font-weight:500}
+.modal h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:900;font-family:var(--body)}
+.modal h2 .alt{font-family:var(--display);font-weight:700;font-size:.62em;color:var(--ink-soft);margin-left:10px;letter-spacing:.01em}
+.modal .lvl{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;margin-top:6px;color:var(--ink-soft)}
+.modal .bio{margin-top:14px;line-height:1.75;max-width:62ch}
+.modal .start{margin-top:16px;border-left:4px solid var(--acc);padding:8px 14px;background:var(--bg-sub);border-radius:0 8px 8px 0}
+.modal .start .eyebrow{color:var(--acc)}
+.modal .start .bk{font-weight:700;font-size:1.05rem}
+.modal .works{margin-top:18px}
+.modal .works .eyebrow{margin-bottom:6px}
+.wlist{list-style:none;padding:0;margin:0;border-top:1px solid var(--border)}
+.wlist li{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);align-items:baseline}
+.wlist .yr{font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums;font-size:1rem}
+.wlist .yr.out{color:var(--ink-soft);font-weight:500}
+.wlist .ttl{font-weight:600}
+.wlist .ttl.star::after{content:"先讀";font-size:.66rem;font-weight:600;color:var(--acc);border:1px solid var(--acc);border-radius:4px;padding:0 5px;margin-left:8px;vertical-align:2px}
+.wlist .org{color:var(--ink-soft);font-style:italic;font-size:.88rem;margin-left:6px;font-family:var(--display);font-weight:500}
+.wlist .nt{display:block;font-size:.8rem;color:var(--ink-soft)}
+.modal .kw{margin-top:16px;font-size:.8rem;color:var(--ink-soft)}
+.modal .kw code{font-family:inherit;background:var(--bg-sub);border-radius:4px;padding:1px 7px;margin-right:6px;display:inline-block;margin-top:4px;color:var(--ink)}
+
+@media (max-width:720px){
+  body{padding-inline:16px}
+  .hero{grid-template-columns:1fr;padding-top:28px}
+  .hero-tools{justify-content:flex-start}
+  .bar{padding-block:8px}
+  .bar-head{position:static}
+  .bar:not(.fold) .bar-head{display:none}
+  .bar-row .fold-in{display:inline-flex}
+  .bar-row{padding-right:0;gap:12px}
+  .langs button{padding:6px 12px;font-size:.92rem}
+  .search{flex:1 1 160px}
+  .search input{width:100%}
+  .legend{font-size:.72rem;gap:8px 10px}
+  .adbar{font-size:.74rem}
+  .matrix{grid-template-columns:150px repeat(var(--cols),minmax(150px,1fr))}
+  .modal{padding:20px 18px 22px}
+  .wlist li{grid-template-columns:54px 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+
+<div class="page">
+  <header class="hero">
+    <div>
+      <div class="eyebrow">Novel Map · 架構版 v0.5.1</div>
+      <h1>小說地圖</h1>
+      <p class="lead">先看<b>類別</b>，再拉<b>年代</b>，點<b>作者</b>看他寫過什麼、從哪本開始。中文世界與英文世界各一張表；每個類別只放最有代表性的幾位，之後再慢慢加。</p>
+      <div class="stamp"><span>中文 <b id="stat-zh">0</b> 位</span><span>英文 <b id="stat-en">0</b> 位</span><span>作品 <b id="stat-works">0</b> 部</span><span>公版作者 <b id="stat-pd">0</b> 位</span><span>暢銷標記 <b id="stat-hot">0</b> 位</span><span>有改編 <b id="stat-ad">0</b> 位</span><span>v0.5.1 · 2026-09-16</span></div>
+    </div>
+    <div class="hero-tools">
+      <a class="tbtn" href="#resources" style="text-decoration:none;font-weight:700;border-color:var(--ink);color:var(--ink)">找書資源 ↓</a>
+      <button class="tbtn" id="btn-reserve" aria-pressed="true" title="在寬螢幕右側留 340px 給評論面板">右側留白：開</button>
+      <button class="tbtn" id="btn-theme" aria-pressed="false">深色</button>
+    </div>
+  </header>
+
+  <section class="starters" aria-labelledby="st-h">
+    <div class="starters-head">
+      <h2 id="st-h">先從這 8 本開始</h2>
+      <p>不想被下面那張大表淹沒的話，這裡各挑四本：都是薄的、好讀的、而且讀完就知道那個類別長什麼樣。點卡片可看作者詳情。</p>
+    </div>
+    <div class="sgrid" id="starters"></div>
+  </section>
+
+  <div class="bar" id="bar">
+    <div class="bar-head" id="bar-head">
+      <div class="bar-sum" id="bar-sum" title="點一下展開選單"></div>
+      <button class="fold" id="bar-fold" aria-expanded="true" aria-controls="bar-body" title="收折／展開篩選選單">收折選單 <span class="ar">▴</span></button>
+    </div>
+    <div class="bar-body" id="bar-body">
+    <div class="bar-row">
+      <div class="langs" role="tablist" aria-label="語言世界">
+        <button role="tab" id="lang-zh" aria-pressed="true">中文世界 <small>原創</small></button>
+        <button role="tab" id="lang-en" aria-pressed="false">英文世界 <small>台灣有譯本</small></button>
+      </div>
+      <div class="slider">
+        <div class="slider-top"><span>年代（拉兩端）</span><span class="range" id="range-label">全部</span></div>
+        <div class="dual" id="dual">
+          <div class="track"></div><div class="fill" id="fill"></div>
+          <input type="range" id="lo" min="0" max="5" step="1" value="0" aria-label="起始年代">
+          <input type="range" id="hi" min="0" max="5" step="1" value="5" aria-label="結束年代">
+        </div>
+        <div class="ticks" id="ticks"></div>
+      </div>
+      <div class="search"><input type="search" id="q" placeholder="找作者或書名" aria-label="搜尋作者或書名"></div>
+      <div class="count">顯示 <b id="cnt">0</b> 位作者</div>
+      <a class="tbtn" href="#resources" style="text-decoration:none">找書資源 ↓</a>
+      <button class="fold fold-in" id="bar-fold2" aria-controls="bar-body" title="收折篩選選單">收折選單 <span class="ar">▴</span></button>
+    </div>
+    <div class="legend">
+      <span class="lv"><i class="dot l1"></i>好讀</span><span class="lv"><i class="dot l2"></i>中等</span><span class="lv"><i class="dot l3"></i>有挑戰</span>
+      <span>｜</span>
+      <span class="chip primary">實心 = 代表作在這個年代</span><span class="chip">空心 = 這個年代也有作品</span>
+      <span>｜ 小字是地區：<span id="legend-tags"></span></span>
+      <span>｜</span>
+      <button class="chip" id="pd-only" aria-pressed="false" title="只顯示作者過世超過 50 年、作品已進入公共領域的人">只看公版（免費）</button>
+      <button class="chip" id="hot-only" aria-pressed="false" title="只顯示各年代的暢銷、現象級作者（含其他列裡標了「熱」的人）">只看暢銷（熱）</button>
+    </div>
+    <div class="adbar" id="adbar"><span>有改編成：</span></div>
+    </div>
+  </div>
+
+  <div class="mwrap"><div class="matrix" id="matrix"></div></div>
+
+  <section class="section" id="resources" aria-labelledby="res-h">
+    <div class="res-head">
+      <div>
+        <div class="eyebrow">Where to get the books</div>
+        <h2 id="res-h">找書資源：免費、借閱、付費</h2>
+        <p class="res-jump" style="margin-top:4px">本區另有 <a href="#media">影音與 Podcast ↓</a></p>
+        <p>三種來源對應三種書：作者過世超過 50 年的<b>公版書</b>免費下載；還在版權內的書<b>用圖書館借</b>（免費，但要用它們的 app 看）；想留在自己書櫃裡的就<b>買</b>。點作者詳情會直接告訴你那位作者屬於哪一種。</p>
+      </div>
+      <div class="langs" role="tablist" aria-label="資源語言">
+        <button role="tab" id="res-zh" aria-pressed="true">中文資源</button>
+        <button role="tab" id="res-en" aria-pressed="false">英文資源</button>
+      </div>
+    </div>
+    <div class="res-groups" id="res-groups"></div>
+    <div class="steps" id="res-steps"></div>
+
+    <div class="media-head" id="media">
+      <div>
+        <div class="eyebrow">Watch &amp; listen</div>
+        <h2>影音與 Podcast：說書、講座、有聲書</h2>
+        <p>讀不下去或還沒決定要不要讀的時候，先聽別人講一遍。這裡挑的是<b>還在更新、以小說為主</b>的頻道與節目；每張卡標了它最適合搭配地圖上的哪幾個類別，作者詳情頁也會直接列出相關的頻道。語言切換跟上面共用。</p>
+      </div>
+      <div class="res-jump">↑ <a href="#resources">回到找書資源</a></div>
+    </div>
+    <div class="res-groups" id="media-groups"></div>
+  </section>
+
+  <section class="section" aria-labelledby="ex-h">
+    <div class="eyebrow">How to read the map</div>
+    <h2 id="ex-h">看懂分類：中文世界和英文世界的書架不一樣</h2>
+    <div class="cols">
+      <div class="col">
+        <h3><span class="sw" style="background:var(--en)"></span>英文世界：文學 vs. 類型</h3>
+        <p>英美書店把小說切成兩大塊：<b>文學小說</b> literary fiction 重人物、文字、主題，沒有固定公式；<b>類型小說</b> genre fiction 各有自己的規則和讀者——推理 mystery、驚悚 thriller、科幻 science fiction、奇幻 fantasy、恐怖 horror、愛情 romance、歷史 historical、青少年 YA。類型分得很細，很多讀者只追一類，一輩子讀幾百本推理也不奇怪。</p>
+        <p>19 世紀的作品（奧斯汀、狄更斯、勃朗特）通常另外叫「經典」classics，這張表把它們放在文學小說那一列的最左邊。</p>
+      </div>
+      <div class="col">
+        <h3><span class="sw" style="background:var(--zh)"></span>中文世界：多了一條「地域」軸</h3>
+        <p>類型小說的分法和英文差不多，但有兩個中文獨有的東西：<b>武俠</b>（1950–70 年代港台的黃金期，金庸、古龍）和規模巨大的<b>網路小說</b>（先在 BBS 或網站連載，動輒上百萬字，改編劇一部接一部）。</p>
+        <p>文學小說則習慣依<b>地域</b>分書架：台灣文學、中國當代、香港、馬華（馬來西亞華人）。每個地區的歷史脈絡不同——台灣談日治與戒嚴、中國談文革與改革開放、香港談城市與身分、馬華談雨林與移民——所以這張表把文學小說分成三列，類型小說則不分地區，只在晶片上用小字標出來。</p>
+      </div>
+    </div>
+
+    <div class="twrap">
+    <table class="eratable">
+      <thead><tr><th>年代</th><th>中文世界在發生什麼</th><th>英文世界在發生什麼</th></tr></thead>
+      <tbody id="eratable"></tbody>
+    </table>
+    </div>
+
+    <div class="note">
+      <b>年份</b>是原文第一次出版（或連載開始）的年份，「約」表示只能確定大概；<b>譯名</b>以台灣常見的譯本為準，不同出版社可能不同，搜尋時可以改用原文書名。<b>入門友善度</b>是主觀的：綠色表示句子好讀、篇幅不長、不需要背景知識。晶片右側的小方塊是<b>改編</b>：影＝電影、劇＝影集或電視劇、動＝動畫、漫＝漫畫、舞＝舞台或音樂劇、遊＝遊戲，詳情頁每部作品下面列出改編的名稱、年份與備註；只收主要的、查得到的版本，不求齊全。<b>「熱」</b>標記表示那位作者在他的年代是暢銷或現象級的，不代表評價；三列暢銷列（華文現象、翻譯文學、現象級）以「當時大家都在看」為選入標準。<br>
+      找書時，詳情頁裡的作者名與書名就是搜尋關鍵字；<b>公版</b>的判斷用台灣的規則（作者過世超過 50 年，依 <code>life</code> 欄位自動計算），英文作品的原文公版不代表中譯本公版。<br>
+      要擴充內容：檔案裡的 <code>AUTHORS_ZH</code>／<code>AUTHORS_EN</code> 每位作者是一個物件，加一筆就會自動出現在對的類別和年代欄。
+    </div>
+  </section>
+</div>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-name" id="modal">
+    <button class="close" id="m-close" aria-label="關閉">×</button>
+    <div class="meta" id="m-meta"></div>
+    <h2 id="m-name"></h2>
+    <div class="lvl" id="m-lvl"></div>
+    <p class="bio" id="m-bio"></p>
+    <div class="start"><div class="eyebrow">從這本開始</div><div class="bk" id="m-start"></div></div>
+    <div class="works"><div class="eyebrow">作品年表</div><ul class="wlist" id="m-works"></ul></div>
+    <div class="adx" id="m-adx"></div>
+    <div class="kw" id="m-kw"></div>
+    <div class="rel" id="m-rel"></div>
+    <div class="get" id="m-get"></div>
+  </div>
+</div>
+
+<script>
+// ===== 中文世界 =====
+// 欄位說明：name 作者｜alt 別名或本名｜life 生卒｜region 地區｜tag 晶片上的短標｜level 入門友善度 1 好讀 2 中等 3 有挑戰
+// genre 對應下方 GENRES_ZH 的 id｜bio 一段白話介紹｜start 建議先讀｜works: t 書名, y 原文首次出版年, n 備註, approx 年份為約略
+const GENRES_ZH = [
+  {id:'classic', name:'古典章回小說', en:'classical vernacular novel', desc:'明清時期的長篇，分「回」講故事，開頭常有「話說⋯」。四大名著都在這裡。'},
+  {id:'lit-tw', name:'文學小說・台灣', en:'literary fiction (Taiwan)', desc:'從日治時期到現在的台灣作家。重人物、語言與時代感，情節不一定強。'},
+  {id:'lit-cn', name:'文學小說・中國', en:'literary fiction (China)', desc:'五四白話文運動之後的中國作家，含 1949 年後移居港美的張愛玲。'},
+  {id:'lit-hkmy', name:'文學小說・香港與馬華', en:'literary fiction (Hong Kong & Malaysian Chinese)', desc:'香港本地作家，以及在馬來西亞出生、多半在台灣出版的「馬華」作家。'},
+  {id:'wuxia', name:'武俠', en:'wuxia', desc:'中文獨有的類型：江湖、門派、武功、恩仇。1950–70 年代港台是黃金期。'},
+  {id:'romance', name:'言情・愛情', en:'romance', desc:'以感情線為主的通俗小說。台灣的瓊瑤、香港的亦舒是兩個原型。'},
+  {id:'mystery', name:'推理・犯罪', en:'mystery & crime', desc:'解謎或犯罪過程為主軸。華文推理起步晚，2010 年後才有大量本土作品。'},
+  {id:'sf', name:'科幻・奇幻', en:'science fiction & fantasy', desc:'科學設想或另一個世界的規則。《三體》之後中文科幻才真正被世界看見。'},
+  {id:'historical', name:'歷史小說', en:'historical fiction', desc:'以真實朝代、人物為背景的虛構故事，考據多寡差很大。'},
+  {id:'web', name:'青春・網路小說', en:'web fiction', desc:'先在 BBS 或網站連載再出書。中文世界規模遠大於英文世界，動輒上百萬字。'}
+];
+
+const ERA_NOTES_ZH = ['明清章回', '五四與戰前', '戰後・武俠黃金期', '解嚴與尋根', '網路與類型崛起', '當代'];
+
+const AUTHORS_ZH = [
+  // ---- 古典章回 ----
+  {id:'caoxueqin', name:'曹雪芹', life:'約 1715–1763', region:'清', tag:'古', level:3, genre:'classic',
+   bio:'清代小說家。《紅樓夢》寫一個大家族由盛而衰，被視為中文小說的頂點。篇幅長、人物多，但前幾回讀進去之後很難放下；很多人建議先讀前二十回感受一下。',
+   start:'紅樓夢',
+   works:[{t:'紅樓夢', y:1791, n:'程甲本刊行；此前約 1750 年代以抄本流傳，前八十回為曹雪芹作'}]},
+  {id:'wuchengen', name:'吳承恩', life:'約 1500–1582', region:'明', tag:'古', level:2, genre:'classic',
+   bio:'《西遊記》的作者（學界仍有爭議，一般歸於他）。取經故事人人熟悉，原著的文字比想像中好讀、也更幽默，可以跳著挑喜歡的回目讀。',
+   start:'西遊記',
+   works:[{t:'西遊記', y:1592, n:'世德堂本刊行'}]},
+  {id:'luoguanzhong', name:'羅貫中', life:'約 1330–1400', region:'元末明初', tag:'古', level:2, genre:'classic',
+   bio:'《三國演義》的作者，一般也認為他參與整理了《水滸傳》。三國是中文世界最多人讀過的歷史小說，權謀與戰爭場面到今天仍是各種改編的源頭。',
+   start:'三國演義',
+   works:[{t:'三國演義', y:1522, n:'現存最早刊本（嘉靖本）；成書約在 14 世紀'}, {t:'水滸傳', y:1589, n:'與施耐庵合著或整理；現存較早刊本為明萬曆年間', approx:true}]},
+  {id:'pusongling', name:'蒲松齡', life:'1640–1715', region:'清', tag:'古', level:2, genre:'classic',
+   bio:'《聊齋誌異》是近五百篇文言短篇，狐仙鬼怪的故事背後多半在講人情。因為是短篇，很適合古典入門：一篇一篇挑著讀，讀不下去就換一篇。',
+   start:'聊齋誌異',
+   works:[{t:'聊齋誌異', y:1766, n:'青柯亭刻本刊行；作者生前以抄本流傳'}]},
+
+  // ---- 文學小說・台灣 ----
+  {id:'wuzhuoliu', name:'吳濁流', life:'1900–1976', region:'台灣（新竹）', tag:'台', level:2, genre:'lit-tw',
+   bio:'日治時期出生的新竹作家。《亞細亞的孤兒》用日文寫成，講一個台灣知識分子在日本、中國、台灣之間都找不到歸屬，是「台灣人身分」這個題目最早也最重要的小說。',
+   start:'亞細亞的孤兒',
+   works:[{t:'亞細亞的孤兒', y:1946, n:'日文原作於戰爭末期完成，1946 年在日本出版；中譯本 1962 年'}, {t:'無花果', y:1970, n:'自傳體，記二二八前後'}]},
+  {id:'baixianyong', name:'白先勇', life:'1937–', region:'台灣', tag:'台', level:1, genre:'lit-tw',
+   bio:'外省第二代，寫大時代裡流落台北的人。《臺北人》十四個短篇，每篇一個人物，一篇一篇讀非常好入口；《孽子》是台灣同志文學的起點。',
+   start:'臺北人',
+   works:[{t:'臺北人', y:1971, n:'短篇集'}, {t:'寂寞的十七歲', y:1976, n:'早期短篇集'}, {t:'孽子', y:1983, n:'長篇'}]},
+  {id:'huangchunming', name:'黃春明', life:'1935–', region:'台灣（宜蘭）', tag:'台', level:1, genre:'lit-tw',
+   bio:'鄉土文學的代表。寫小鎮小人物，語言口語、幽默又心酸，很多篇改編成電影（《兒子的大玩偶》《看海的日子》）。',
+   start:'兒子的大玩偶',
+   works:[{t:'兒子的大玩偶', y:1969, n:'短篇集'}, {t:'鑼', y:1974, n:'短篇集'}, {t:'莎喲娜啦・再見', y:1974, n:'中篇'}]},
+  {id:'xiaolihong', name:'蕭麗紅', life:'1950–', region:'台灣（嘉義布袋）', tag:'台', level:1, genre:'lit-tw',
+   bio:'《千江有水千江月》寫台灣鄉間的家族與一段含蓄的感情，語言溫柔，是很多人心中最好讀的台灣小說之一。',
+   start:'千江有水千江月',
+   works:[{t:'桂花巷', y:1977}, {t:'千江有水千江月', y:1981, n:'聯合報長篇小說獎'}]},
+  {id:'liang', name:'李昂', life:'1952–', region:'台灣（鹿港）', tag:'台', level:2, genre:'lit-tw',
+   bio:'寫性別與權力最直接的台灣作家。《殺夫》講一個被家暴的妻子，當年引起極大爭議，現在是課堂經典。',
+   start:'殺夫',
+   works:[{t:'殺夫', y:1983, n:'中篇'}, {t:'迷園', y:1991}, {t:'北港香爐人人插', y:1997, n:'短篇集'}]},
+  {id:'wumingyi', name:'吳明益', life:'1971–', region:'台灣', tag:'台', level:1, genre:'lit-tw',
+   bio:'現在最多外國讀者的台灣作家。自然、記憶、台北的老市場，寫得清楚又有畫面；《天橋上的魔術師》改編成影集。',
+   start:'天橋上的魔術師',
+   works:[{t:'睡眠的航線', y:2007}, {t:'複眼人', y:2011, n:'長篇，已有多國譯本'}, {t:'天橋上的魔術師', y:2011, n:'短篇連作，中華商場'}, {t:'單車失竊記', y:2015, n:'入圍布克國際獎'}, {t:'海風酒店', y:2023}]},
+  {id:'ganyaoming', name:'甘耀明', life:'1972–', region:'台灣（苗栗）', tag:'台', level:1, genre:'lit-tw',
+   bio:'客家背景，把鄉野傳說和歷史揉在一起，被稱為「新鄉土」。故事性很強，《邦查女孩》寫花蓮山林裡的伐木隊，很好讀。',
+   start:'邦查女孩',
+   works:[{t:'殺鬼', y:2009}, {t:'邦查女孩', y:2015}, {t:'成為真正的人', y:2021, n:'布農少年與山難'}]},
+  {id:'chensihong', name:'陳思宏', life:'1976–', region:'台灣（彰化永靖）', tag:'台', level:1, genre:'lit-tw',
+   bio:'旅居柏林。《鬼地方》寫彰化鄉下一個家族的秘密，節奏快、句子短，得台灣文學獎金典獎年度大獎，是近年最容易推薦給沒讀過台灣小說的人的一本。',
+   start:'鬼地方',
+   works:[{t:'鬼地方', y:2019}, {t:'佛羅里達變形記', y:2020}, {t:'樓上的好人', y:2022}]},
+  {id:'yangshuangzi', name:'楊双子', life:'1984–', region:'台灣（台中）', tag:'台', level:1, genre:'lit-tw',
+   bio:'「双子」是姊妹兩人共用的筆名。《臺灣漫遊錄》假託為日治時期一位日本女作家的遊記，寫吃、寫鐵道、寫台日兩個女人的關係，2024 年得美國國家圖書獎翻譯文學獎。',
+   start:'臺灣漫遊錄',
+   works:[{t:'花開時節', y:2017}, {t:'臺灣漫遊錄', y:2020, n:'2024 年美國國家圖書獎翻譯文學獎'}]},
+
+  // ---- 文學小說・中國 ----
+  {id:'luxun', name:'魯迅', life:'1881–1936', region:'中國（浙江紹興）', tag:'中', level:2, genre:'lit-cn',
+   bio:'中國現代小說的起點。作品其實都是短篇，篇幅短、句子硬、諷刺很直接；〈阿Q正傳〉〈孔乙己〉〈祝福〉是最常被讀的幾篇。',
+   start:'吶喊',
+   works:[{t:'吶喊', y:1923, n:'短篇集，含〈狂人日記〉〈阿Q正傳〉〈孔乙己〉'}, {t:'彷徨', y:1926, n:'短篇集，含〈祝福〉'}]},
+  {id:'shencongwen', name:'沈從文', life:'1902–1988', region:'中國（湖南）', tag:'中', level:1, genre:'lit-cn',
+   bio:'寫湘西的水、船、渡口和純樸的人。《邊城》很短，文字乾淨，是很多人推薦的第一本中國現代小說。',
+   start:'邊城',
+   works:[{t:'邊城', y:1934, n:'中篇'}]},
+  {id:'laoshe', name:'老舍', life:'1899–1966', region:'中國（北京）', tag:'中', level:1, genre:'lit-cn',
+   bio:'北京話寫作的代表。《駱駝祥子》講一個拉車的年輕人怎麼被城市一點一點磨掉，故事線清楚、口語生動，很好讀。',
+   start:'駱駝祥子',
+   works:[{t:'駱駝祥子', y:1936, n:'雜誌連載 1936–37，單行本 1939'}, {t:'四世同堂', y:1944, n:'三部曲，1944–49 陸續發表'}]},
+  {id:'qianzhongshu', name:'錢鍾書', life:'1910–1998', region:'中國（江蘇無錫）', tag:'中', level:1, genre:'lit-cn',
+   bio:'一輩子只寫了一部長篇。《圍城》講留學回來的方鴻漸在婚姻和職場裡進退兩難，全書都是機智的比喻，「城裡的人想出去，城外的人想進來」就出自這裡。',
+   start:'圍城',
+   works:[{t:'圍城', y:1947}]},
+  {id:'zhangailing', name:'張愛玲', life:'1920–1995', region:'上海 → 香港 → 美國', tag:'中', level:1, genre:'lit-cn',
+   bio:'台灣讀者最熟的中國現代作家（作品都由皇冠出版）。寫上海與香港的男女、家族，冷靜、精準、句句金句。短篇比長篇更容易上手。',
+   start:'傾城之戀',
+   works:[{t:'傾城之戀', y:1943, n:'中篇；收於《傳奇》1944'}, {t:'金鎖記', y:1943, n:'中篇'}, {t:'半生緣', y:1968, n:'由 1950 年的《十八春》改寫'}, {t:'小團圓', y:2009, n:'身後出版'}]},
+  {id:'acheng', name:'阿城', life:'1949–', region:'中國（北京）', tag:'中', level:1, genre:'lit-cn',
+   bio:'「尋根文學」的代表。《棋王》只有三萬字，講文革下鄉時一個癡迷下棋的青年，文字極簡、極好讀，適合當中國當代小說的第一本。',
+   start:'棋王',
+   works:[{t:'棋王', y:1984, n:'中篇；與〈樹王〉〈孩子王〉合稱「三王」'}]},
+  {id:'moyan', name:'莫言', life:'1955–', region:'中國（山東高密）', tag:'中', level:2, genre:'lit-cn',
+   bio:'2012 年諾貝爾文學獎。寫山東高密鄉的家族、戰爭與荒誕，場面大、感官強烈；《紅高粱家族》改編成張藝謀的電影。',
+   start:'紅高粱家族',
+   works:[{t:'紅高粱家族', y:1987}, {t:'豐乳肥臀', y:1996}, {t:'生死疲勞', y:2006, n:'地主死後輪迴為驢、牛、豬⋯'}, {t:'蛙', y:2009, n:'茅盾文學獎'}]},
+  {id:'yuhua', name:'余華', life:'1960–', region:'中國（浙江）', tag:'中', level:1, genre:'lit-cn',
+   bio:'中國當代最好讀的作家。《活著》講一個人一輩子失去所有親人，故事簡單，句子也簡單，卻是很多人的一生之書；改編成張藝謀的電影。',
+   start:'活著',
+   works:[{t:'活著', y:1993, n:'雜誌發表 1992'}, {t:'許三觀賣血記', y:1995}, {t:'兄弟', y:2005, n:'上下部 2005–06'}, {t:'第七天', y:2013}, {t:'文城', y:2021}]},
+  {id:'wangxiaobo', name:'王小波', life:'1952–1997', region:'中國（北京）', tag:'中', level:2, genre:'lit-cn',
+   bio:'活著時沒什麼名氣，過世後成了一代人的偶像。《黃金時代》寫文革時期一對男女的關係，幽默、放肆、反權威，文字節奏很快。',
+   start:'黃金時代',
+   works:[{t:'黃金時代', y:1991, n:'聯合報文學獎中篇小說獎'}, {t:'白銀時代', y:1997}]},
+  {id:'chenchuncheng', name:'陳春成', life:'1990–', region:'中國（福建）', tag:'中', level:1, genre:'lit-cn',
+   bio:'九篇短篇組成的《夜晚的潛水艇》一出版就在兩岸都成為話題，故事奇想、文字乾淨，適合當作「中國新一代」的入口。',
+   start:'夜晚的潛水艇',
+   works:[{t:'夜晚的潛水艇', y:2020, n:'短篇集'}]},
+
+  // ---- 文學小說・香港與馬華 ----
+  {id:'xixi', name:'西西', life:'1937–2022', region:'香港', tag:'港', level:1, genre:'lit-hkmy',
+   bio:'香港最被珍視的作家。《我城》用輕快、童趣的語言寫 1970 年代的香港年輕人，「我城」後來成了香港人指稱香港的代名詞。',
+   start:'我城',
+   works:[{t:'我城', y:1975, n:'報紙連載，1979 年出書'}, {t:'哀悼乳房', y:1992}, {t:'飛氈', y:1996}]},
+  {id:'dongqizhang', name:'董啟章', life:'1967–', region:'香港', tag:'港', level:3, genre:'lit-hkmy',
+   bio:'香港最有野心的長篇小說家，把香港的物件、地圖、街道當主角來寫。結構複雜，適合已經讀了一些再來。',
+   start:'地圖集',
+   works:[{t:'地圖集', y:1997, n:'虛構的香港地圖考證'}, {t:'天工開物・栩栩如真', y:2005, n:'紅樓夢獎評審團獎'}]},
+  {id:'liyongping', name:'李永平', life:'1947–2017', region:'婆羅洲（砂拉越）→ 台灣', tag:'馬', level:3, genre:'lit-hkmy',
+   bio:'生於婆羅洲、在台灣寫作一生，是「馬華文學在台灣」的代表。《吉陵春秋》文字極講究，被稱為現代中文小說語言的一個高點。',
+   start:'吉陵春秋',
+   works:[{t:'吉陵春秋', y:1986}, {t:'大河盡頭', y:2008, n:'上下卷 2008–10'}]},
+  {id:'zhangguixing', name:'張貴興', life:'1956–', region:'砂拉越 → 台灣', tag:'馬', level:2, genre:'lit-hkmy',
+   bio:'寫婆羅洲雨林、華人移民與獵殺，場面濃烈。《野豬渡河》寫日軍佔領時期的砂拉越，得台灣文學獎與紅樓夢獎。',
+   start:'野豬渡河',
+   works:[{t:'群象', y:1998}, {t:'猴杯', y:2000}, {t:'野豬渡河', y:2018}]},
+  {id:'lizishu', name:'黎紫書', life:'1971–', region:'馬來西亞（怡保）', tag:'馬', level:1, genre:'lit-hkmy',
+   bio:'《流俗地》寫馬來西亞小城一個盲眼女子和她身邊的人，語言溫和，故事很好進入，是近年馬華小說最容易推薦的一本。',
+   start:'流俗地',
+   works:[{t:'告別的年代', y:2010}, {t:'流俗地', y:2020}]},
+
+  // ---- 武俠 ----
+  {id:'huanzhulouzhu', name:'還珠樓主', alt:'本名李壽民', life:'1902–1961', region:'中國（四川）', tag:'中', level:3, genre:'wuxia',
+   bio:'民國時期的武俠大家，《蜀山劍俠傳》是後來所有「仙俠」「修仙」故事的源頭：飛劍、法寶、洞天福地都從這裡來。原著極長、文言味重，知道它的位置就好。',
+   start:'蜀山劍俠傳',
+   works:[{t:'蜀山劍俠傳', y:1932, n:'連載 1932–48，未完'}]},
+  {id:'liangyusheng', name:'梁羽生', life:'1924–2009', region:'香港', tag:'港', level:2, genre:'wuxia',
+   bio:'新派武俠的開山者，比金庸早一年開始連載。文人氣重，詩詞多，《白髮魔女傳》《七劍下天山》最有名。',
+   start:'白髮魔女傳',
+   works:[{t:'龍虎鬥京華', y:1954, n:'新派武俠第一部'}, {t:'七劍下天山', y:1956}, {t:'白髮魔女傳', y:1957}, {t:'萍蹤俠影錄', y:1959}]},
+  {id:'jinyong', name:'金庸', alt:'本名查良鏞', life:'1924–2018', region:'香港', tag:'港', level:1, genre:'wuxia',
+   bio:'武俠小說的代名詞。十五部作品從 1955 寫到 1972，之後反覆修訂。故事完整、人物鮮明、歷史背景真實，是最多人推薦的「第一套武俠」。',
+   start:'射鵰英雄傳',
+   works:[{t:'書劍恩仇錄', y:1955}, {t:'射鵰英雄傳', y:1957}, {t:'神鵰俠侶', y:1959}, {t:'倚天屠龍記', y:1961}, {t:'天龍八部', y:1963}, {t:'笑傲江湖', y:1967}, {t:'鹿鼎記', y:1969, n:'連載至 1972，最後一部'}]},
+  {id:'gulong', name:'古龍', alt:'本名熊耀華', life:'1938–1985', region:'台灣', tag:'台', level:1, genre:'wuxia',
+   bio:'台灣武俠的代表。不寫歷史背景，寫浪子、朋友、酒與寂寞，句子短得像電影分鏡。楚留香、陸小鳳、李尋歡都是他的人物。',
+   start:'多情劍客無情劍',
+   works:[{t:'絕代雙驕', y:1966}, {t:'楚留香傳奇', y:1967, n:'原名《鐵血傳奇》'}, {t:'多情劍客無情劍', y:1969}, {t:'歡樂英雄', y:1971}, {t:'陸小鳳傳奇', y:1973, n:'金庸封筆後應《明報》邀稿而寫', approx:true}]},
+  {id:'zhengfeng', name:'鄭丰', alt:'本名陳宇慧', life:'1973–', region:'台灣', tag:'台', level:1, genre:'wuxia',
+   bio:'台灣的女性武俠作家，MIT 畢業、曾任金融業。《天觀雙俠》得全球華文新武俠大賽首獎，被稱為「女版金庸」，是 2000 年後少數還在寫傳統長篇武俠的人。',
+   start:'天觀雙俠',
+   works:[{t:'天觀雙俠', y:2007, n:'全球華文新武俠大賽首獎'}, {t:'靈劍', y:2009, approx:true}]},
+
+  // ---- 言情・愛情 ----
+  {id:'qiongyao', name:'瓊瑤', alt:'本名陳喆', life:'1938–2024', region:'台灣', tag:'台', level:1, genre:'romance',
+   bio:'台灣言情小說的代名詞，六十多部作品幾乎都被改編成電影電視。《窗外》是她的第一部長篇，寫師生戀，半自傳。',
+   start:'窗外',
+   works:[{t:'窗外', y:1963}, {t:'煙雨濛濛', y:1964}, {t:'幾度夕陽紅', y:1964}, {t:'還珠格格', y:1997}]},
+  {id:'yishu', name:'亦舒', life:'1946–', region:'香港', tag:'港', level:1, genre:'romance',
+   bio:'香港都會女性小說的代表，倪匡的妹妹。寫獨立、聰明、會賺錢的女人，句子短、對白利，《我的前半生》《喜寶》《玫瑰的故事》都改編成影視。',
+   start:'我的前半生',
+   works:[{t:'喜寶', y:1979}, {t:'玫瑰的故事', y:1981}, {t:'我的前半生', y:1982}]},
+  {id:'xijuan', name:'席絹', life:'1970–', region:'台灣', tag:'台', level:1, genre:'romance',
+   bio:'1990 年代台灣「租書店言情」的代表作家，《交錯時光的愛戀》是最早的穿越言情之一，帶起一整個世代的言情出版。',
+   start:'交錯時光的愛戀',
+   works:[{t:'交錯時光的愛戀', y:1993}]},
+  {id:'zhangxiaoxian', name:'張小嫻', life:'1967–', region:'香港', tag:'港', level:1, genre:'romance',
+   bio:'1990 年代起最暢銷的港台愛情小說家。《麵包樹上的女人》是她的第一部小說，寫一個女人在麵包和愛情之間的選擇。',
+   start:'麵包樹上的女人',
+   works:[{t:'麵包樹上的女人', y:1994}]},
+
+  // ---- 推理・犯罪 ----
+  {id:'maijia', name:'麥家', life:'1964–', region:'中國（浙江）', tag:'中', level:1, genre:'mystery',
+   bio:'「諜戰小說」的代表，寫密碼破譯者與特務。《暗算》《風聲》都改編成影視；《解密》有二十多國譯本。歸在推理是因為讀起來就是解謎。',
+   start:'解密',
+   works:[{t:'解密', y:2002}, {t:'暗算', y:2003, n:'茅盾文學獎'}, {t:'風聲', y:2007}]},
+  {id:'jiqing', name:'既晴', life:'1975–', region:'台灣', tag:'台', level:2, genre:'mystery',
+   bio:'台灣本格推理的代表之一，也是推理評論家與推廣者。《請把門鎖好》得第四屆皇冠大眾小說獎首獎。',
+   start:'請把門鎖好',
+   works:[{t:'魔法妄想症', y:2000}, {t:'請把門鎖好', y:2002, n:'皇冠大眾小說獎首獎'}]},
+  {id:'chanhokei', name:'陳浩基', life:'1969–', region:'香港', tag:'港', level:1, genre:'mystery',
+   bio:'華文推理近十年最重要的名字。《13・67》用六個倒敘的案子寫一位香港警探和香港的五十年，得台北國際書展大獎，賣出二十多國版權。',
+   start:'13・67',
+   works:[{t:'遺忘・刑警', y:2011, n:'島田莊司推理小說獎首獎'}, {t:'13・67', y:2014}, {t:'網內人', y:2017}]},
+  {id:'zijinchen', name:'紫金陳', life:'1986–', region:'中國（浙江）', tag:'中', level:1, genre:'mystery',
+   bio:'中國「社會派」推理的暢銷代表，作品幾乎全部被改編成劇：《壞小孩》→《隱秘的角落》、《長夜難明》→《沉默的真相》。故事節奏快，很好追。',
+   start:'壞小孩',
+   works:[{t:'無證之罪', y:2014}, {t:'壞小孩', y:2014}, {t:'長夜難明', y:2017}]},
+  {id:'wofu', name:'臥斧', life:'', region:'台灣', tag:'台', level:2, genre:'mystery',
+   bio:'台灣犯罪小說作家，也是編輯與評論者。《碎夢大道》系列以能讀取他人記憶的主角，寫台灣社會的暗面。',
+   start:'碎夢大道',
+   works:[{t:'碎夢大道', y:2014}, {t:'抵達夢土通知我', y:2016}]},
+
+  // ---- 科幻・奇幻 ----
+  {id:'nikuang', name:'倪匡', life:'1935–2022', region:'香港', tag:'港', level:1, genre:'sf',
+   bio:'「衛斯理」系列一百多本，是華文世界最長壽的科幻冒險系列，題材天馬行空、每本都很短，很適合當床頭讀物。',
+   start:'藍血人',
+   works:[{t:'鑽石花', y:1963, n:'衛斯理系列第一部'}, {t:'藍血人', y:1965, approx:true}]},
+  {id:'zhangxiguo', name:'張系國', life:'1944–', region:'台灣', tag:'台', level:2, genre:'sf',
+   bio:'台灣科幻小說的奠基者，本業是電腦科學教授。《棋王》寫一個能預知的小孩被電視節目利用（與阿城的《棋王》同名、內容無關）；《城》三部曲建構了自己的星球史。',
+   start:'星雲組曲',
+   works:[{t:'棋王', y:1975}, {t:'星雲組曲', y:1980, n:'短篇集'}, {t:'五玉碟', y:1983, n:'《城》三部曲第一部'}]},
+  {id:'liucixin', name:'劉慈欣', life:'1963–', region:'中國（山西）', tag:'中', level:2, genre:'sf',
+   bio:'《三體》讓中文科幻第一次拿到雨果獎，也是近二十年最多人讀的中文小說之一。第一部比較慢，第二部《黑暗森林》開始停不下來。',
+   start:'三體',
+   works:[{t:'球狀閃電', y:2004}, {t:'三體', y:2008, n:'雜誌連載 2006；2015 年雨果獎'}, {t:'黑暗森林', y:2008}, {t:'死神永生', y:2010}]},
+  {id:'egoyan', name:'伊格言', life:'1977–', region:'台灣', tag:'台', level:2, genre:'sf',
+   bio:'台灣當代科幻的代表。《噬夢人》寫記憶植入與生化人，《零地點》假設核四發生事故之後的台灣。',
+   start:'零地點',
+   works:[{t:'噬夢人', y:2010}, {t:'零地點', y:2013}]},
+  {id:'haojingfang', name:'郝景芳', life:'1984–', region:'中國（天津）', tag:'中', level:1, genre:'sf',
+   bio:'〈北京折疊〉寫一個被摺成三層的北京，不同階層輪流醒來，得 2016 年雨果獎最佳中短篇。篇幅短，是很好的中文科幻入口。',
+   start:'北京折疊',
+   works:[{t:'流浪蒼穹', y:2011, approx:true}, {t:'北京折疊', y:2012, n:'中篇；2016 年雨果獎'}]},
+
+  // ---- 歷史小說 ----
+  {id:'gaoyang', name:'高陽', alt:'本名許晏駢', life:'1922–1992', region:'台灣', tag:'台', level:2, genre:'historical',
+   bio:'台灣歷史小說的第一人，寫清朝最多。《胡雪巖》三部曲寫紅頂商人的興衰，是很多商界人士的案頭書。',
+   start:'胡雪巖',
+   works:[{t:'胡雪巖', y:1973, n:'三部曲：胡雪巖、紅頂商人、燈火樓台'}, {t:'慈禧全傳', y:1977, approx:true}]},
+  {id:'eryuehe', name:'二月河', alt:'本名凌解放', life:'1945–2018', region:'中國（河南）', tag:'中', level:2, genre:'historical',
+   bio:'「落霞三部曲」寫康熙、雍正、乾隆三朝，每部都是幾十萬字，改編成的《雍正王朝》《康熙王朝》是華人世界最紅的歷史劇。',
+   start:'雍正皇帝',
+   works:[{t:'康熙大帝', y:1985, n:'四卷，1985–89'}, {t:'雍正皇帝', y:1991, n:'三卷，1991–94'}, {t:'乾隆皇帝', y:1994, n:'六卷', approx:true}]},
+  {id:'shishuqing', name:'施叔青', life:'1945–', region:'台灣（鹿港）', tag:'台', level:2, genre:'historical',
+   bio:'李昂的姊姊。「台灣三部曲」從清代鹿港寫到日治、戰後，是用小說寫台灣史最完整的嘗試。',
+   start:'行過洛津',
+   works:[{t:'行過洛津', y:2003, n:'台灣三部曲之一'}, {t:'風前塵埃', y:2008}, {t:'三世人', y:2010}]},
+  {id:'maboyong', name:'馬伯庸', life:'1980–', region:'中國（內蒙古）', tag:'中', level:1, genre:'historical',
+   bio:'把歷史縫隙裡的小事寫成緊湊的類型小說，《長安十二時辰》改編成劇後爆紅。考據扎實、節奏像美劇，是歷史小說裡最好進入的。',
+   start:'長安十二時辰',
+   works:[{t:'風起隴西', y:2005}, {t:'長安十二時辰', y:2017}, {t:'兩京十五日', y:2020}]},
+
+  // ---- 青春・網路小說 ----
+  {id:'pizicai', name:'痞子蔡', alt:'本名蔡智恆', life:'1969–', region:'台灣', tag:'台', level:1, genre:'web',
+   bio:'《第一次的親密接觸》1998 年在 BBS 上連載，是華文網路小說的起點，出版後兩岸都賣翻。',
+   start:'第一次的親密接觸',
+   works:[{t:'第一次的親密接觸', y:1998}, {t:'檞寄生', y:2001, approx:true}]},
+  {id:'giddens', name:'九把刀', alt:'本名柯景騰', life:'1978–', region:'台灣（彰化）', tag:'台', level:1, genre:'web',
+   bio:'台灣網路小說的最大品牌，什麼類型都寫。《那些年，我們一起追的女孩》半自傳，自己導成電影後成了一整代人的青春記憶。',
+   start:'那些年，我們一起追的女孩',
+   works:[{t:'獵命師傳奇', y:2005, n:'長篇系列', approx:true}, {t:'那些年，我們一起追的女孩', y:2006}]},
+  {id:'tonghua', name:'桐華', life:'1980–', region:'中國（陝西）', tag:'中', level:1, genre:'web',
+   bio:'《步步驚心》是穿越言情的代表作，一個現代女子穿越到康熙年間的九子奪嫡，改編劇 2011 年紅遍兩岸。',
+   start:'步步驚心',
+   works:[{t:'步步驚心', y:2005}, {t:'大漠謠', y:2006, approx:true}]},
+  {id:'tianxiabachang', name:'天下霸唱', alt:'本名張牧野', life:'1977–', region:'中國（天津）', tag:'中', level:1, genre:'web',
+   bio:'《鬼吹燈》開創了「盜墓小說」這個類型，摸金校尉、粽子、「雞鳴燈滅不摸金」都從這裡來，之後的《盜墓筆記》也受它影響。',
+   start:'鬼吹燈',
+   works:[{t:'鬼吹燈', y:2006, n:'八部，2006–08'}]},
+  {id:'maoni', name:'貓膩', life:'1977–', region:'中國（湖北）', tag:'中', level:1, genre:'web',
+   bio:'中國網路小說（「網文」）文筆最被稱道的作者之一。《慶餘年》改編劇 2019 年大紅；他的書每部都上百萬字，要有心理準備。',
+   start:'慶餘年',
+   works:[{t:'慶餘年', y:2007}, {t:'間客', y:2009}, {t:'將夜', y:2011}, {t:'擇天記', y:2014}]}
+];
+
+// ===== 英文世界 =====
+// name 台灣常見譯名｜alt 原文姓名｜works: t 台灣譯名（沒有可靠譯名時省略）, o 原文書名, y 原文首次出版年
+const GENRES_EN = [
+  {id:'literary', name:'文學小說・經典與當代', en:'literary fiction & classics', desc:'重人物、文字與主題，不靠固定的類型公式。19 世紀的「經典」也放在這一列。'},
+  {id:'mystery', name:'推理・犯罪', en:'mystery & crime', desc:'有偵探、有謎題、有真相。英文世界分得很細：古典本格、冷硬派、警察程序、心理懸疑。'},
+  {id:'thriller', name:'驚悚・間諜', en:'thriller & spy', desc:'重點是緊張與追逐，不一定有謎題。法律驚悚、科技驚悚、間諜小說都在這裡。'},
+  {id:'sf', name:'科幻・反烏托邦', en:'science fiction & dystopia', desc:'從一個科學或社會的假設推下去會怎樣。反烏托邦 dystopia 是想像一個壞掉的未來社會。'},
+  {id:'fantasy', name:'奇幻', en:'fantasy', desc:'另一個有魔法或神話的世界，有自己的規則。托爾金之後才成為獨立的書架。'},
+  {id:'horror', name:'恐怖', en:'horror', desc:'讓人害怕是目的。從哥德小說的古堡與怪物，到心理恐怖，再到史蒂芬・金。'},
+  {id:'romance', name:'愛情', en:'romance', desc:'感情線是主軸。英文世界的浪漫小說是最大的類型市場之一。'},
+  {id:'historical', name:'歷史小說', en:'historical fiction', desc:'把虛構的人物放進真實的時代，考據講究，很多得大獎的當代小說屬於這一類。'},
+  {id:'ya', name:'青少年・成長', en:'young adult & coming-of-age', desc:'主角是青少年，講長大。篇幅適中、節奏快，常是成年人重新開始讀小說的入口。'}
+];
+
+const ERA_NOTES_EN = ['19 世紀經典', '現代主義', '戰後', '後現代・類型成熟', '全球暢銷書時代', '當代'];
+
+const AUTHORS_EN = [
+  // ---- 文學小說 ----
+  {id:'austen', name:'珍・奧斯汀', alt:'Jane Austen', life:'1775–1817', region:'英國', tag:'英', level:1, genre:'literary',
+   bio:'英國小說的起點之一。寫鄉紳家庭裡的婚姻與金錢，語氣機智諷刺，兩百年後讀起來還是像在看一齣聰明的愛情喜劇。',
+   start:'傲慢與偏見',
+   works:[{t:'理性與感性', o:'Sense and Sensibility', y:1811}, {t:'傲慢與偏見', o:'Pride and Prejudice', y:1813}, {t:'艾瑪', o:'Emma', y:1815}]},
+  {id:'dickens', name:'查爾斯・狄更斯', alt:'Charles Dickens', life:'1812–1870', region:'英國', tag:'英', level:2, genre:'literary',
+   bio:'維多利亞時代最受歡迎的作家，作品多半先在報刊連載，所以情節緊、人物誇張又難忘。篇幅長，可以從《雙城記》或《遠大前程》開始。',
+   start:'遠大前程',
+   works:[{t:'孤雛淚', o:'Oliver Twist', y:1838}, {t:'塊肉餘生記', o:'David Copperfield', y:1850}, {t:'雙城記', o:'A Tale of Two Cities', y:1859}, {t:'遠大前程', o:'Great Expectations', y:1861}]},
+  {id:'cbronte', name:'夏綠蒂・勃朗特', alt:'Charlotte Brontë', life:'1816–1855', region:'英國', tag:'英', level:1, genre:'literary',
+   bio:'《簡愛》用第一人稱寫一個孤女家庭教師的成長與愛情，是英文小說裡最早的「女性自己說話」的聲音之一。妹妹艾蜜莉寫了《咆哮山莊》。',
+   start:'簡愛',
+   works:[{t:'簡愛', o:'Jane Eyre', y:1847}]},
+  {id:'fitzgerald', name:'費茲傑羅', alt:'F. Scott Fitzgerald', life:'1896–1940', region:'美國', tag:'美', level:1, genre:'literary',
+   bio:'「爵士時代」的代言人。《大亨小傳》很薄，寫一個靠可疑財富往上爬的人和他追不到的舊愛，美國夢的光與空都在裡面。',
+   start:'大亨小傳',
+   works:[{t:'塵世樂園', o:'This Side of Paradise', y:1920}, {t:'大亨小傳', o:'The Great Gatsby', y:1925}, {t:'夜未央', o:'Tender Is the Night', y:1934}]},
+  {id:'hemingway', name:'海明威', alt:'Ernest Hemingway', life:'1899–1961', region:'美國', tag:'美', level:1, genre:'literary',
+   bio:'句子短、動詞多、不解釋情緒，影響了之後一百年的英文寫作。《老人與海》一百多頁，是最常被推薦的第一本。1954 年諾貝爾獎。',
+   start:'老人與海',
+   works:[{t:'太陽依舊升起', o:'The Sun Also Rises', y:1926}, {t:'戰地春夢', o:'A Farewell to Arms', y:1929}, {t:'戰地鐘聲', o:'For Whom the Bell Tolls', y:1940}, {t:'老人與海', o:'The Old Man and the Sea', y:1952}]},
+  {id:'steinbeck', name:'史坦貝克', alt:'John Steinbeck', life:'1902–1968', region:'美國', tag:'美', level:1, genre:'literary',
+   bio:'寫經濟大蕭條時期的加州農工與底層人。《人鼠之間》很短、故事集中，很多學校拿來當第一本英文小說；《憤怒的葡萄》是他的代表長篇。1962 年諾貝爾獎。',
+   start:'人鼠之間',
+   works:[{t:'人鼠之間', o:'Of Mice and Men', y:1937}, {t:'憤怒的葡萄', o:'The Grapes of Wrath', y:1939}, {t:'伊甸園東', o:'East of Eden', y:1952}]},
+  {id:'salinger', name:'沙林傑', alt:'J. D. Salinger', life:'1919–2010', region:'美國', tag:'美', level:1, genre:'literary',
+   bio:'一輩子幾乎只靠一本書。《麥田捕手》是一個被退學的十六歲少年三天的碎念，青春期的厭世與溫柔都在裡面。',
+   start:'麥田捕手',
+   works:[{t:'麥田捕手', o:'The Catcher in the Rye', y:1951}, {t:'九個故事', o:'Nine Stories', y:1953, n:'短篇集'}]},
+  {id:'harperlee', name:'哈波・李', alt:'Harper Lee', life:'1926–2016', region:'美國', tag:'美', level:1, genre:'literary',
+   bio:'《梅岡城故事》透過小女孩的眼睛看 1930 年代美國南方的種族審判，是美國最多人讀過的小說之一，也非常適合入門。',
+   start:'梅岡城故事',
+   works:[{t:'梅岡城故事', o:'To Kill a Mockingbird', y:1960}, {t:'守望者', o:'Go Set a Watchman', y:2015, n:'早期草稿，晚年出版'}]},
+  {id:'ishiguro', name:'石黑一雄', alt:'Kazuo Ishiguro', life:'1954–', region:'英國（日裔）', tag:'英', level:1, genre:'literary',
+   bio:'五歲移居英國。文字克制，故事常由一個不太可靠的敘事者慢慢揭開真相。《長日將盡》寫一位老管家的一生，《別讓我走》表面是校園小說。2017 年諾貝爾獎。',
+   start:'別讓我走',
+   works:[{t:'長日將盡', o:'The Remains of the Day', y:1989, n:'布克獎'}, {t:'別讓我走', o:'Never Let Me Go', y:2005}, {t:'克拉拉與太陽', o:'Klara and the Sun', y:2021}]},
+  {id:'hosseini', name:'卡勒德・胡賽尼', alt:'Khaled Hosseini', life:'1965–', region:'美國（阿富汗裔）', tag:'美', level:1, genre:'literary',
+   bio:'《追風箏的孩子》寫阿富汗兩個男孩的友情與背叛，故事性極強，是 2000 年代全球最暢銷的文學小說之一，也是很多人「重新開始讀小說」的那一本。',
+   start:'追風箏的孩子',
+   works:[{t:'追風箏的孩子', o:'The Kite Runner', y:2003}, {t:'燦爛千陽', o:'A Thousand Splendid Suns', y:2007}, {t:'遠山的回音', o:'And the Mountains Echoed', y:2013}]},
+  {id:'martel', name:'楊・馬泰爾', alt:'Yann Martel', life:'1963–', region:'加拿大', tag:'加', level:1, genre:'literary',
+   bio:'《少年 Pi 的奇幻漂流》：一個印度少年和一隻孟加拉虎在救生艇上漂流 227 天。布克獎，李安改編成電影。',
+   start:'少年 Pi 的奇幻漂流',
+   works:[{t:'少年 Pi 的奇幻漂流', o:'Life of Pi', y:2001, n:'布克獎'}]},
+  {id:'rooney', name:'莎莉・魯尼', alt:'Sally Rooney', life:'1991–', region:'愛爾蘭', tag:'愛', level:1, genre:'literary',
+   bio:'「千禧世代的小說家」。《正常人》寫愛爾蘭小鎮兩個年輕人從高中到大學斷斷續續的關係，對話不用引號，讀起來像在偷聽。',
+   start:'正常人',
+   works:[{t:'聊天紀錄', o:'Conversations with Friends', y:2017}, {t:'正常人', o:'Normal People', y:2018}, {t:'美麗的世界，你在哪裡', o:'Beautiful World, Where Are You', y:2021}]},
+  {id:'celesteng', name:'伍綺詩', alt:'Celeste Ng', life:'1980–', region:'美國（華裔）', tag:'美', level:1, genre:'literary',
+   bio:'《無聲告白》從一個華裔家庭女兒的死亡倒推整個家的秘密，2014 年亞馬遜年度選書第一名；《星星之火》改編成影集。',
+   start:'無聲告白',
+   works:[{t:'無聲告白', o:'Everything I Never Told You', y:2014}, {t:'星星之火', o:'Little Fires Everywhere', y:2017}]},
+
+  // ---- 推理・犯罪 ----
+  {id:'doyle', name:'亞瑟・柯南・道爾', alt:'Arthur Conan Doyle', life:'1859–1930', region:'英國', tag:'英', level:1, genre:'mystery',
+   bio:'福爾摩斯的作者。四部長篇、五十六個短篇，短篇尤其適合入門，一篇二十分鐘。',
+   start:'福爾摩斯冒險史',
+   works:[{t:'血字的研究', o:'A Study in Scarlet', y:1887, n:'福爾摩斯首次登場'}, {t:'福爾摩斯冒險史', o:'The Adventures of Sherlock Holmes', y:1892, n:'短篇集'}, {t:'巴斯克維爾的獵犬', o:'The Hound of the Baskervilles', y:1902}]},
+  {id:'christie', name:'阿嘉莎・克莉絲蒂', alt:'Agatha Christie', life:'1890–1976', region:'英國', tag:'英', level:1, genre:'mystery',
+   bio:'「謀殺天后」，史上最暢銷的小說家之一。白羅與瑪波小姐是她的兩大偵探；《一個都不留》是純粹的謎題，沒有偵探也讓人放不下。',
+   start:'東方快車謀殺案',
+   works:[{t:'史岱爾莊謀殺案', o:'The Mysterious Affair at Styles', y:1920, n:'白羅首次登場'}, {t:'羅傑・艾克洛命案', o:'The Murder of Roger Ackroyd', y:1926}, {t:'東方快車謀殺案', o:'Murder on the Orient Express', y:1934}, {t:'一個都不留', o:'And Then There Were None', y:1939}]},
+  {id:'chandler', name:'雷蒙・錢德勒', alt:'Raymond Chandler', life:'1888–1959', region:'美國', tag:'美', level:2, genre:'mystery',
+   bio:'「冷硬派」偵探小說的代表，私家偵探馬羅走在洛杉磯的黑夜裡。重點不是謎題，是文字與氣氛；村上春樹是他的粉絲，還親自翻譯過。',
+   start:'漫長的告別',
+   works:[{t:'大眠', o:'The Big Sleep', y:1939}, {t:'漫長的告別', o:'The Long Goodbye', y:1953}]},
+  {id:'flynn', name:'吉莉安・弗琳', alt:'Gillian Flynn', life:'1971–', region:'美國', tag:'美', level:1, genre:'mystery',
+   bio:'《控制》讓「不可靠敘事者」的婚姻驚悚成為 2010 年代的暢銷公式，大衛・芬奇改編成電影。',
+   start:'控制',
+   works:[{t:'利器', o:'Sharp Objects', y:2006}, {t:'控制', o:'Gone Girl', y:2012}]},
+  {id:'horowitz', name:'安東尼・赫洛維茲', alt:'Anthony Horowitz', life:'1955–', region:'英國', tag:'英', level:1, genre:'mystery',
+   bio:'古典本格推理在當代最會玩的人。《喜鵲謀殺案》是「書中書」：一本推理小說的手稿，和圍繞它的真實謀殺。也獲授權寫過新的福爾摩斯。',
+   start:'喜鵲謀殺案',
+   works:[{t:'絲之屋', o:'The House of Silk', y:2011, n:'官方授權的福爾摩斯新作'}, {t:'喜鵲謀殺案', o:'Magpie Murders', y:2016}, {t:'關鍵句是死亡', o:'The Sentence Is Death', y:2018}]},
+  {id:'osman', name:'理查・歐斯曼', alt:'Richard Osman', life:'1970–', region:'英國', tag:'英', level:1, genre:'mystery',
+   bio:'英國電視主持人，《週四謀殺俱樂部》寫養老村四個老人組隊破案，溫暖幽默，2020 年代最暢銷的推理系列。',
+   start:'週四謀殺俱樂部',
+   works:[{t:'週四謀殺俱樂部', o:'The Thursday Murder Club', y:2020}, {o:'The Man Who Died Twice', y:2021, n:'系列第二集'}]},
+
+  // ---- 驚悚・間諜 ----
+  {id:'lecarre', name:'約翰・勒卡雷', alt:'John le Carré', life:'1931–2020', region:'英國', tag:'英', level:2, genre:'thriller',
+   bio:'真的當過英國情報員。寫冷戰間諜的灰色與背叛，沒有英雄，只有疲憊的人；《冷戰諜魂》是最好的起點。',
+   start:'冷戰諜魂',
+   works:[{t:'冷戰諜魂', o:'The Spy Who Came in from the Cold', y:1963}, {t:'鍋匠、裁縫、士兵、間諜', o:'Tinker Tailor Soldier Spy', y:1974}, {t:'夜班經理', o:'The Night Manager', y:1993}]},
+  {id:'harris', name:'湯瑪斯・哈里斯', alt:'Thomas Harris', life:'1940–', region:'美國', tag:'美', level:1, genre:'thriller',
+   bio:'創造了漢尼拔・萊克特。《沉默的羔羊》是連續殺人犯驚悚的原型，電影拿了五項奧斯卡。',
+   start:'沉默的羔羊',
+   works:[{t:'紅龍', o:'Red Dragon', y:1981}, {t:'沉默的羔羊', o:'The Silence of the Lambs', y:1988}, {t:'人魔', o:'Hannibal', y:1999}]},
+  {id:'crichton', name:'麥可・克萊頓', alt:'Michael Crichton', life:'1942–2008', region:'美國', tag:'美', level:1, genre:'thriller',
+   bio:'哈佛醫學院出身，寫「科技驚悚」：把真實科學推到出事的邊緣。《侏羅紀公園》就是他，適合理工背景的讀者。',
+   start:'侏羅紀公園',
+   works:[{t:'天外病菌', o:'The Andromeda Strain', y:1969}, {t:'侏羅紀公園', o:'Jurassic Park', y:1990}, {t:'奈米獵殺', o:'Prey', y:2002}]},
+  {id:'danbrown', name:'丹・布朗', alt:'Dan Brown', life:'1964–', region:'美國', tag:'美', level:1, genre:'thriller',
+   bio:'《達文西密碼》把藝術史、宗教陰謀和追逐戰揉成 2000 年代最暢銷的小說，章節極短，一翻就停不下來。',
+   start:'達文西密碼',
+   works:[{t:'天使與魔鬼', o:'Angels & Demons', y:2000}, {t:'達文西密碼', o:'The Da Vinci Code', y:2003}, {t:'起源', o:'Origin', y:2017}]},
+  {id:'hawkins', name:'寶拉・霍金斯', alt:'Paula Hawkins', life:'1972–', region:'英國', tag:'英', level:1, genre:'thriller',
+   bio:'《列車上的女孩》：一個女人每天從通勤火車上看一對夫妻，直到那位太太失蹤。2015 年全球最暢銷的小說。',
+   start:'列車上的女孩',
+   works:[{t:'列車上的女孩', o:'The Girl on the Train', y:2015}]},
+
+  // ---- 科幻・反烏托邦 ----
+  {id:'wells', name:'H・G・威爾斯', alt:'H. G. Wells', life:'1866–1946', region:'英國', tag:'英', level:1, genre:'sf',
+   bio:'科幻小說的祖師之一：時間旅行、外星人入侵、隱形人，都是他先寫的。每本都短，讀起來像冒險故事。',
+   start:'時間機器',
+   works:[{t:'時間機器', o:'The Time Machine', y:1895}, {t:'世界大戰', o:'The War of the Worlds', y:1898}]},
+  {id:'huxley', name:'阿道斯・赫胥黎', alt:'Aldous Huxley', life:'1894–1963', region:'英國', tag:'英', level:2, genre:'sf',
+   bio:'《美麗新世界》想像一個靠基因分級、藥物和娛樂讓所有人快樂而不自由的社會，和《一九八四》並稱兩大反烏托邦。',
+   start:'美麗新世界',
+   works:[{t:'美麗新世界', o:'Brave New World', y:1932}]},
+  {id:'orwell', name:'喬治・歐威爾', alt:'George Orwell', life:'1903–1950', region:'英國', tag:'英', level:1, genre:'sf',
+   bio:'「老大哥在看著你」出自《一九八四》。《動物農莊》用農場動物寫革命如何腐化，一百頁、極好讀，適合當第一本。',
+   start:'動物農莊',
+   works:[{t:'動物農莊', o:'Animal Farm', y:1945}, {t:'一九八四', o:'Nineteen Eighty-Four', y:1949}]},
+  {id:'asimov', name:'艾西莫夫', alt:'Isaac Asimov', life:'1920–1992', region:'美國（俄裔）', tag:'美', level:2, genre:'sf',
+   bio:'「機器人三定律」的發明者，一生寫了近五百本書。《基地》系列寫銀河帝國的衰亡與一門能預測歷史的數學，是太空歌劇的骨架。',
+   start:'我，機器人',
+   works:[{t:'我，機器人', o:'I, Robot', y:1950, n:'短篇集'}, {t:'基地', o:'Foundation', y:1951}, {t:'基地與帝國', o:'Foundation and Empire', y:1952}]},
+  {id:'bradbury', name:'雷・布萊伯利', alt:'Ray Bradbury', life:'1920–2012', region:'美國', tag:'美', level:1, genre:'sf',
+   bio:'文字最抒情的科幻作家。《華氏 451 度》寫消防員的工作是燒書；《火星紀事》是一組關於人類殖民火星的短篇。',
+   start:'華氏 451 度',
+   works:[{t:'火星紀事', o:'The Martian Chronicles', y:1950}, {t:'華氏 451 度', o:'Fahrenheit 451', y:1953}]},
+  {id:'herbert', name:'法蘭克・赫伯特', alt:'Frank Herbert', life:'1920–1986', region:'美國', tag:'美', level:3, genre:'sf',
+   bio:'《沙丘》是科幻史上最暢銷的小說：一個沙漠星球、香料、政治與宗教，世界觀極龐大，前一百頁比較硬。近年的電影版讓它重新翻紅。',
+   start:'沙丘',
+   works:[{t:'沙丘', o:'Dune', y:1965}, {t:'沙丘救世主', o:'Dune Messiah', y:1969}]},
+  {id:'pkdick', name:'菲利普・K・狄克', alt:'Philip K. Dick', life:'1928–1982', region:'美國', tag:'美', level:2, genre:'sf',
+   bio:'問「什麼是真實、什麼是人」問得最兇的科幻作家。《銀翼殺手》《關鍵報告》《魔鬼總動員》都改編自他；《高堡奇人》假設軸心國贏了二戰。',
+   start:'銀翼殺手',
+   works:[{t:'高堡奇人', o:'The Man in the High Castle', y:1962}, {t:'銀翼殺手', o:'Do Androids Dream of Electric Sheep?', y:1968, n:'另譯《仿生人會夢見電子羊嗎？》'}, {t:'尤比克', o:'Ubik', y:1969}]},
+  {id:'atwood', name:'瑪格麗特・愛特伍', alt:'Margaret Atwood', life:'1939–', region:'加拿大', tag:'加', level:1, genre:'sf',
+   bio:'加拿大文學的代表人物。《使女的故事》想像一個女性被當成生育工具的神權國家，影集播出後再度成為全球話題。',
+   start:'使女的故事',
+   works:[{t:'使女的故事', o:"The Handmaid's Tale", y:1985}, {t:'盲眼刺客', o:'The Blind Assassin', y:2000, n:'布克獎'}, {t:'證詞', o:'The Testaments', y:2019, n:'布克獎'}]},
+  {id:'tedchiang', name:'姜峯楠', alt:'Ted Chiang', life:'1967–', region:'美國（華裔）', tag:'美', level:2, genre:'sf',
+   bio:'產量極少但幾乎每篇得獎的科幻短篇作家，〈妳一生的預言〉改編成電影《異星入境》。用嚴謹的科學設定講人的問題，工程背景的讀者會特別有共鳴。',
+   start:'妳一生的預言',
+   works:[{t:'妳一生的預言', o:'Stories of Your Life and Others', y:2002, n:'短篇集'}, {t:'呼吸', o:'Exhalation', y:2019, n:'短篇集'}]},
+  {id:'weir', name:'安迪・威爾', alt:'Andy Weir', life:'1972–', region:'美國', tag:'美', level:1, genre:'sf',
+   bio:'軟體工程師出身。《火星任務》原本在自己網站連載，寫一個被留在火星的太空人靠科學算出活路，全書像工程日誌，是理工人最愛的科幻入門。',
+   start:'火星任務',
+   works:[{t:'火星任務', o:'The Martian', y:2011, n:'自費電子書 2011，正式出版 2014'}, {t:'極限返航', o:'Project Hail Mary', y:2021}]},
+
+  // ---- 奇幻 ----
+  {id:'tolkien', name:'J・R・R・托爾金', alt:'J. R. R. Tolkien', life:'1892–1973', region:'英國', tag:'英', level:2, genre:'fantasy',
+   bio:'現代奇幻的源頭，牛津的語言學教授。《哈比人》是寫給小孩的冒險故事，很好讀；《魔戒》三部曲是後來所有精靈、矮人、半獸人設定的來源。',
+   start:'哈比人',
+   works:[{t:'哈比人', o:'The Hobbit', y:1937}, {t:'魔戒', o:'The Lord of the Rings', y:1954, n:'三部曲，1954–55'}]},
+  {id:'cslewis', name:'C・S・路易斯', alt:'C. S. Lewis', life:'1898–1963', region:'英國', tag:'英', level:1, genre:'fantasy',
+   bio:'托爾金的好友。《納尼亞傳奇》七本，從衣櫥進入另一個世界，是英語世界最經典的兒童奇幻，大人讀也很快。',
+   start:'獅子、女巫、魔衣櫥',
+   works:[{t:'獅子、女巫、魔衣櫥', o:'The Lion, the Witch and the Wardrobe', y:1950, n:'納尼亞傳奇第一部'}]},
+  {id:'leguin', name:'娥蘇拉・勒瑰恩', alt:'Ursula K. Le Guin', life:'1929–2018', region:'美國', tag:'美', level:2, genre:'fantasy',
+   bio:'奇幻與科幻兩邊都是大師。《地海》系列寫一個年輕巫師學會面對自己的影子，宮崎駿之子改編成動畫；《黑暗的左手》是科幻，寫一個沒有固定性別的星球。',
+   start:'地海巫師',
+   works:[{t:'地海巫師', o:'A Wizard of Earthsea', y:1968}, {t:'黑暗的左手', o:'The Left Hand of Darkness', y:1969, n:'科幻'}]},
+  {id:'grrm', name:'喬治・R・R・馬汀', alt:'George R. R. Martin', life:'1948–', region:'美國', tag:'美', level:2, genre:'fantasy',
+   bio:'《冰與火之歌》（影集《權力遊戲》）：多視角、主角會死、沒有絕對的好人。目前寫到第五部，第六部還在等。',
+   start:'權力遊戲',
+   works:[{t:'權力遊戲', o:'A Game of Thrones', y:1996, n:'冰與火之歌第一部'}, {t:'烽火危城', o:'A Clash of Kings', y:1998}]},
+  {id:'rowling', name:'J・K・羅琳', alt:'J. K. Rowling', life:'1965–', region:'英國', tag:'英', level:1, genre:'fantasy',
+   bio:'《哈利波特》七集，從 1997 到 2007，一整代人跟著哈利長大。第一集也是很好的英文原文入門書。',
+   start:'哈利波特：神秘的魔法石',
+   works:[{t:'哈利波特：神秘的魔法石', o:"Harry Potter and the Philosopher's Stone", y:1997}, {t:'哈利波特：死神的聖物', o:'Harry Potter and the Deathly Hallows', y:2007, n:'第七集'}]},
+  {id:'sanderson', name:'布蘭登・山德森', alt:'Brandon Sanderson', life:'1975–', region:'美國', tag:'美', level:1, genre:'fantasy',
+   bio:'當代最多產、最會設計「魔法系統」的奇幻作家，魔法像有物理定律一樣可以推理。《迷霧之子》是最常見的入口。',
+   start:'迷霧之子：最後帝國',
+   works:[{t:'迷霧之子：最後帝國', o:'Mistborn: The Final Empire', y:2006}, {t:'颶光典籍：王者之路', o:'The Way of Kings', y:2010}]},
+  {id:'kuang', name:'匡靈秀', alt:'R. F. Kuang', life:'1996–', region:'美國（華裔）', tag:'美', level:2, genre:'fantasy',
+   bio:'《巴別塔學院》：1830 年代牛津的翻譯學院，魔法來自兩種語言之間翻譯不出來的部分。討論殖民與語言，2022 年星雲獎。',
+   start:'巴別塔學院',
+   works:[{t:'罌粟戰爭', o:'The Poppy War', y:2018}, {t:'巴別塔學院', o:'Babel', y:2022}, {t:'黃色臉孔', o:'Yellowface', y:2023, n:'非奇幻，出版界諷刺'}]},
+
+  // ---- 恐怖 ----
+  {id:'mshelley', name:'瑪麗・雪萊', alt:'Mary Shelley', life:'1797–1851', region:'英國', tag:'英', level:2, genre:'horror',
+   bio:'十八歲寫出《科學怪人》，同時是恐怖小說和科幻小說的起點：一個科學家造出生命，然後拋棄它。',
+   start:'科學怪人',
+   works:[{t:'科學怪人', o:'Frankenstein', y:1818}]},
+  {id:'stoker', name:'布拉姆・史托克', alt:'Bram Stoker', life:'1847–1912', region:'愛爾蘭', tag:'愛', level:2, genre:'horror',
+   bio:'《德古拉》把吸血鬼定型成今天的樣子。全書用日記、信件、剪報拼成，形式很新。',
+   start:'德古拉',
+   works:[{t:'德古拉', o:'Dracula', y:1897}]},
+  {id:'sjackson', name:'雪莉・傑克森', alt:'Shirley Jackson', life:'1916–1965', region:'美國', tag:'美', level:1, genre:'horror',
+   bio:'心理恐怖的大師，不靠血腥。《鬼入侵》是最好的鬼屋小說之一（Netflix 影集借了書名）；短篇〈樂透〉是美國課堂必讀。',
+   start:'我們一直住在城堡裡',
+   works:[{t:'鬼入侵', o:'The Haunting of Hill House', y:1959}, {t:'我們一直住在城堡裡', o:'We Have Always Lived in the Castle', y:1962}]},
+  {id:'sking', name:'史蒂芬・金', alt:'Stephen King', life:'1947–', region:'美國', tag:'美', level:1, genre:'horror',
+   bio:'「恐怖大師」，但其實什麼都寫：《刺激 1995》《站在我這邊》都是他的中篇改編。書很厚但翻得極快，《魔女嘉莉》是第一本也最薄。',
+   start:'魔女嘉莉',
+   works:[{t:'魔女嘉莉', o:'Carrie', y:1974}, {t:'鬼店', o:'The Shining', y:1977}, {t:'四季奇譚', o:'Different Seasons', y:1982, n:'含《刺激 1995》原著中篇'}, {t:'牠', o:'It', y:1986}, {t:'11/22/63', o:'11/22/63', y:2011, n:'時光旅行阻止甘迺迪遇刺'}]},
+
+  // ---- 愛情 ----
+  {id:'mitchell', name:'瑪格麗特・米契爾', alt:'Margaret Mitchell', life:'1900–1949', region:'美國', tag:'美', level:2, genre:'romance',
+   bio:'一生只寫了一本《飄》：南北戰爭下的郝思嘉與白瑞德，一千多頁；電影《亂世佳人》就是它。',
+   start:'飄',
+   works:[{t:'飄', o:'Gone with the Wind', y:1936, n:'普立茲獎'}]},
+  {id:'dumaurier', name:'達芙妮・杜穆里埃', alt:'Daphne du Maurier', life:'1907–1989', region:'英國', tag:'英', level:1, genre:'romance',
+   bio:'《蝴蝶夢》開頭「昨晚我又夢見自己回到曼德利」是英文小說最有名的第一句之一。愛情、豪宅、死去的前妻，希區考克改編成電影。',
+   start:'蝴蝶夢',
+   works:[{t:'牙買加客棧', o:'Jamaica Inn', y:1936}, {t:'蝴蝶夢', o:'Rebecca', y:1938}]},
+  {id:'sparks', name:'尼可拉斯・史派克', alt:'Nicholas Sparks', life:'1965–', region:'美國', tag:'美', level:1, genre:'romance',
+   bio:'美國催淚愛情小說的代名詞，幾乎每本都改編成電影。《手札情緣》從養老院裡一個老人念筆記本開始。',
+   start:'手札情緣',
+   works:[{t:'手札情緣', o:'The Notebook', y:1996}, {t:'瓶中信', o:'Message in a Bottle', y:1998}]},
+  {id:'moyes', name:'喬喬・莫伊絲', alt:'Jojo Moyes', life:'1969–', region:'英國', tag:'英', level:1, genre:'romance',
+   bio:'《遇見你之前》：一個小鎮女孩去照顧一個癱瘓的富家子。2010 年代英國最暢銷的愛情小說，電影《我就要你好好的》。',
+   start:'遇見你之前',
+   works:[{t:'遇見你之前', o:'Me Before You', y:2012}]},
+  {id:'emilyhenry', name:'艾蜜莉・亨利', alt:'Emily Henry', life:'1991–', region:'美國', tag:'美', level:1, genre:'romance',
+   bio:'2020 年代最紅的浪漫喜劇小說家，主角常是作家或編輯，對話機智。《海灘讀物》是兩個寫不出書的作家互換類型。',
+   start:'海灘讀物',
+   works:[{t:'海灘讀物', o:'Beach Read', y:2020}, {o:'Book Lovers', y:2022}]},
+
+  // ---- 歷史小說 ----
+  {id:'follett', name:'肯・弗雷特', alt:'Ken Follett', life:'1949–', region:'英國', tag:'英', level:1, genre:'historical',
+   bio:'《聖殿春秋》寫 12 世紀英國一座大教堂怎麼花幾十年蓋起來，建築、政治、愛情全在裡面，一千頁但極好讀，是他從驚悚轉歷史的代表作。',
+   start:'聖殿春秋',
+   works:[{t:'聖殿春秋', o:'The Pillars of the Earth', y:1989}, {t:'巨人的隕落', o:'Fall of Giants', y:2010, n:'世紀三部曲第一部'}]},
+  {id:'mantel', name:'希拉蕊・曼特爾', alt:'Hilary Mantel', life:'1952–2022', region:'英國', tag:'英', level:3, genre:'historical',
+   bio:'《狼廳》三部曲從亨利八世的謀臣克倫威爾的眼睛寫都鐸宮廷，兩度得布克獎。用現在式、視角極貼近，需要適應。',
+   start:'狼廳',
+   works:[{t:'狼廳', o:'Wolf Hall', y:2009, n:'布克獎'}, {t:'血季', o:'Bring Up the Bodies', y:2012, n:'布克獎'}, {t:'鏡與光', o:'The Mirror and the Light', y:2020}]},
+  {id:'zusak', name:'馬格斯・朱薩克', alt:'Markus Zusak', life:'1975–', region:'澳洲', tag:'澳', level:1, genre:'historical',
+   bio:'《偷書賊》由死神來敘述，寫二戰德國一個偷書的小女孩。青少年也能讀，大人讀會哭。',
+   start:'偷書賊',
+   works:[{t:'偷書賊', o:'The Book Thief', y:2005}]},
+  {id:'doerr', name:'安東尼・杜爾', alt:'Anthony Doerr', life:'1973–', region:'美國', tag:'美', level:1, genre:'historical',
+   bio:'《呼喚奇蹟的光》：二戰中一個法國盲眼女孩和一個德國無線電少年，章節極短，得普立茲獎。',
+   start:'呼喚奇蹟的光',
+   works:[{t:'呼喚奇蹟的光', o:'All the Light We Cannot See', y:2014, n:'普立茲獎'}]},
+  {id:'towles', name:'埃默・托爾斯', alt:'Amor Towles', life:'1964–', region:'美國', tag:'美', level:1, genre:'historical',
+   bio:'《莫斯科紳士》：1922 年一位伯爵被判終身軟禁在莫斯科的大飯店裡，接下來三十年都在那棟樓。優雅、幽默，很多人的年度最愛。',
+   start:'莫斯科紳士',
+   works:[{t:'上流法則', o:'Rules of Civility', y:2011}, {t:'莫斯科紳士', o:'A Gentleman in Moscow', y:2016}, {t:'林肯公路', o:'The Lincoln Highway', y:2021}]},
+
+  // ---- 青少年・成長 ----
+  {id:'alcott', name:'露易莎・梅・奧爾柯特', alt:'Louisa May Alcott', life:'1832–1888', region:'美國', tag:'美', level:1, genre:'ya',
+   bio:'《小婦人》寫南北戰爭時期四姊妹的成長，一百五十年來一直在被改編。',
+   start:'小婦人',
+   works:[{t:'小婦人', o:'Little Women', y:1868}]},
+  {id:'montgomery', name:'露西・莫德・蒙哥馬利', alt:'L. M. Montgomery', life:'1874–1942', region:'加拿大', tag:'加', level:1, genre:'ya',
+   bio:'《清秀佳人》（紅髮安妮）：愛德華王子島上一個愛講話的孤女被一對老兄妹收養。溫暖、幽默，是少女小說的原型。',
+   start:'清秀佳人',
+   works:[{t:'清秀佳人', o:'Anne of Green Gables', y:1908}]},
+  {id:'lowry', name:'露易絲・勞瑞', alt:'Lois Lowry', life:'1937–', region:'美國', tag:'美', level:1, genre:'ya',
+   bio:'《記憶傳授人》：一個沒有痛苦、沒有顏色、也沒有選擇的社會，十二歲的男孩被選為接收所有記憶的人。反烏托邦的青少年入門。',
+   start:'記憶傳授人',
+   works:[{t:'記憶傳授人', o:'The Giver', y:1993, n:'紐伯瑞獎'}]},
+  {id:'collins', name:'蘇珊・柯林斯', alt:'Suzanne Collins', life:'1962–', region:'美國', tag:'美', level:1, genre:'ya',
+   bio:'《飢餓遊戲》三部曲：極權國家每年抽選青少年進行電視直播的生存戰。節奏極快，是 2010 年代 YA 熱潮的起點。',
+   start:'飢餓遊戲',
+   works:[{t:'飢餓遊戲', o:'The Hunger Games', y:2008}, {t:'星火燎原', o:'Catching Fire', y:2009}, {t:'自由幻夢', o:'Mockingjay', y:2010}]},
+  {id:'johngreen', name:'約翰・葛林', alt:'John Green', life:'1977–', region:'美國', tag:'美', level:1, genre:'ya',
+   bio:'《生命中的美好缺憾》：兩個癌症病友的愛情，聰明、好笑、不濫情。YouTuber 出身，是 YA 界的明星作者。',
+   start:'生命中的美好缺憾',
+   works:[{t:'尋找阿拉斯加', o:'Looking for Alaska', y:2005}, {t:'生命中的美好缺憾', o:'The Fault in Our Stars', y:2012}]}
+];
+
+// ===== 暢銷・話題（v0.4 新增）=====
+// 新增三列：中文世界「暢銷・華文現象」「翻譯文學・暢銷」，英文世界「暢銷・現象級」。
+// hot:true 的作者在晶片上多一個「熱」字，可用「只看暢銷」篩選；已在其他列的暢銷作者也標了 hot。
+GENRES_ZH.push(
+  {id:'hot-zh', name:'暢銷・華文現象', en:'chinese bestsellers', desc:'每個年代「大家都在看」的華文小說，不管評論家怎麼說。從民國的張恨水到今天的網文。', hot:true},
+  {id:'trans', name:'翻譯文學・暢銷', en:'translated bestsellers', desc:'台灣書市最多人讀的非英語翻譯小說：日本、法國、俄國、拉美、韓國⋯。年代欄是原文出版年，小字是原作國。', hot:true}
+);
+GENRES_EN.push(
+  {id:'hot', name:'暢銷・現象級', en:'blockbusters', desc:'英文世界每個年代的現象級暢銷書：當時人手一本、後來多半拍成電影。文學價值不是重點，「大家都在看」才是。', hot:true}
+);
+
+// ---- 已在地圖上的暢銷作者 ----
+const HOT_IDS = new Set(['jinyong','gulong','qiongyao','yishu','xijuan','zhangxiaoxian','pizicai','giddens','tonghua','tianxiabachang','maoni','liucixin','yuhua','zijinchen','maboyong','chensihong','yangshuangzi','xiaolihong','chanhokei',
+  'dickens','christie','doyle','sking','rowling','tolkien','danbrown','harris','crichton','hawkins','flynn','hosseini','martel','rooney','celesteng','collins','johngreen','sparks','moyes','emilyhenry','follett','zusak','doerr','sanderson','grrm','weir','atwood','osman','kuang','mitchell','dumaurier','hemingway','steinbeck','salinger','harperlee','lecarre']);
+AUTHORS_ZH.concat(AUTHORS_EN).forEach(a => { if (HOT_IDS.has(a.id)) a.hot = true; });
+
+AUTHORS_ZH.push(
+  // ---- 暢銷・華文現象 ----
+  {id:'zhanghenshui', name:'張恨水', life:'1895–1967', region:'中國（安徽）', tag:'中', level:1, genre:'hot-zh', hot:true,
+   bio:'民國時期最暢銷的通俗小說家，報紙連載一出，全城搶著看。《啼笑因緣》是 1930 年代的國民讀物，改編過十幾次。', start:'啼笑因緣',
+   works:[{t:'金粉世家', y:1927, n:'連載 1927–32', approx:true}, {t:'啼笑因緣', y:1930}]},
+  {id:'xuxu', name:'徐訏', life:'1908–1980', region:'上海 → 香港', tag:'中', level:1, genre:'hot-zh', hot:true,
+   bio:'《風蕭蕭》1943 年連載時銷量全國第一，那一年被稱為「風蕭蕭年」。後來移居香港，是港台 1950 年代最紅的作家之一。', start:'風蕭蕭',
+   works:[{t:'鬼戀', y:1937, n:'中篇'}, {t:'風蕭蕭', y:1943}]},
+  {id:'yulihua', name:'於梨華', life:'1931–2020', region:'台灣 → 美國', tag:'台', level:1, genre:'hot-zh', hot:true,
+   bio:'「留學生文學」的代表。《又見棕櫚，又見棕櫚》寫留美歸來的無根感，1960 年代台灣大學生幾乎人手一本。', start:'又見棕櫚，又見棕櫚',
+   works:[{t:'又見棕櫚，又見棕櫚', y:1967}]},
+  {id:'zhangmanjuan', name:'張曼娟', life:'1961–', region:'台灣', tag:'台', level:1, genre:'hot-zh', hot:true,
+   bio:'《海水正藍》是 1980 年代台灣最暢銷的小說集，賣了幾十萬本，很多人的第一本「文藝小說」。', start:'海水正藍',
+   works:[{t:'海水正藍', y:1985, n:'短篇集'}]},
+  {id:'houwenyong', name:'侯文詠', life:'1962–', region:'台灣', tag:'台', level:1, genre:'hot-zh', hot:true,
+   bio:'醫師出身。《白色巨塔》寫醫院裡的權力鬥爭，是 1999 年的年度暢銷書，改編劇也紅；《危險心靈》寫教育體制。', start:'白色巨塔',
+   works:[{t:'白色巨塔', y:1999}, {t:'危險心靈', y:2003}]},
+  {id:'huangyi', name:'黃易', life:'1952–2017', region:'香港', tag:'港', level:1, genre:'hot-zh', hot:true,
+   bio:'《尋秦記》是「穿越」小說的祖師爺：現代特種兵回到戰國。1990 年代租書店的鎮店之寶，之後的穿越熱都從這裡來。', start:'尋秦記',
+   works:[{t:'尋秦記', y:1994}, {t:'大唐雙龍傳', y:1996}]},
+  {id:'wangwenhua', name:'王文華', life:'1967–', region:'台灣', tag:'台', level:1, genre:'hot-zh', hot:true,
+   bio:'《蛋白質女孩》用一種押韻、跳躍的都會語言寫台北男女，2000 年紅到兩岸都有人模仿。', start:'蛋白質女孩',
+   works:[{t:'蛋白質女孩', y:2000}]},
+  {id:'hanhan', name:'韓寒', life:'1982–', region:'中國（上海）', tag:'中', level:1, genre:'hot-zh', hot:true,
+   bio:'十七歲寫的《三重門》賣了兩百萬冊，之後成了中國 2000 年代最有影響力的年輕人之一，後來拍電影。', start:'三重門',
+   works:[{t:'三重門', y:2000}, {t:'1988：我想和這個世界談談', y:2010}]},
+  {id:'guojingming', name:'郭敬明', life:'1983–', region:'中國（四川）', tag:'中', level:1, genre:'hot-zh', hot:true,
+   bio:'中國 2000 年代的青春文學現象，《幻城》《小時代》各賣數百萬冊，評論家不喜歡但讀者買單。', start:'幻城',
+   works:[{t:'幻城', y:2003}, {t:'小時代', y:2008}]},
+  {id:'jiangrong', name:'姜戎', life:'1946–', region:'中國（北京）', tag:'中', level:2, genre:'hot-zh', hot:true,
+   bio:'《狼圖騰》寫知青在內蒙古草原與狼共處，中國賣了幾百萬冊、台灣也長期在榜，法國導演阿諾拍成電影。', start:'狼圖騰',
+   works:[{t:'狼圖騰', y:2004}]},
+  {id:'tangjiasanshao', name:'唐家三少', life:'1981–', region:'中國', tag:'中', level:1, genre:'hot-zh', hot:true,
+   bio:'中國網文的「超級作者」，連續多年作家富豪榜第一。《斗羅大陸》改編動畫、遊戲、真人劇，是青少年網文的代表。', start:'斗羅大陸',
+   works:[{t:'斗羅大陸', y:2008}]},
+  {id:'wuxiaole', name:'吳曉樂', life:'1989–', region:'台灣（台中）', tag:'台', level:1, genre:'hot-zh', hot:true,
+   bio:'家教出身，《你的孩子不是你的孩子》寫九個家庭的教育壓力，公視改編成影集後成為社會話題。', start:'你的孩子不是你的孩子',
+   works:[{t:'你的孩子不是你的孩子', y:2014, n:'短篇連作'}, {t:'上流兒童', y:2018}]},
+  {id:'moxiangtongxiu', name:'墨香銅臭', life:'', region:'中國', tag:'中', level:1, genre:'hot-zh', hot:true,
+   bio:'《魔道祖師》是 2010 年代影響最大的網路小說之一，改編動畫與影集《陳情令》紅遍亞洲，帶起一整個世代的同人與周邊文化。', start:'魔道祖師',
+   works:[{t:'魔道祖師', y:2015, n:'連載 2015–16'}, {t:'天官賜福', y:2017}]},
+  {id:'linyihan', name:'林奕含', life:'1991–2017', region:'台灣（台南）', tag:'台', level:2, genre:'hot-zh', hot:true,
+   bio:'《房思琪的初戀樂園》是 2017 年台灣最被討論的一本書，寫一個少女與補習班老師之間的權力與傷害，文字極美、題材極重。', start:'房思琪的初戀樂園',
+   works:[{t:'房思琪的初戀樂園', y:2017}]},
+
+  // ---- 翻譯文學・暢銷（非英語原作） ----
+  {id:'dumas', name:'大仲馬', alt:'Alexandre Dumas', life:'1802–1870', region:'法國', tag:'法', level:1, genre:'trans', hot:true,
+   bio:'十九世紀最會說故事的人。《基度山恩仇記》：被陷害入獄的水手越獄、得到寶藏、回來復仇，一百七十年來一直是全世界的暢銷書。', start:'基度山恩仇記',
+   works:[{t:'三劍客', o:'Les Trois Mousquetaires', y:1844}, {t:'基度山恩仇記', o:'Le Comte de Monte-Cristo', y:1844, n:'連載 1844–46'}]},
+  {id:'hugo', name:'雨果', alt:'Victor Hugo', life:'1802–1885', region:'法國', tag:'法', level:2, genre:'trans', hot:true,
+   bio:'《悲慘世界》：偷一條麵包坐了十九年牢的尚萬強。全書很長，但故事線清楚，音樂劇和電影讓它成為最多人知道的法國小說。', start:'悲慘世界',
+   works:[{t:'鐘樓怪人', o:'Notre-Dame de Paris', y:1831}, {t:'悲慘世界', o:'Les Misérables', y:1862}]},
+  {id:'dostoevsky', name:'杜斯妥也夫斯基', alt:'Fyodor Dostoevsky', life:'1821–1881', region:'俄國', tag:'俄', level:3, genre:'trans', hot:true,
+   bio:'俄國文學的兩座大山之一。《罪與罰》寫一個大學生殺了人之後的心理，是最好進入的一本；《卡拉馬佐夫兄弟》被很多作家稱為「最偉大的小說」。', start:'罪與罰',
+   works:[{t:'罪與罰', o:'Преступление и наказание', y:1866}, {t:'白癡', o:'Идиот', y:1869}, {t:'卡拉馬佐夫兄弟', o:'Братья Карамазовы', y:1880}]},
+  {id:'tolstoy', name:'托爾斯泰', alt:'Leo Tolstoy', life:'1828–1910', region:'俄國', tag:'俄', level:3, genre:'trans', hot:true,
+   bio:'另一座大山。《安娜・卡列尼娜》寫一段婚外情和一整個俄國上流社會，比《戰爭與和平》短、好讀，建議先讀它。', start:'安娜・卡列尼娜',
+   works:[{t:'戰爭與和平', o:'Война и мир', y:1869}, {t:'安娜・卡列尼娜', o:'Анна Каренина', y:1878}]},
+  {id:'soseki', name:'夏目漱石', alt:'夏目漱石', life:'1867–1916', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'日本現代文學的起點，曾經印在千圓鈔票上。《我是貓》用一隻貓的眼睛看明治時代的知識分子，很好笑；《心》寫友情與背叛，是日本高中課本必讀。', start:'我是貓',
+   works:[{t:'我是貓', o:'吾輩は猫である', y:1905}, {t:'少爺', o:'坊っちゃん', y:1906}, {t:'心', o:'こころ', y:1914}]},
+  {id:'kafka', name:'卡夫卡', alt:'Franz Kafka', life:'1883–1924', region:'布拉格（德語）', tag:'德', level:2, genre:'trans', hot:true,
+   bio:'一覺醒來變成一隻蟲——《變形記》只有幾十頁，是最多人讀過的現代主義小說。生前幾乎沒出版，遺囑要求燒掉手稿，朋友沒照做。', start:'變形記',
+   works:[{t:'變形記', o:'Die Verwandlung', y:1915, n:'中篇'}, {t:'審判', o:'Der Process', y:1925, n:'身後出版'}, {t:'城堡', o:'Das Schloss', y:1926, n:'身後出版'}]},
+  {id:'hesse', name:'赫塞', alt:'Hermann Hesse', life:'1877–1962', region:'德國 → 瑞士', tag:'德', level:1, genre:'trans', hot:true,
+   bio:'寫年輕人尋找自我的作家，1960 年代美國嬉皮和 1980 年代台灣學生都愛他。《徬徨少年時》《流浪者之歌》都薄、都好讀。', start:'徬徨少年時',
+   works:[{t:'徬徨少年時', o:'Demian', y:1919}, {t:'流浪者之歌', o:'Siddhartha', y:1922}, {t:'荒野之狼', o:'Der Steppenwolf', y:1927}]},
+  {id:'camus', name:'卡繆', alt:'Albert Camus', life:'1913–1960', region:'法國（阿爾及利亞）', tag:'法', level:1, genre:'trans', hot:true,
+   bio:'「今天，媽媽死了。」《異鄉人》的第一句。很短、句子很簡單，講一個對什麼都無所謂的人殺了人。存在主義的入口，也是台灣長年的暢銷書。', start:'異鄉人',
+   works:[{t:'異鄉人', o:"L'Étranger", y:1942}, {t:'鼠疫', o:'La Peste', y:1947}]},
+  {id:'saintexupery', name:'聖修伯里', alt:'Antoine de Saint-Exupéry', life:'1900–1944', region:'法國', tag:'法', level:1, genre:'trans', hot:true,
+   bio:'飛行員作家。《小王子》是史上翻譯語言最多的小說之一，台灣每年都在暢銷榜上；一小時讀完，長大後每隔幾年重讀一次會讀到不同的東西。', start:'小王子',
+   works:[{t:'小王子', o:'Le Petit Prince', y:1943}, {t:'夜間飛行', o:'Vol de nuit', y:1931}]},
+  {id:'dazai', name:'太宰治', alt:'太宰治', life:'1909–1948', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'「生而為人，我很抱歉。」《人間失格》寫一個覺得自己不配當人的男人，2010 年代在台灣重新大紅，年輕讀者特別有感。', start:'人間失格',
+   works:[{t:'斜陽', o:'斜陽', y:1947}, {t:'人間失格', o:'人間失格', y:1948}]},
+  {id:'kawabata', name:'川端康成', alt:'川端康成', life:'1899–1972', region:'日本', tag:'日', level:2, genre:'trans', hot:true,
+   bio:'第一位得諾貝爾獎的日本作家（1968）。《雪國》寫溫泉鄉的藝妓與東京來的男人，文字像水墨畫，情節很淡。', start:'雪國',
+   works:[{t:'伊豆的舞孃', o:'伊豆の踊子', y:1926}, {t:'雪國', o:'雪国', y:1948, n:'連載 1935–37，完整版 1948'}, {t:'古都', o:'古都', y:1962}]},
+  {id:'mishima', name:'三島由紀夫', alt:'三島由紀夫', life:'1925–1970', region:'日本', tag:'日', level:2, genre:'trans', hot:true,
+   bio:'《金閣寺》根據真實縱火案，寫一個口吃的年輕僧人為什麼燒掉最美的建築。他本人 1970 年切腹自殺，讓作品更被反覆討論。', start:'金閣寺',
+   works:[{t:'假面的告白', o:'仮面の告白', y:1949}, {t:'潮騷', o:'潮騒', y:1954}, {t:'金閣寺', o:'金閣寺', y:1956}]},
+  {id:'matsumoto', name:'松本清張', alt:'松本清張', life:'1909–1992', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'「社會派推理」的開創者：兇手為什麼殺人比怎麼殺更重要。《點與線》用火車時刻表破案，是日本推理史上的暢銷分水嶺。', start:'點與線',
+   works:[{t:'點與線', o:'点と線', y:1958}, {t:'零的焦點', o:'ゼロの焦点', y:1959}, {t:'砂之器', o:'砂の器', y:1961}]},
+  {id:'solzhenitsyn', name:'索忍尼辛', alt:'Aleksandr Solzhenitsyn', life:'1918–2008', region:'俄國', tag:'俄', level:2, genre:'trans', hot:true,
+   bio:'自己坐過勞改營，寫出來的東西讓蘇聯把他驅逐出境。《伊凡・傑尼索維奇的一天》只寫勞改營裡的一天，很短；《癌症病房》寫病房裡的各種人，是他最好讀的長篇。', start:'伊凡・傑尼索維奇的一天',
+   works:[{t:'伊凡・傑尼索維奇的一天', o:'Один день Ивана Денисовича', y:1962}, {t:'癌症病房', o:'Раковый корпус', y:1968}]},
+  {id:'marquez', name:'馬奎斯', alt:'Gabriel García Márquez', life:'1927–2014', region:'哥倫比亞', tag:'哥', level:2, genre:'trans', hot:true,
+   bio:'「魔幻寫實」的代名詞。《百年孤寂》寫一個家族七代人和一座小鎮，人物名字反覆出現，讀的時候記得畫家譜。台灣 1980 年代起長銷至今。', start:'百年孤寂',
+   works:[{t:'百年孤寂', o:'Cien años de soledad', y:1967}, {t:'愛在瘟疫蔓延時', o:'El amor en los tiempos del cólera', y:1985}]},
+  {id:'murakami', name:'村上春樹', alt:'村上春樹', life:'1949–', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'台灣最多人讀的外國作家，沒有之一。《挪威的森林》1989 年進台灣後掀起「村上現象」，賴明珠的譯本成了一整代人的文體。想入門從短篇或《挪威的森林》開始。', start:'挪威的森林',
+   works:[{t:'聽風的歌', o:'風の歌を聴け', y:1979}, {t:'挪威的森林', o:'ノルウェイの森', y:1987}, {t:'海邊的卡夫卡', o:'海辺のカフカ', y:2002}, {t:'1Q84', o:'1Q84', y:2009}, {t:'沒有女人的男人們', o:'女のいない男たち', y:2014, n:'短篇集'}]},
+  {id:'kundera', name:'米蘭・昆德拉', alt:'Milan Kundera', life:'1929–2023', region:'捷克 → 法國', tag:'捷', level:2, genre:'trans', hot:true,
+   bio:'《生命中不能承受之輕》：布拉格之春前後的兩對男女，夾著哲學議論。1980 年代末在台灣是文青必讀，書名成了流行語。', start:'生命中不能承受之輕',
+   works:[{t:'笑忘書', o:'Kniha smíchu a zapomnění', y:1979}, {t:'生命中不能承受之輕', o:'Nesnesitelná lehkost bytí', y:1984}]},
+  {id:'eco', name:'安伯托・艾可', alt:'Umberto Eco', life:'1932–2016', region:'義大利', tag:'義', level:3, genre:'trans', hot:true,
+   bio:'符號學教授寫的中世紀修道院謀殺案。《玫瑰的名字》又是推理又是哲學，全球賣了五千萬冊，史恩・康納萊演了電影版。', start:'玫瑰的名字',
+   works:[{t:'玫瑰的名字', o:'Il nome della rosa', y:1980}, {t:'傅科擺', o:'Il pendolo di Foucault', y:1988}]},
+  {id:'suskind', name:'徐四金', alt:'Patrick Süskind', life:'1949–', region:'德國', tag:'德', level:1, genre:'trans', hot:true,
+   bio:'《香水》：一個沒有體味、卻有超人嗅覺的男人，為了做出完美香水而殺人。一本書紅了四十年，作者從此幾乎不再露面。', start:'香水',
+   works:[{t:'香水', o:'Das Parfum', y:1985}]},
+  {id:'yoshimoto', name:'吉本芭娜娜', alt:'吉本ばなな', life:'1964–', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'《廚房》：失去所有親人的女孩住進別人家，在廚房裡慢慢好起來。很薄、很溫柔，1990 年代和村上春樹一起在台灣掀起日本小說熱。', start:'廚房',
+   works:[{t:'廚房', o:'キッチン', y:1988}, {t:'哀愁的預感', o:'哀しい予感', y:1988}]},
+  {id:'coelho', name:'保羅・科爾賀', alt:'Paulo Coelho', life:'1947–', region:'巴西', tag:'巴', level:1, genre:'trans', hot:true,
+   bio:'《牧羊少年奇幻之旅》：一個西班牙牧羊少年去埃及找寶藏的寓言，全球賣了一億五千萬冊，是很多人「唯一讀完的小說」。', start:'牧羊少年奇幻之旅',
+   works:[{t:'牧羊少年奇幻之旅', o:'O Alquimista', y:1988}]},
+  {id:'gaarder', name:'喬斯坦・賈德', alt:'Jostein Gaarder', life:'1952–', region:'挪威', tag:'挪', level:1, genre:'trans', hot:true,
+   bio:'高中哲學老師寫的《蘇菲的世界》：一個女孩收到神秘信件，一路上完整部西方哲學史。1995 年在台灣賣到缺貨，是那幾年的全民讀物。', start:'蘇菲的世界',
+   works:[{t:'蘇菲的世界', o:'Sofies verden', y:1991}]},
+  {id:'higashino', name:'東野圭吾', alt:'東野圭吾', life:'1958–', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'2010 年代台灣書店賣得最好的小說家，年年榜首。推理只是外殼，寫的是人；《解憂雜貨店》甚至沒有兇手。從《嫌疑犯 X 的獻身》或《解憂雜貨店》開始都行。', start:'解憂雜貨店',
+   works:[{t:'秘密', o:'秘密', y:1998}, {t:'白夜行', o:'白夜行', y:1999}, {t:'嫌疑犯 X 的獻身', o:'容疑者Xの献身', y:2005}, {t:'解憂雜貨店', o:'ナミヤ雑貨店の奇蹟', y:2012}]},
+  {id:'miyabe', name:'宮部美幸', alt:'宮部みゆき', life:'1960–', region:'日本', tag:'日', level:2, genre:'trans', hot:true,
+   bio:'日本「國民作家」，什麼類型都寫。《模仿犯》一千多頁寫一樁連續殺人案背後的整個社會，是台灣推理迷公認的必讀磚頭書。', start:'火車',
+   works:[{t:'火車', o:'火車', y:1992}, {t:'模仿犯', o:'模倣犯', y:2001}, {t:'所羅門的偽證', o:'ソロモンの偽証', y:2012}]},
+  {id:'zafon', name:'薩豐', alt:'Carlos Ruiz Zafón', life:'1964–2020', region:'西班牙', tag:'西', level:1, genre:'trans', hot:true,
+   bio:'《風之影》：巴塞隆納一個男孩在「遺忘書之墓」裡選了一本書，從此被捲進作者的秘密。2006 年在台灣是年度第一暢銷小說。', start:'風之影',
+   works:[{t:'風之影', o:'La sombra del viento', y:2001}, {t:'天使遊戲', o:'El juego del ángel', y:2008}]},
+  {id:'isaka', name:'伊坂幸太郎', alt:'伊坂幸太郎', life:'1971–', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'多線敘事、最後全部接起來，是他的招牌。《金色夢鄉》寫一個被誣陷刺殺首相的男人逃亡，讀完會很想再讀一本。', start:'金色夢鄉',
+   works:[{t:'重力小丑', o:'重力ピエロ', y:2003}, {t:'死神的精確度', o:'死神の精度', y:2005}, {t:'金色夢鄉', o:'ゴールデンスランバー', y:2007}]},
+  {id:'ogawa', name:'小川洋子', alt:'小川洋子', life:'1962–', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'《博士熱愛的算式》：記憶只能維持八十分鐘的數學教授、女管家和她的兒子。用質數和完全數講愛與記憶，理工人會特別喜歡。', start:'博士熱愛的算式',
+   works:[{t:'博士熱愛的算式', o:'博士の愛した数式', y:2003}]},
+  {id:'larsson', name:'史迪格・拉森', alt:'Stieg Larsson', life:'1954–2004', region:'瑞典', tag:'瑞', level:1, genre:'trans', hot:true,
+   bio:'《龍紋身的女孩》：記者和天才駭客莉絲調查富豪家族的失蹤案。作者交稿後就過世了，三部曲全球賣了一億冊，帶起北歐犯罪小說熱。', start:'龍紋身的女孩',
+   works:[{t:'龍紋身的女孩', o:'Män som hatar kvinnor', y:2005}]},
+  {id:'nesbo', name:'尤・奈斯博', alt:'Jo Nesbø', life:'1960–', region:'挪威', tag:'挪', level:1, genre:'trans', hot:true,
+   bio:'北歐犯罪小說現在的第一名，哈利・霍勒警探系列。《雪人》是系列最紅的一本，可以單獨讀。', start:'雪人',
+   works:[{t:'知更鳥', o:'Rødstrupe', y:2000}, {t:'雪人', o:'Snømannen', y:2007}]},
+  {id:'hankang', name:'韓江', alt:'한강', life:'1970–', region:'韓國', tag:'韓', level:2, genre:'trans', hot:true,
+   bio:'2024 年諾貝爾文學獎。《素食者》寫一個突然不吃肉的女人和她身邊的人如何崩解，很短、很不舒服、很難忘。', start:'素食者',
+   works:[{t:'素食者', o:'채식주의자', y:2007}, {t:'少年來了', o:'소년이 온다', y:2014}]},
+  {id:'minato', name:'湊佳苗', alt:'湊かなえ', life:'1973–', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'《告白》：女老師在結業式上宣布，殺死她女兒的兇手就在班上。「黑暗系」推理的代表，改編電影也極紅。', start:'告白',
+   works:[{t:'告白', o:'告白', y:2008}]},
+  {id:'ferrante', name:'艾琳娜・斐蘭德', alt:'Elena Ferrante', life:'', region:'義大利', tag:'義', level:1, genre:'trans', hot:true,
+   bio:'匿名作家，沒人知道她是誰。「那不勒斯故事」四部曲從《我的天才女友》開始，寫兩個女孩六十年的友情與競爭，HBO 改編成影集。', start:'我的天才女友',
+   works:[{t:'我的天才女友', o:"L'amica geniale", y:2011, n:'那不勒斯故事第一部'}]},
+  {id:'beckman', name:'菲特烈・貝克曼', alt:'Fredrik Backman', life:'1981–', region:'瑞典', tag:'瑞', level:1, genre:'trans', hot:true,
+   bio:'《明天別再來敲門》：一個難搞的老頭和搬來隔壁的一家人。溫暖、好笑、會哭，2010 年代台灣最長銷的翻譯小說之一，湯姆・漢克斯演了美版電影。', start:'明天別再來敲門',
+   works:[{t:'明天別再來敲門', o:'En man som heter Ove', y:2012}, {t:'焦慮的人', o:'Folk med ångest', y:2019}]},
+  {id:'kawaguchi', name:'川口俊和', alt:'川口俊和', life:'1971–', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'《在咖啡冷掉之前》：一家可以回到過去的咖啡店，但只能待到咖啡冷掉。很薄、很催淚，是近年台灣書店最常見的日本小說。', start:'在咖啡冷掉之前',
+   works:[{t:'在咖啡冷掉之前', o:'コーヒーが冷めないうちに', y:2015}]},
+  {id:'murata', name:'村田沙耶香', alt:'村田沙耶香', life:'1979–', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'《便利店人間》：一個在便利商店打工十八年、覺得這樣就很好的女人。作者自己也在便利店打工，芥川獎得獎作，很短。', start:'便利店人間',
+   works:[{t:'便利店人間', o:'コンビニ人間', y:2016}]},
+  {id:'chonamjoo', name:'趙南柱', alt:'조남주', life:'1978–', region:'韓國', tag:'韓', level:1, genre:'trans', hot:true,
+   bio:'《82 年生的金智英》寫一個普通韓國女性從出生到當媽媽遇到的每一件小事，在韓國賣了一百萬冊、台灣也大賣，引起很多爭論。', start:'82 年生的金智英',
+   works:[{t:'82 年生的金智英', o:'82년생 김지영', y:2016}]},
+  {id:'sohnwonpyung', name:'孫元平', alt:'손원평', life:'1979–', region:'韓國', tag:'韓', level:1, genre:'trans', hot:true,
+   bio:'《杏仁》：一個天生無法感受情緒的少年。青少年也能讀，BTS 成員推薦後在台灣長銷好幾年。', start:'杏仁',
+   works:[{t:'杏仁', o:'아몬드', y:2017}]},
+  {id:'tsujimura', name:'辻村深月', alt:'辻村深月', life:'1980–', region:'日本', tag:'日', level:1, genre:'trans', hot:true,
+   bio:'《鏡之孤城》：七個不去上學的國中生被鏡子吸進一座城堡。本屋大賞第一名，動畫電影也紅，青少年與成人都能讀。', start:'鏡之孤城',
+   works:[{t:'鏡之孤城', o:'かがみの孤城', y:2017}]}
+);
+
+AUTHORS_EN.push(
+  {id:'stowe', name:'史托夫人', alt:'Harriet Beecher Stowe', life:'1811–1896', region:'美國', tag:'美', level:2, genre:'hot', hot:true,
+   bio:'《湯姆叔叔的小屋》是十九世紀除了聖經之外賣最好的書，直接推動了美國的廢奴運動；林肯據說見到她時說「就是這位小婦人引發了大戰爭」。', start:'湯姆叔叔的小屋',
+   works:[{t:'湯姆叔叔的小屋', o:"Uncle Tom's Cabin", y:1852}]},
+  {id:'twain', name:'馬克・吐溫', alt:'Mark Twain', life:'1835–1910', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'美國文學的幽默之父，當年是全國最紅的作家兼演講明星。《頑童歷險記》用一個少年的口吻寫密西西比河上的漂流，海明威說美國現代文學全從這本書來。', start:'湯姆歷險記',
+   works:[{t:'湯姆歷險記', o:'The Adventures of Tom Sawyer', y:1876}, {t:'頑童歷險記', o:'Adventures of Huckleberry Finn', y:1884}]},
+  {id:'carroll', name:'路易斯・卡羅', alt:'Lewis Carroll', life:'1832–1898', region:'英國', tag:'英', level:1, genre:'hot', hot:true,
+   bio:'牛津的數學講師寫給小女孩的故事。《愛麗絲夢遊仙境》從沒退出過暢銷榜，裡面的邏輯遊戲和文字遊戲大人讀更有趣。', start:'愛麗絲夢遊仙境',
+   works:[{t:'愛麗絲夢遊仙境', o:"Alice's Adventures in Wonderland", y:1865}, {t:'愛麗絲鏡中奇遇', o:'Through the Looking-Glass', y:1871}]},
+  {id:'london', name:'傑克・倫敦', alt:'Jack London', life:'1876–1916', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'淘金客出身，美國第一個靠寫作致富的作家。《野性的呼喚》從一隻狗的角度寫阿拉斯加淘金熱，很短、很好讀。', start:'野性的呼喚',
+   works:[{t:'野性的呼喚', o:'The Call of the Wild', y:1903}, {t:'白牙', o:'White Fang', y:1906}]},
+  {id:'buck', name:'賽珍珠', alt:'Pearl S. Buck', life:'1892–1973', region:'美國（在中國長大）', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'在中國長大的美國作家，《大地》寫中國農民王龍一家的興衰，是 1931、32 年美國最暢銷的書，讓她拿了普立茲和諾貝爾獎。', start:'大地',
+   works:[{t:'大地', o:'The Good Earth', y:1931}]},
+  {id:'hilton', name:'詹姆斯・希爾頓', alt:'James Hilton', life:'1900–1954', region:'英國', tag:'英', level:1, genre:'hot', hot:true,
+   bio:'《失落的地平線》發明了「香格里拉」這個詞：一群人的飛機迫降在喜馬拉雅山裡一個不老的世外桃源。1930 年代的平裝書之王。', start:'失落的地平線',
+   works:[{t:'失落的地平線', o:'Lost Horizon', y:1933}, {t:'再會，契普斯先生', o:'Goodbye, Mr. Chips', y:1934}]},
+  {id:'puzo', name:'馬里奧・普佐', alt:'Mario Puzo', life:'1920–1999', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《教父》：紐約黑手黨柯里昂家族的接班故事。小說本身就賣了兩千萬冊，柯波拉的電影讓它成了流行文化的一部分。', start:'教父',
+   works:[{t:'教父', o:'The Godfather', y:1969}]},
+  {id:'segal', name:'艾瑞克・席格爾', alt:'Erich Segal', life:'1937–2010', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'耶魯古典學教授寫的《愛的故事》：哈佛富家子和貧窮女孩的愛情，很薄，「愛就是永遠不必說對不起」出自這裡。1970 年美國第一暢銷書。', start:'愛的故事',
+   works:[{t:'愛的故事', o:'Love Story', y:1970}]},
+  {id:'bach', name:'李察・巴哈', alt:'Richard Bach', life:'1936–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《天地一沙鷗》：一隻只想飛得更高的海鷗。幾十頁的寓言配照片，1970 年代在美國和台灣都是全民讀物，很多人的畢業禮物。', start:'天地一沙鷗',
+   works:[{t:'天地一沙鷗', o:'Jonathan Livingston Seagull', y:1970}]},
+  {id:'benchley', name:'彼得・本奇利', alt:'Peter Benchley', life:'1940–2006', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《大白鯊》：海灘小鎮與一條鯊魚。小說先紅，史匹柏的電影再發明了「暑假大片」這件事。', start:'大白鯊',
+   works:[{t:'大白鯊', o:'Jaws', y:1974}]},
+  {id:'clavell', name:'詹姆斯・克拉維爾', alt:'James Clavell', life:'1921–1994', region:'英國 → 美國', tag:'英', level:2, genre:'hot', hot:true,
+   bio:'《幕府將軍》：英國航海士漂流到 1600 年的日本，捲進德川家康的權力鬥爭。一千多頁，1975 年出版後賣了千萬冊，2024 年又拍了新影集。', start:'幕府將軍',
+   works:[{t:'大班', o:'Tai-Pan', y:1966}, {t:'幕府將軍', o:'Shōgun', y:1975}]},
+  {id:'forsyth', name:'佛雷德里克・福賽斯', alt:'Frederick Forsyth', life:'1938–2025', region:'英國', tag:'英', level:1, genre:'hot', hot:true,
+   bio:'記者出身，《豺狼之日》寫一個職業殺手怎麼一步步準備刺殺戴高樂，讀者明知歷史上戴高樂沒死還是緊張到不行。現代驚悚小說的範本。', start:'豺狼之日',
+   works:[{t:'豺狼之日', o:'The Day of the Jackal', y:1971}, {t:'敖德薩檔案', o:'The Odessa File', y:1972}]},
+  {id:'clancy', name:'湯姆・克蘭西', alt:'Tom Clancy', life:'1947–2013', region:'美國', tag:'美', level:2, genre:'hot', hot:true,
+   bio:'保險業務員寫的《獵殺紅色十月》：蘇聯潛艦艦長叛逃。雷根總統說「這書放不下」之後大賣，開創了「軍事技術驚悚」這個類型。', start:'獵殺紅色十月',
+   works:[{t:'獵殺紅色十月', o:'The Hunt for Red October', y:1984}, {t:'愛國者遊戲', o:'Patriot Games', y:1987}]},
+  {id:'sheldon', name:'西德尼・薛爾頓', alt:'Sidney Sheldon', life:'1917–2007', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'好萊塢編劇轉行寫小說，每本都是「翻頁機器」。《假如明天來臨》寫一個被陷害的女人變成國際大盜，1980 年代台灣租書店的常客。', start:'假如明天來臨',
+   works:[{t:'午夜的另一面', o:'The Other Side of Midnight', y:1973}, {t:'假如明天來臨', o:'If Tomorrow Comes', y:1985}]},
+  {id:'grisham', name:'約翰・葛里遜', alt:'John Grisham', life:'1955–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'律師出身，「法律驚悚」的代名詞，1990 年代每年一本、每本第一名。《黑色豪門企業》寫年輕律師發現事務所替黑幫洗錢，湯姆・克魯斯主演電影。', start:'黑色豪門企業',
+   works:[{t:'殺戮時刻', o:'A Time to Kill', y:1989}, {t:'黑色豪門企業', o:'The Firm', y:1991}, {t:'鵜鶘檔案', o:'The Pelican Brief', y:1992}]},
+  {id:'waller', name:'羅伯・詹姆斯・華勒', alt:'Robert James Waller', life:'1939–2017', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《麥迪遜之橋》：攝影師和農婦四天的愛情。很薄，1990 年代初賣了一千兩百萬冊，克林・伊斯威特和梅莉・史翠普演了電影。', start:'麥迪遜之橋',
+   works:[{t:'麥迪遜之橋', o:'The Bridges of Madison County', y:1992}]},
+  {id:'golden', name:'亞瑟・高登', alt:'Arthur Golden', life:'1956–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《藝妓回憶錄》：美國人寫京都藝妓的一生，在美國暢銷榜上待了兩年，日本人不太買帳。', start:'藝妓回憶錄',
+   works:[{t:'藝妓回憶錄', o:'Memoirs of a Geisha', y:1997}]},
+  {id:'fielding', name:'海倫・菲爾丁', alt:'Helen Fielding', life:'1958–', region:'英國', tag:'英', level:1, genre:'hot', hot:true,
+   bio:'《BJ 單身日記》：三十多歲倫敦單身女性的日記，體重、香菸、爛男人。發明了「chick lit」這個類型，也是《傲慢與偏見》的現代翻版。', start:'BJ 單身日記',
+   works:[{t:'BJ 單身日記', o:"Bridget Jones's Diary", y:1996}]},
+  {id:'meyer', name:'史蒂芬妮・梅爾', alt:'Stephenie Meyer', life:'1973–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《暮光之城》：高中女生愛上吸血鬼。四本書賣了一億冊，2000 年代末全球青少年的共同記憶，也讓「吸血鬼愛情」變成一個書架。', start:'暮光之城',
+   works:[{t:'暮光之城', o:'Twilight', y:2005}]},
+  {id:'picoult', name:'茱迪・皮考特', alt:'Jodi Picoult', life:'1966–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'每本都是一個道德兩難。《姊姊的守護者》：為了救白血病姊姊而被生下來的妹妹，決定告父母。台灣 2000 年代的暢銷常客。', start:'姊姊的守護者',
+   works:[{t:'姊姊的守護者', o:"My Sister's Keeper", y:2004}]},
+  {id:'albom', name:'米奇・艾爾邦', alt:'Mitch Albom', life:'1958–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'體育記者出身，《最後 14 堂星期二的課》是回憶錄，《在天堂遇見的五個人》是小說：一個遊樂園維修工死後遇到改變他一生的五個人。都很薄、都催淚。', start:'在天堂遇見的五個人',
+   works:[{t:'在天堂遇見的五個人', o:'The Five People You Meet in Heaven', y:2003}]},
+  {id:'ahern', name:'西西莉雅・艾亨', alt:'Cecelia Ahern', life:'1981–', region:'愛爾蘭', tag:'愛', level:1, genre:'hot', hot:true,
+   bio:'二十一歲寫的《P.S. 我愛你》：丈夫過世後留下十二封信，每月一封。愛爾蘭總理的女兒，一出道就是全球暢銷。', start:'P.S. 我愛你',
+   works:[{t:'P.S. 我愛你', o:'PS, I Love You', y:2004}]},
+  {id:'niffenegger', name:'奧黛麗・尼芬格', alt:'Audrey Niffenegger', life:'1963–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《時空旅人之妻》：一個會不由自主在時間裡跳來跳去的男人，和一直在等他的女人。科幻設定、愛情小說的讀法。', start:'時空旅人之妻',
+   works:[{t:'時空旅人之妻', o:"The Time Traveler's Wife", y:2003}]},
+  {id:'haddon', name:'馬克・海登', alt:'Mark Haddon', life:'1962–', region:'英國', tag:'英', level:1, genre:'hot', hot:true,
+   bio:'《深夜小狗神祕習題》：一個十五歲、有自閉特質的數學天才少年，調查鄰居的狗是誰殺的。章節用質數編號，理工人會會心一笑。', start:'深夜小狗神祕習題',
+   works:[{t:'深夜小狗神祕習題', o:'The Curious Incident of the Dog in the Night-Time', y:2003}]},
+  {id:'eljames', name:'E・L・詹姆絲', alt:'E. L. James', life:'1963–', region:'英國', tag:'英', level:1, genre:'hot', hot:true,
+   bio:'《格雷的五十道陰影》從《暮光之城》的同人小說起家，2011 年後成為史上賣最快的平裝書，評論家罵翻、讀者買翻。', start:'格雷的五十道陰影',
+   works:[{t:'格雷的五十道陰影', o:'Fifty Shades of Grey', y:2011}]},
+  {id:'rjoyce', name:'蕾秋・喬伊斯', alt:'Rachel Joyce', life:'1962–', region:'英國', tag:'英', level:1, genre:'hot', hot:true,
+   bio:'《一個人的朝聖》：退休老人為了寄一封信，走了一千公里去看瀕死的老友。2012 年後在台灣長銷多年，是很多讀書會的選書。', start:'一個人的朝聖',
+   works:[{t:'一個人的朝聖', o:'The Unlikely Pilgrimage of Harold Fry', y:2012}]},
+  {id:'hoover', name:'柯琳・胡佛', alt:'Colleen Hoover', life:'1979–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'BookTok 時代的女王，2022 年美國前十暢銷書她一個人佔了六本。《以我們告終》寫一段從美好變成暴力的關係。', start:'以我們告終',
+   works:[{t:'以我們告終', o:'It Ends with Us', y:2016}]},
+  {id:'tjreid', name:'泰勒・詹金斯・瑞德', alt:'Taylor Jenkins Reid', life:'1983–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《艾芙琳・雨果的七個丈夫》：老牌影星找一個無名記者寫回憶錄。2017 年出版，靠 TikTok 在 2021 年重新衝上榜首。', start:'艾芙琳・雨果的七個丈夫',
+   works:[{t:'艾芙琳・雨果的七個丈夫', o:'The Seven Husbands of Evelyn Hugo', y:2017}, {t:'黛西・瓊斯與六人組', o:'Daisy Jones & The Six', y:2019}]},
+  {id:'owens', name:'迪莉婭・歐文斯', alt:'Delia Owens', life:'1949–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'野生動物學家七十歲寫的第一本小說。《沼澤女孩》：北卡羅來納沼澤裡獨自長大的女孩，和一樁謀殺案。在紐約時報榜上待了三年。', start:'沼澤女孩',
+   works:[{t:'沼澤女孩', o:'Where the Crawdads Sing', y:2018}]},
+  {id:'haig', name:'麥特・海格', alt:'Matt Haig', life:'1975–', region:'英國', tag:'英', level:1, genre:'hot', hot:true,
+   bio:'《午夜圖書館》：一個想結束生命的女人進入一座圖書館，每本書都是她可能活過的另一種人生。2020 年代初全球與台灣的長銷書。', start:'午夜圖書館',
+   works:[{t:'午夜圖書館', o:'The Midnight Library', y:2020}]},
+  {id:'garmus', name:'邦妮・嘉姆斯', alt:'Bonnie Garmus', life:'1957–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'六十四歲出道。《化學課》：1960 年代一位被學界排擠的女化學家，變成電視烹飪節目主持人。2022 年全球現象級，Apple TV 改編影集。', start:'化學課',
+   works:[{t:'化學課', o:'Lessons in Chemistry', y:2022}]},
+  {id:'zevin', name:'加布莉・澤文', alt:'Gabrielle Zevin', life:'1977–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《明日，明日，又明日》：兩個做電玩的朋友三十年的合作與爭吵，2022 年最被討論的小說之一，對工程背景的讀者特別親切。', start:'明日，明日，又明日',
+   works:[{t:'A.J. 的書店人生', o:'The Storied Life of A.J. Fikry', y:2014}, {t:'明日，明日，又明日', o:'Tomorrow, and Tomorrow, and Tomorrow', y:2022}]},
+  {id:'yarros', name:'麗貝卡・亞羅斯', alt:'Rebecca Yarros', life:'1981–', region:'美國', tag:'美', level:1, genre:'hot', hot:true,
+   bio:'《第四翼》：龍騎士軍校裡的生存與愛情。2023 年「浪漫奇幻」romantasy 熱潮的引爆點，一年賣了幾百萬冊。', start:'第四翼',
+   works:[{t:'第四翼', o:'Fourth Wing', y:2023}]}
+);
+
+// ===== 改編作品（v0.5 新增）=====
+// 格式：ADAPT[作者id] = { '作品名（與 works 的 t 相同）': [[類型, 改編名稱, 年份, 備註], ...], '_': [作者層級：原著不在作品年表裡的改編] }
+// 類型：film 電影｜tv 影集・電視劇｜anime 動畫｜manga 漫畫｜stage 舞台・音樂劇｜game 遊戲｜other 其他
+const AD_KINDS = [
+  ['film', '電影', '影'], ['tv', '影集・劇', '劇'], ['anime', '動畫', '動'], ['manga', '漫畫', '漫'], ['stage', '舞台・音樂劇', '舞'], ['game', '遊戲', '遊'], ['other', '其他', '他']
+];
+const ADAPT = {
+  // ---------- 中文世界 ----------
+  caoxueqin: {'紅樓夢': [['tv','紅樓夢',1987,'央視版，王扶林導演，最經典'], ['tv','紅樓夢',2010,'李少紅導演'], ['film','紅樓夢之金玉良緣',2024,'胡玫導演'], ['stage','越劇《紅樓夢》',1958,'徐玉蘭、王文娟，1962 拍成電影']]},
+  wuchengen: {'西遊記': [['tv','西遊記',1986,'央視版，六小齡童演孫悟空'], ['film','大話西遊',1995,'周星馳，上下兩集'], ['anime','大鬧天宮',1964,'上海美術電影製片廠，1961–64'], ['anime','西遊記之大聖歸來',2015], ['game','黑神話：悟空',2024,'遊戲科學'], ['manga','七龍珠',1984,'鳥山明，取材自西遊記']]},
+  luoguanzhong: {'三國演義': [['tv','三國演義',1994,'央視版，84 集'], ['tv','三國',2010], ['film','赤壁',2008,'吳宇森，上下兩集'], ['game','三國志',1985,'光榮 KOEI，系列出到十四代'], ['game','真・三國無雙',2000,'光榮'], ['manga','三國志',1971,'橫山光輝，60 卷']], '水滸傳': [['tv','水滸傳',1998,'央視版'], ['tv','水滸傳',2011]]},
+  pusongling: {'聊齋誌異': [['film','倩女幽魂',1987,'徐克監製、程小東導演，改編自〈聶小倩〉'], ['film','畫皮',2008,'陳嘉上'], ['tv','聊齋',1986,'福建電視台']]},
+  baixianyong: {'臺北人': [['tv','一把青',2015,'公視，曹瑞原導演，改編自〈一把青〉'], ['film','金大班的最後一夜',1984,'白景瑞導演，改編自同名短篇']], '寂寞的十七歲': [['film','玉卿嫂',1984,'張毅導演，楊惠姍主演']], '孽子': [['film','孽子',1986,'虞戡平導演'], ['tv','孽子',2003,'公視，曹瑞原導演'], ['stage','孽子',2014,'國家戲劇院']]},
+  huangchunming: {'兒子的大玩偶': [['film','兒子的大玩偶',1983,'侯孝賢、曾壯祥、萬仁三段式，台灣新電影起點之一'], ['film','看海的日子',1983,'王童導演，改編自同名短篇']], '莎喲娜啦・再見': [['film','莎喲娜啦・再見',1985,'葉金勝導演']]},
+  xiaolihong: {'桂花巷': [['film','桂花巷',1987,'陳坤厚導演，陸小芬主演']]},
+  liang: {'殺夫': [['film','殺夫',1986,'曾壯祥導演']]},
+  wumingyi: {'天橋上的魔術師': [['tv','天橋上的魔術師',2021,'公視，楊雅喆導演']]},
+  luxun: {'吶喊': [['film','阿Q正傳',1981,'岑範導演，改編自〈阿Q正傳〉']], '彷徨': [['film','祝福',1956,'桑弧導演，改編自〈祝福〉'], ['film','傷逝',1981,'水華導演']]},
+  shencongwen: {'邊城': [['film','邊城',1984,'凌子風導演']]},
+  laoshe: {'駱駝祥子': [['film','駱駝祥子',1982,'凌子風導演，斯琴高娃演虎妞']], '四世同堂': [['tv','四世同堂',1985], ['tv','四世同堂',2009]]},
+  qianzhongshu: {'圍城': [['tv','圍城',1990,'黃蜀芹導演，陳道明演方鴻漸']]},
+  zhangailing: {'傾城之戀': [['film','傾城之戀',1984,'許鞍華導演，周潤發、繆騫人']], '半生緣': [['film','半生緣',1997,'許鞍華導演，黎明、吳倩蓮'], ['tv','半生緣',2003]], '_': [['film','色，戒',2007,'李安導演，改編自短篇〈色，戒〉，威尼斯金獅獎'], ['film','紅玫瑰白玫瑰',1994,'關錦鵬導演，改編自同名中篇']]},
+  acheng: {'棋王': [['film','棋王',1988,'滕文驥導演'], ['film','棋王',1991,'徐克、嚴浩，把阿城與張系國的兩部《棋王》合在一起']]},
+  moyan: {'紅高粱家族': [['film','紅高粱',1988,'張藝謀導演，柏林金熊獎'], ['tv','紅高粱',2014,'周迅主演']]},
+  yuhua: {'活著': [['film','活著',1994,'張藝謀導演，坎城評審團大獎；葛優影帝'], ['tv','福貴',2005], ['stage','活著',2012,'孟京輝導演話劇']], '許三觀賣血記': [['film','許三觀',2015,'韓國版，河正宇自導自演']]},
+  huanzhulouzhu: {'蜀山劍俠傳': [['film','新蜀山劍俠',1983,'徐克導演，靈感來源'], ['film','蜀山傳',2001,'徐克導演']]},
+  liangyusheng: {'白髮魔女傳': [['film','白髮魔女傳',1993,'于仁泰導演，張國榮、林青霞'], ['film','白髮魔女傳之明月天國',2014]], '七劍下天山': [['film','七劍',2005,'徐克導演'], ['tv','七劍下天山',2006]]},
+  jinyong: {'射鵰英雄傳': [['tv','射鵰英雄傳',1983,'TVB，黃日華、翁美玲，最多人心中的版本'], ['tv','射鵰英雄傳',2017], ['film','射鵰英雄傳：俠之大者',2025,'徐克導演，肖戰']], '神鵰俠侶': [['tv','神鵰俠侶',1995,'TVB，古天樂、李若彤'], ['tv','神鵰俠侶',2006,'黃曉明、劉亦菲']], '倚天屠龍記': [['tv','倚天屠龍記',1986,'TVB，梁朝偉'], ['film','倚天屠龍記之魔教教主',1993,'王晶導演，李連杰']], '天龍八部': [['tv','天龍八部',1997,'TVB，黃日華、陳浩民'], ['tv','天龍八部',2003]], '笑傲江湖': [['tv','笑傲江湖',1996,'TVB，呂頌賢'], ['film','笑傲江湖II東方不敗',1992,'程小東導演，林青霞'], ['tv','笑傲江湖',2001,'央視版']], '鹿鼎記': [['tv','鹿鼎記',1998,'TVB，陳小春'], ['film','鹿鼎記',1992,'王晶導演，周星馳']], '_': [['game','金庸群俠傳',1996,'河洛工作室，把十四部小說做成一款遊戲']]},
+  gulong: {'絕代雙驕': [['film','絕代雙驕',1979,'楚原導演，邵氏'], ['tv','絕代雙驕',1999,'林志穎、蘇有朋']], '楚留香傳奇': [['tv','楚留香',1979,'TVB，鄭少秋，台灣播出時萬人空巷']], '多情劍客無情劍': [['tv','小李飛刀',1978,'TVB，朱江']], '陸小鳳傳奇': [['tv','陸小鳳',1976,'TVB，劉松仁']], '_': [['film','流星・蝴蝶・劍',1976,'楚原導演，邵氏古龍電影系列的起點'], ['film','三少爺的劍',2016,'爾冬陞導演、徐克監製']]},
+  qiongyao: {'窗外': [['film','窗外',1973,'林青霞的第一部電影']], '煙雨濛濛': [['film','煙雨濛濛',1965,'歸亞蕾主演'], ['tv','情深深雨濛濛',2001,'趙薇、林心如']], '幾度夕陽紅': [['tv','幾度夕陽紅',1986,'劉雪華、秦漢']], '還珠格格': [['tv','還珠格格',1998,'趙薇、林心如、蘇有朋，收視史上的現象']]},
+  yishu: {'玫瑰的故事': [['film','玫瑰的故事',1986,'楊凡導演，張曼玉、周潤發'], ['tv','玫瑰的故事',2024,'劉亦菲主演']], '我的前半生': [['tv','我的前半生',2017,'馬伊琍、靳東']], '喜寶': [['film','喜寶',2020]]},
+  maijia: {'解密': [['tv','解密',2016], ['film','解密',2024,'陳思誠導演，劉昊然']], '暗算': [['tv','暗算',2006,'柳雲龍自導自演，諜戰劇熱潮的起點']], '風聲': [['film','風聲',2009,'陳國富、高群書導演，周迅、李冰冰']]},
+  chanhokei: {'13・67': [['other','電影版權售出',2015,'王家衛買下改編權，尚未開拍']]},
+  zijinchen: {'無證之罪': [['tv','無證之罪',2017,'秦昊主演']], '壞小孩': [['tv','隱秘的角落',2020,'秦昊，「一起爬山嗎」']], '長夜難明': [['tv','沉默的真相',2020,'廖凡、白宇']]},
+  nikuang: {'鑽石花': [['film','衛斯理傳奇',1987,'許冠傑主演']], '藍血人': [['film','衛斯理藍血人',2002,'劉德華主演']]},
+  zhangxiguo: {'棋王': [['film','棋王',1991,'徐克、嚴浩，與阿城的《棋王》合併改編，梁家輝主演']]},
+  liucixin: {'三體': [['tv','三體',2023,'騰訊版，30 集'], ['tv','3 體 3 Body Problem',2024,'Netflix，《權力遊戲》製作團隊'], ['anime','三體',2022,'bilibili']], '_': [['film','流浪地球',2019,'郭帆導演，改編自同名中篇，中國科幻電影里程碑'], ['film','流浪地球 2',2023]]},
+  eryuehe: {'康熙大帝': [['tv','康熙王朝',2001,'陳道明演康熙']], '雍正皇帝': [['tv','雍正王朝',1999,'唐國強演雍正，歷史劇高峰']], '乾隆皇帝': [['tv','乾隆王朝',2002]]},
+  maboyong: {'長安十二時辰': [['tv','長安十二時辰',2019,'雷佳音、易烊千璽']], '風起隴西': [['tv','風起隴西',2022]], '_': [['film','長安的荔枝',2025,'大鵬自導自演，改編自同名中篇'], ['tv','長安的荔枝',2025]]},
+  pizicai: {'第一次的親密接觸': [['film','第一次的親密接觸',2000,'陳小春、舒淇']]},
+  giddens: {'那些年，我們一起追的女孩': [['film','那些年，我們一起追的女孩',2011,'九把刀自導，柯震東、陳妍希']], '_': [['film','殺手歐陽盆栽',2011,'改編自「殺手」系列'], ['film','等一個人咖啡',2014]]},
+  tonghua: {'步步驚心': [['tv','步步驚心',2011,'劉詩詩、吳奇隆，穿越劇的高峰']], '大漠謠': [['tv','風中奇緣',2014,'改名播出']]},
+  tianxiabachang: {'鬼吹燈': [['film','尋龍訣',2015,'烏爾善導演，陳坤、黃渤、舒淇'], ['film','九層妖塔',2015,'陸川導演'], ['tv','鬼吹燈之精絕古城',2016,'靳東主演，多季系列']]},
+  maoni: {'慶餘年': [['tv','慶餘年',2019,'張若昀，第二季 2024']], '將夜': [['tv','將夜',2018]], '擇天記': [['tv','擇天記',2017,'鹿晗主演'], ['anime','擇天記',2015]]},
+  zhanghenshui: {'啼笑因緣': [['film','啼笑因緣',1932,'明星公司，第一個電影版'], ['tv','啼笑因緣',2004,'胡兵、袁立']], '金粉世家': [['tv','金粉世家',2003,'陳坤、董潔、劉亦菲']]},
+  houwenyong: {'白色巨塔': [['tv','白色巨塔',2006,'言承旭、戴立忍']], '危險心靈': [['tv','危險心靈',2006,'公視，易智言導演']]},
+  huangyi: {'尋秦記': [['tv','尋秦記',2001,'TVB，古天樂、林峯'], ['film','尋秦記',2025,'古天樂，拖了十年才上映']], '大唐雙龍傳': [['tv','大唐雙龍傳',2004,'TVB，林峯、吳卓羲']]},
+  guojingming: {'小時代': [['film','小時代',2013,'郭敬明自導，一年內拍四集']]},
+  jiangrong: {'狼圖騰': [['film','狼圖騰',2015,'法國導演阿諾 Jean-Jacques Annaud']]},
+  tangjiasanshao: {'斗羅大陸': [['anime','斗羅大陸',2018,'騰訊，年番連播'], ['tv','斗羅大陸',2021,'肖戰主演']]},
+  wuxiaole: {'你的孩子不是你的孩子': [['tv','你的孩子不是你的孩子',2018,'公視，五個單元，被稱為台版《黑鏡》']]},
+  moxiangtongxiu: {'魔道祖師': [['anime','魔道祖師',2018,'騰訊，三季'], ['tv','陳情令',2019,'肖戰、王一博，紅遍亞洲'], ['manga','魔道祖師',2017,'漫畫版']], '天官賜福': [['anime','天官賜福',2020]]},
+  // ---------- 翻譯文學 ----------
+  dumas: {'基度山恩仇記': [['film','基度山恩仇記',2002,'Kevin Reynolds 導演，Jim Caviezel'], ['film','基度山恩仇記',2024,'法國版，法國年度票房冠軍'], ['anime','巖窟王',2004,'Gankutsuou，太空歌劇版']], '三劍客': [['film','三劍客',1993,'迪士尼版'], ['film','三劍客',2011,'Paul W. S. Anderson'], ['film','三劍客：達太安',2023,'法國版']]},
+  hugo: {'悲慘世界': [['stage','悲慘世界',1985,'倫敦西區音樂劇，1980 巴黎首演，全球最長壽音樂劇之一'], ['film','悲慘世界',2012,'Tom Hooper，音樂劇電影版，Hugh Jackman'], ['film','悲慘世界',1998,'Liam Neeson'], ['tv','悲慘世界',2018,'BBC']], '鐘樓怪人': [['anime','鐘樓怪人',1996,'迪士尼動畫'], ['stage','鐘樓怪人',1998,'法語音樂劇 Notre-Dame de Paris'], ['film','鐘樓怪人',1939,'Charles Laughton']]},
+  dostoevsky: {'罪與罰': [['manga','罪與罰',1953,'手塚治虫改編'], ['film','罪與罰',1970,'蘇聯版'], ['tv','罪與罰',2002,'BBC']], '白癡': [['film','白痴',1951,'黑澤明導演，把場景搬到北海道']], '卡拉馬佐夫兄弟': [['film','卡拉馬佐夫兄弟',1958,'Yul Brynner'], ['tv','卡拉馬佐夫兄弟',2013,'日本富士電視台，現代改編']]},
+  tolstoy: {'戰爭與和平': [['film','戰爭與和平',1966,'蘇聯版，Sergei Bondarchuk，奧斯卡最佳外語片'], ['film','戰爭與和平',1956,'奧黛麗・赫本'], ['tv','戰爭與和平',2016,'BBC']], '安娜・卡列尼娜': [['film','安娜・卡列尼娜',2012,'Joe Wright 導演，Keira Knightley'], ['film','安娜・卡列尼娜',1935,'葛麗泰・嘉寶'], ['film','安娜・卡列尼娜',1997,'蘇菲・瑪索']]},
+  soseki: {'心': [['film','心',1955,'市川崑導演'], ['anime','心',2009,'「青之文學」系列']], '我是貓': [['film','我是貓',1975,'市川崑導演']], '少爺': [['tv','少爺',2016,'二宮和也主演特別劇']]},
+  kafka: {'審判': [['film','審判',1962,'Orson Welles 導演，Anthony Perkins']], '變形記': [['stage','變形記',1969,'Steven Berkoff 名作，之後改編無數']]},
+  camus: {'異鄉人': [['film','異鄉人',1967,'Luchino Visconti 導演，Marcello Mastroianni']]},
+  saintexupery: {'小王子': [['film','小王子',1974,'音樂劇電影'], ['anime','小王子',2015,'Mark Osborne，定格＋3D'], ['manga','小王子',2008,'Joann Sfar 漫畫版'], ['stage','小王子',2002,'法語音樂劇']]},
+  dazai: {'人間失格': [['film','人間失格',2010,'荒戶源次郎導演，生田斗真'], ['film','人間失格：太宰治和他的三個女人',2019,'蜷川實花導演，小栗旬'], ['anime','人間失格',2009,'「青之文學」系列，小畑健人設'], ['manga','人間失格',2017,'伊藤潤二改編']]},
+  kawabata: {'雪國': [['film','雪國',1957,'豐田四郎導演，岸惠子']], '伊豆的舞孃': [['film','伊豆的舞孃',1974,'山口百惠、三浦友和，共拍過六次電影']], '古都': [['film','古都',1963,'岩下志麻一人分飾兩角'], ['film','古都',1980,'山口百惠']]},
+  mishima: {'金閣寺': [['film','炎上',1958,'市川崑導演，市川雷藏'], ['stage','金閣寺',2011,'宮本亞門導演舞台劇，森田剛']], '潮騷': [['film','潮騷',1975,'山口百惠、三浦友和']]},
+  matsumoto: {'點與線': [['film','點與線',1958], ['tv','點與線',2007,'北野武主演特別劇']], '砂之器': [['film','砂之器',1974,'野村芳太郎導演，日本影史名作'], ['tv','砂之器',2004,'中居正廣']], '零的焦點': [['film','零的焦點',2009,'廣末涼子、中谷美紀']]},
+  solzhenitsyn: {'伊凡・傑尼索維奇的一天': [['film','伊凡・傑尼索維奇的一天',1970,'英國、挪威合拍']]},
+  marquez: {'百年孤寂': [['tv','百年孤寂',2024,'Netflix，哥倫比亞製作，第一次影像化']], '愛在瘟疫蔓延時': [['film','愛在瘟疫蔓延時',2007,'Mike Newell 導演']]},
+  murakami: {'挪威的森林': [['film','挪威的森林',2010,'陳英雄導演，松山研一、菊地凜子']], '海邊的卡夫卡': [['stage','海邊的卡夫卡',2012,'蜷川幸雄導演，曾到台灣演出']], '沒有女人的男人們': [['film','在車上',2021,'濱口竜介導演，改編自〈Drive My Car〉等三篇，奧斯卡最佳國際影片']], '_': [['film','燃燒烈愛',2018,'李滄東導演，改編自短篇〈燒穀倉〉，劉亞仁、史蒂芬・連'], ['film','東尼瀧谷',2004,'市川準導演，改編自同名短篇']]},
+  kundera: {'生命中不能承受之輕': [['film','布拉格的春天',1988,'Philip Kaufman 導演，Daniel Day-Lewis、Juliette Binoche']]},
+  eco: {'玫瑰的名字': [['film','玫瑰的名字',1986,'Jean-Jacques Annaud 導演，Sean Connery'], ['tv','玫瑰的名字',2019,'義大利影集']]},
+  suskind: {'香水': [['film','香水',2006,'Tom Tykwer 導演']]},
+  yoshimoto: {'廚房': [['film','廚房',1989,'森田芳光導演'], ['film','我愛廚房',1997,'嚴浩導演，香港版，富田靖子、陳小春']]},
+  gaarder: {'蘇菲的世界': [['film','蘇菲的世界',1999,'挪威電影'], ['tv','蘇菲的世界',1999,'挪威影集']]},
+  higashino: {'秘密': [['film','秘密',1999,'廣末涼子、小林薰'], ['tv','秘密',2010,'志田未來']], '白夜行': [['tv','白夜行',2006,'山田孝之、綾瀨遙，最經典的版本'], ['film','白夜行',2009,'韓國版，孫藝真'], ['film','白夜行',2011,'日本電影版，堀北真希']], '嫌疑犯 X 的獻身': [['film','嫌疑犯 X 的獻身',2008,'西谷弘導演，福山雅治、堤真一'], ['film','嫌疑人 X',2012,'韓國版'], ['film','嫌疑人 X 的獻身',2017,'中國版，蘇有朋導演']], '解憂雜貨店': [['film','解憂雜貨店',2017,'日本版，廣木隆一導演'], ['film','解憂雜貨店',2017,'中國版，王俊凱、成龍']], '_': [['tv','神探伽利略',2007,'福山雅治，改編自「伽利略」系列']]},
+  miyabe: {'模仿犯': [['film','模仿犯',2002,'森田芳光導演'], ['tv','模仿犯',2023,'Netflix 台灣版，吳慷仁主演，把場景搬到台灣']], '火車': [['tv','火車',2011,'上川隆也、佐佐木希'], ['tv','火車',2012,'韓國電影版']], '所羅門的偽證': [['film','所羅門的偽證',2015,'前後篇']]},
+  isaka: {'金色夢鄉': [['film','金色夢鄉',2010,'中村義洋導演，堺雅人'], ['film','幻夢',2020,'韓國版']], '重力小丑': [['film','重力小丑',2009,'加瀨亮、岡田將生']], '死神的精確度': [['film','死神的精確度',2008,'金城武主演']], '_': [['film','子彈列車',2022,'Brad Pitt 主演，改編自《瓢蟲》'], ['film','家鴨與野鴨的投幣式置物櫃',2007]]},
+  ogawa: {'博士熱愛的算式': [['film','博士熱愛的算式',2006,'小泉堯史導演，寺尾聰、深津繪里']]},
+  larsson: {'龍紋身的女孩': [['film','龍紋身的女孩',2009,'瑞典版，Noomi Rapace'], ['film','龍紋身的女孩',2011,'David Fincher 導演，Rooney Mara、Daniel Craig']]},
+  nesbo: {'雪人': [['film','雪人',2017,'Tomas Alfredson 導演，Michael Fassbender']]},
+  hankang: {'素食者': [['film','素食者',2009,'韓國電影']]},
+  minato: {'告白': [['film','告白',2010,'中島哲也導演，松隆子，日本電影學院獎最佳影片']]},
+  ferrante: {'我的天才女友': [['tv','我的天才女友',2018,'HBO 與義大利 RAI 合製，四季拍完四部曲']]},
+  beckman: {'明天別再來敲門': [['film','明天別再來敲門',2015,'瑞典版，奧斯卡最佳外語片提名'], ['film','超難搞先生',2022,'美國版，Tom Hanks']]},
+  kawaguchi: {'在咖啡冷掉之前': [['stage','在咖啡冷掉之前',2010,'原本就是舞台劇，之後才改寫成小說'], ['film','在咖啡冷掉之前',2018,'有村架純主演']]},
+  chonamjoo: {'82 年生的金智英': [['film','82 年生的金智英',2019,'鄭有美、孔劉']]},
+  tsujimura: {'鏡之孤城': [['anime','鏡之孤城',2022,'原惠一導演']]},
+  // ---------- 英文世界 ----------
+  austen: {'傲慢與偏見': [['tv','傲慢與偏見',1995,'BBC，Colin Firth 演達西先生'], ['film','傲慢與偏見',2005,'Joe Wright 導演，Keira Knightley'], ['film','BJ 單身日記',2001,'現代翻版，見海倫・菲爾丁']], '理性與感性': [['film','理性與感性',1995,'李安導演，Emma Thompson 編劇兼主演，奧斯卡最佳改編劇本']], '艾瑪': [['film','獨領風騷',1995,'Clueless，搬到 1990 年代比佛利山的高中'], ['film','艾瑪',2020,'Anya Taylor-Joy']]},
+  dickens: {'遠大前程': [['film','遠大前程',1946,'David Lean 導演，公認最好的版本'], ['film','遠大前程',1998,'現代版，Ethan Hawke、Gwyneth Paltrow'], ['tv','遠大前程',2011,'BBC']], '孤雛淚': [['film','孤雛淚',1948,'David Lean'], ['stage','孤雛淚 Oliver!',1960,'音樂劇，1968 電影版得奧斯卡最佳影片'], ['film','孤雛淚',2005,'Roman Polanski']], '雙城記': [['film','雙城記',1935,'Ronald Colman'], ['film','雙城記',1958]], '塊肉餘生記': [['film','塊肉餘生記',1935], ['film','大衛・考柏菲',2019,'Armando Iannucci，Dev Patel']]},
+  cbronte: {'簡愛': [['film','簡愛',1943,'Orson Welles 演羅徹斯特'], ['tv','簡愛',2006,'BBC，Ruth Wilson'], ['film','簡愛',2011,'Mia Wasikowska、Michael Fassbender']]},
+  fitzgerald: {'大亨小傳': [['film','大亨小傳',1974,'Robert Redford'], ['film','大亨小傳',2013,'Baz Luhrmann 導演，Leonardo DiCaprio']]},
+  hemingway: {'老人與海': [['film','老人與海',1958,'Spencer Tracy'], ['anime','老人與海',1999,'Aleksandr Petrov 玻璃油畫動畫，奧斯卡最佳動畫短片']], '戰地春夢': [['film','戰地春夢',1932,'Gary Cooper'], ['film','戰地春夢',1957,'Rock Hudson']], '戰地鐘聲': [['film','戰地鐘聲',1943,'Gary Cooper、Ingrid Bergman']], '太陽依舊升起': [['film','妾似朝陽又照君',1957,'Ava Gardner']]},
+  steinbeck: {'人鼠之間': [['stage','人鼠之間',1937,'史坦貝克自己改編的舞台劇，紐約劇評人獎'], ['film','人鼠之間',1939], ['film','人鼠之間',1992,'Gary Sinise 自導自演，John Malkovich']], '憤怒的葡萄': [['film','憤怒的葡萄',1940,'John Ford 導演，Henry Fonda']], '伊甸園東': [['film','天倫夢覺',1955,'Elia Kazan 導演，James Dean 成名作']]},
+  salinger: {'麥田捕手': [['other','拒絕改編','','沙林傑生前拒絕所有改編，至今沒有電影版']]},
+  harperlee: {'梅岡城故事': [['film','梅岡城故事',1962,'Gregory Peck 得奧斯卡影帝'], ['stage','梅岡城故事',2018,'百老匯，Aaron Sorkin 改編']]},
+  ishiguro: {'長日將盡': [['film','長日將盡',1993,'James Ivory 導演，Anthony Hopkins、Emma Thompson']], '別讓我走': [['film','別讓我走',2010,'Carey Mulligan、Andrew Garfield'], ['tv','別讓我走',2016,'日劇版，綾瀨遙']]},
+  hosseini: {'追風箏的孩子': [['film','追風箏的孩子',2007,'Marc Forster 導演']]},
+  martel: {'少年 Pi 的奇幻漂流': [['film','少年 Pi 的奇幻漂流',2012,'李安導演，四座奧斯卡，在台中拍的']]},
+  rooney: {'正常人': [['tv','正常人',2020,'BBC／Hulu，Paul Mescal、Daisy Edgar-Jones']], '聊天紀錄': [['tv','聊天紀錄',2022,'BBC／Hulu']]},
+  celesteng: {'星星之火': [['tv','星星之火',2020,'Hulu，Reese Witherspoon、Kerry Washington']]},
+  doyle: {'血字的研究': [['tv','新世紀福爾摩斯',2010,'BBC，Benedict Cumberbatch，第一集就是血字的研究的現代版']], '福爾摩斯冒險史': [['tv','福爾摩斯',1984,'Granada，Jeremy Brett，最忠於原著'], ['film','福爾摩斯',2009,'Guy Ritchie 導演，Robert Downey Jr.'], ['tv','福爾摩斯與華生',2012,'Elementary，搬到紐約，華生是女的'], ['anime','名偵探福爾摩斯',1984,'宮崎駿參與導演的動畫，角色是狗']], '巴斯克維爾的獵犬': [['film','巴斯克維爾的獵犬',1959,'Hammer 製片，Peter Cushing']]},
+  christie: {'東方快車謀殺案': [['film','東方快車謀殺案',1974,'Sidney Lumet 導演，全明星卡司'], ['film','東方快車謀殺案',2017,'Kenneth Branagh 自導自演']], '一個都不留': [['film','一個都不留',1945,'René Clair'], ['tv','一個都不留',2015,'BBC 迷你影集']], '史岱爾莊謀殺案': [['tv','大偵探白羅',1989,'ITV，David Suchet 演了 25 年，拍完所有白羅故事']], '羅傑・艾克洛命案': [['tv','大偵探白羅：羅傑・艾克洛命案',2000,'David Suchet 版']], '_': [['stage','捕鼠器',1952,'她自己寫的舞台劇，倫敦連演七十多年，史上最長']]},
+  chandler: {'大眠': [['film','夜長夢多',1946,'Howard Hawks 導演，Humphrey Bogart 演馬羅']], '漫長的告別': [['film','漫長的告別',1973,'Robert Altman 導演，Elliott Gould']]},
+  flynn: {'控制': [['film','控制',2014,'David Fincher 導演，Ben Affleck、Rosamund Pike']], '利器': [['tv','利器',2018,'HBO，Amy Adams']]},
+  horowitz: {'喜鵲謀殺案': [['tv','喜鵲謀殺案',2022,'BBC／PBS，Lesley Manville']]},
+  osman: {'週四謀殺俱樂部': [['film','週四謀殺俱樂部',2025,'Netflix，Chris Columbus 導演，Helen Mirren、Pierce Brosnan']]},
+  lecarre: {'冷戰諜魂': [['film','冷戰諜魂',1965,'Richard Burton']], '鍋匠、裁縫、士兵、間諜': [['tv','鍋匠、裁縫、士兵、間諜',1979,'BBC，Alec Guinness 演史邁利'], ['film','諜影行動',2011,'Gary Oldman，台灣片名《諜影行動》']], '夜班經理': [['tv','夜班經理',2016,'BBC／AMC，Tom Hiddleston、Hugh Laurie']]},
+  harris: {'紅龍': [['film','孽慾殺人夜',1986,'Michael Mann 導演，Manhunter'], ['film','紅龍',2002,'Anthony Hopkins']], '沉默的羔羊': [['film','沉默的羔羊',1991,'Jonathan Demme，奧斯卡五項大獎'], ['tv','雙面人魔',2013,'Hannibal，Mads Mikkelsen']], '人魔': [['film','人魔',2001,'Ridley Scott 導演']]},
+  crichton: {'侏羅紀公園': [['film','侏羅紀公園',1993,'Steven Spielberg，之後五部續集']], '天外病菌': [['film','天外病菌',1971,'Robert Wise 導演']]},
+  danbrown: {'達文西密碼': [['film','達文西密碼',2006,'Ron Howard 導演，Tom Hanks']], '天使與魔鬼': [['film','天使與魔鬼',2009,'Tom Hanks']], '_': [['film','地獄',2016,'Inferno，Tom Hanks']]},
+  hawkins: {'列車上的女孩': [['film','列車上的女孩',2016,'Emily Blunt']]},
+  wells: {'時間機器': [['film','時光機器',1960,'George Pal'], ['film','時光機器',2002,'Guy Pearce']], '世界大戰': [['other','世界大戰 廣播劇',1938,'Orson Welles 的廣播劇，聽眾以為火星人真的來了'], ['film','世界大戰',1953], ['film','世界大戰',2005,'Steven Spielberg，Tom Cruise']]},
+  huxley: {'美麗新世界': [['tv','美麗新世界',2020,'Peacock 影集']]},
+  orwell: {'動物農莊': [['anime','動物農莊',1954,'英國第一部動畫長片，CIA 出資'], ['film','動物農莊',1999,'電視電影']], '一九八四': [['film','一九八四',1984,'John Hurt、Richard Burton，1984 年上映'], ['stage','一九八四',2013,'Headlong 劇團，後來進百老匯']]},
+  asimov: {'我，機器人': [['film','機械公敵',2004,'Will Smith，只借用書名和三定律']], '基地': [['tv','基地',2021,'Apple TV+，Jared Harris']]},
+  bradbury: {'華氏 451 度': [['film','華氏 451 度',1966,'François Truffaut 導演'], ['film','華氏 451 度',2018,'HBO，Michael B. Jordan']], '火星紀事': [['tv','火星紀事',1980,'迷你影集']]},
+  herbert: {'沙丘': [['film','沙丘魔堡',1984,'David Lynch 導演，公認失敗但有趣'], ['film','沙丘',2021,'Denis Villeneuve 導演，六座奧斯卡'], ['film','沙丘：第二部',2024], ['tv','沙丘：預言',2024,'Max 影集，前傳'], ['game','沙丘 II',1992,'即時戰略遊戲的祖師爺']], '沙丘救世主': [['tv','沙丘：救世主',2003,'Sci Fi 迷你影集']]},
+  pkdick: {'銀翼殺手': [['film','銀翼殺手',1982,'Ridley Scott 導演，Harrison Ford'], ['film','銀翼殺手 2049',2017,'Denis Villeneuve 導演']], '高堡奇人': [['tv','高堡奇人',2015,'Amazon，四季']], '_': [['film','魔鬼總動員',1990,'改編自短篇，Arnold Schwarzenegger'], ['film','關鍵報告',2002,'Steven Spielberg，Tom Cruise，改編自短篇'], ['tv','電子夢：菲利普・狄克的世界',2017,'Amazon 選集劇']]},
+  atwood: {'使女的故事': [['film','使女的故事',1990,'Natasha Richardson'], ['tv','使女的故事',2017,'Hulu，Elisabeth Moss，六季 2025 完結']], '_': [['tv','雙面葛蕾斯',2017,'Netflix，改編自 Alias Grace']]},
+  tedchiang: {'妳一生的預言': [['film','異星入境',2016,'Denis Villeneuve 導演，Amy Adams，改編自〈妳一生的預言〉']]},
+  weir: {'火星任務': [['film','絕地救援',2015,'Ridley Scott 導演，Matt Damon']], '極限返航': [['film','Project Hail Mary',2026,'Ryan Gosling，2026 年 3 月上映']]},
+  tolkien: {'魔戒': [['film','魔戒三部曲',2001,'Peter Jackson，2001–03，17 座奧斯卡'], ['anime','魔戒',1978,'Ralph Bakshi 動畫'], ['tv','魔戒：力量之戒',2022,'Amazon，前傳'], ['game','中土世界：魔多之影',2014]], '哈比人': [['film','哈比人三部曲',2012,'Peter Jackson，2012–14'], ['anime','哈比人',1977,'電視動畫']]},
+  cslewis: {'獅子、女巫、魔衣櫥': [['film','納尼亞傳奇：獅子、女巫、魔衣櫥',2005,'迪士尼，之後兩集續集'], ['tv','納尼亞傳奇',1988,'BBC']]},
+  leguin: {'地海巫師': [['anime','地海戰記',2006,'吉卜力，宮崎吾朗導演，作者本人不滿意'], ['tv','地海傳說',2004,'Sci Fi 迷你影集']]},
+  grrm: {'權力遊戲': [['tv','權力遊戲',2011,'HBO，八季 2011–19，59 座艾美獎'], ['tv','龍族前傳',2022,'HBO，前傳']]},
+  rowling: {'哈利波特：神秘的魔法石': [['film','哈利波特',2001,'八部電影 2001–11'], ['stage','哈利波特：被詛咒的孩子',2016,'倫敦西區舞台劇'], ['game','霍格華茲的傳承',2023], ['tv','哈利波特',2027,'HBO 影集，籌備中，預計 2027']]},
+  mshelley: {'科學怪人': [['film','科學怪人',1931,'Boris Karloff，定型了怪物的長相'], ['film','瑪麗雪萊之科學怪人',1994,'Kenneth Branagh、Robert De Niro'], ['stage','科學怪人',2011,'國家劇院，Danny Boyle 導演，Benedict Cumberbatch'], ['film','科學怪人',2025,'Guillermo del Toro，Netflix']]},
+  stoker: {'德古拉': [['film','不死殭屍—恐慄交響曲',1922,'Nosferatu，未經授權的改編，默片經典'], ['film','吸血鬼',1931,'Bela Lugosi'], ['film','吸血鬼：真愛不死',1992,'Francis Ford Coppola，Gary Oldman'], ['film','諾斯費拉圖',2024,'Robert Eggers 導演']]},
+  sjackson: {'鬼入侵': [['film','鬼屋',1963,'The Haunting，Robert Wise'], ['tv','鬼入侵',2018,'Netflix，Mike Flanagan，只借用書名與設定']], '我們一直住在城堡裡': [['film','我們一直住在城堡裡',2018]]},
+  sking: {'魔女嘉莉': [['film','魔女嘉莉',1976,'Brian De Palma 導演，Sissy Spacek'], ['film','魔女嘉莉',2013], ['stage','魔女嘉莉',1988,'百老匯音樂劇，著名的失敗作']], '鬼店': [['film','鬼店',1980,'Stanley Kubrick，Jack Nicholson；史蒂芬・金本人討厭這個版本'], ['tv','鬼店',1997,'金自己編劇的迷你影集']], '四季奇譚': [['film','刺激 1995',1994,'改編自〈麗塔海華絲與蕭山克監獄的救贖〉，IMDb 榜首'], ['film','站在我這邊',1986,'Rob Reiner，改編自〈屍體〉'], ['film','誰在跟我玩遊戲',1998,'Apt Pupil']], '牠': [['tv','牠',1990,'Tim Curry 演小丑'], ['film','牠',2017,'Andy Muschietti，史上最賣座恐怖片'], ['film','牠：第二章',2019]], '11/22/63': [['tv','11/22/63',2016,'Hulu，James Franco']]},
+  mitchell: {'飄': [['film','亂世佳人',1939,'費雯麗、克拉克・蓋博，八座奧斯卡，通膨調整後史上最賣座電影']]},
+  dumaurier: {'蝴蝶夢': [['film','蝴蝶夢',1940,'Hitchcock，奧斯卡最佳影片'], ['film','蝴蝶夢',2020,'Netflix，Lily James、Armie Hammer']], '牙買加客棧': [['film','牙買加客棧',1939,'Hitchcock']], '_': [['film','鳥',1963,'Hitchcock，改編自她的短篇']]},
+  sparks: {'手札情緣': [['film','手札情緣',2004,'Ryan Gosling、Rachel McAdams']], '瓶中信': [['film','瓶中信',1999,'Kevin Costner']]},
+  moyes: {'遇見你之前': [['film','我就要你好好的',2016,'Emilia Clarke、Sam Claflin']]},
+  emilyhenry: {'_': [['film','People We Meet on Vacation',2026,'Netflix，2026 年 1 月']]},
+  follett: {'聖殿春秋': [['tv','聖殿春秋',2010,'八集迷你影集'], ['game','The Pillars of the Earth',2017,'Daedalic 冒險遊戲']]},
+  mantel: {'狼廳': [['tv','狼廳',2015,'BBC，Mark Rylance 演克倫威爾'], ['stage','狼廳',2013,'皇家莎士比亞劇團']], '鏡與光': [['tv','狼廳：鏡與光',2024,'BBC']]},
+  zusak: {'偷書賊': [['film','偷書賊',2013,'Geoffrey Rush、Emily Watson']]},
+  doerr: {'呼喚奇蹟的光': [['tv','呼喚奇蹟的光',2023,'Netflix，四集']]},
+  towles: {'莫斯科紳士': [['tv','莫斯科紳士',2024,'Paramount+，Ewan McGregor']]},
+  alcott: {'小婦人': [['film','小婦人',1994,'Winona Ryder'], ['film','她們',2019,'Greta Gerwig 導演，Saoirse Ronan'], ['anime','愛的小婦人物語',1987,'世界名作劇場']]},
+  montgomery: {'清秀佳人': [['anime','清秀佳人',1979,'高畑勲導演，世界名作劇場，宮崎駿參與'], ['tv','清秀佳人',1985,'Megan Follows，加拿大經典版'], ['tv','勇敢的安妮',2017,'Netflix，Anne with an E']]},
+  lowry: {'記憶傳授人': [['film','記憶傳承人：極樂謊言',2014,'Jeff Bridges、Meryl Streep']]},
+  collins: {'飢餓遊戲': [['film','飢餓遊戲',2012,'Jennifer Lawrence，四部 2012–15'], ['film','飢餓遊戲：鳴鳥與游蛇之歌',2023,'前傳']]},
+  johngreen: {'生命中的美好缺憾': [['film','生命中的美好缺憾',2014,'Shailene Woodley']], '尋找阿拉斯加': [['tv','尋找阿拉斯加',2019,'Hulu']]},
+  twain: {'湯姆歷險記': [['film','湯姆歷險記',1938], ['anime','湯姆歷險記',1980,'世界名作劇場']], '頑童歷險記': [['film','頑童歷險記',1993,'迪士尼，Elijah Wood']]},
+  carroll: {'愛麗絲夢遊仙境': [['anime','愛麗絲夢遊仙境',1951,'迪士尼動畫'], ['film','魔境夢遊',2010,'Tim Burton 導演，Johnny Depp'], ['game','愛麗絲驚魂記',2000,'American McGee\'s Alice']]},
+  london: {'野性的呼喚': [['film','野性的呼喚',1935,'Clark Gable'], ['film','極地守護犬',2020,'Harrison Ford']], '白牙': [['anime','白牙',2018,'Netflix 動畫'], ['film','白牙',1991,'迪士尼']]},
+  buck: {'大地': [['film','大地',1937,'Luise Rainer 得奧斯卡影后']]},
+  hilton: {'失落的地平線': [['film','失落的地平線',1937,'Frank Capra 導演']], '再會，契普斯先生': [['film','萬世師表',1939,'Robert Donat 得奧斯卡影帝'], ['film','萬世師表',1969,'音樂劇版，Peter O\'Toole']]},
+  puzo: {'教父': [['film','教父',1972,'Coppola 導演，Marlon Brando，奧斯卡最佳影片'], ['film','教父 II',1974,'續集也得最佳影片'], ['game','教父',2006,'EA']]},
+  segal: {'愛的故事': [['film','愛的故事',1970,'Ali MacGraw、Ryan O\'Neal，1970 年美國票房冠軍']]},
+  bach: {'天地一沙鷗': [['film','天地一沙鷗',1973,'Neil Diamond 配樂得葛萊美獎']]},
+  benchley: {'大白鯊': [['film','大白鯊',1975,'Steven Spielberg，第一部「暑假大片」']]},
+  clavell: {'幕府將軍': [['tv','幕府將軍',1980,'Richard Chamberlain、三船敏郎'], ['tv','幕府將軍',2024,'FX，真田廣之，18 座艾美獎創紀錄']], '大班': [['film','大班',1986,'Bryan Brown、陳沖']]},
+  forsyth: {'豺狼之日': [['film','豺狼之日',1973,'Fred Zinnemann 導演'], ['tv','豺狼之日',2024,'Sky／Peacock，Eddie Redmayne']], '敖德薩檔案': [['film','敖德薩檔案',1974,'Jon Voight']]},
+  clancy: {'獵殺紅色十月': [['film','獵殺紅色十月',1990,'Sean Connery、Alec Baldwin']], '愛國者遊戲': [['film','愛國者遊戲',1992,'Harrison Ford']], '_': [['tv','傑克萊恩',2018,'Amazon，John Krasinski，四季']]},
+  sheldon: {'假如明天來臨': [['tv','假如明天來臨',1986,'迷你影集']], '午夜的另一面': [['film','午夜的另一面',1977]]},
+  grisham: {'黑色豪門企業': [['film','黑色豪門企業',1993,'Sydney Pollack 導演，Tom Cruise']], '殺戮時刻': [['film','殺戮時刻',1996,'Matthew McConaughey、Samuel L. Jackson']], '鵜鶘檔案': [['film','絕對機密',1993,'Julia Roberts、Denzel Washington']]},
+  waller: {'麥迪遜之橋': [['film','麥迪遜之橋',1995,'Clint Eastwood 自導自演，Meryl Streep'], ['stage','麥迪遜之橋',2014,'百老匯音樂劇']]},
+  golden: {'藝妓回憶錄': [['film','藝伎回憶錄',2005,'Rob Marshall 導演，章子怡、鞏俐、楊紫瓊']]},
+  fielding: {'BJ 單身日記': [['film','BJ 單身日記',2001,'Renée Zellweger，Colin Firth 再演一次達西'], ['film','BJ 單身日記：生命中的男人',2025,'第四集']]},
+  meyer: {'暮光之城': [['film','暮光之城',2008,'Kristen Stewart、Robert Pattinson，五部 2008–12']]},
+  picoult: {'姊姊的守護者': [['film','姊姊的守護者',2009,'Cameron Diaz，結局和小說不一樣']]},
+  albom: {'在天堂遇見的五個人': [['tv','在天堂遇見的五個人',2004,'ABC 電視電影，Jon Voight']]},
+  ahern: {'P.S. 我愛你': [['film','P.S. 我愛你',2007,'Hilary Swank、Gerard Butler']]},
+  niffenegger: {'時空旅人之妻': [['film','時空旅人之妻',2009,'Eric Bana、Rachel McAdams'], ['tv','時空旅人之妻',2022,'HBO，Steven Moffat 編劇']]},
+  haddon: {'深夜小狗神祕習題': [['stage','深夜小狗神祕習題',2012,'英國國家劇院，五座奧利佛獎、五座東尼獎，曾來台演出']]},
+  eljames: {'格雷的五十道陰影': [['film','格雷的五十道陰影',2015,'三部曲 2015–18']]},
+  rjoyce: {'一個人的朝聖': [['film','一個人的朝聖',2023,'Jim Broadbent、Penelope Wilton']]},
+  hoover: {'以我們告終': [['film','It Ends with Us',2024,'Blake Lively、Justin Baldoni']]},
+  tjreid: {'黛西・瓊斯與六人組': [['tv','黛西・瓊斯與六人組',2023,'Amazon，Riley Keough']], '艾芙琳・雨果的七個丈夫': [['film','艾芙琳・雨果的七個丈夫',2026,'Netflix，籌備中']]},
+  owens: {'沼澤女孩': [['film','沼澤女孩',2022,'Daisy Edgar-Jones，Taylor Swift 寫主題曲']]},
+  garmus: {'化學課': [['tv','化學課',2023,'Apple TV+，Brie Larson']]}
+};
+
+
+const ERAS = [
+  {label:'1900 以前', short:'–1899', from:-9999, to:1899},
+  {label:'1900–1949', short:'1900–49', from:1900, to:1949},
+  {label:'1950–1979', short:'1950–79', from:1950, to:1979},
+  {label:'1980–1999', short:'1980–99', from:1980, to:1999},
+  {label:'2000–2009', short:'2000–09', from:2000, to:2009},
+  {label:'2010–現在', short:'2010–', from:2010, to:2100}
+];
+const ERA_TABLE = [
+  ['明清章回小說：三國、西遊、紅樓夢、聊齋。分「回」講故事，白話與文言混用。', '19 世紀經典：奧斯汀、狄更斯、勃朗特；哥德小說出現怪物與吸血鬼（科學怪人、德古拉）；世紀末威爾斯開了科幻的頭。'],
+  ['五四白話文運動之後現代小說出現：魯迅、老舍、沈從文、錢鍾書；上海的張愛玲；台灣有吳濁流用日文寫《亞細亞的孤兒》；武俠的前身還珠樓主。', '現代主義與「失落的一代」：費茲傑羅、海明威、史坦貝克；反烏托邦兩大經典《美麗新世界》《一九八四》；克莉絲蒂與冷硬派錢德勒在同一時期。'],
+  ['港台武俠與言情的黃金期：梁羽生、金庸、古龍、瓊瑤；台灣現代主義與鄉土文學：白先勇、黃春明；倪匡的衛斯理、張系國的科幻也在這時起步。', '戰後：《麥田捕手》《梅岡城故事》；科幻奇幻成形：《基地》《沙丘》《魔戒》《納尼亞》；間諜小說（勒卡雷）與心理恐怖（雪莉・傑克森）。'],
+  ['台灣解嚴後文學題材鬆綁（李昂、蕭麗紅）；中國「尋根」與新時期：阿城、莫言、余華、王小波；席絹帶起租書店言情；1998 年痞子蔡的網路小說出現。', '類型市場成熟：史蒂芬・金、《哈利波特》《冰與火之歌》《侏羅紀公園》《沉默的羔羊》；文學小說有石黑一雄、愛特伍、《喜福會》。'],
+  ['網路與類型崛起：《三體》《鬼吹燈》《慶餘年》《步步驚心》；台灣新一代：吳明益、甘耀明；華文推理起步（既晴）；鄭丰重寫傳統武俠。', '全球暢銷書時代：《達文西密碼》《追風箏的孩子》《少年 Pi》《飢餓遊戲》《偷書賊》；山德森接棒奇幻；石黑一雄《別讓我走》。'],
+  ['台灣文學走向國際：吳明益、楊双子、陳思宏；華文推理成熟：陳浩基、紫金陳；馬華的黎紫書；中國新一代陳春成；馬伯庸的歷史類型小說。', '當代：莎莉・魯尼、《火星任務》《控制》《週四謀殺俱樂部》《莫斯科紳士》《呼喚奇蹟的光》；改編影集帶動閱讀（使女的故事、正常人）。']
+];
+const STARTERS = [
+  {lang:'zh', id:'yuhua', book:'活著', why:'句子簡單、故事簡單，兩個晚上讀完，但會記很久。', size:'薄'},
+  {lang:'zh', id:'baixianyong', book:'臺北人', why:'十四個短篇、十四個人，一篇一篇讀，讀不完也沒關係。', size:'薄'},
+  {lang:'zh', id:'jinyong', book:'射鵰英雄傳', why:'武俠的正門：故事最完整、最不用做功課，四冊一路追。', size:'厚'},
+  {lang:'zh', id:'chensihong', book:'鬼地方', why:'現在的台灣小說長什麼樣：彰化鄉下、家族秘密、節奏快。', size:'中'},
+  {lang:'en', id:'hemingway', book:'老人與海', why:'一百多頁，全世界最常見的「第一本英文小說」。', size:'薄'},
+  {lang:'en', id:'orwell', book:'動物農莊', why:'一百頁的寓言，讀完就懂為什麼大家都在引用它。', size:'薄'},
+  {lang:'en', id:'christie', book:'一個都不留', why:'十個人困在島上一個一個死，推理小說的純粹版。', size:'中'},
+  {lang:'en', id:'weir', book:'火星任務', why:'工程日誌式的科幻，理工人讀起來像在解題。', size:'中'}
+];
+
+
+/* ---- 公版判斷：台灣著作權法，作者歿後 50 年（隔年 1/1 起） ---- */
+const THIS_YEAR = new Date().getFullYear();
+function deathYear(a){ const m = (a.life || '').match(/[–-]\s*(\d{4})\s*$/); return m ? +m[1] : null; }
+function isPD(a){ const d = deathYear(a); return d !== null && d + 50 < THIS_YEAR; }
+function pdFrom(a){ const d = deathYear(a); return d === null ? null : d + 51; }
+
+/* ---- 找書資源 ---- */
+const RESOURCES = {
+  zh: {
+    groups: [
+      {id:'free', name:'免費・公版', en:'free / public domain', color:'var(--lv1)', desc:'作者過世超過 50 年的書，誰都可以合法下載、複製。四大名著、聊齋、魯迅、老舍都在這一類。', items:[
+        {name:'好讀', url:'https://www.haodoo.net/', desc:'志工經營二十年的免費書櫃，每本都有 EPUB／updb 可下載，古典區（四大名著、聊齋、魯迅⋯）是台灣人校過的版本。', tags:[['ok','古典區公版'],['warn','現代作品多未授權']], note:'現代作家的書多半沒有取得授權，只是「有人反映就下架」，要不要用是自己的判斷。'},
+        {name:'維基文庫', url:'https://zh.wikisource.org/', desc:'維基百科的姊妹站，古典與民國時期的公版文本，整本可複製。', tags:[['ok','公版']]},
+        {name:'中國哲學書電子化計劃 ctext.org', url:'https://ctext.org/zh', desc:'先秦到清的古籍全文資料庫，附原刻本掃描，繁簡可切換，四大名著都有。', tags:[['ok','公版']]},
+        {name:'開放文學', url:'http://open-lit.com/', desc:'台灣站，古典小說分回線上讀，還有很多四大名著以外的明清小說（老殘遊記、鏡花緣、三言二拍⋯）。', tags:[['ok','公版']]},
+        {name:'臺灣華文電子書庫（國家圖書館）', url:'https://taiwanebook.ncl.edu.tw/zh-tw', desc:'國圖把民國早期、日治時期的公版圖書掃描上線，看得到當年的原版書。', tags:[['ok','公版'],['','掃描檔']]},
+        {name:'Project Gutenberg 中文區', url:'https://www.gutenberg.org/browse/languages/zh', desc:'老牌公版庫的中文部分，數量不多但紅樓夢、三國這些都有，EPUB 可直接下載。', tags:[['ok','公版']]}
+      ]},
+      {id:'lib', name:'圖書館借閱', en:'library lending', color:'var(--lib)', desc:'免費，但要有借書證，而且要用平台自己的 app 看（借期通常 14 天，可續借、可預約）。還在版權內的書走這條路最省錢。', items:[
+        {name:'HyRead ebook', url:'https://hchcc.ebook.hyread.com.tw/', desc:'各縣市圖書館最普遍的平台，繁中書最多。新竹縣（連結）、新竹市 hcmlgov.ebook.hyread.com.tw、台北市 tpml.ebook.hyread.com.tw 各有分站；裝 HyRead app 用圖書館帳號登入。', tags:[['','需借書證']]},
+        {name:'udn 讀書館', url:'https://reading.udn.com/udnlib/', desc:'聯合報系的平台，各館有分站，小說類收得不少，app 介面簡單。', tags:[['','需借書證']]},
+        {name:'台灣雲端書庫', url:'https://www.ebookservice.tw/', desc:'用縣市圖書館帳號登入，計次制（每人每月有借閱次數上限，各館不同），新書上架快。', tags:[['','需借書證'],['','計次制']]},
+        {name:'國立公共資訊圖書館 電子書服務平台', url:'https://ebook.nlpi.edu.tw/', desc:'國資圖（台中）的平台，全國民眾都能申請借閱證，而且可以線上辦證，不用跑一趟。', tags:[['ok','可線上辦證']], note:'網路辦證頁：nlpi.edu.tw → 讀者服務 → 借閱證申請。'},
+        {name:'文化部 擴大電子書計次借閱網', url:'https://ebook.moc.gov.tw/', desc:'文化部補助的計次借閱入口，整合多個平台的館藏，用來查「哪一館有這本」。', tags:[['','需借書證']], note:'各館規則以館方公告為準。'}
+      ]},
+      {id:'buy', name:'付費購買', en:'buy', color:'var(--zh)', desc:'買了就是自己的，跟上傳的 EPUB 放同一個書櫃。常有折扣，新書大約紙本七到八折。', items:[
+        {name:'Google Play 圖書', url:'https://play.google.com/store/books', desc:'你現在的書櫃。買的書和自己上傳的檔案放在一起，手機、平板、網頁同步。', tags:[['pay','付費']]},
+        {name:'Readmoo 讀墨', url:'https://readmoo.com/', desc:'台灣最大的繁中電子書店，書量最多、活動最多，有自家的 mooInk 閱讀器。', tags:[['pay','付費']]},
+        {name:'樂天 Kobo', url:'https://www.kobo.com/tw/zh', desc:'繁中和英文書都齊，折扣頻繁，有 Kobo 閱讀器。', tags:[['pay','付費']]},
+        {name:'博客來電子書', url:'https://www.books.com.tw/web/ebook', desc:'跟紙本同一個站，方便比價和看評價。', tags:[['pay','付費']]},
+        {name:'Amazon Kindle 繁體中文書店', url:'https://www.amazon.com/-/zh_TW/b?node=18327575011', desc:'2019 年起約兩萬本繁中書，美金計價，用 Kindle app 或閱讀器看。', tags:[['pay','付費'],['','美金']]}
+      ]},
+      {id:'pick', name:'選書參考', en:'what to read next', color:'var(--ink-soft)', desc:'不知道下一本讀什麼的時候看這些：先看獎項名單（少而精），再看書評站（多而雜），最後看讀者社群（真實但主觀）。', items:[
+        {name:'Openbook 閱讀誌', url:'https://www.openbook.org.tw/', desc:'台灣的書評媒體，每年年底的「Openbook 好書獎」是挑當代中文小說最省事的名單，得獎專題全文上線。', tags:[['','書評'],['','年度好書']]},
+        {name:'臺灣文學獎・金典獎', url:'https://award.nmtl.gov.tw/', desc:'國立臺灣文學館主辦，每年選出年度大獎與金典獎作品；地圖上的陳思宏《鬼地方》、甘耀明都在歷屆名單裡。', tags:[['','文學獎']]},
+        {name:'台北國際書展大獎', url:'https://www.tibe.org.tw/', desc:'每年二月書展前公布，小說獎三本得獎加入圍，台港馬作家都有；陳浩基《13・67》就是得主之一。', tags:[['','文學獎']]},
+        {name:'紅樓夢獎：世界華文長篇小說獎', url:'https://zh.wikipedia.org/wiki/%E7%B4%85%E6%A8%93%E5%A4%A2%E7%8D%8E', desc:'香港浸會大學兩年一屆，華文長篇小說的最高獎，歷屆得主有莫言、駱以軍、黃碧雲、董啟章。', tags:[['','文學獎'],['','長篇']]},
+        {name:'OKAPI 閱讀生活誌（博客來）', url:'https://okapi.books.com.tw/', desc:'博客來的書評與專欄站，「作家專業書評」單元是作家評作家，比商品頁的評價可靠。', tags:[['','書評']]},
+        {name:'閱讀最前線（Readmoo）', url:'https://news.readmoo.com/', desc:'讀墨的書業新聞站：作家專訪、新書介紹、電子書排行榜。', tags:[['','書評'],['','排行榜']]},
+        {name:'九歌年度小說選', url:'https://www.chiuko.com.tw/', desc:'九歌出版社每年一本，由一位作家主編，收錄當年最好的台灣短篇；用一本書認識十幾位新作家最快。', tags:[['','年度選集']]},
+        {name:'豆瓣讀書', url:'https://book.douban.com/', desc:'中文世界最大的讀者評分站（簡體介面）。中國當代小說和翻譯小說的評分與短評最完整，台灣書也查得到。', tags:[['','評分'],['','簡體']]},
+        {name:'PTT book 板', url:'https://www.ptt.cc/bbs/book/index.html', desc:'台灣讀者的心得與推薦文，站內搜「推薦」「入門」很好用；也有各類型的推書串。', tags:[['','讀者社群']]},
+        {name:'閱讀前哨站：愛書人 50 個私藏去處', url:'https://readingoutpost.com/book-lover-collection/', desc:'一篇文章整理了 50 個書評與心得網站，這一欄不夠用的時候看這篇。', tags:[['','整理文']]}
+      ]}
+    ],
+    steps: [
+      ['第 1 步', '辦借書證：住哪個縣市就去那裡的圖書館辦，或線上申請國資圖的借閱證。'],
+      ['第 2 步', '裝 app：HyRead、udn 讀書館、台灣雲端書庫任選，用圖書館帳號登入。'],
+      ['第 3 步', '用地圖詳情頁的作者名搜尋、借閱（多數館 14 天，可預約排隊）。'],
+      ['要留在 Play 圖書', '公版書上傳 EPUB；版權中的書只能在 Play 商店買。']
+    ]
+  },
+  en: {
+    groups: [
+      {id:'free', name:'免費・公版', en:'free / public domain', color:'var(--lv1)', desc:'英文公版書的量遠大於中文。注意「原文公版」不等於「中譯本公版」——翻譯有自己的版權。', items:[
+        {name:'Standard Ebooks', url:'https://standardebooks.org/', desc:'志工把公版書重新校對、排版、做封面，EPUB 品質最好；你拿到的 23 本英文書就是這裡來的。', tags:[['ok','公版']]},
+        {name:'Project Gutenberg', url:'https://www.gutenberg.org/', desc:'最老牌的公版庫，七萬多本，EPUB 與 Kindle 格式都有。', tags:[['ok','公版']]},
+        {name:'Faded Page', url:'https://www.fadedpage.com/', desc:'加拿大的公版庫。加拿大以前是歿後 50 年，所以有歐威爾、赫胥黎、海明威《老人與海》、史坦貝克、《飄》這些台灣已公版、美國還沒公版的書。', tags:[['ok','公版（台灣可用）']]},
+        {name:'Project Gutenberg Australia', url:'https://gutenberg.net.au/', desc:'澳洲站，同樣的邏輯，《一九八四》《動物農莊》原文在這裡。', tags:[['ok','公版（台灣可用）']]},
+        {name:'Open Library（Internet Archive）', url:'https://openlibrary.org/', desc:'掃描書的「數位借閱」，一次借一小時到 14 天，有版權的書也借得到。', tags:[['warn','借閱制'],['warn','法律爭議中']]},
+        {name:'LibriVox', url:'https://librivox.org/', desc:'公版書的免費有聲書，志工朗讀，練英文聽力用。', tags:[['ok','公版有聲書']]}
+      ]},
+      {id:'lib', name:'圖書館借閱', en:'library lending', color:'var(--lib)', desc:'台灣的公共圖書館也有英文電子書，只是量少一點。', items:[
+        {name:'Libby／OverDrive', url:'https://libbyapp.com/', desc:'全球圖書館最常用的英文電子書平台。台北市立圖書館與國家圖書館的借閱證可以登入 Libby 借英文書、英文漫畫。', tags:[['','需借書證']], note:'台北市圖借閱證的申辦資格與國圖的規定，請以館方公告為準。'},
+        {name:'HyRead 各館的英文書區', url:'https://hchcc.ebook.hyread.com.tw/', desc:'各館平台裡都有一小區英文電子書，順手搜一下。', tags:[['','需借書證']]}
+      ]},
+      {id:'buy', name:'付費購買', en:'buy', color:'var(--en)', desc:'英文電子書通常比紙本便宜很多，經典書常在幾美元以內。', items:[
+        {name:'Amazon Kindle Store', url:'https://www.amazon.com/kindle-ebooks', desc:'英文書最齊，Kindle app 跨平台，台灣帳號可以直接買美國店。', tags:[['pay','付費']]},
+        {name:'Kobo', url:'https://www.kobo.com/', desc:'英文書齊全，跟中文書同一個帳號。', tags:[['pay','付費']]},
+        {name:'Google Play 圖書', url:'https://play.google.com/store/books', desc:'英文書也有，跟你的中文書櫃同一個地方。', tags:[['pay','付費']]},
+        {name:'Apple Books', url:'https://www.apple.com/tw/apple-books/', desc:'iPhone／iPad 用戶的選擇。', tags:[['pay','付費']]}
+      ]},
+      {id:'pick', name:'選書參考', en:'what to read next', color:'var(--ink-soft)', desc:'英文世界的選書資源多到用不完，先從評分站和獎項名單開始就夠。', items:[
+        {name:'Goodreads', url:'https://www.goodreads.com/', desc:'全世界最大的讀者評分站，看評分、書評、書單最快；每年的 Goodreads Choice Awards 是讀者票選。', tags:[['','評分']]},
+        {name:'The StoryGraph', url:'https://www.thestorygraph.com/', desc:'Goodreads 的替代品，可以用「情緒、節奏、長度」篩書，適合「想讀一本輕鬆的短篇推理」這種需求。', tags:[['','評分'],['','篩選']]},
+        {name:'Five Books', url:'https://fivebooks.com/', desc:'每個主題請一位專家推薦五本並說明理由，找某個領域的入門書很好用。', tags:[['','推薦']]},
+        {name:'Literary Hub ＋ Bookmarks', url:'https://lithub.com/', desc:'文學新聞站；旗下的 Bookmarks（bookmarks.reviews）把各大媒體的書評彙整成一個評級。', tags:[['','書評']]},
+        {name:'NPR Books We Love', url:'https://apps.npr.org/best-books/', desc:'美國公共廣播每年的好書清單，可以按類型、心情篩選，回溯到 2013 年。', tags:[['','年度好書']]},
+        {name:'r/Fantasy、r/books', url:'https://www.reddit.com/r/Fantasy/', desc:'Reddit 的讀書社群；r/Fantasy 每年的「Top Novels」票選是奇幻與科幻的選書聖經。', tags:[['','讀者社群']]},
+        {name:'布克獎・普立茲獎', url:'https://thebookerprizes.com/', desc:'文學小說的兩大獎：布克獎 Booker（英語世界）與普立茲小說獎 Pulitzer（美國）；地圖上石黑一雄、杜爾的得獎註記就是這兩個。', tags:[['','文學獎']]},
+        {name:'雨果獎・愛倫坡獎', url:'https://www.thehugoawards.org/', desc:'類型小說的兩大獎：雨果獎 Hugo（科幻奇幻，三體、沙丘都得過）與愛倫坡獎 Edgar（推理，theedgars.com）。', tags:[['','類型獎']]},
+        {name:'Modern Library 100 Best Novels', url:'https://www.modernlibrary.com/top-100/100-best-novels/', desc:'最常被引用的英文小說百大書單，同頁還有讀者票選版；經典補課用。', tags:[['','經典書單']]}
+      ]}
+    ],
+    steps: [
+      ['公版', '直接下載 EPUB，上傳 Play 圖書。Standard Ebooks 優先，找不到再去 Gutenberg。'],
+      ['台灣公版但美國不是', '歐威爾、海明威晚期、赫胥黎等：到 Faded Page 或 Gutenberg Australia 自己下載。'],
+      ['版權中', '台北市圖借閱證 + Libby 借；或 Kindle／Kobo 買，經典書常只要幾美元。'],
+      ['練英文', 'Play 圖書長按單字有字典和翻譯；LibriVox 有公版有聲書。']
+    ]
+  }
+};
+
+/* ---- 影音與 Podcast ---- */
+const MEDIA_GROUPS = [
+  {id:'yt', name:'YouTube 說書', en:'booktube', color:'var(--en)'},
+  {id:'pod', name:'Podcast', en:'podcasts', color:'var(--zh)'},
+  {id:'lec', name:'免費公開課・講座', en:'free lectures', color:'var(--lv1)'},
+  {id:'audio', name:'有聲書', en:'audiobooks', color:'var(--lib)'}
+];
+const GENRE_NAMES = {};
+GENRES_ZH.forEach(g => GENRE_NAMES[g.id] = g.name);
+GENRES_EN.forEach(g => GENRE_NAMES[g.id] = GENRE_NAMES[g.id] || g.name);
+const MEDIA = {
+  zh: [
+    {g:'yt', name:'NeKo嗚喵・說書', url:'https://www.youtube.com/@NeKo_Wumiao', desc:'台灣最多人看的說書頻道之一，小說比例高：推理、奇幻、當代文學都講，年終書單影片很適合挑書。', tags:[['ok','小說為主'],['','仍在更新']], genres:['mystery','sf','fantasy','lit-tw','lit-cn','literary','thriller','trans','hot-zh']},
+    {g:'yt', name:'朱宥勳使出人生攻擊！', url:'https://www.youtube.com/channel/UCIFqfMtBfNsYGBz3uNd9UAw', desc:'小說家朱宥勳講台灣文學史、作家故事和「這本為什麼重要」，是地圖上「文學小說・台灣」那一列最好的導覽。', tags:[['ok','台灣文學']], genres:['lit-tw','lit-hkmy']},
+    {g:'yt', name:'說書人柳豫', url:'https://www.youtube.com/channel/UCBY6ricq_NJTBSgFkZ2llkA', desc:'專講三國與金庸，一集一個人物或一段情節，講得像在說評書。武俠、歷史、古典那三列從這裡開始最不費力。', tags:[['ok','三國・金庸']], genres:['wuxia','historical','classic']},
+    {g:'yt', name:'超級歪 SuperY', url:'https://www.youtube.com/channel/UCAM7yIYvZGYLJR6z6RqLlNw', desc:'哲學與電影頻道，「文學」系列講《卡拉馬佐夫兄弟》、卡夫卡這類硬書。讀不下去的西方經典，先聽他講一遍。', tags:[['','西方經典'],['','偏深']], genres:['literary']},
+    {g:'pod', name:'閱讀夏LaLa', url:'https://podcasts.apple.com/us/podcast/%E9%96%B1%E8%AE%80%E5%A4%8Flala/id1538116376', desc:'兩位主持人聊書、訪作家，小說比例高，台灣當代作家常上節目；想認識「現在誰在寫」聽這個。', tags:[['ok','小說為主'],['','作家訪談']], genres:['lit-tw','lit-hkmy','mystery']},
+    {g:'pod', name:'迷誠品', url:'https://open.spotify.com/show/1cHbHWJ8tgqiuGah5fqV0V', desc:'誠品書店的節目，「今天讀什麼」單元由作家、編輯選書聊書，一集一本，長度適合通勤。', tags:[['','選書']], genres:['lit-tw','lit-cn','romance','trans','hot-zh']},
+    {g:'pod', name:'偵探推理俱樂部', url:'https://podcasts.apple.com/tw/podcast/%E5%81%B5%E6%8E%A2%E6%8E%A8%E7%90%86%E4%BF%B1%E6%A8%82%E9%83%A8/id1700614721', desc:'推理小說專門節目，一集講一本書或一位作家，本格、社會派、冷硬派都會碰到。', tags:[['ok','推理專門']], genres:['mystery','thriller','trans']},
+    {g:'pod', name:'惡之根：推理文學與真實案件的對讀', url:'https://rootsofevil.firstory.io/', desc:'把推理小說和真實案件放在一起講，讀推理的人會喜歡這個角度。', tags:[['','推理・犯罪']], genres:['mystery','thriller']},
+    {g:'pod', name:'下一本讀什麼？（閱讀前哨站・瓦基）', url:'https://readingoutpost.com/podcast/', desc:'台灣最紅的說書 Podcast，也有 YouTube 版。以非文學書為主、偶爾講小說，適合先養成「聽書」的習慣。', tags:[['warn','非小說為主']], genres:[]},
+    {g:'lec', name:'台大開放式課程：歐麗娟《紅樓夢》', url:'https://www.youtube.com/playlist?list=PLaSVd_PZ_Y7yDFfkc4WnWlTApcw2vumlq', desc:'整學期的大學課免費看，從神話、人物到結構一路講；是最多人推薦的紅樓夢入口，很多人聽完才第一次讀完原著。', tags:[['ok','免費'],['','紅樓夢']], genres:['classic']},
+    {g:'lec', name:'台大開放式課程：白先勇《紅樓夢》導讀', url:'https://ocw.ntu.edu.tw/', desc:'白先勇 2014–15 年在台大講了三個學期，逐回細講；他自己就在地圖的「文學小說・台灣」列上。到台大開放式課程網站搜尋「白先勇 紅樓夢」。', tags:[['ok','免費'],['','紅樓夢']], genres:['classic','lit-tw']},
+    {g:'lec', name:'TED-Ed「Why should you read…」系列', url:'https://ed.ted.com/search?qs=why+should+you+read', desc:'五分鐘講一本經典為什麼值得讀，有中文字幕；讀之前先看一集，決定要不要讀。', tags:[['ok','免費'],['','中文字幕']], genres:['literary','sf','horror','fantasy','mystery','classic']},
+    {g:'audio', name:'鏡好聽 Mirror Voice', url:'https://www.mirrorvoice.com.tw/', desc:'台灣最大的中文有聲書平台，小說有聲書和說書節目都有，訂閱制。', tags:[['pay','付費']], genres:['lit-tw','lit-cn','mystery','romance','trans','hot-zh']},
+    {g:'audio', name:'博客來暢聽', url:'https://www.books.com.tw/activity/2024/08/audiosubscription/', desc:'博客來 2024 年推出的有聲書訂閱服務，書目以博客來的暢銷書為主。', tags:[['pay','付費']], genres:[]}
+  ],
+  en: [
+    {g:'yt', name:'Jack Edwards', url:'https://www.youtube.com/@JackEdwards', desc:'英國 BookTube 的代表人物，當代文學與經典都講，節奏快、講得清楚；他是莎莉・魯尼的粉絲。', tags:[['ok','當代・經典']], genres:['literary','ya','romance','hot']},
+    {g:'yt', name:'Better Than Food: Book Reviews', url:'https://www.youtube.com/@BetterThanFood', desc:'文學小說的深度書評，語氣強烈、不客氣；想知道「這本到底好在哪」看他。', tags:[['','文學小說'],['','偏深']], genres:['literary','horror']},
+    {g:'yt', name:'Benjamin McEvoy（Hardcore Literature）', url:'https://www.youtube.com/c/BenjaminMcEvoy', desc:'經典小說逐本細講，也有同名 Podcast；讀狄更斯、奧斯汀之前先聽他導讀，會好讀很多。', tags:[['ok','經典導讀']], genres:['literary','classic','horror']},
+    {g:'yt', name:'Daniel Greene', url:'https://www.youtube.com/@DanielGreeneReviews', desc:'奇幻書評與排名，選奇幻系列（山德森、馬汀、托爾金）之前看他。', tags:[['','奇幻']], genres:['fantasy','sf']},
+    {g:'yt', name:'Merphy Napier', url:'https://www.youtube.com/@MerphyNapier', desc:'奇幻與科幻書評，講山德森講得最多，也常做「從哪本開始」的影片。', tags:[['','奇幻・科幻']], genres:['fantasy','sf']},
+    {g:'pod', name:'Backlisted', url:'https://www.backlisted.fm/', desc:'兩位英國書人每集聊一本「應該被重讀的老書」，來賓多是作家；經典入門最好的節目。', tags:[['ok','經典']], genres:['literary','mystery','horror','historical']},
+    {g:'pod', name:'The History of Literature', url:'https://historyofliterature.com/', desc:'從古代講到現代的文學史，一集一個主題，七百多集，隨便挑一集聽都行。', tags:[['','文學史']], genres:['literary','classic']},
+    {g:'pod', name:'Literature and History', url:'https://literatureandhistory.com/', desc:'按時間順序講西方文學，做得像有聲紀錄片，一集一兩小時；想打底的人聽這個。', tags:[['','文學史'],['','長']], genres:['literary','classic']},
+    {g:'pod', name:'The New York Times Book Review', url:'https://www.nytimes.com/column/book-review-podcast', desc:'每週新書與作家訪談，跟上當代英文出版最快的方法。', tags:[['','新書']], genres:['literary','thriller','historical','hot']},
+    {g:'lec', name:'TED-Ed「Why should you read…」系列', url:'https://ed.ted.com/search?qs=why+should+you+read', desc:'五分鐘一本：一九八四、沙丘、科學怪人、簡愛⋯都有，有中文字幕。', tags:[['ok','免費'],['','中文字幕']], genres:['literary','sf','horror','fantasy','mystery','classic']},
+    {g:'lec', name:'Crash Course Literature（John Green）', url:'https://www.youtube.com/@crashcourse', desc:'地圖「青少年」那一列的約翰・葛林本人主講，一集十二分鐘講一本（大亨小傳、麥田捕手、一九八四⋯），有中文字幕；到頻道搜尋 Crash Course Literature。', tags:[['ok','免費'],['','中文字幕']], genres:['literary','ya','sf']},
+    {g:'lec', name:'Open Yale Courses：The American Novel Since 1945', url:'https://oyc.yale.edu/english/engl-291', desc:'耶魯整學期的課，講戰後美國小說：沙林傑、莫里森、麥卡錫；影片與逐字稿都免費。', tags:[['ok','免費'],['','大學課']], genres:['literary']},
+    {g:'lec', name:'Open Yale Courses：Hemingway, Fitzgerald, Faulkner', url:'https://oyc.yale.edu/english/engl-310', desc:'耶魯的另一門課，專講海明威、費茲傑羅、福克納三個人。', tags:[['ok','免費'],['','大學課']], genres:['literary']},
+    {g:'audio', name:'LibriVox', url:'https://librivox.org/', desc:'公版書的免費有聲書，志工朗讀；奧斯汀、狄更斯、福爾摩斯都有好幾個版本。', tags:[['ok','免費・公版']], genres:['literary','classic','mystery','horror']},
+    {g:'audio', name:'Audible', url:'https://www.audible.com/', desc:'英文有聲書最齊，很多由演員朗讀；訂閱制。', tags:[['pay','付費']], genres:['literary','fantasy','sf','thriller']},
+    {g:'audio', name:'Google Play 圖書（有聲書）', url:'https://play.google.com/store/books/category/audiobooks', desc:'跟你的書櫃同一個地方，單本購買不用訂閱。', tags:[['pay','付費']], genres:[]}
+  ]
+};
+function mediaCard(it){
+  let host = ''; try { host = new URL(it.url).host.replace(/^www\./, ''); } catch(e) {}
+  const gens = (it.genres || []).map(x => GENRE_NAMES[x]).filter(Boolean).slice(0, 4);
+  return `<li class="rcard"><div class="rt"><a class="rn" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a><span class="url">${esc(host)}</span></div><div class="rd">${esc(it.desc)}</div><div class="rtags">${(it.tags || []).map(t => `<span class="rtag ${t[0]}">${esc(t[1])}</span>`).join('')}</div>${gens.length ? `<div class="rgen">適合：${gens.map(x => `<span>${esc(x)}</span>`).join('')}</div>` : ''}</li>`;
+}
+function renderMedia(){
+  const items = MEDIA[resLang];
+  $('media-groups').innerHTML = MEDIA_GROUPS.map(g => {
+    const list = items.filter(it => it.g === g.id);
+    if (!list.length) return '';
+    return `<div class="rgroup" style="--rc:${g.color}"><h3>${esc(g.name)}<span class="en">${esc(g.en)}</span></h3><ul class="rlist">${list.map(mediaCard).join('')}</ul></div>`;
+  }).join('');
+}
+function relatedMedia(a, lang){
+  const kind = {yt:'YouTube', pod:'Podcast', lec:'公開課', audio:'有聲書'};
+  const pool = MEDIA[lang].concat(MEDIA[lang === 'zh' ? 'en' : 'zh']);
+  const hits = pool.filter(it => (it.genres || []).includes(a.genre)).slice(0, 4);
+  if (!hits.length) return '';
+  return `<div class="eyebrow">延伸影音</div>` + hits.map(it => `<a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a><span class="kind">${kind[it.g]}</span>`).join('　');
+}
+
+let resLang = null;
+function renderResources(){
+  const R = RESOURCES[resLang];
+  $('res-zh').setAttribute('aria-pressed', resLang === 'zh');
+  $('res-en').setAttribute('aria-pressed', resLang === 'en');
+  $('res-groups').innerHTML = R.groups.map(g => `<div class="rgroup" style="--rc:${g.color}"><h3>${esc(g.name)}<span class="en">${esc(g.en)}</span></h3>${g.desc ? `<div class="gdesc">${esc(g.desc)}</div>` : ''}<ul class="rlist">${g.items.map(it => {
+    let host = ''; try { host = new URL(it.url).host.replace(/^www\./, ''); } catch(e) {}
+    return `<li class="rcard"><div class="rt"><a class="rn" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a><span class="url">${esc(host)}</span></div><div class="rd">${esc(it.desc)}</div><div class="rtags">${(it.tags || []).map(t => `<span class="rtag ${t[0]}">${esc(t[1])}</span>`).join('')}</div>${it.note ? `<div class="rnote">${esc(it.note)}</div>` : ''}</li>`;
+  }).join('')}</ul></div>`).join('');
+  $('res-steps').innerHTML = R.steps.map(s => `<div class="step"><b>${esc(s[0])}</b>${esc(s[1])}</div>`).join('');
+  renderMedia();
+}
+
+const WORLD = {
+  zh:{genres:GENRES_ZH, authors:AUTHORS_ZH, notes:ERA_NOTES_ZH, tags:'台＝台灣　中＝中國　港＝香港　馬＝馬華　古＝明清；翻譯列的小字是原作國（日／法／德／俄／韓⋯）'},
+  en:{genres:GENRES_EN, authors:AUTHORS_EN, notes:ERA_NOTES_EN, tags:'英＝英國　美＝美國　加＝加拿大　愛＝愛爾蘭　澳＝澳洲'}
+};
+const eraOf = y => ERAS.findIndex(e => y >= e.from && y <= e.to);
+for (const k in WORLD) WORLD[k].authors.forEach(a => {
+  const sw = a.works.find(w => w.t === a.start) || a.works[0];
+  a.primaryEra = eraOf(sw.y);
+  a.eras = new Set(a.works.map(w => eraOf(w.y)));
+});
+/* ---- 改編資料套用 ---- */
+const AD_ORDER = AD_KINDS.map(k => k[0]);
+const AD_LABEL = Object.fromEntries(AD_KINDS.map(k => [k[0], k[1]]));
+const AD_GLYPH = Object.fromEntries(AD_KINDS.map(k => [k[0], k[2]]));
+const AD_UNMATCHED = [];
+AUTHORS_ZH.concat(AUTHORS_EN).forEach(a => {
+  const m = ADAPT[a.id] || {};
+  const kinds = new Set();
+  const titles = new Set(a.works.map(w => w.t));
+  Object.keys(m).forEach(k => { if (k !== '_' && !titles.has(k)) AD_UNMATCHED.push(a.id + ':' + k); });
+  a.works.forEach(w => { w.ad = m[w.t] || []; w.ad.forEach(x => kinds.add(x[0])); });
+  a.adExtra = m['_'] || [];
+  a.adExtra.forEach(x => kinds.add(x[0]));
+  a.adKinds = kinds;
+});
+function adGlyphs(a){ return AD_ORDER.filter(k => a.adKinds.has(k)).map(k => AD_GLYPH[k]).join(''); }
+function adItem(x){ return `<span class="adi"><span class="adk">${AD_LABEL[x[0]] || x[0]}</span>《${esc(x[1])}》${x[2] ? `<span class="yr2">${x[2]}</span>` : ''}${x[3] ? `<span class="adn">　${esc(x[3])}</span>` : ''}</span>`; }
+const byId = {};
+for (const k in WORLD) WORLD[k].authors.forEach(a => byId[k + ':' + a.id] = a);
+
+const state = {lang:'zh', lo:0, hi:5, q:'', pdOnly:false, hotOnly:false, ad:[]};
+try{ const s = JSON.parse(localStorage.getItem('novelmap') || '{}'); Object.assign(state, s); }catch(e){}
+state.q = ''; state.pdOnly = !!state.pdOnly; state.hotOnly = !!state.hotOnly; state.ad = Array.isArray(state.ad) ? state.ad : [];
+// 選單收折：第一次在窄螢幕（手機）預設收起，之後記住使用者的選擇
+if (typeof state.fold !== 'boolean') state.fold = matchMedia('(max-width:720px)').matches;
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const lvlText = {1:'好讀', 2:'中等', 3:'有挑戰'};
+function save(){ try{ localStorage.setItem('novelmap', JSON.stringify({lang:state.lang, lo:state.lo, hi:state.hi, pdOnly:state.pdOnly, hotOnly:state.hotOnly, ad:state.ad, fold:state.fold, resLang:resLang})); }catch(e){} }
+
+function rangeText(){
+  const lo = state.lo, hi = state.hi;
+  if (lo === 0 && hi === 5) return '全部年代';
+  if (lo === hi) return ERAS[lo].label;
+  return (lo === 0 ? '古典' : String(ERAS[lo].from)) + ' — ' + (hi === 5 ? '現在' : String(ERAS[hi].to));
+}
+function renderSummary(n){
+  const f = [];
+  if (state.pdOnly) f.push('只看公版');
+  if (state.hotOnly) f.push('只看暢銷');
+  if (state.ad.length) f.push('改編：' + state.ad.map(k => AD_LABEL[k] || k).join('、'));
+  if (state.q.trim()) f.push('搜尋「' + state.q.trim() + '」');
+  $('bar-sum').innerHTML = `<b>${state.lang === 'zh' ? '中文世界' : '英文世界'}</b><span class="sep">·</span><span>${esc(rangeText())}</span><span class="sep">·</span><span><b>${n}</b> 位作者</span>` + f.map(x => `<span class="f">${esc(x)}</span>`).join('');
+}
+function applyFold(){
+  $('bar').classList.toggle('fold', state.fold);
+  const b = $('bar-fold');
+  b.setAttribute('aria-expanded', !state.fold);
+  b.innerHTML = (state.fold ? '展開選單' : '收折選單') + ' <span class="ar">▴</span>';
+  if (!state.fold) renderSlider();  // 收起時寬度為 0，展開後重算拉桿位置
+}
+
+function matches(a){
+  const q = state.q.trim().toLowerCase();
+  if (!q) return true;
+  const hay = [a.name, a.alt || '', ...a.works.map(w => (w.t || '') + ' ' + (w.o || ''))].join(' ').toLowerCase();
+  return hay.includes(q);
+}
+
+function renderMatrix(){
+  const W = WORLD[state.lang];
+  const eras = [];
+  for (let i = state.lo; i <= state.hi; i++) eras.push(i);
+  const m = $('matrix');
+  m.style.setProperty('--cols', eras.length);
+  let html = '<div class="hd gl stuck"><div class="eyebrow">類別 ／ 年代</div></div>';
+  eras.forEach(i => html += `<div class="hd"><div class="era">${ERAS[i].short}</div><div class="hnote">${esc(W.notes[i])}</div></div>`);
+  let shown = new Set();
+  W.genres.forEach((g, gi) => {
+    const odd = (gi % 2 ? ' odd' : '') + (g.hot ? ' hotrow' : '');
+    html += `<div class="gl stuck${odd}"><div class="gname">${esc(g.name)}</div><div class="gen">${esc(g.en)}</div><div class="gdesc">${esc(g.desc)}</div></div>`;
+    eras.forEach(i => {
+      const list = W.authors.filter(a => a.genre === g.id && a.eras.has(i) && matches(a) && (!state.pdOnly || isPD(a)) && (!state.hotOnly || a.hot) && (!state.ad.length || state.ad.some(k => a.adKinds.has(k))));
+      list.sort((a, b) => (a.primaryEra === i ? 0 : 1) - (b.primaryEra === i ? 0 : 1));
+      let cell = '';
+      list.forEach(a => {
+        shown.add(a.id);
+        const primary = a.primaryEra === i;
+        cell += `<button class="chip${primary ? ' primary' : ''}" data-id="${a.id}" title="${esc(a.start)}"><i class="dot l${a.level}"></i>${esc(a.name)}<span class="tg">${esc(a.tag)}${isPD(a) ? '<span class="pd" title="公版：可免費取得">·免</span>' : ''}${a.hot ? '<span class="hot" title="暢銷／現象級">·熱</span>' : ''}</span>${a.adKinds.size ? `<span class="ad" title="有改編：${AD_ORDER.filter(k => a.adKinds.has(k)).map(k => AD_LABEL[k]).join('、')}">${adGlyphs(a)}</span>` : ''}</button>`;
+      });
+      html += `<div class="cell${cell ? '' : ' empty'}${odd}">${cell}</div>`;
+    });
+  });
+  m.innerHTML = html;
+  $('cnt').textContent = shown.size;
+  $('legend-tags').textContent = W.tags;
+  renderSummary(shown.size);
+}
+
+function renderSlider(){
+  const lo = state.lo, hi = state.hi;
+  $('lo').value = lo; $('hi').value = hi;
+  const pct = v => (v / 5) * 100;
+  const fill = $('fill');
+  const thumb = 20, w = $('dual').clientWidth || 400;
+  const px = v => (v / 5) * (w - thumb) + thumb / 2;
+  fill.style.left = px(lo) + 'px';
+  fill.style.width = Math.max(0, px(hi) - px(lo)) + 'px';
+  const a = lo === 0 ? '古典' : String(ERAS[lo].from), b = hi === 5 ? '現在' : String(ERAS[hi].to);
+  $('range-label').textContent = (lo === 0 && hi === 5) ? '全部年代' : (lo === hi ? ERAS[lo].label : a + ' — ' + b);
+  document.querySelectorAll('#ticks button').forEach((b, i) => b.classList.toggle('on', i >= lo && i <= hi));
+}
+
+function setRange(lo, hi){
+  state.lo = Math.max(0, Math.min(5, lo)); state.hi = Math.max(0, Math.min(5, hi));
+  if (state.lo > state.hi) [state.lo, state.hi] = [state.hi, state.lo];
+  renderSlider(); renderMatrix(); save();
+}
+
+function setLang(l){
+  state.lang = l;
+  document.body.classList.toggle('lang-zh', l === 'zh');
+  document.body.classList.toggle('lang-en', l === 'en');
+  $('lang-zh').setAttribute('aria-pressed', l === 'zh');
+  $('lang-en').setAttribute('aria-pressed', l === 'en');
+  renderSlider(); renderMatrix(); save();
+}
+
+let lastFocus = null;
+function openAuthor(lang, id){
+  const a = byId[lang + ':' + id]; if (!a) return;
+  const W = WORLD[lang];
+  const g = W.genres.find(x => x.id === a.genre);
+  document.body.classList.toggle('lang-zh', lang === 'zh');
+  document.body.classList.toggle('lang-en', lang === 'en');
+  $('m-meta').innerHTML = `<span class="pill">${esc(g.name)}</span>${isPD(a) ? '<span class="pdpill pd">公版・免費</span>' : '<span class="pdpill cr">版權中</span>'}${a.hot ? '<span class="pdpill hot">暢銷・現象級</span>' : ''}${a.adKinds.size ? `<span class="pdpill ad">已改編：${AD_ORDER.filter(k => a.adKinds.has(k)).map(k => AD_LABEL[k]).join('・')}</span>` : ''}<span>${esc(a.region)}</span>${a.life ? `<span class="num">${esc(a.life)}</span>` : ''}${a.alt && lang === 'zh' ? `<span>${esc(a.alt)}</span>` : ''}`;
+  $('m-name').innerHTML = esc(a.name) + (a.alt && lang === 'en' ? `<span class="alt">${esc(a.alt)}</span>` : '');
+  $('m-lvl').innerHTML = `<i class="dot l${a.level}"></i>入門友善度：${lvlText[a.level]}`;
+  $('m-bio').textContent = a.bio;
+  const sw = a.works.find(w => w.t === a.start);
+  $('m-start').innerHTML = `《${esc(a.start)}》${sw && sw.o ? `<span class="org" style="font-family:var(--display);font-weight:500;color:var(--ink-soft);font-style:italic;font-size:.85em;margin-left:8px">${esc(sw.o)}</span>` : ''}${sw ? `<span class="num" style="color:var(--ink-soft);font-size:.85em;margin-left:8px">${sw.approx ? '約 ' : ''}${sw.y}</span>` : ''}`;
+  const works = [...a.works].sort((x, y) => x.y - y.y);
+  $('m-works').innerHTML = works.map(w => {
+    const inRange = eraOf(w.y) >= state.lo && eraOf(w.y) <= state.hi;
+    const title = w.t ? `《${esc(w.t)}》` : '';
+    return `<li><span class="yr${inRange ? '' : ' out'}">${w.approx ? '約' : ''}${w.y}</span><span><span class="ttl${w.t === a.start ? ' star' : ''}">${title}</span>${w.o ? `<span class="org">${esc(w.o)}</span>` : ''}${w.n ? `<span class="nt">${esc(w.n)}</span>` : ''}${w.ad && w.ad.length ? `<span class="adl">${w.ad.map(adItem).join('')}</span>` : ''}</span></li>`;
+  }).join('');
+  const pd = isPD(a), from = pdFrom(a);
+  let get;
+  if (pd && a.genre === 'trans') get = `<b>原文公版</b>：作者過世超過 50 年，原文可以免費取得（<a href="https://www.gutenberg.org/" target="_blank" rel="noopener">Project Gutenberg</a> 有多種語言）；<b>中譯本多半仍有版權</b>，好讀上有些早期譯本，其餘請用圖書館借閱或購買。`;
+  else if (pd && lang === 'zh') get = `<b>公版・免費</b>：作者過世超過 50 年，可以合法免費取得。到 <a href="https://www.haodoo.net/" target="_blank" rel="noopener">好讀</a> 古典區、<a href="https://zh.wikisource.org/" target="_blank" rel="noopener">維基文庫</a> 或 <a href="https://ctext.org/zh" target="_blank" rel="noopener">ctext.org</a> 找，下載 EPUB 直接上傳 Play 圖書。`;
+  else if (pd && lang === 'en' && deathYear(a) < 1930) get = `<b>原文公版・免費</b>：英文原文可以在 <a href="https://standardebooks.org/" target="_blank" rel="noopener">Standard Ebooks</a> 或 <a href="https://www.gutenberg.org/" target="_blank" rel="noopener">Project Gutenberg</a> 免費下載；<b>中譯本仍有版權</b>，要看中文請用圖書館借閱或購買。`;
+  else if (pd && lang === 'en') get = `<b>台灣已公版、美國未公版</b>：原文在美國的 Gutenberg 上通常找不到，試 <a href="https://www.fadedpage.com/" target="_blank" rel="noopener">Faded Page</a> 或 <a href="https://gutenberg.net.au/" target="_blank" rel="noopener">Gutenberg Australia</a>；<b>中譯本仍有版權</b>，請用圖書館借閱或購買。`;
+  else if (from && from <= THIS_YEAR + 10) get = `<b>版權中</b>（${from} 年起才進入公版）：現在請用<a href="#resources">圖書館電子書借閱</a>，或在 Play 圖書、Readmoo、Kobo 購買。`;
+  else get = `<b>版權中</b>：這位作者的書要用<a href="#resources">圖書館電子書借閱</a>（HyRead、udn、雲端書庫），或在 Play 圖書、Readmoo、Kobo 購買${lang === 'en' ? '；英文原文可用台北市圖借閱證在 Libby 借' : ''}。`;
+  $('m-get').innerHTML = get;
+  $('m-rel').innerHTML = relatedMedia(a, lang);
+  $('m-rel').hidden = !$('m-rel').innerHTML;
+  $('m-adx').innerHTML = a.adExtra.length ? `<div class="eyebrow">其他改編（原著不在上面的年表）</div>${a.adExtra.map(adItem).join('')}` : '';
+  $('m-adx').hidden = !a.adExtra.length;
+  const kws = [a.name, a.alt].filter(Boolean);
+  $('m-kw').innerHTML = '圖書館搜尋關鍵字：' + kws.map(k => `<code>${esc(k)}</code>`).join('') + (sw ? `<code>${esc(a.start)}</code>` : '') + (sw && sw.o ? `<code>${esc(sw.o)}</code>` : '');
+  lastFocus = document.activeElement;
+  $('overlay').hidden = false;
+  $('m-close').focus();
+}
+function closeModal(){
+  $('overlay').hidden = true;
+  document.body.classList.toggle('lang-zh', state.lang === 'zh');
+  document.body.classList.toggle('lang-en', state.lang === 'en');
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+
+function renderStarters(){
+  $('starters').innerHTML = STARTERS.map(s => {
+    const a = byId[s.lang + ':' + s.id];
+    return `<button class="scard" data-lang="${s.lang}" data-id="${s.id}" style="--sc:var(--${s.lang})"><div class="who"><span>${esc(a.name)}${a.alt && s.lang === 'en' ? ' · ' + esc(a.alt) : ''}</span><span class="lang">${s.lang === 'zh' ? '中文' : '英文'}</span></div><div class="book">《${esc(s.book)}》</div><div class="why">${esc(s.why)}</div><span class="size">${s.size}</span></button>`;
+  }).join('');
+}
+function renderEraTable(){
+  $('eratable').innerHTML = ERA_TABLE.map((r, i) => `<tr><td>${ERAS[i].short}</td><td class="zh">${esc(r[0])}</td><td class="en">${esc(r[1])}</td></tr>`).join('');
+}
+function renderTicks(){
+  $('ticks').innerHTML = ERAS.map((e, i) => `<button data-i="${i}" title="只看 ${e.label}">${e.short}</button>`).join('');
+}
+
+/* ---- wiring ---- */
+renderTicks(); renderStarters(); renderEraTable();
+$('stat-zh').textContent = AUTHORS_ZH.length;
+$('stat-en').textContent = AUTHORS_EN.length;
+$('stat-works').textContent = AUTHORS_ZH.concat(AUTHORS_EN).reduce((n, a) => n + a.works.length, 0);
+$('stat-pd').textContent = AUTHORS_ZH.concat(AUTHORS_EN).filter(isPD).length;
+$('stat-hot').textContent = AUTHORS_ZH.concat(AUTHORS_EN).filter(a => a.hot).length;
+$('stat-ad').textContent = AUTHORS_ZH.concat(AUTHORS_EN).filter(a => a.adKinds.size).length;
+if (AD_UNMATCHED.length) console.warn('adaptation keys not matched:', AD_UNMATCHED);
+AD_KINDS.forEach(k => { const b = document.createElement('button'); b.className = 'chip'; b.dataset.k = k[0]; b.setAttribute('aria-pressed', state.ad.includes(k[0])); b.innerHTML = `${esc(k[1])}<span class="ad">${esc(k[2])}</span>`; b.title = '只顯示有改編成' + k[1] + '的作者（可複選）'; $('adbar').appendChild(b); });
+$('adbar').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const k = b.dataset.k; state.ad = state.ad.includes(k) ? state.ad.filter(x => x !== k) : state.ad.concat(k); document.querySelectorAll('#adbar button').forEach(x => x.setAttribute('aria-pressed', state.ad.includes(x.dataset.k))); renderMatrix(); save(); });
+$('hot-only').setAttribute('aria-pressed', state.hotOnly);
+$('hot-only').addEventListener('click', () => { state.hotOnly = !state.hotOnly; $('hot-only').setAttribute('aria-pressed', state.hotOnly); renderMatrix(); save(); });
+try{ const s0 = JSON.parse(localStorage.getItem('novelmap') || '{}'); resLang = s0.resLang || null; }catch(e){}
+resLang = resLang || state.lang;
+renderResources();
+$('pd-only').setAttribute('aria-pressed', state.pdOnly);
+$('pd-only').addEventListener('click', () => { state.pdOnly = !state.pdOnly; $('pd-only').setAttribute('aria-pressed', state.pdOnly); renderMatrix(); save(); });
+$('res-zh').addEventListener('click', () => { resLang = 'zh'; renderResources(); save(); });
+$('res-en').addEventListener('click', () => { resLang = 'en'; renderResources(); save(); });
+setLang(state.lang);
+setRange(state.lo, state.hi);
+
+$('lang-zh').addEventListener('click', () => setLang('zh'));
+$('lang-en').addEventListener('click', () => setLang('en'));
+$('lo').addEventListener('input', e => { let v = +e.target.value; if (v > state.hi) v = state.hi; state.lo = v; renderSlider(); renderMatrix(); save(); });
+$('hi').addEventListener('input', e => { let v = +e.target.value; if (v < state.lo) v = state.lo; state.hi = v; renderSlider(); renderMatrix(); save(); });
+$('ticks').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const i = +b.dataset.i; if (state.lo === i && state.hi === i) setRange(0, 5); else setRange(i, i); });
+$('q').addEventListener('input', e => { state.q = e.target.value; renderMatrix(); });
+$('matrix').addEventListener('click', e => { const b = e.target.closest('.chip'); if (b) openAuthor(state.lang, b.dataset.id); });
+$('starters').addEventListener('click', e => { const b = e.target.closest('.scard'); if (b) openAuthor(b.dataset.lang, b.dataset.id); });
+$('m-close').addEventListener('click', closeModal);
+$('overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); if (e.target.closest && e.target.closest('a[href="#resources"]')) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('overlay').hidden) closeModal(); });
+window.addEventListener('resize', renderSlider);
+
+/* fold / unfold the control bar (handy on phones) */
+applyFold();
+function toggleFold(){ state.fold = !state.fold; applyFold(); save(); }
+$('bar-fold').addEventListener('click', toggleFold);
+$('bar-fold2').addEventListener('click', toggleFold);
+$('bar-sum').addEventListener('click', () => { if (state.fold) toggleFold(); });
+
+/* right-side reserve for the comment panel */
+let reserve = true; try{ reserve = localStorage.getItem('novelmap-reserve') !== '0'; }catch(e){}
+function applyReserve(){ document.body.classList.toggle('reserve', reserve); $('btn-reserve').setAttribute('aria-pressed', reserve); $('btn-reserve').textContent = '右側留白：' + (reserve ? '開' : '關'); renderSlider(); }
+applyReserve();
+$('btn-reserve').addEventListener('click', () => { reserve = !reserve; try{ localStorage.setItem('novelmap-reserve', reserve ? '1' : '0'); }catch(e){} applyReserve(); });
+
+/* theme toggle: system → dark → light */
+const root = document.documentElement;
+function applyTheme(t){ if (t) root.setAttribute('data-theme', t); else root.removeAttribute('data-theme'); const dark = t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches); $('btn-theme').textContent = dark ? '淺色' : '深色'; $('btn-theme').setAttribute('aria-pressed', !!t); }
+let theme = null; try{ theme = localStorage.getItem('novelmap-theme') || null; }catch(e){}
+applyTheme(theme);
+$('btn-theme').addEventListener('click', () => { const dark = root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches); theme = dark ? 'light' : 'dark'; try{ localStorage.setItem('novelmap-theme', theme); }catch(e){} applyTheme(theme); });
+</script>
+
+</body></html>
