@@ -1,0 +1,2139 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>漫畫入門地圖</title>
+<meta name="description" content="日本與台灣的代表性漫畫家與作品，可依讀者群、題材、雜誌篩選，並用年代拉桿看每個年代出了什麼。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+/* ===== 🟣 大膽表現 Bold Expression（漫畫版：紙白＋墨黑＋分格線） ===== */
+:root{
+  --bg:#fafafa; --bg-sub:#f0f0f0; --ink:#0a0a0a; --ink-soft:#555; --ink-faint:#8a8a8a;
+  --accent:#7c3aed; --accent2:#f43f5e; --card:#ffffff; --border:#e0e0e0; --line:#0a0a0a;
+  --shadow:4px 4px 0 var(--line);
+  --dot:rgba(10,10,10,.14);
+  /* 讀者群語意色：前景 / 淡底 */
+  --shonen:#d1362b; --shonen-bg:#fbe7e4;
+  --shojo:#d63384;  --shojo-bg:#fce3ef;
+  --seinen:#2f4fb8; --seinen-bg:#e5e9f9;
+  --josei:#b45309;  --josei-bg:#fdebd2;
+  --all:#15803d;    --all-bg:#e1f4e7;
+  --tw:#0a0a0a; --tw-bg:#ffe86b;
+  --range-out:rgba(10,10,10,.06); --hk-oricon:#0a0a0a;
+  --font-display:"Syne","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --font-body:"Helvetica Neue",Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --reserve:0px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a0a0a; --bg-sub:#1a1a1a; --ink:#fafafa; --ink-soft:#aaa; --ink-faint:#777;
+  --accent:#a78bfa; --accent2:#fb7185; --card:#1a1a1a; --border:#333; --line:#fafafa;
+  --dot:rgba(250,250,250,.16);
+  --shonen:#ff7a6b; --shonen-bg:#3a1a17;
+  --shojo:#ff7ab8;  --shojo-bg:#3b1730;
+  --seinen:#8aa4ff; --seinen-bg:#17203d;
+  --josei:#f5b04a;  --josei-bg:#3a2a10;
+  --all:#5fd48a;    --all-bg:#123322;
+  --tw:#0a0a0a; --tw-bg:#ffd93d;
+  --range-out:rgba(250,250,250,.07); --hk-oricon:#444;
+}}
+:root[data-theme="dark"]{
+  --bg:#0a0a0a; --bg-sub:#1a1a1a; --ink:#fafafa; --ink-soft:#aaa; --ink-faint:#777;
+  --accent:#a78bfa; --accent2:#fb7185; --card:#1a1a1a; --border:#333; --line:#fafafa;
+  --dot:rgba(250,250,250,.16);
+  --shonen:#ff7a6b; --shonen-bg:#3a1a17;
+  --shojo:#ff7ab8;  --shojo-bg:#3b1730;
+  --seinen:#8aa4ff; --seinen-bg:#17203d;
+  --josei:#f5b04a;  --josei-bg:#3a2a10;
+  --all:#5fd48a;    --all-bg:#123322;
+  --tw:#0a0a0a; --tw-bg:#ffd93d;
+  --range-out:rgba(250,250,250,.07); --hk-oricon:#444;
+}
+@media (min-width:1280px){ :root[data-reserve="on"]{ --reserve:340px; } }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.75;
+  padding-inline:24px;padding-block:0 80px;text-spacing-trim:space-all;}
+p{line-break:strict;text-wrap:pretty;overflow-wrap:break-word;margin:0 0 .8em}
+h1,h2,h3,h4{text-wrap:balance;margin:0;line-height:1.25}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:min(1500px,calc(100vw - var(--reserve) - 48px));margin:0}
+.num{font-variant-numeric:tabular-nums}
+.en{font-family:var(--font-display);letter-spacing:.02em}
+.eyebrow{font-family:var(--font-display);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---- 頁首：網點 ---- */
+header.hero{position:relative;border-bottom:3px solid var(--line);padding-block:36px 28px;margin-bottom:24px;
+  background-image:radial-gradient(var(--dot) 1.2px, transparent 1.3px);background-size:9px 9px;
+  background-position:0 0;}
+header.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,transparent 55%,var(--bg) 100%);pointer-events:none}
+header.hero>*{position:relative;z-index:1}
+.hero-grid{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:flex-end;justify-content:space-between}
+.hero h1{font-family:var(--font-display);font-weight:900;font-size:clamp(2rem,4.6vw,3.4rem);letter-spacing:.02em;line-height:1.1}
+.hero h1 .en{display:block;font-size:.42em;font-weight:800;letter-spacing:.22em;color:var(--accent2);margin-bottom:6px}
+.hero .lede{max-width:34em;margin:14px 0 0;color:var(--ink-soft);font-size:.98rem}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:.8rem;color:var(--ink-soft)}
+.hero .meta b{color:var(--ink);font-family:var(--font-display);font-size:1.15rem;font-weight:800;margin-right:2px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+.tbtn{border:2px solid var(--line);background:var(--card);padding:5px 12px;border-radius:3px;font-size:.8rem;font-weight:600;box-shadow:2px 2px 0 var(--line);transition:transform .08s,box-shadow .08s}
+.tbtn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--line)}
+.tbtn[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+/* ---- 分格面板 ---- */
+.panel{background:var(--card);border:2px solid var(--line);border-radius:4px;box-shadow:var(--shadow);padding:18px 20px}
+section{margin-bottom:28px}
+.sec-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.sec-head h2{font-size:clamp(1.15rem,2.2vw,1.45rem);font-weight:900}
+.sec-head .en{color:var(--ink-faint);font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.sec-head .hint{color:var(--ink-soft);font-size:.85rem;margin-left:auto}
+
+/* ---- 起手 16 部 ---- */
+.start-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.start-group{border-top:4px solid var(--g);padding-top:8px}
+.start-group h3{font-size:.85rem;font-weight:900;color:var(--g);display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.start-group h3 .en{font-weight:700;color:var(--ink-faint);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+.start-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.start-item{display:block;width:100%;text-align:left;background:var(--bg-sub);border:1px solid var(--border);border-left:3px solid var(--g);border-radius:0 4px 4px 0;padding:8px 10px;transition:background .12s}
+.start-item:hover{background:var(--card);border-color:var(--line)}
+.start-item .t{font-weight:700;font-size:.95rem}
+.start-item .a{color:var(--ink-soft);font-size:.8rem;margin-left:6px}
+.start-item .y{font-family:var(--font-display);font-weight:700;font-size:.72rem;color:var(--ink-faint);margin-left:6px}
+.start-item .w{display:block;color:var(--ink-soft);font-size:.8rem;line-height:1.55;margin-top:2px}
+
+/* ---- 讀者群說明 ---- */
+details.explain summary{cursor:pointer;font-weight:700;list-style:none;display:flex;align-items:center;gap:10px}
+details.explain summary::-webkit-details-marker{display:none}
+details.explain summary::before{content:"▸";font-family:var(--font-display);transition:transform .15s}
+details.explain[open] summary::before{transform:rotate(90deg)}
+.demo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.demo-card{border:2px solid var(--c);border-radius:4px;padding:10px 12px;background:var(--cb)}
+.demo-card h4{color:var(--c);font-size:1rem;font-weight:900;display:flex;gap:8px;align-items:baseline}
+.demo-card h4 .en{font-size:.7rem;color:var(--ink-soft);letter-spacing:.1em}
+.demo-card p{font-size:.84rem;color:var(--ink);margin:6px 0 0;line-height:1.6}
+.explain .note{margin-top:12px;font-size:.84rem;color:var(--ink-soft);max-width:60em}
+
+/* ---- 篩選器 ---- */
+.controls{display:grid;grid-template-columns:1fr;gap:14px}
+.ctl-row{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.ctl-label{font-family:var(--font-display);font-weight:800;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);min-width:92px}
+.chip{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:3px 12px;font-size:.84rem;font-weight:600;line-height:1.5;transition:background .1s,color .1s}
+.chip:hover{background:var(--bg-sub)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip.demo-chip[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:#fff}
+.chip .cnt{font-family:var(--font-display);font-size:.7rem;font-weight:700;opacity:.6;margin-left:4px}
+select.sel,input.search{font:inherit;font-size:.86rem;border:1.5px solid var(--line);border-radius:4px;background:var(--card);color:var(--ink);padding:5px 10px}
+input.search{min-width:220px}
+.ctl-right{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:4px;overflow:hidden}
+.seg button{border:0;background:var(--card);padding:4px 10px;font-size:.8rem;font-weight:600}
+.seg button+button{border-left:1.5px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+/* ---- 年代拉桿 ---- */
+.range-wrap{padding:6px 4px 0}
+.range-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.range-val{font-family:var(--font-display);font-weight:800;font-size:1.35rem;letter-spacing:.02em}
+.range-val small{font-size:.7rem;color:var(--ink-soft);letter-spacing:.1em;margin-left:6px;font-weight:700}
+.range-presets{display:flex;gap:6px;flex-wrap:wrap}
+.range-presets button{border:1px solid var(--border);background:var(--bg-sub);border-radius:3px;padding:2px 8px;font-size:.74rem;font-family:var(--font-display);font-weight:700}
+.range-presets button:hover{border-color:var(--line)}
+.dual{position:relative;height:44px}
+.dual .track{position:absolute;left:0;right:0;top:18px;height:6px;background:var(--bg-sub);border:1px solid var(--border);border-radius:3px}
+.dual .fill{position:absolute;top:18px;height:6px;background:var(--ink);border-radius:3px}
+.dual input[type=range]{position:absolute;left:0;right:0;top:8px;width:100%;margin:0;-webkit-appearance:none;appearance:none;background:transparent;pointer-events:none;height:26px}
+.dual input[type=range]::-webkit-slider-runnable-track{background:transparent;height:26px}
+.dual input[type=range]::-moz-range-track{background:transparent;height:26px}
+.dual input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;pointer-events:auto;width:22px;height:22px;margin-top:2px;border-radius:50%;background:var(--card);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--line);cursor:grab}
+.dual input[type=range]::-moz-range-thumb{pointer-events:auto;width:16px;height:16px;border-radius:50%;background:var(--card);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--line);cursor:grab}
+.dual input[type=range]:focus-visible::-webkit-slider-thumb{outline:3px solid var(--accent)}
+.ticks{position:relative;height:18px;margin-top:-4px}
+.ticks span{position:absolute;transform:translateX(-50%);font-family:var(--font-display);font-size:.68rem;font-weight:700;color:var(--ink-faint)}
+.ticks span::before{content:"";position:absolute;left:50%;top:-8px;width:1px;height:6px;background:var(--ink-faint)}
+.histo{display:flex;align-items:flex-end;gap:1px;height:26px;margin:0 0 -2px;padding:0 10px}
+.histo i{flex:1;background:var(--border);display:block;min-height:1px;border-radius:1px 1px 0 0}
+.histo i.in{background:var(--ink)}
+
+/* ---- 結果列 ---- */
+.result-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:22px 0 12px}
+.result-bar .count{font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.result-bar .count small{font-weight:600;font-size:.78rem;color:var(--ink-soft);margin-left:6px;font-family:var(--font-body)}
+.result-bar .reset{margin-left:auto}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.76rem;color:var(--ink-soft)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-2px;margin-right:4px;background:var(--c)}
+
+/* ---- 作者卡片 ---- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:4px;box-shadow:var(--shadow);padding:0;overflow:hidden;text-align:left;display:flex;flex-direction:column;transition:transform .1s,box-shadow .1s;position:relative}
+.card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}
+.card .stripe{height:6px;background:var(--c)}
+.card .body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card .name{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.card .name b{font-size:1.15rem;font-weight:900;line-height:1.3}
+.card .name .alt{font-size:.72rem;color:var(--ink-faint);font-family:var(--font-display);font-weight:600}
+.card .years{font-family:var(--font-display);font-weight:700;font-size:.72rem;color:var(--ink-soft);letter-spacing:.06em}
+.tags{display:flex;flex-wrap:wrap;gap:4px}
+.tag{font-size:.7rem;font-weight:700;padding:1px 7px;border-radius:3px;background:var(--bg-sub);color:var(--ink-soft);border:1px solid var(--border)}
+.tag.demo{background:var(--cb);color:var(--c);border-color:transparent}
+.tag.region{background:var(--tw-bg);color:var(--tw);border-color:transparent}
+.tag.region.jp{background:var(--ink);color:var(--bg)}
+.card .intro{font-size:.82rem;color:var(--ink-soft);line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.wlist{list-style:none;margin:2px 0 0;padding:8px 0 0;border-top:1px dashed var(--border);display:flex;flex-direction:column;gap:3px}
+.wlist li{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:baseline;font-size:.84rem}
+.wlist .wy{font-family:var(--font-display);font-weight:700;font-size:.72rem;color:var(--ink-soft);white-space:nowrap;min-width:78px}
+.wlist .wt{font-weight:600}
+.wlist .wm{color:var(--ink-faint);font-size:.72rem;margin-left:6px}
+.wlist li.out{opacity:.4}
+.wlist li.out .wt{font-weight:400}
+.star{color:var(--accent2);font-weight:900;margin-right:2px}
+.wlist .more{font-size:.74rem;color:var(--ink-faint)}
+.card .open{position:absolute;right:10px;top:12px;font-family:var(--font-display);font-size:.7rem;font-weight:700;color:var(--ink-faint);letter-spacing:.1em}
+.approx{border-bottom:1px dotted currentColor;cursor:help}
+
+/* ---- 年代軸 ---- */
+.tl-wrap{overflow:auto;max-height:88vh;border:2px solid var(--line);border-radius:4px;background:var(--card);box-shadow:var(--shadow)}
+.tl{position:relative;min-width:900px}
+.tl-head{position:sticky;top:0;z-index:3;display:grid;grid-template-columns:var(--labw) 1fr;background:var(--card);border-bottom:2px solid var(--line)}
+.tl-head .corner{padding:8px 10px;font-family:var(--font-display);font-size:.7rem;font-weight:700;letter-spacing:.1em;color:var(--ink-soft);border-right:2px solid var(--line);position:sticky;left:0;background:var(--card);z-index:4}
+.tl-axis{position:relative;height:32px}
+.tl-axis span{position:absolute;top:6px;transform:translateX(-50%);font-family:var(--font-display);font-size:.72rem;font-weight:700;color:var(--ink-soft)}
+.tl-axis span::after{content:"";position:absolute;left:50%;top:18px;width:1px;height:8px;background:var(--ink-soft)}
+.tl-group{display:grid;grid-template-columns:var(--labw) 1fr;border-bottom:1px solid var(--border)}
+.tl-group .glabel{position:sticky;left:0;z-index:2;background:var(--cb);color:var(--c);font-weight:900;font-size:.78rem;padding:4px 10px;border-right:2px solid var(--line);letter-spacing:.08em}
+.tl-group .gfill{background:var(--cb);opacity:.5}
+.tl-row{display:grid;grid-template-columns:var(--labw) 1fr;border-bottom:1px solid var(--border);cursor:pointer}
+.tl-row:hover{background:var(--bg-sub)}
+.tl-row .lab{position:sticky;left:0;z-index:2;background:var(--card);border-right:2px solid var(--line);padding:6px 10px;font-size:.84rem;font-weight:700;line-height:1.3;display:flex;flex-direction:column;justify-content:center}
+.tl-row:hover .lab{background:var(--bg-sub)}
+.tl-row .lab small{font-weight:500;font-size:.68rem;color:var(--ink-faint);font-family:var(--font-display)}
+.tl-row .lanes{position:relative;background-image:linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:calc(var(--ppy) * 10) 100%;background-position:calc(var(--ppy) * 0) 0}
+.tl-row .lanes::before{content:"";position:absolute;top:0;bottom:0;left:0;width:var(--outl);background:var(--range-out);pointer-events:none}
+.tl-row .lanes::after{content:"";position:absolute;top:0;bottom:0;right:0;width:var(--outr);background:var(--range-out);pointer-events:none}
+.bar{position:absolute;height:20px;border-radius:2px;background:var(--c);color:#fff;font-size:.72rem;font-weight:700;line-height:20px;padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.bar.ongoing{background:linear-gradient(90deg,var(--c) 0%,var(--c) calc(100% - 28px),transparent 100%);}
+.bar.ongoing::after{content:"→";position:absolute;right:4px;color:var(--c)}
+.bar.rec{outline:2px solid var(--accent2);outline-offset:1px}
+.bar.dim{opacity:.35}
+.bar .oneshot{font-size:.65rem}
+.tl-note{font-size:.8rem;color:var(--ink-soft);margin-top:8px}
+
+/* ---- 詳情 modal ---- */
+.modal{position:fixed;inset:0;z-index:50;display:none}
+.modal[open]{display:block}
+.modal .backdrop{position:absolute;inset:0;background:rgba(10,10,10,.55)}
+.modal .dlg{position:absolute;top:4vh;left:50%;transform:translateX(-50%);width:min(960px,calc(100vw - 32px));max-height:92vh;overflow:auto;background:var(--card);border:3px solid var(--line);border-radius:4px;box-shadow:8px 8px 0 var(--line);padding:22px 24px 26px}
+@media (min-width:1280px){ :root[data-reserve="on"] .modal .dlg{left:calc((100vw - var(--reserve)) / 2)} }
+.dlg .close{position:absolute;right:14px;top:12px;border:2px solid var(--line);background:var(--card);width:34px;height:34px;border-radius:3px;font-family:var(--font-display);font-weight:800;box-shadow:2px 2px 0 var(--line)}
+.dlg .dhead{border-left:8px solid var(--c);padding-left:14px;margin-bottom:14px;padding-right:44px}
+.dlg .dhead h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:900}
+.dlg .dhead .alt{font-family:var(--font-display);font-weight:600;color:var(--ink-soft);font-size:.82rem;margin-top:2px}
+.dlg .dhead .tags{margin-top:8px}
+.dlg .intro{font-size:.95rem;max-width:42em;color:var(--ink)}
+.dlg table{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:14px}
+.dlg th{text-align:left;font-family:var(--font-display);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);border-bottom:2px solid var(--line);padding:6px 8px;white-space:nowrap}
+.dlg td{padding:9px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+.dlg tr.hl td{background:var(--bg-sub)}
+.dlg td.y{font-family:var(--font-display);font-weight:700;white-space:nowrap;font-size:.8rem}
+.dlg td.t{min-width:260px}
+.dlg td.t b{font-size:.95rem}
+.dlg td .tag.demo,.dlg td.num{white-space:nowrap}
+.dlg td.t .o{display:block;color:var(--ink-faint);font-size:.74rem}
+.dlg td .why{display:block;margin-top:3px;color:var(--ink);font-size:.82rem;line-height:1.55}
+.dlg td .why::before{content:"推薦理由　";color:var(--accent2);font-weight:900}
+.dlg td .note{display:block;margin-top:3px;color:var(--ink-soft);font-size:.8rem;line-height:1.55}
+.dlg .tblwrap{overflow-x:auto}
+.dlg .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px;flex-wrap:wrap}
+.dlg .nav button{border:2px solid var(--line);background:var(--card);padding:6px 12px;border-radius:3px;font-weight:700;font-size:.84rem;box-shadow:2px 2px 0 var(--line)}
+.dlg .lib{margin-top:14px;font-size:.8rem;color:var(--ink-soft);background:var(--bg-sub);border-radius:4px;padding:8px 12px}
+.dlg .lib code{font-family:var(--font-display);font-weight:700;color:var(--ink);background:var(--card);padding:0 6px;border-radius:3px;border:1px solid var(--border)}
+
+/* ---- 頁內導覽 ---- */
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.jump a{font-size:.78rem;font-weight:700;color:var(--ink);text-decoration:none;border:1.5px solid var(--line);border-radius:999px;padding:2px 11px;background:var(--card)}
+.jump a:hover{background:var(--ink);color:var(--bg)}
+
+/* ---- 暢銷層 ---- */
+.hitpill{display:inline-block;font-size:.66rem;font-weight:900;line-height:1.35;padding:0 5px;border-radius:3px;background:var(--accent2);color:#fff;margin-left:5px;vertical-align:1px;letter-spacing:0}
+.tag.ext{background:var(--accent2);color:#fff;border-color:transparent}
+.hp{display:inline-flex;align-items:baseline;gap:6px;font-size:.76rem;line-height:1.5;padding:2px 8px 2px 0;border-radius:4px;color:var(--ink);margin:2px 6px 2px 0;background:var(--bg-sub);border:1px solid var(--border);overflow:hidden}
+.hp b{font-family:var(--font-display);font-size:.66rem;letter-spacing:.06em;padding:2px 7px;align-self:stretch;color:#fff;background:var(--k);white-space:nowrap}
+.hp a{text-decoration:none;font-weight:800}
+.hk-oricon{--k:var(--hk-oricon)}.hk-circ{--k:var(--seinen)}.hk-est{--k:#8a8a8a}.hk-era{--k:var(--josei)}.hk-tw{--k:var(--all)}
+.dlg td .hits{display:block;margin-top:6px}
+table.oricon{width:100%;border-collapse:collapse;font-size:.82rem;margin:8px 0 6px}
+table.oricon th{text-align:left;font-family:var(--font-display);font-size:.66rem;letter-spacing:.12em;color:var(--ink-soft);border-bottom:2px solid var(--line);padding:5px 6px}
+table.oricon td{padding:5px 6px;border-bottom:1px solid var(--border);vertical-align:top}
+table.oricon td.y a{font-family:var(--font-display);font-weight:800;color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--ink-faint)}
+table.oricon td:nth-child(2) .olink b{color:var(--accent2)}
+.olink{border:0;background:none;padding:0;text-align:left;display:flex;flex-direction:column;line-height:1.35}
+.olink b{font-size:.84rem}
+.olink small{color:var(--ink-faint);font-size:.7rem;font-family:var(--font-display);font-weight:700}
+.olink:hover b{text-decoration:underline}
+.oricon-note{font-size:.8rem;color:var(--ink-soft);margin:6px 0 10px;line-height:1.6}
+.hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin-top:12px}
+.hcard{text-align:left;background:var(--card);border:2px solid var(--line);border-left:8px solid var(--c);border-radius:4px;box-shadow:var(--shadow);padding:10px 12px;display:flex;flex-direction:column;gap:6px;transition:transform .1s,box-shadow .1s}
+.hcard:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}
+.hcard .hh{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.hcard .hh b{font-size:1rem;font-weight:900}
+.hcard .hh .tag.demo{background:var(--cb);color:var(--c);border-color:transparent}
+.hcard .ha{font-size:.8rem;color:var(--ink-soft)}
+.hcard .hl{display:flex;flex-wrap:wrap}
+.twbox{margin-top:16px;background:var(--all-bg);border:1px solid var(--all);border-radius:4px;padding:10px 14px}
+.twbox h4{font-size:.9rem;color:var(--all);font-weight:900;margin-bottom:6px}
+.twbox ul{margin:0;padding-left:1.2em;font-size:.84rem;line-height:1.65}
+.twbox li{margin-bottom:3px}
+.twbox .vf{font-size:.7rem;font-weight:700;color:var(--all);margin-left:4px}
+.twbox .vf.no{color:var(--josei)}
+
+/* ---- 找漫畫資源 ---- */
+.res-top{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+.seg.big button{padding:6px 16px;font-size:.92rem;font-weight:800}
+.res-intro{margin:14px 0 6px;color:var(--ink-soft);font-size:.88rem;max-width:60em}
+.steps{list-style:none;margin:10px 0 16px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;counter-reset:s}
+.steps li{position:relative;background:var(--bg-sub);border:1px solid var(--border);border-radius:4px;padding:10px 12px 10px 46px;font-size:.84rem;line-height:1.6}
+.steps li::before{content:attr(data-n);position:absolute;left:12px;top:10px;width:24px;height:24px;border:2px solid var(--line);border-radius:50%;background:var(--card);font-family:var(--font-display);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.steps li b{display:block;font-size:.9rem;margin-bottom:2px}
+.res-legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.76rem;color:var(--ink-soft);margin:0 0 12px}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.res-card{display:flex;flex-direction:column;gap:6px;background:var(--card);border:2px solid var(--line);border-radius:4px;box-shadow:var(--shadow);padding:12px 14px 12px;color:var(--ink);text-decoration:none;transition:transform .1s,box-shadow .1s;position:relative}
+.res-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}
+.res-card .rh{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding-right:22px}
+.res-card .rh b{font-size:1rem;font-weight:900;line-height:1.35}
+.res-card .rh::after{content:"↗";position:absolute;right:12px;top:10px;font-family:var(--font-display);font-weight:800;color:var(--ink-faint);font-size:.9rem}
+.pill{font-size:.7rem;font-weight:800;padding:1px 8px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);white-space:nowrap}
+.pill.cost{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pill.tw-可用{background:var(--all-bg);color:var(--all);border-color:var(--all)}
+.pill.tw-部分{background:var(--josei-bg);color:var(--josei);border-color:var(--josei)}
+.pill.tw-限日{background:var(--shonen-bg);color:var(--shonen);border-color:var(--shonen)}
+.pill.tw-未確認{background:var(--bg-sub);color:var(--ink-soft);border-color:var(--border)}
+.res-card p{margin:0;font-size:.84rem;line-height:1.6}
+.res-card .how{color:var(--ink-soft)}
+.res-card .how::before{content:"怎麼開始　";font-weight:800;color:var(--ink)}
+.res-card .price{background:var(--bg-sub);border-radius:4px;padding:5px 9px;font-size:.78rem;color:var(--ink)}
+.res-card .price::before{content:"價格　";font-weight:800;font-family:var(--font-display);letter-spacing:.04em}
+.res-card .rf{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px;border-top:1px dashed var(--border)}
+.res-card .vf{font-size:.7rem;font-weight:700;color:var(--all)}
+.res-card .vf.no{color:var(--josei)}
+.res-card .vnote{font-size:.74rem;color:var(--ink-soft);line-height:1.5}
+.dead{margin-top:18px;font-size:.84rem}
+.dead summary{cursor:pointer;font-weight:700;color:var(--ink-soft)}
+.dead ul{margin:8px 0 0;padding-left:1.2em;color:var(--ink-soft)}
+.res-empty{grid-column:1/-1;padding:24px;text-align:center;color:var(--ink-soft);border:2px dashed var(--border);border-radius:4px}
+
+/* ---- 頁尾 ---- */
+.notes{font-size:.84rem;color:var(--ink-soft);max-width:70em}
+.notes h3{font-size:.95rem;color:var(--ink);margin:14px 0 4px;font-weight:900}
+.backlog{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px}
+.backlog ul{margin:4px 0 0;padding-left:1.2em;columns:2;column-gap:20px;font-size:.82rem}
+.backlog li{break-inside:avoid;margin-bottom:2px}
+.fab{position:fixed;left:24px;bottom:22px;z-index:40;border:2px solid var(--line);background:var(--card);padding:8px 14px;border-radius:3px;font-weight:700;font-size:.84rem;box-shadow:3px 3px 0 var(--line);display:none}
+.fab.show{display:block}
+.empty{padding:40px 20px;text-align:center;color:var(--ink-soft);border:2px dashed var(--border);border-radius:4px}
+
+@media (max-width:640px){
+  body{padding-inline:16px}
+  .hero h1{font-size:2rem}
+  .cards{grid-template-columns:1fr}
+  .ctl-label{min-width:0;width:100%}
+  .ctl-right{margin-left:0}
+  input.search{min-width:0;width:100%}
+  .dlg{padding:16px 14px 20px}
+  .fab{left:16px}
+  .res-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important;scroll-behavior:auto!important} }
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <h1><span class="en">Manga Atlas · JP × TW</span>漫畫入門地圖</h1>
+      <p class="lede">日本與台灣的代表性漫畫家，先按<b>讀者群</b>（少年／少女／青年／女性）和<b>題材</b>分，再用年代拉桿看每個年代出了什麼；點作者看他在哪一年畫了哪部。第一版只放有名的，之後再充實。</p>
+      <nav class="jump" aria-label="頁內導覽"><a href="#start">先從這 16 部</a><a href="#filters">篩選</a><a href="#results">作者</a><a href="#hits">各年代在看什麼</a><a href="#resources">找漫畫資源</a><a href="#notes">說明</a></nav>
+    </div>
+    <div>
+      <div class="meta" id="meta"></div>
+      <div class="toolbar" style="margin-top:10px">
+        <button class="tbtn" id="reserveBtn" aria-pressed="true" title="右側留 340px 給 claude.ai 的留言面板">◨ 右側留白</button>
+        <button class="tbtn" id="themeBtn" aria-pressed="false" title="切換深色／淺色">◐ 深色</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="start">
+  <div class="sec-head"><h2>先從這 16 部開始</h2><span class="en">Start here</span><span class="hint">全部是完結或可以隨時停的作品，點一下看作者</span></div>
+  <div class="panel"><div class="start-groups" id="startGroups"></div></div>
+</section>
+
+<section id="explain">
+  <details class="explain panel">
+    <summary>「讀者群」是什麼？為什麼漫畫要先分少年／少女／青年／女性，而不是像小說那樣只分題材？</summary>
+    <p class="note" style="margin-top:12px">日本漫畫幾乎都先在<b>雜誌</b>上連載，雜誌是按「賣給誰」分的：週刊少年Jump 賣給國高中男生、花與夢賣給國高中女生、Big Comic 賣給上班族。同一本雜誌的作品會有相近的節奏、畫風與尺度，所以「讀者群」其實就是雜誌系統，也是選書時最省力的第一層。題材（運動、懸疑、戀愛）是第二層，同一個題材在少年誌和青年誌會長得完全不一樣。台灣漫畫沒有這麼嚴格的雜誌系統，這裡按作品的調性歸類。</p>
+    <div class="demo-grid" id="demoGrid"></div>
+    <p class="note">注意：讀者群是「雜誌鎖定的對象」，不是「只有那群人在看」。灌籃高手的女性讀者很多，海街日記的男性讀者也很多。</p>
+  </details>
+</section>
+
+<section id="filters">
+  <div class="sec-head"><h2>篩選</h2><span class="en">Filter</span><span class="hint">同一列多選是「或」，不同列之間是「且」</span></div>
+  <div class="panel controls">
+    <div class="ctl-row"><span class="ctl-label">地區</span><div id="regionChips" class="ctl-row" style="gap:6px"></div>
+      <div class="ctl-right"><input class="search" id="search" type="search" placeholder="搜作者或作品名，例如 浦澤、灌籃" aria-label="搜尋"></div></div>
+    <div class="ctl-row"><span class="ctl-label">讀者群</span><div id="demoChips" class="ctl-row" style="gap:6px"></div></div>
+    <div class="ctl-row"><span class="ctl-label">題材</span><div id="genreChips" class="ctl-row" style="gap:6px"></div></div>
+    <div class="ctl-row"><span class="ctl-label">雜誌／出版社</span>
+      <select class="sel" id="magSel" aria-label="雜誌或出版社"></select>
+      <label class="chip" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="recOnly" style="margin:0"> 只看 ★ 入門推薦</label>
+      <label class="chip" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="hitOnly" style="margin:0"> 只看 <span class="hitpill">暢</span> 有暢銷紀錄</label>
+      <span class="ctl-label" style="min-width:0;margin-left:6px">收錄</span>
+      <div class="seg" id="scopeSeg" role="group" aria-label="收錄範圍"><button data-v="all" aria-pressed="true" title="精選＋暢銷擴充">全部</button><button data-v="core" aria-pressed="false" title="第一版挑的代表性作者">精選</button><button data-v="ext" aria-pressed="false" title="為了暢銷層新增的作者">暢銷擴充</button></div>
+      <div class="ctl-right"><span class="ctl-label" style="min-width:0">年代比對</span>
+        <div class="seg" role="group" aria-label="年代比對方式"><button id="modeStart" aria-pressed="true" title="作品的連載開始年落在拉桿範圍內">開始連載</button><button id="modeActive" aria-pressed="false" title="作品在拉桿範圍內的任一年仍在連載">連載中</button></div></div></div>
+    <div class="range-wrap">
+      <div class="range-head">
+        <div class="range-val num"><span id="rangeLo">1950</span> – <span id="rangeHi">2026</span><small id="rangeCnt"></small></div>
+        <div class="range-presets" id="presets"></div>
+      </div>
+      <div class="histo" id="histo" aria-hidden="true"></div>
+      <div class="dual">
+        <div class="track"></div><div class="fill" id="fill"></div>
+        <input type="range" id="lo" min="1950" max="2026" value="1950" step="1" aria-label="起始年">
+        <input type="range" id="hi" min="1950" max="2026" value="2026" step="1" aria-label="結束年">
+      </div>
+      <div class="ticks" id="ticks"></div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="result-bar">
+    <div class="count" id="count"></div>
+    <div class="seg" role="group" aria-label="檢視方式"><button id="viewCards" aria-pressed="true">作者卡片</button><button id="viewTimeline" aria-pressed="false">年代軸</button></div>
+    <div class="legend" id="legend"></div>
+    <button class="chip reset" id="reset">清除篩選</button>
+  </div>
+  <div id="cards" class="cards"></div>
+  <div id="timeline" hidden></div>
+</section>
+
+<section id="hits">
+  <div class="sec-head"><h2>各年代大家在看什麼</h2><span class="en">Bestsellers by era</span><span class="hint">跟風用的：每個年代賣最好、最多人在看的作品，數字都標了硬度</span></div>
+  <div class="panel">
+    <div class="res-top"><div id="decTabs" class="ctl-row" style="gap:6px"></div><span class="ctl-label" id="decCount" style="min-width:0;margin-left:auto"></span></div>
+    <p class="res-intro" id="decNote"></p>
+    <div class="res-legend" id="hitLegend"></div>
+    <div id="oriconBox"></div>
+    <div class="hgrid" id="decGrid"></div>
+    <div class="twbox" id="twBox"></div>
+    <p class="oricon-note" style="margin-top:14px">怎麼讀這一區：Oricon 年榜是日本紙本＋部分電子的實銷估計，只有 2008–2022 年有「作品別」；累計發行量是出版社宣傳用的數字（含庫存與海外），彼此口徑不同，不要直接相加或比較。台灣沒有公開、連續的漫畫銷售榜，這裡只放查得到的通路觀察。點任何一張卡或表格裡的書名，都會開作者詳情。</p>
+  </div>
+</section>
+
+<section id="resources">
+  <div class="sec-head"><h2>找漫畫資源</h2><span class="en">Where to read</span><span class="hint">免費／借閱／付費／選書參考／影音 · 全部連結查證日 2026-09-15</span></div>
+  <div class="panel">
+    <div class="res-top">
+      <div class="seg big" role="group" aria-label="地區"><button id="resTw" aria-pressed="true">台灣</button><button id="resJp" aria-pressed="false">日本（日文網站）</button></div>
+      <div id="resGroups" class="ctl-row" style="gap:6px"></div>
+    </div>
+    <p class="res-intro" id="resIntro"></p>
+    <ol class="steps" id="resSteps"></ol>
+    <div class="res-legend" id="resLegend"></div>
+    <div class="res-grid" id="resGrid"></div>
+    <details class="dead"><summary>已結束或改名的服務（避雷）</summary><ul id="resDead"></ul></details>
+  </div>
+</section>
+
+<section id="notes">
+  <div class="sec-head"><h2>說明與候補名單</h2><span class="en">Notes</span></div>
+  <div class="panel notes">
+    <h3>年份怎麼看</h3>
+    <p>年份是<b>連載開始–連載結束</b>年，不是單行本出版年；台灣漫畫沒有雜誌連載的，以單行本出版年計。「→」表示連載中，「休載」表示長期沒有新話。年份下方有虛線（例如 <span class="approx">約1990</span>）的，是我沒能核對到一手資料、可能差一兩年的，之後充實時再查。</p>
+    <h3>台灣出版社欄</h3>
+    <p>只在有把握時填，用來幫你在圖書館電子書搜尋時多一個關鍵字（例如「灌籃高手 尖端」）。空白不代表台灣沒出版。</p>
+    <h3>暢銷紀錄怎麼看</h3>
+    <p>作品旁的「暢」表示有暢銷紀錄，紀錄分五種硬度：<b>榜單</b>是 Oricon 年間コミックランキング「作品別」，日本紙本實銷的估計，2008–2022 年有公開，2023 年起只剩單卷榜；<b>發行量</b>是出版社或媒體公布的累計發行部數，附截至日期，是宣傳口徑（含庫存、有時含海外與電子），會一直增加；<b>估計</b>是漫畫彙整站的數字，沒有一手出處與日期，只能當量級參考；<b>印象</b>是榜單出現前的年代，用動畫化、發行量紀錄或社會現象佐證；<b>台灣</b>是博客來、金石堂或 Openbook 閱讀誌的轉述。三種數字口徑不同，不要直接比較。「收錄」切到「精選」可以回到第一版的 57 位作者，不會被暢銷擴充的作者干擾。</p>
+    <h3>資源區怎麼看</h3>
+    <p>每張資源卡右下角有查證狀態：「已查證」表示 2026-09-15 當天有打開官方頁確認內容；「未直接確認」表示官方頁抓不到，只從商店頁、新聞或第三方佐證，內容可能有出入。價格一律照頁面原文抄並附日期，過一陣子就會變，用之前再看一眼。日本資源多了一個「從台灣」欄：可用／部分可用／限日本／未確認，其中「限日本」全部有官方原文依據，「未確認」是官方頁沒寫。</p>
+    <h3>這一版的邊界</h3>
+    <p>精選層日本 44 位、台灣 13 位，共 118 部；暢銷擴充層另外加了為了「各年代大家在看什麼」需要的作者。精選的標準是「講到這個類別、這個年代，一定會被提到的名字」，不是「最好看」。港漫（陳某《火鳳燎原》、馬榮成《風雲》）、韓國漫畫與網路漫畫（webtoon）這一版先不放。</p>
+    <h3>候補名單（之後要充實時挑）</h3>
+    <div class="backlog" id="backlog"></div>
+  </div>
+</section>
+</div>
+
+<button class="fab" id="fab">↑ 回到篩選</button>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+  <div class="backdrop" id="backdrop"></div>
+  <div class="dlg" id="dlg"></div>
+</div>
+
+<script>
+// ===== 漫畫入門地圖 資料層 =====
+// 年份為「連載開始–連載結束」；e:null 表示連載中；hiatus:true 表示長期休載；approx:true 表示年份待查證。
+// vols 為單行本卷數（只填有把握的）。rec:true 為入門推薦，why 為推薦理由。
+
+const DEMO = {
+  shonen: { label: '少年', en: 'shōnen', desc: '給國高中男生看的雜誌系統。熱血、友情、比賽、變強。週刊少年Jump、Sunday、Magazine 三大週刊都在這裡。' },
+  shojo:  { label: '少女', en: 'shōjo',  desc: '給國高中女生看的雜誌系統。感情、人際、成長，但科幻與歷史大作也不少。花與夢、Margaret、Nakayoshi。' },
+  seinen: { label: '青年', en: 'seinen', desc: '給大學生到上班族男性的雜誌系統。題材成人化：懸疑、社會、職場、哲學。Big Comic、Morning、Afternoon、Young 系列。' },
+  josei:  { label: '女性', en: 'josei',  desc: '給成年女性的雜誌系統。工作、婚姻、人生選擇，畫風比少女誌寫實。Kiss、BE·LOVE、FEEL YOUNG。' },
+  all:    { label: '全年齡', en: 'all ages', desc: '兒童刊物或報紙連載出身、大人小孩都能看：哆啦A夢、烏龍院、四格漫畫。' },
+};
+
+const GENRES = {
+  battle:  '熱血冒險', sport: '運動', mystery: '懸疑推理', scifi: '科幻', fantasy: '奇幻',
+  daily:   '日常療癒', romance: '戀愛', history: '歷史', horror: '恐怖', food: '美食',
+  music:   '音樂', work: '職人／職場', social: '社會寫實', comedy: '幽默搞笑', growth: '成長',
+  wuxia:   '武俠', classic: '經典改編',
+};
+
+const REGION = { jp: '日本', tw: '台灣' };
+
+const AUTHORS = [
+  // ============ 日本・少年 ============
+  { id: 'tezuka', name: '手塚治虫', alt: 'てづか おさむ / Osamu Tezuka', region: 'jp', born: 1928, died: 1989, demo: 'shonen',
+    intro: '被稱為「漫畫之神」。他把電影式分鏡帶進漫畫，奠定了日本故事漫畫的基本語法；本身是醫學博士，作品從兒童向到成人向都有。想知道「日本漫畫是從哪裡長出來的」，就從他開始。',
+    works: [
+      { t: '原子小金剛', o: '鉄腕アトム', s: 1952, e: 1968, mag: '少年', pub: '光文社', demo: 'shonen', g: ['scifi', 'battle'], vols: 21, note: '日本第一部電視動畫（1963）的原作。' },
+      { t: '火之鳥', o: '火の鳥', s: 1954, e: 1988, mag: 'COM 等多誌', pub: '虫プロ商事 等', demo: 'seinen', g: ['scifi', 'history'], note: '橫跨古代到未來的生命輪迴主題，作者畢生未完成的大作。' },
+      { t: '怪醫黑傑克', o: 'ブラック・ジャック', s: 1973, e: 1983, mag: '週刊少年Champion', pub: '秋田書店', demo: 'shonen', g: ['work', 'social'], vols: 25, rec: true, why: '每話獨立、隨手翻開哪一話都能看，是接觸手塚最不費力的入口。' },
+      { t: '佛陀', o: 'ブッダ', s: 1972, e: 1983, mag: '希望之友', pub: '潮出版社', demo: 'seinen', g: ['history', 'classic'], vols: 14, note: '以釋迦牟尼一生為主軸的長篇。' },
+    ] },
+  { id: 'fujiko', name: '藤子・F・不二雄', alt: 'ふじこ・F・ふじお / Fujiko F. Fujio', region: 'jp', born: 1933, died: 1996, demo: 'all',
+    intro: '本名藤本弘。原本與安孫子素雄共用「藤子不二雄」筆名，1987 年拆夥後加上 F。哆啦A夢從 1969 年連載到他過世，是台灣人最熟悉的日本漫畫，沒有之一。',
+    works: [
+      { t: '哆啦A夢', o: 'ドラえもん', s: 1969, e: 1996, mag: '小學館學年誌', pub: '小學館', tw: '青文', demo: 'all', g: ['daily', 'scifi', 'comedy'], vols: 45, rec: true, why: '一話一個道具、一個小故事，完全不需要門檻；台灣圖書館幾乎都有。' },
+      { t: '奇天烈大百科', o: 'キテレツ大百科', s: 1974, e: 1977, mag: 'こどもの光', pub: '家之光協會', demo: 'all', g: ['scifi', 'comedy'], vols: 3 },
+    ] },
+  { id: 'toriyama', name: '鳥山明', alt: 'とりやま あきら / Akira Toriyama', region: 'jp', born: 1955, died: 2024, demo: 'shonen',
+    intro: '七龍珠定義了「打倒一個更強的敵人、再遇到更強的敵人」這種少年漫畫的節奏，之後三十年的 Jump 作品幾乎都在這個框架裡。他同時是電玩《勇者鬥惡龍 Dragon Quest》的角色設計。',
+    works: [
+      { t: '怪博士與機器娃娃', o: 'Dr.スランプ', s: 1980, e: 1984, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['comedy', 'scifi'], vols: 18 },
+      { t: '七龍珠', o: 'ドラゴンボール', s: 1984, e: 1995, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'comedy'], vols: 42, rec: true, why: '少年漫畫的原型。前半段（悟空小時候）是冒險喜劇，後半段變成格鬥升級，讀完就懂 Jump 是什麼。' },
+    ] },
+  { id: 'takahashi', name: '高橋留美子', alt: 'たかはし るみこ / Rumiko Takahashi', region: 'jp', born: 1957, demo: 'shonen',
+    intro: '少數同時在少年誌和青年誌都拿下代表作的女性作者。福星小子、亂馬½、犬夜叉是 Sunday 三個世代的招牌，相聚一刻則是青年誌的戀愛經典。她的作品幾乎全部動畫化。',
+    works: [
+      { t: '福星小子', o: 'うる星やつら', s: 1978, e: 1987, mag: '週刊少年Sunday', pub: '小學館', tw: '尖端', demo: 'shonen', g: ['comedy', 'romance', 'scifi'], vols: 34 },
+      { t: '相聚一刻', o: 'めぞん一刻', s: 1980, e: 1987, mag: 'Big Comic Spirits', pub: '小學館', tw: '尖端', demo: 'seinen', g: ['romance', 'daily'], vols: 15, rec: true, why: '一棟破公寓裡的房客與年輕管理員的戀愛，15 卷完結，是「青年誌戀愛漫畫」的標準答案。' },
+      { t: '亂馬½', o: 'らんま1/2', s: 1987, e: 1996, mag: '週刊少年Sunday', pub: '小學館', tw: '尖端', demo: 'shonen', g: ['comedy', 'battle', 'romance'], vols: 38 },
+      { t: '犬夜叉', o: '犬夜叉', s: 1996, e: 2008, mag: '週刊少年Sunday', pub: '小學館', tw: '尖端', demo: 'shonen', g: ['fantasy', 'battle', 'romance'], vols: 56 },
+    ] },
+  { id: 'adachi', name: '安達充', alt: 'あだち みつる / Mitsuru Adachi', region: 'jp', born: 1951, demo: 'shonen',
+    intro: '棒球加青春戀愛。他的特色是留白很多、對白很少，關鍵時刻常常一整頁沒有字。鄰家女孩（Touch）是 1980 年代 Sunday 的代表作，H2 是 1990 年代的。',
+    works: [
+      { t: '鄰家女孩', o: 'タッチ', s: 1981, e: 1986, mag: '週刊少年Sunday', pub: '小學館', tw: '青文', demo: 'shonen', g: ['sport', 'romance', 'growth'], vols: 26, rec: true, why: '雙胞胎兄弟與鄰家女孩，甲子園為目標。節奏慢、情緒細，是「運動漫畫也可以很安靜」的代表。' },
+      { t: 'H2', o: 'H2', s: 1992, e: 1999, mag: '週刊少年Sunday', pub: '小學館', tw: '青文', demo: 'shonen', g: ['sport', 'romance'], vols: 34 },
+    ] },
+  { id: 'araki', name: '荒木飛呂彥', alt: 'あらき ひろひこ / Hirohiko Araki', region: 'jp', born: 1960, demo: 'shonen',
+    intro: 'JOJO 的奇妙冒險從 1987 年連載到現在，採「部」制，每一部換主角、換時代，可以從任何一部開始。第三部發明的「替身 Stand」能力系統影響了後來非常多作品。',
+    works: [
+      { t: 'JOJO的奇妙冒險', o: 'ジョジョの奇妙な冒険', s: 1987, e: null, mag: '週刊少年Jump → Ultra Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'fantasy'], note: '第 1–6 部在週刊少年Jump（1987–2004），第 7 部起移到青年誌 Ultra Jump。想試水溫可從第 3 部「星塵遠征軍」或第 4 部「不滅鑽石」開始。' },
+    ] },
+  { id: 'inoue', name: '井上雄彥', alt: 'いのうえ たけひこ / Takehiko Inoue', region: 'jp', born: 1967, demo: 'shonen',
+    intro: '灌籃高手是日本運動漫畫的銷量代表，也是台灣 1990 年代的集體記憶。之後他轉向青年誌，用毛筆水墨畫宮本武藏（浪人劍客），也畫輪椅籃球（REAL）。',
+    works: [
+      { t: '灌籃高手', o: 'SLAM DUNK', s: 1990, e: 1996, mag: '週刊少年Jump', pub: '集英社', tw: '尖端', demo: 'shonen', g: ['sport', 'growth', 'comedy'], vols: 31, rec: true, why: '31 卷完結、只講一個夏天的高中籃球。運動漫畫最強的入口，不懂籃球也沒關係。' },
+      { t: '浪人劍客', o: 'バガボンド', s: 1998, e: null, hiatus: true, mag: 'Morning', pub: '講談社', tw: '尖端', demo: 'seinen', g: ['history', 'battle', 'growth'], note: '改編自吉川英治小說《宮本武藏》，2015 年起長期休載。' },
+      { t: 'REAL', o: 'リアル', s: 1999, e: null, mag: 'Young Jump', pub: '集英社', tw: '尖端', demo: 'seinen', g: ['sport', 'social', 'growth'], note: '輪椅籃球，不定期連載。' },
+    ] },
+  { id: 'togashi', name: '富樫義博', alt: 'とがし よしひろ / Yoshihiro Togashi', region: 'jp', born: 1966, demo: 'shonen',
+    intro: '幽遊白書是 1990 年代 Jump 的招牌之一；HUNTER×HUNTER 從 1998 年連載至今，以「念能力」系統和複雜的規則設計聞名，但長期不定期連載。',
+    works: [
+      { t: '幽遊白書', o: '幽☆遊☆白書', s: 1990, e: 1994, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'fantasy'], vols: 19 },
+      { t: 'HUNTER×HUNTER', o: 'HUNTER×HUNTER', s: 1998, e: null, hiatus: true, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'fantasy', 'mystery'], note: '長期不定期連載，目前 38 卷左右。' },
+    ] },
+  { id: 'aoyama', name: '青山剛昌', alt: 'あおやま ごうしょう / Gosho Aoyama', region: 'jp', born: 1963, demo: 'shonen',
+    intro: '名偵探柯南從 1994 年連載到現在超過 100 卷，是日本推理漫畫最大的 IP，每年一部劇場版。單元劇結構，從任何一卷都能讀。',
+    works: [
+      { t: '名偵探柯南', o: '名探偵コナン', s: 1994, e: null, mag: '週刊少年Sunday', pub: '小學館', tw: '青文', demo: 'shonen', g: ['mystery'], note: '超過 100 卷，本格推理單元劇為主，主線（黑衣組織）進展緩慢。' },
+      { t: '魔術快斗', o: 'まじっく快斗', s: 1987, e: null, mag: '週刊少年Sunday（不定期）', pub: '小學館', tw: '青文', demo: 'shonen', g: ['mystery', 'comedy'], vols: 5, note: '怪盜基德的出處，不定期刊載。' },
+    ] },
+  { id: 'oda', name: '尾田榮一郎', alt: 'おだ えいいちろう / Eiichiro Oda', region: 'jp', born: 1975, demo: 'shonen',
+    intro: 'ONE PIECE 從 1997 年連載至今，是全球累計發行量最高的單一作者漫畫（金氏世界紀錄）。海賊冒險加上龐大的世界觀伏筆，是 2000 年代以後 Jump 的代名詞。',
+    works: [
+      { t: 'ONE PIECE', o: 'ONE PIECE', s: 1997, e: null, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'fantasy', 'comedy'], note: '超過 110 卷，前 12 卷（東海篇）可先試讀感覺。' },
+    ] },
+  { id: 'kishimoto', name: '岸本齊史', alt: 'きしもと まさし / Masashi Kishimoto', region: 'jp', born: 1974, demo: 'shonen',
+    intro: '火影忍者 1999–2014 連載、72 卷完結，與 ONE PIECE、BLEACH 並稱 2000 年代 Jump 三大長篇。忍者村、術式、師徒與宿敵，是海外最受歡迎的日本漫畫之一。',
+    works: [
+      { t: '火影忍者', o: 'NARUTO -ナルト-', s: 1999, e: 2014, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'fantasy', 'growth'], vols: 72 },
+    ] },
+  { id: 'arakawa', name: '荒川弘', alt: 'あらかわ ひろむ / Hiromu Arakawa', region: 'jp', born: 1973, demo: 'shonen',
+    intro: '北海道酪農家庭出身的女性作者。鋼之鍊金術師 27 卷完結、每條伏筆都有收，是「結構完整的少年漫畫」的範本；銀之匙寫農業高中，把自己的成長背景畫進去。',
+    works: [
+      { t: '鋼之鍊金術師', o: '鋼の錬金術師', s: 2001, e: 2010, mag: '月刊少年Gangan', pub: 'Square Enix', tw: '東立', demo: 'shonen', g: ['fantasy', 'battle', 'mystery'], vols: 27, rec: true, why: '27 卷完結、劇情緊、沒有灌水。想看「一個完整故事」的少年漫畫，這部最穩。' },
+      { t: '銀之匙', o: '銀の匙 Silver Spoon', s: 2011, e: 2019, mag: '週刊少年Sunday', pub: '小學館', tw: '東立', demo: 'shonen', g: ['daily', 'growth', 'food'], vols: 15 },
+    ] },
+  { id: 'obata', name: '小畑健', alt: 'おばた たけし / Takeshi Obata', region: 'jp', born: 1969, demo: 'shonen',
+    intro: '作畫者，和不同原作者搭檔：棋魂（原作 堀田由美）、死亡筆記本 與 爆漫王。（原作 大場鶇）。畫面精緻，是「原作＋作畫」分工制在 Jump 最成功的例子。',
+    works: [
+      { t: '棋魂', o: 'ヒカルの碁', s: 1998, e: 2003, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['growth', 'sport'], vols: 23, note: '原作 堀田由美。圍棋題材，在台灣帶動一波學棋潮。' },
+      { t: '死亡筆記本', o: 'DEATH NOTE', s: 2003, e: 2006, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['mystery', 'social'], vols: 12, rec: true, why: '12 卷完結、心理攻防、節奏極快。不喜歡打鬥的人也能一口氣讀完的少年漫畫。原作 大場鶇。' },
+      { t: '爆漫王。', o: 'バクマン。', s: 2008, e: 2012, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['work', 'growth'], vols: 20, note: '原作 大場鶇。寫兩個高中生立志成為 Jump 漫畫家，順便把週刊漫畫的產業內幕講了一遍。' },
+    ] },
+  { id: 'isayama', name: '諫山創', alt: 'いさやま はじめ / Hajime Isayama', region: 'jp', born: 1986, demo: 'shonen',
+    intro: '進擊的巨人 2009–2021 連載、34 卷完結，是講談社別冊少年Magazine 的代表作。從「人類對抗巨人」的生存劇，一路翻轉成關於歷史、仇恨與自由的故事。',
+    works: [
+      { t: '進擊的巨人', o: '進撃の巨人', s: 2009, e: 2021, mag: '別冊少年Magazine', pub: '講談社', tw: '東立', demo: 'shonen', g: ['battle', 'mystery', 'social'], vols: 34, rec: true, why: '34 卷完結、伏筆收得乾淨。2010 年代影響力最大的少年漫畫。' },
+    ] },
+  { id: 'furudate', name: '古館春一', alt: 'ふるだて はるいち / Haruichi Furudate', region: 'jp', born: 1983, demo: 'shonen',
+    intro: '排球少年!! 2012–2020 連載、45 卷完結，是 2010 年代運動漫畫的代表。沒有超能力式的必殺技，靠戰術和團隊寫到最後。',
+    works: [
+      { t: '排球少年!!', o: 'ハイキュー!!', s: 2012, e: 2020, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['sport', 'growth'], vols: 45 },
+    ] },
+  { id: 'gotouge', name: '吾峠呼世晴', alt: 'ごとうげ こよはる / Koyoharu Gotouge', region: 'jp', born: 1989, demo: 'shonen',
+    intro: '鬼滅之刃 2016–2020 連載、23 卷完結，在動畫化後成為 2020 年前後日本銷量最高的漫畫。大正時代、鬼與獵鬼人，故事直白、情緒到位。',
+    works: [
+      { t: '鬼滅之刃', o: '鬼滅の刃', s: 2016, e: 2020, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'fantasy', 'history'], vols: 23, rec: true, why: '23 卷完結，故事線單純，是近年最容易讀完的熱門少年漫畫。' },
+    ] },
+  { id: 'fujimoto', name: '藤本樹', alt: 'ふじもと たつき / Tatsuki Fujimoto', region: 'jp', born: 1992, demo: 'shonen',
+    intro: '2010 年代末期最受注目的新世代作者。鏈鋸人的暴力與荒謬、驀然回首的安靜與痛，風格差很大但都很電影。短篇很多，適合先試短的。',
+    works: [
+      { t: '炎拳', o: 'ファイアパンチ', s: 2016, e: 2018, mag: '少年Jump+', pub: '集英社', tw: '東立', demo: 'shonen', g: ['fantasy', 'social'], vols: 8 },
+      { t: '鏈鋸人', o: 'チェンソーマン', s: 2018, e: null, mag: '週刊少年Jump → 少年Jump+', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'horror', 'comedy'], note: '第一部（1–11 卷）在週刊少年Jump 完結，第二部 2022 年起在 Jump+ 連載。' },
+      { t: '驀然回首', o: 'ルックバック', s: 2021, e: 2021, mag: '少年Jump+', pub: '集英社', tw: '東立', demo: 'shonen', g: ['growth', 'work', 'daily'], vols: 1, rec: true, why: '單卷、一小時內讀完，寫兩個畫漫畫的女孩。想知道「現在的漫畫可以做到什麼」，先讀這本。' },
+    ] },
+  { id: 'yamada-abe', name: '山田鐘人 × 阿部司', alt: 'やまだ かねひと × あべ つかさ', region: 'jp', demo: 'shonen',
+    intro: '原作（山田鐘人）加作畫（阿部司）的組合。葬送的芙莉蓮 2020 年起在 Sunday 連載，2023 年動畫化後大紅：勇者一行打倒魔王「之後」，長壽精靈重新走一遍旅程的故事。',
+    works: [
+      { t: '葬送的芙莉蓮', o: '葬送のフリーレン', s: 2020, e: null, mag: '週刊少年Sunday', pub: '小學館', tw: '東立', demo: 'shonen', g: ['fantasy', 'daily', 'growth'], rec: true, why: '節奏慢、一話一話讀很舒服，奇幻設定不複雜。連載中，但每卷都可以停。' },
+    ] },
+
+  // ============ 日本・少女 ============
+  { id: 'ikeda', name: '池田理代子', alt: 'いけだ りよこ / Riyoko Ikeda', region: 'jp', born: 1947, demo: 'shojo',
+    intro: '凡爾賽玫瑰以法國大革命為背景，是 1970 年代少女漫畫黃金期的代表作，改編成寶塚歌劇後成為日本國民級 IP。和萩尾望都、竹宮惠子同屬「花之 24 年組」世代。',
+    works: [
+      { t: '凡爾賽玫瑰', o: 'ベルサイユのばら', s: 1972, e: 1973, mag: '週刊Margaret', pub: '集英社', tw: '尖端', demo: 'shojo', g: ['history', 'romance'], vols: 10, rec: true, why: '少女漫畫的經典入口：法國大革命、女扮男裝的近衛隊長、瑪麗安東尼。10 卷完結（後有外傳）。' },
+      { t: '奧爾佛士之窗', o: 'オルフェウスの窓', s: 1975, e: 1981, mag: '週刊Margaret → 月刊Seventeen', pub: '集英社', demo: 'shojo', g: ['history', 'romance'], vols: 18, note: '德國、俄國革命為背景。' },
+    ] },
+  { id: 'hagio', name: '萩尾望都', alt: 'はぎお もと / Moto Hagio', region: 'jp', born: 1949, demo: 'shojo',
+    intro: '「花之 24 年組」的核心人物，把科幻、哲學、性別議題帶進少女漫畫，改變了這個類型能講什麼。波族傳奇寫一對永遠是少年的吸血鬼跨越兩百年的故事。',
+    works: [
+      { t: '波族傳奇', o: 'ポーの一族', s: 1972, e: 1976, mag: '別冊少女Comic', pub: '小學館', tw: '尖端', demo: 'shojo', g: ['fantasy', 'history'], vols: 5, rec: true, why: '少女漫畫史上的轉捩點之一，5 卷讀完，2016 年起有續篇。' },
+      { t: '托馬的心臟', o: 'トーマの心臓', s: 1974, e: 1974, mag: '週刊少女Comic', pub: '小學館', demo: 'shojo', g: ['growth', 'romance'], vols: 3, note: '德國寄宿學校少年群像。' },
+      { t: '11人！', o: '11人いる!', s: 1975, e: 1975, mag: '別冊少女Comic', pub: '小學館', demo: 'shojo', g: ['scifi', 'mystery'], vols: 1, note: '太空船上的密室推理，短篇科幻經典。' },
+    ] },
+  { id: 'miuchi', name: '美內鈴惠', alt: 'みうち すずえ / Suzue Miuchi', region: 'jp', born: 1951, demo: 'shojo',
+    intro: '千面女郎（玻璃假面）1976 年連載至今仍未完結，是白泉社花與夢的鎮社之寶。演劇題材、天才少女對決，台灣 1980–90 年代讀者印象最深的少女漫畫之一。',
+    works: [
+      { t: '千面女郎（玻璃假面）', o: 'ガラスの仮面', s: 1976, e: null, hiatus: true, mag: '花與夢', pub: '白泉社', tw: '東立', demo: 'shojo', g: ['work', 'growth'], note: '49 卷，長期休載中。台灣早期由大然出版，現為東立。' },
+    ] },
+  { id: 'takeuchi', name: '武內直子', alt: 'たけうち なおこ / Naoko Takeuchi', region: 'jp', born: 1967, demo: 'shojo',
+    intro: '美少女戰士 1991–1997 連載，把「變身少女」和「戰隊」結合，成為 1990 年代全球最有影響力的少女漫畫。',
+    works: [
+      { t: '美少女戰士', o: '美少女戦士セーラームーン', s: 1991, e: 1997, mag: 'Nakayoshi', pub: '講談社', tw: '尖端', demo: 'shojo', g: ['fantasy', 'battle', 'romance'], vols: 18 },
+    ] },
+  { id: 'clamp', name: 'CLAMP', alt: 'クランプ', region: 'jp', demo: 'shojo',
+    intro: '四位女性組成的創作團體，1989 年出道。1990 年代以庫洛魔法使、魔法騎士雷阿斯稱霸 Nakayoshi，2000 年代起跨到青年誌。各作品的角色會互相客串，形成自己的宇宙。',
+    works: [
+      { t: '聖傳', o: '聖伝-RG VEDA-', s: 1989, e: 1996, mag: 'Wings', pub: '新書館', tw: '東立', demo: 'shojo', g: ['fantasy', 'battle'], vols: 10 },
+      { t: '魔法騎士雷阿斯', o: '魔法騎士レイアース', s: 1993, e: 1996, mag: 'Nakayoshi', pub: '講談社', tw: '東立', demo: 'shojo', g: ['fantasy', 'battle'], vols: 6 },
+      { t: '庫洛魔法使', o: 'カードキャプターさくら', s: 1996, e: 2000, mag: 'Nakayoshi', pub: '講談社', tw: '東立', demo: 'shojo', g: ['fantasy', 'daily', 'romance'], vols: 12, rec: true, why: '12 卷完結、畫風精緻、故事溫和，是最多人推薦的少女漫畫入口。2016 年起有續篇 Clear Card 篇。' },
+      { t: 'xxxHOLiC', o: 'xxxHOLiC', s: 2003, e: 2011, mag: 'Young Magazine', pub: '講談社', tw: '東立', demo: 'seinen', g: ['fantasy', 'mystery'], vols: 19 },
+    ] },
+  { id: 'yoshida', name: '吉田秋生', alt: 'よしだ あきみ / Akimi Yoshida', region: 'jp', born: 1956, demo: 'shojo',
+    intro: '少女誌出身，題材卻很硬：BANANA FISH 寫紐約街頭幫派與陰謀，海街日記寫鎌倉四姊妹的日常。畫風寫實、對白節制，男性讀者也很多。',
+    works: [
+      { t: 'BANANA FISH', o: 'BANANA FISH', s: 1985, e: 1994, mag: '別冊少女Comic', pub: '小學館', tw: '尖端', demo: 'shojo', g: ['mystery', 'social', 'battle'], vols: 19, note: '2018 年動畫化。' },
+      { t: '海街日記', o: '海街diary', s: 2006, e: 2018, mag: '月刊flowers', pub: '小學館', tw: '尖端', demo: 'shojo', g: ['daily', 'growth', 'social'], vols: 9, rec: true, why: '9 卷完結，鎌倉四姊妹的日常。是枝裕和 2015 年改編成電影。不像「漫畫」的漫畫，適合平常看小說的人。' },
+    ] },
+  { id: 'yazawa', name: '矢澤愛', alt: 'やざわ あい / Ai Yazawa', region: 'jp', born: 1967, demo: 'shojo',
+    intro: 'NANA 寫兩個同名女孩在東京的合租生活，一個是龐克樂團主唱、一個是普通女孩；時尚與音樂元素強烈，2000 年代最紅的少女漫畫之一，2009 年起休載。',
+    works: [
+      { t: '天堂之吻', o: 'Paradise Kiss', s: 2000, e: 2003, mag: 'Zipper', pub: '祥傳社', tw: '尖端', demo: 'shojo', g: ['romance', 'work', 'growth'], vols: 5, note: '服裝設計系學生的故事，5 卷完結。' },
+      { t: 'NANA', o: 'NANA', s: 2000, e: 2009, hiatus: true, mag: 'Cookie', pub: '集英社', tw: '尖端', demo: 'shojo', g: ['romance', 'music', 'growth'], vols: 21, rec: true, why: '20 多歲女性的愛情、友情與樂團夢。21 卷、休載中，但前面的完成度足以讀。' },
+    ] },
+  { id: 'umino', name: '羽海野千花', alt: 'うみの チカ / Chica Umino', region: 'jp', born: 1966, demo: 'shojo',
+    intro: '蜂蜜幸運草寫美術大學生的群像，3 月的獅子寫一個孤獨的職業將棋少年被一家三姊妹接住。細膩、溫柔、會痛，兩部都動畫化。',
+    works: [
+      { t: '蜂蜜幸運草', o: 'ハチミツとクローバー', s: 2000, e: 2006, mag: 'CUTiE Comic → Young You → Chorus', pub: '寶島社 → 集英社', tw: '尖端', demo: 'shojo', g: ['romance', 'growth', 'daily'], vols: 10, rec: true, why: '10 卷完結，大學生的暗戀與畢業。青春群像的標準作。' },
+      { t: '3月的獅子', o: '3月のライオン', s: 2007, e: null, mag: 'Young Animal', pub: '白泉社', tw: '尖端', demo: 'seinen', g: ['growth', 'daily', 'sport'], note: '職業將棋少年的故事，連載中，17 卷以上。' },
+    ] },
+  { id: 'shiina', name: '椎名輕穗', alt: 'しいな かるほ / Karuho Shiina', region: 'jp', born: 1975, demo: 'shojo',
+    intro: '好想告訴你 2005–2017 連載、30 卷完結，是 2000 年代後期到 2010 年代少女戀愛漫畫的代表：外表陰沉的女孩與陽光男孩，慢慢地變成朋友、再變成戀人。',
+    works: [
+      { t: '好想告訴你', o: '君に届け', s: 2005, e: 2017, mag: '別冊Margaret', pub: '集英社', tw: '東立', demo: 'shojo', g: ['romance', 'growth', 'daily'], vols: 30 },
+    ] },
+
+  // ============ 日本・青年 ============
+  { id: 'otomo', name: '大友克洋', alt: 'おおとも かつひろ / Katsuhiro Otomo', region: 'jp', born: 1954, demo: 'seinen',
+    intro: 'AKIRA 用極度精密寫實的畫面改變了日本漫畫的視覺標準，對歐美的影響尤其深。畫崩壞的東京、畫爆炸、畫群眾，每一格都像建築圖。',
+    works: [
+      { t: '童夢', o: '童夢', s: 1980, e: 1981, mag: 'Action Deluxe', pub: '雙葉社', demo: 'seinen', g: ['scifi', 'horror'], vols: 1, note: '團地裡的超能力對決，單卷。' },
+      { t: 'AKIRA', o: 'AKIRA', s: 1982, e: 1990, mag: 'Young Magazine', pub: '講談社', tw: '東立', demo: 'seinen', g: ['scifi', 'social', 'battle'], vols: 6, rec: true, why: '6 卷完結，日本漫畫走向世界的代表作；1988 年電影只講到漫畫的一半。' },
+    ] },
+  { id: 'shirow', name: '士郎正宗', alt: 'しろう まさむね / Masamune Shirow', region: 'jp', born: 1961, demo: 'seinen',
+    intro: '攻殼機動隊的原作者。頁面資訊密度極高，還附大量作者註解，讀起來像在讀設定集。1995 年押井守的電影版讓它成為賽博龐克的代名詞。',
+    works: [
+      { t: '蘋果核戰', o: 'アップルシード', s: 1985, e: 1989, mag: 'Comic Gaia', pub: '青心社', demo: 'seinen', g: ['scifi', 'battle'], vols: 4 },
+      { t: '攻殼機動隊', o: '攻殻機動隊 THE GHOST IN THE SHELL', s: 1989, e: 1991, mag: 'Young Magazine 海賊版', pub: '講談社', tw: '尖端', demo: 'seinen', g: ['scifi', 'mystery', 'social'], vols: 1, note: '本篇 1 卷，另有 1.5 與 2。' },
+    ] },
+  { id: 'miura', name: '三浦建太郎', alt: 'みうら けんたろう / Kentaro Miura', region: 'jp', born: 1966, died: 2021, demo: 'seinen',
+    intro: '烙印勇士 1989 年起連載，黑暗奇幻的代表：巨劍、傭兵、人性的最壞面。作者 2021 年過世後，由好友森恒二監修、助手團隊繼續。',
+    works: [
+      { t: '烙印勇士', o: 'ベルセルク', s: 1989, e: null, mag: 'Young Animal', pub: '白泉社', tw: '東立', demo: 'seinen', g: ['fantasy', 'battle', 'horror'], note: '40 卷以上，「黃金時代篇」（第 3–14 卷）是公認最好的入口。' },
+    ] },
+  { id: 'urasawa', name: '浦澤直樹', alt: 'うらさわ なおき / Naoki Urasawa', region: 'jp', born: 1960, demo: 'seinen',
+    intro: '懸疑長篇的大師。MONSTER 寫一個醫生追捕自己救活的怪物，20 世紀少年寫童年的預言變成現實，PLUTO 改編手塚原子小金剛的「地上最大機器人」篇。適合平常看推理小說的人。',
+    works: [
+      { t: '以柔克剛', o: 'YAWARA!', s: 1986, e: 1993, mag: 'Big Comic Spirits', pub: '小學館', demo: 'seinen', g: ['sport', 'comedy'], vols: 29, note: '柔道天才少女，早期代表作。' },
+      { t: 'MONSTER', o: 'MONSTER', s: 1994, e: 2001, mag: 'Big Comic Original', pub: '小學館', tw: '東立', demo: 'seinen', g: ['mystery', 'social'], vols: 18, rec: true, why: '18 卷完結，冷戰後的德國為背景，懸疑漫畫的頂點。讀小說的人最容易接受的漫畫之一。' },
+      { t: '20世紀少年', o: '20世紀少年', s: 1999, e: 2006, mag: 'Big Comic Spirits', pub: '小學館', tw: '東立', demo: 'seinen', g: ['mystery', 'scifi', 'social'], vols: 22, note: '續篇「21 世紀少年」2 卷。' },
+      { t: 'PLUTO', o: 'PLUTO', s: 2003, e: 2009, mag: 'Big Comic Original', pub: '小學館', tw: '東立', demo: 'seinen', g: ['scifi', 'mystery'], vols: 8, rec: true, why: '8 卷完結。把手塚的兒童漫畫改寫成給大人的機器人推理，讀完會想回頭看原子小金剛。' },
+    ] },
+  { id: 'iwaaki', name: '岩明均', alt: 'いわあき ひとし / Hitoshi Iwaaki', region: 'jp', born: 1960, demo: 'seinen',
+    intro: '寄生獸 10 卷完結，是 1990 年代青年漫畫的經典：右手被外星生物寄生的高中生，故事最後問的是「人類是什麼」。歷史之眼寫亞歷山大大帝的書記官，連載中。',
+    works: [
+      { t: '寄生獸', o: '寄生獣', s: 1988, e: 1995, mag: 'Morning Open增刊 → 月刊Afternoon', pub: '講談社', tw: '東立', demo: 'seinen', g: ['scifi', 'horror', 'social'], vols: 10, rec: true, why: '10 卷完結，畫風樸素但故事非常紮實。青年漫畫最好的入口之一。' },
+      { t: '歷史之眼', o: 'ヒストリエ', s: 2003, e: null, mag: '月刊Afternoon', pub: '講談社', tw: '東立', demo: 'seinen', g: ['history'], note: '不定期連載，12 卷左右。' },
+    ] },
+  { id: 'matsumoto', name: '松本大洋', alt: 'まつもと たいよう / Taiyō Matsumoto', region: 'jp', born: 1967, demo: 'seinen',
+    intro: '畫風自由、分鏡實驗性強，被視為藝術家型的漫畫家。乒乓寫兩個桌球少年，惡童當街寫虛構城市「寶町」的兩個流浪兒，都改編成動畫或電影。近年台灣由大塊文化重新出版。',
+    works: [
+      { t: '惡童當街', o: '鉄コン筋クリート', s: 1993, e: 1994, mag: 'Big Comic Spirits', pub: '小學館', tw: '大塊文化', demo: 'seinen', g: ['social', 'growth', 'battle'], vols: 3 },
+      { t: '乒乓', o: 'ピンポン', s: 1996, e: 1997, mag: 'Big Comic Spirits', pub: '小學館', tw: '大塊文化', demo: 'seinen', g: ['sport', 'growth'], vols: 5, rec: true, why: '5 卷完結，運動漫畫裡最「不像運動漫畫」的一部；2014 年湯淺政明動畫版也很好。' },
+      { t: 'Sunny', o: 'Sunny', s: 2011, e: 2015, mag: '月刊IKKI', pub: '小學館', tw: '大塊文化', demo: 'seinen', g: ['growth', 'daily', 'social'], vols: 6, note: '以作者自己在育幼院的童年為底。' },
+    ] },
+  { id: 'taniguchi', name: '谷口治郎', alt: 'たにぐち じろう / Jiro Taniguchi', region: 'jp', born: 1947, died: 2017, demo: 'seinen',
+    intro: '在法國評價極高、被稱為最接近歐洲漫畫的日本作者。步行的人幾乎沒有對白，只是散步；孤獨的美食家（原作 久住昌之）改編日劇後長紅十多年。',
+    works: [
+      { t: '步行的人', o: '歩くひと', s: 1990, e: 1991, mag: 'Morning Party增刊', pub: '講談社', demo: 'seinen', g: ['daily'], vols: 1, note: '單卷，散步漫畫的原點。' },
+      { t: '孤獨的美食家', o: '孤独のグルメ', s: 1994, e: 1996, mag: '月刊PANJA（2008 年起 週刊SPA!）', pub: '扶桑社', demo: 'seinen', g: ['food', 'daily'], vols: 2, rec: true, why: '原作 久住昌之。一個人吃飯的漫畫，每話獨立，日劇的原作。' },
+      { t: '遙遠的小鎮', o: '遥かな町へ', s: 1998, e: 1998, mag: 'Big Comic', pub: '小學館', demo: 'seinen', g: ['daily', 'growth'], vols: 2, note: '中年男子回到 14 歲的身體，2 卷完結。' },
+    ] },
+  { id: 'yukimura', name: '幸村誠', alt: 'ゆきむら まこと / Makoto Yukimura', region: 'jp', born: 1976, demo: 'seinen',
+    intro: '星空清理者寫太空垃圾清理員，海盜戰記寫維京時代的復仇與和解。後者先在少年誌連載，因為題材太重轉到青年誌 Afternoon，是少見的例子。',
+    works: [
+      { t: '星空清理者', o: 'プラネテス', s: 1999, e: 2004, mag: 'Morning', pub: '講談社', tw: '東立', demo: 'seinen', g: ['scifi', 'work', 'growth'], vols: 4, note: '4 卷完結，硬科幻。' },
+      { t: '海盜戰記', o: 'ヴィンランド・サガ', s: 2005, e: null, mag: '週刊少年Magazine → 月刊Afternoon', pub: '講談社', tw: '東立', demo: 'seinen', g: ['history', 'battle', 'growth'], rec: true, why: '11 世紀北歐為背景，從復仇故事走向「真正的戰士不需要劍」。連載中，接近完結。' },
+    ] },
+  { id: 'asano', name: '淺野一二O', alt: 'あさの いにお / Inio Asano', region: 'jp', born: 1980, demo: 'seinen',
+    intro: '寫都市年輕人的不安、無聊與日常，背景用照片加工、人物卻很漫畫，形成獨特的疏離感。晚安布布是代表作，很多人的「人生漫畫」，也很多人讀完很難受。',
+    works: [
+      { t: '素晴日', o: '素晴らしい世界', s: 2002, e: 2004, mag: 'Sunday GX', pub: '小學館', demo: 'seinen', g: ['daily', 'social'], vols: 2, note: '短篇集，入門淺野的好起點。' },
+      { t: '晚安布布', o: 'おやすみプンプン', s: 2007, e: 2013, mag: 'Young Sunday → Big Comic Spirits', pub: '小學館', demo: 'seinen', g: ['growth', 'social', 'romance'], vols: 13 },
+      { t: 'Dead Dead Demon\'s Dededede Destruction', o: 'デッドデッドデーモンズデデデデデストラクション', s: 2014, e: 2022, mag: 'Big Comic Spirits', pub: '小學館', demo: 'seinen', g: ['scifi', 'daily', 'social'], vols: 12, note: '外星母艦停在東京上空三年後的日常。' },
+    ] },
+  { id: 'kui', name: '九井諒子', alt: 'くい りょうこ / Ryoko Kui', region: 'jp', demo: 'seinen',
+    intro: '迷宮飯 14 卷完結，把「在地下城裡把魔物煮來吃」寫得有生態邏輯、有料理程序，最後變成關於慾望的故事。2024 年動畫化。',
+    works: [
+      { t: '龍的學校在山上', o: '竜の学校は山の上', s: 2011, e: 2011, mag: '短篇集', pub: 'イースト・プレス', demo: 'seinen', g: ['fantasy', 'daily'], vols: 1, note: '短篇集，可以看出作者的奇幻想像方式。' },
+      { t: '迷宮飯', o: 'ダンジョン飯', s: 2014, e: 2023, mag: 'Harta', pub: 'KADOKAWA', tw: '青文', demo: 'seinen', g: ['fantasy', 'food', 'comedy'], vols: 14, rec: true, why: '14 卷完結。奇幻加料理，輕鬆但設定嚴謹，適合不想看太沉重東西的人。' },
+    ] },
+  { id: 'ito', name: '伊藤潤二', alt: 'いとう じゅんじ / Junji Ito', region: 'jp', born: 1963, demo: 'seinen',
+    intro: '日本恐怖漫畫的代表。富江寫一個殺不死、會分裂的美少女，漩渦寫一個被螺旋詛咒的小鎮。畫工細膩，恐怖來自「日常裡出現不對勁的形狀」。',
+    works: [
+      { t: '富江', o: '富江', s: 1987, e: 2000, mag: '月刊Halloween', pub: '朝日ソノラマ', tw: '東立', demo: 'shojo', g: ['horror'], vols: 3, note: '出道作，發表在少女恐怖誌。' },
+      { t: '漩渦', o: 'うずまき', s: 1998, e: 1999, mag: 'Big Comic Spirits', pub: '小學館', tw: '東立', demo: 'seinen', g: ['horror'], vols: 3, rec: true, why: '3 卷完結，恐怖漫畫最有名的一部；不敢看恐怖片的人也能試，因為是「形狀」在恐怖。' },
+    ] },
+  { id: 'ishizuka', name: '石塚真一', alt: 'いしづか しんいち / Shinichi Ishizuka', region: 'jp', born: 1971, demo: 'seinen',
+    intro: 'BLUE GIANT 寫一個仙台高中生立志成為世界第一的爵士薩克斯風手，從日本、歐洲一路到美國，系列連載至今；岳寫山岳救難志工。兩部都很熱，但都是青年誌。',
+    works: [
+      { t: '岳', o: '岳 みんなの山', s: 2003, e: 2012, mag: 'Big Comic Original', pub: '小學館', demo: 'seinen', g: ['work', 'daily'], vols: 18 },
+      { t: 'BLUE GIANT', o: 'BLUE GIANT', s: 2013, e: 2016, mag: 'Big Comic', pub: '小學館', tw: '尖端', demo: 'seinen', g: ['music', 'growth'], vols: 10, rec: true, why: '第一部 10 卷完結（日本篇），之後 SUPREME（歐洲篇）、EXPLORER（美國篇）。畫「聲音」畫得最好的漫畫之一。' },
+      { t: 'BLUE GIANT SUPREME', o: 'BLUE GIANT SUPREME', s: 2016, e: 2020, mag: 'Big Comic', pub: '小學館', tw: '尖端', demo: 'seinen', g: ['music', 'growth'], vols: 11 },
+    ] },
+  { id: 'miyazaki', name: '宮崎駿', alt: 'みやざき はやお / Hayao Miyazaki', region: 'jp', born: 1941, demo: 'seinen',
+    intro: '大家熟悉的是他的動畫，但風之谷的漫畫版連載了 12 年、7 卷，比 1984 年的電影長得多、也黑暗複雜得多，電影只講到第 2 卷。',
+    works: [
+      { t: '風之谷', o: '風の谷のナウシカ', s: 1982, e: 1994, mag: 'Animage', pub: '德間書店', tw: '台灣東販', demo: 'seinen', g: ['scifi', 'fantasy', 'social'], vols: 7, rec: true, why: '7 卷完結。看過電影的人最容易入手的「大部頭」漫畫，讀完會重新理解宮崎駿。' },
+    ] },
+
+  // ============ 日本・女性 ============
+  { id: 'ninomiya', name: '二之宮知子', alt: 'にのみや ともこ / Tomoko Ninomiya', region: 'jp', born: 1969, demo: 'josei',
+    intro: '交響情人夢寫音樂大學裡的天才鋼琴少女與指揮系學長，是古典音樂入門最好的漫畫，2006 年日劇版在台灣也很紅。',
+    works: [
+      { t: '交響情人夢', o: 'のだめカンタービレ', s: 2001, e: 2010, mag: 'Kiss', pub: '講談社', tw: '東立', demo: 'josei', g: ['music', 'romance', 'comedy'], vols: 25, rec: true, why: '25 卷完結（含番外）。搞笑加古典音樂，每一卷都會想找曲子來聽。' },
+    ] },
+  { id: 'higashimura', name: '東村明子', alt: 'ひがしむら アキコ / Akiko Higashimura', region: 'jp', born: 1975, demo: 'josei',
+    intro: '筆速極快、搞笑感強。海月姬寫一棟只住宅女的公寓，東京白日夢女寫三個 33 歲單身女性。她的散文式自傳漫畫「塗鴉日記」（かくかくしかじか）也很受好評。',
+    works: [
+      { t: '海月姬', o: '海月姫', s: 2008, e: 2017, mag: 'Kiss', pub: '講談社', tw: '東立', demo: 'josei', g: ['comedy', 'romance', 'daily'], vols: 17, rec: true, why: '17 卷完結，御宅女子與女裝美男的喜劇，讀起來很快。' },
+      { t: '東京白日夢女', o: '東京タラレバ娘', s: 2014, e: 2017, mag: 'Kiss', pub: '講談社', demo: 'josei', g: ['romance', 'daily', 'social'], vols: 9 },
+    ] },
+  { id: 'anno', name: '安野夢洋子', alt: 'あんの モヨコ / Moyoco Anno', region: 'jp', born: 1971, demo: 'josei',
+    intro: '寫工作、慾望與女性的生活，畫風華麗、講話很直接。工作狂人寫週刊雜誌的女編輯，花癡公主寫一個永遠在找對象的女子。丈夫是動畫導演庵野秀明。',
+    works: [
+      { t: '花癡公主', o: 'ハッピー・マニア', s: 1995, e: 2001, mag: 'FEEL YOUNG', pub: '祥傳社', demo: 'josei', g: ['romance', 'comedy', 'social'], vols: 11 },
+      { t: '惡女花魁', o: 'さくらん', s: 2001, e: 2003, mag: 'Evening', pub: '講談社', demo: 'seinen', g: ['history', 'social'], vols: 1, note: '江戶吉原的花魁，單卷，2007 年蜷川實花改編電影。' },
+      { t: '工作狂人', o: '働きマン', s: 2004, e: 2008, hiatus: true, mag: 'Morning', pub: '講談社', demo: 'seinen', g: ['work', 'social'], vols: 4 },
+    ] },
+  { id: 'suetsugu', name: '末次由紀', alt: 'すえつぐ ゆき / Yuki Suetsugu', region: 'jp', born: 1975, demo: 'josei',
+    intro: '花牌情緣寫競技歌牌（百人一首）的高中社團，2007–2022 連載、50 卷完結。刊在女性誌 BE·LOVE，但讀起來是標準的青春運動漫畫。',
+    works: [
+      { t: '花牌情緣', o: 'ちはやふる', s: 2007, e: 2022, mag: 'BE·LOVE', pub: '講談社', tw: '東立', demo: 'josei', g: ['sport', 'growth', 'romance'], vols: 50 },
+    ] },
+
+  // ============ 台灣 ============
+  { id: 'yeh', name: '葉宏甲', alt: 'Yeh Hung-chia', region: 'tw', born: 1923, died: 1990, demo: 'shonen',
+    intro: '新竹人。諸葛四郎 1958 年起連載於《漫畫大王》，是 1960 年代台灣小孩的共同記憶，羅大佑〈童年〉唱的「諸葛四郎和魔鬼黨」就是它。2023 年台中國家漫畫博物館辦了百年紀念展。',
+    works: [
+      { t: '諸葛四郎', o: '', s: 1958, e: 1967, approx: true, mag: '漫畫大王 → 漫畫週刊', pub: '大華文化 等', demo: 'shonen', g: ['wuxia', 'battle'], rec: true, why: '台灣漫畫史的起點之一。看的是歷史意義，故事本身是 1950 年代的武俠英雄劇。近年有復刻版。' },
+    ] },
+  { id: 'ao', name: '敖幼祥', alt: 'Ao Yu-hsiang', region: 'tw', born: 1956, demo: 'all',
+    intro: '烏龍院 1980 年起在中國時報連載四格，之後發展為長篇（活寶、大長篇），是台灣最長壽的漫畫品牌之一，也是 1980 年代本土漫畫復興的起點。',
+    works: [
+      { t: '烏龍院', o: '', s: 1980, e: null, mag: '中國時報（四格）', pub: '時報文化 等', demo: 'all', g: ['comedy', 'wuxia'], rec: true, why: '四格開始、老少咸宜。想知道「台灣人自己畫的漫畫長什麼樣」，這是最多人看過的答案。' },
+      { t: '烏龍院 活寶', o: '', s: 2004, e: 2010, approx: true, mag: '單行本', pub: '時報文化', demo: 'all', g: ['comedy', 'wuxia', 'battle'], note: '長篇武俠版。' },
+    ] },
+  { id: 'tsai', name: '蔡志忠', alt: 'Tsai Chih-chung', region: 'tw', born: 1948, demo: 'all',
+    intro: '用漫畫講中國古典：莊子說、老子說、禪說、孔子說……1980 年代中期起橫掃台灣書市，之後翻譯到數十種語言。嚴格說是「漫畫化的經典解說」，但對很多人來說是第一次讀懂莊子。',
+    works: [
+      { t: '大醉俠', o: '', s: 1980, e: 1985, approx: true, mag: '中國時報（四格）', pub: '時報文化', demo: 'all', g: ['comedy', 'wuxia'] },
+      { t: '莊子說', o: '', s: 1986, e: 1986, mag: '單行本', pub: '時報文化', demo: 'all', g: ['classic', 'comedy'], vols: 1, rec: true, why: '一本讀完，讀的是莊子不是漫畫技巧，但這正是它厲害的地方。之後有老子說、禪說、列子說一整套。' },
+    ] },
+  { id: 'chu', name: '朱德庸', alt: 'Chu Te-yung', region: 'tw', born: 1960, demo: 'seinen',
+    intro: '都市四格漫畫的代表：雙響炮寫夫妻、醋溜族寫年輕人、澀女郎寫單身女性。1990 年代在台灣與中國都極紅，澀女郎改編成陸劇《粉紅女郎》。',
+    works: [
+      { t: '雙響炮', o: '', s: 1983, e: 1990, approx: true, mag: '中國時報（四格）', pub: '時報文化', demo: 'seinen', g: ['comedy', 'daily', 'social'], rec: true, why: '四格、一頁一個笑話，完全沒有門檻。看夫妻鬥嘴看台灣 1980–90 年代的都市生活。之後還有續集系列。' },
+      { t: '醋溜族', o: '', s: 1987, e: 1995, approx: true, mag: '報紙專欄', pub: '時報文化', demo: 'seinen', g: ['comedy', 'daily'] },
+      { t: '澀女郎', o: '', s: 1992, e: 2002, approx: true, mag: '報紙專欄', pub: '時報文化', demo: 'josei', g: ['comedy', 'daily', 'social'] },
+    ] },
+  { id: 'chen-uen', name: '鄭問', alt: 'Chen Uen', region: 'tw', born: 1958, died: 2017, demo: 'seinen',
+    intro: '把水墨技法帶進漫畫的第一人。刺客列傳畫戰國刺客，阿鼻劍（編劇 馬利）是台灣武俠漫畫的巔峰，1990 年起在講談社 Morning 連載東周英雄傳，獲日本漫畫家協會優秀賞。2018 年故宮為他辦「千年一問」特展。',
+    works: [
+      { t: '刺客列傳', o: '', s: 1985, e: 1986, mag: '時報週刊', pub: '時報文化 → 大辣', demo: 'seinen', g: ['history', 'wuxia'], vols: 1, note: '改編《史記》刺客列傳，單卷。' },
+      { t: '阿鼻劍', o: '', s: 1989, e: 1990, mag: '星期漫畫', pub: '時報文化 → 大辣', demo: 'seinen', g: ['wuxia', 'fantasy'], vols: 2, rec: true, why: '2 卷（未完），台灣漫畫最常被提到的一部；讀的是畫面與氣勢。2019 年大辣出版 30 週年紀念合訂本。' },
+      { t: '東周英雄傳', o: '東周英雄伝', s: 1990, e: 1993, mag: 'Morning', pub: '講談社', tw: '時報文化 → 大辣', demo: 'seinen', g: ['history', 'wuxia'], vols: 3, note: '台灣漫畫家第一次在日本大出版社連載。' },
+      { t: '深邃美麗的亞細亞', o: '深く美しきアジア', s: 1992, e: 1996, mag: 'Morning', pub: '講談社', tw: '時報文化 → 大辣', demo: 'seinen', g: ['fantasy', 'wuxia'], vols: 5 },
+    ] },
+  { id: 'yu', name: '游素蘭', alt: 'Yu Su-lan', region: 'tw', demo: 'shojo',
+    intro: '1990 年代台灣少女漫畫的代表人物。傾國怨伶是古裝奇幻，畫風華麗，當年在台灣、香港、東南亞都有讀者；火王則是穿越題材。早期作品多由大然出版。',
+    works: [
+      { t: '傾國怨伶', o: '', s: 1990, e: 2001, approx: true, mag: '公主 等少女誌', pub: '大然 等', demo: 'shojo', g: ['fantasy', 'romance', 'history'], rec: true, why: '台灣本土少女漫畫最有名的一部，看 1990 年代台灣少女漫畫的畫風就看這個。' },
+      { t: '火王', o: '', s: 1993, e: 2003, approx: true, mag: '少女誌', pub: '大然 等', demo: 'shojo', g: ['fantasy', 'romance'], note: '2018 年改編陸劇。' },
+    ] },
+  { id: 'lin', name: '林政德', alt: 'Lin Cheng-te', region: 'tw', demo: 'shonen',
+    intro: 'YOUNG GUNS 1990 年起連載，校園、棒球、青春戀愛，是 1990 年代台灣少年漫畫最紅的一部，畫風接近同期的日本少年誌。斷斷續續連載到 2000 年代，共 10 卷。',
+    works: [
+      { t: 'YOUNG GUNS', o: '', s: 1990, e: 2006, approx: true, mag: '週刊少年快報 等', pub: '東立', demo: 'shonen', g: ['growth', 'sport', 'romance'], vols: 10, rec: true, why: '台灣少年漫畫的代表作，看的是「台灣人畫日式少年漫畫可以到什麼程度」。' },
+    ] },
+  { id: 'juan', name: '阮光民', alt: 'Ruan Guang-min', region: 'tw', born: 1973, demo: 'seinen',
+    intro: '寫台灣鄉鎮的日常與人情。東華春理髮廳改編成公視電視劇，用九柑仔店（2016–2018）寫一個年輕人回鄉接手阿公的柑仔店，2019 年改編電視劇。也畫了吳明益小說《天橋上的魔術師》的圖像版。',
+    works: [
+      { t: '東華春理髮廳', o: '', s: 2006, e: 2007, approx: true, mag: '單行本', pub: '東立', demo: 'seinen', g: ['daily', 'social'], note: '2012 年改編公視電視劇。' },
+      { t: '用九柑仔店', o: '', s: 2016, e: 2018, mag: '單行本', pub: '遠流', demo: 'seinen', g: ['daily', 'social', 'growth'], vols: 5, rec: true, why: '5 卷完結，台灣鄉下柑仔店的人情。想從台灣漫畫開始，這是最溫和的入口。' },
+      { t: '天橋上的魔術師 圖像版', o: '', s: 2020, e: 2020, mag: '單行本', pub: '新經典文化', demo: 'seinen', g: ['classic', 'daily', 'fantasy'], vols: 2, note: '改編吳明益小說，與小莊各畫一冊。' },
+    ] },
+  { id: 'wei', name: '韋宗成', alt: 'Wei Tsung-cheng', region: 'tw', demo: 'shonen',
+    intro: '冥戰錄 2010 年起連載，用台灣民間信仰（媽祖、王爺、道士）寫少年奇幻，是台灣少年漫畫少見的長篇連載，也是「把台灣元素放進日式少年漫畫」的代表。',
+    works: [
+      { t: '冥戰錄', o: '', s: 2010, e: null, mag: '單行本', pub: '未來數位', demo: 'shonen', g: ['fantasy', 'battle'], note: '連載中，20 卷以上。' },
+    ] },
+  { id: 'akru', name: 'AKRU', alt: '', region: 'tw', demo: 'shojo',
+    intro: '北城百畫帖以 1930 年代日治時期的台北為背景，一間咖啡店裡的奇幻短篇，把老台北的建築與街道畫得很仔細。柯普雷的翅膀是早期的少女奇幻。',
+    works: [
+      { t: '柯普雷的翅膀', o: '', s: 2008, e: 2008, approx: true, mag: '單行本', pub: '蓋亞', demo: 'shojo', g: ['fantasy', 'romance'], vols: 1 },
+      { t: '北城百畫帖', o: '', s: 2010, e: 2013, mag: '單行本', pub: '蓋亞', demo: 'shojo', g: ['fantasy', 'history', 'daily'], vols: 2, rec: true, why: '2 卷（I、II），日治時期的台北咖啡店奇幻短篇。畫風細、每篇獨立，很適合台灣漫畫入門。' },
+    ] },
+  { id: 'zuo', name: '左萱', alt: 'Zuo Hsuan', region: 'tw', demo: 'seinen',
+    intro: '神之鄉寫桃園大溪的青年與陣頭（關聖帝君聖誕遶境），2 卷完結，2021 年改編電視劇。芭蕉的芽寫日治時期的台灣文學青年。是 2010 年代「畫台灣自己的題材」這一波的代表。',
+    works: [
+      { t: '神之鄉', o: '', s: 2015, e: 2016, mag: '單行本', pub: '蓋亞', demo: 'seinen', g: ['daily', 'growth', 'social'], vols: 2, rec: true, why: '2 卷完結，大溪的廟會與年輕人。短、好讀、很台灣。' },
+      { t: '芭蕉的芽', o: '', s: 2019, e: null, mag: '單行本', pub: '蓋亞', demo: 'seinen', g: ['history', 'growth'], note: '日治時期台北高校的文學青年。' },
+    ] },
+  { id: 'changsheng', name: '常勝', alt: 'Chang Sheng', region: 'tw', demo: 'seinen',
+    intro: '台灣類型漫畫（科幻、超級英雄）的代表。閻鐵花 2020–2021 出版、3 卷完結，京劇名伶變成超級英雄，畫面與分鏡都是電影規格，是近年台灣漫畫在國際上最受注目的一部。',
+    works: [
+      { t: 'BABY', o: '', s: 2015, e: 2015, approx: true, mag: '單行本', pub: '蓋亞', demo: 'seinen', g: ['scifi', 'battle'], note: '外星生物與少女，科幻動作。' },
+      { t: '閻鐵花', o: '', s: 2020, e: 2021, mag: '單行本', pub: '大辣', demo: 'seinen', g: ['battle', 'fantasy', 'social'], vols: 3, rec: true, why: '3 卷完結，京劇加超級英雄，畫面非常強。想看「台灣漫畫可以做到的最高規格」，選這部。' },
+    ] },
+  { id: 'gao', name: '高妍', alt: 'Gao Yan', region: 'tw', born: 1996, demo: 'seinen',
+    intro: '台北出身，活躍於日本。綠之歌—收集群風—寫一個台灣女孩透過細野晴臣的音樂與日本文化相遇，先在日本連載後出版，村上春樹寫了推薦；她也為村上春樹《棄貓》繪製插畫。',
+    works: [
+      { t: '間隙', o: '', s: 2017, e: 2017, approx: true, mag: '獨立出版', pub: '自費出版', demo: 'seinen', g: ['daily', 'growth'], vols: 1, note: '早期短篇，綠之歌的原型。' },
+      { t: '綠之歌—收集群風—', o: '緑の歌 - 収集群風 -', s: 2020, e: 2022, mag: '月刊Comic Beam', pub: 'KADOKAWA', tw: '臉譜', demo: 'seinen', g: ['music', 'growth', 'romance'], vols: 2, rec: true, why: '上下 2 卷，台灣年輕世代的漫畫在日本被看見的例子。安靜、音樂、青春。' },
+    ] },
+];
+
+// 候補名單：之後要充實時可以挑
+const BACKLOG = {
+  jp: ['芥見下下（咒術迴戰）', '遠藤達哉（SPY×FAMILY）', '空知英秋（銀魂）', '和月伸宏（神劍闖江湖）', '北条司（城市獵人）', '車田正美（聖鬥士星矢）', '秋本治（烏龍派出所）', '藤澤亨（麻辣教師GTO）', '大今良時（聲之形）', '真島浩（FAIRY TAIL）', '原泰久（王者天下）', '石田翠（東京喰種）', 'ONE × 村田雄介（一拳超人）', '福本伸行（賭博默示錄）', '弘兼憲史（島耕作）', '三田紀房（東大特訓班）', '柴門文（東京愛情故事）', '五十嵐大介（海獸之子）', '中村光（聖哥傳）', '楳圖一雄（漂流教室）', '水木茂（鬼太郎）', '石之森章太郎（人造人009）', '松本零士（銀河鐵道999）', '永井豪（惡魔人）', '田村由美（BASARA、勿說是推理）', '高屋奈月（魔法水果籃）', '竹宮惠子（風與木之詩）', '山岸涼子（日出處天子）', '岡崎京子（River\'s Edge）', '押見修造（惡之華）'],
+  tw: ['任正華（修羅海、頑劣家族）', '陳弘耀（一刀傳、大西遊）', '劉興欽（阿三哥與大嬸婆）', '曾正忠（花心赤狐）', '麥人杰（狎客行）', '蕭言中（童話短路）', '邱若龍（霧社事件）', '賴有賢（真命天子）', '周顯宗（摺紙戰士）', '葉明軒（大仙術士李白）', '彭傑（時間支配者，集英社）', '61Chi（房間、南方小鎮時光）', '小島（獅子藏匿的書屋）', '簡嘉誠（消逝的後街光影）', '星期一回收日（廢廢子的充氣人生）', 'PAM PAM LIU（瘋人院之旅）', '陳沛珛（暫時先這樣）', '顆粒（許個願吧大喜）'],
+};
+
+</script>
+<script>
+// ===== 暢銷層（各年代大家在看什麼） =====
+// 硬度標籤：
+//   oricon  榜單   Oricon 年間コミックランキング「作品別」（2008–2022 有公開；2023 起只剩單卷榜）— 硬數據，查證日 2026-09-16（ANN 轉載）
+//   circ    發行量 出版社／媒體公布的累計發行部數，附截至日期 — 會持續增加，只代表當下
+//   est     估計   彙整站（mangazenkan、tonblo 等）的數字，沒有一手出處與日期 — 只當量級參考
+//   era     印象   榜單出現前的年代，用動畫化、發行量紀錄、社會現象佐證 — 質性
+//   tw      台灣   博客來、金石堂或媒體（Openbook 閱讀誌）轉述 — 標明「轉述」者非一手榜單
+// 標題對應 data.js 裡的 w.t；EXT_AUTHORS 是為了暢銷層新增的作者（ext:true），可用「收錄」切換隱藏。
+
+const ORICON = {
+  2008: { src: 'https://www.animenewsnetwork.com/news/2009-01-02/2008-top-selling-manga-in-japan-by-series', rows: [['ONE PIECE', 5956540], ['火影忍者', 4261054], ['20世紀少年', 3710054], ['家庭教師HITMAN REBORN!', 3371618], ['BLEACH', 3161825]] },
+  2009: { src: 'https://www.animenewsnetwork.com/news/2009-12-04/2009-top-selling-manga-in-japan-by-series', rows: [['ONE PIECE', 14721241], ['火影忍者', 6836494], ['BLEACH', 6471021], ['鋼之鍊金術師', 5810522], ['銀魂', 4733511]] },
+  2010: { src: 'https://www.animenewsnetwork.com/news/2010-11-30/top-selling-manga-in-japan-by-series/2010', rows: [['ONE PIECE', 32343809], ['火影忍者', 7409068], ['好想告訴你', 6572813], ['FAIRY TAIL 魔導少年', 5739526], ['BLEACH', 5204193]] },
+  2011: { src: 'https://www.animenewsnetwork.com/news/2011-11-30/one-piece-sells-record-38-million-manga-volumes-in-2011', rows: [['ONE PIECE', 37996373], ['火影忍者', 6874840], ['青之驅魔師', 5223712], ['FAIRY TAIL 魔導少年', 4701596], ['美食獵人 TORIKO', 4665634]] },
+  2012: { src: 'https://www.animenewsnetwork.com/news/2012-12-02/30-top-selling-manga-in-japan-by-series/2012', rows: [['ONE PIECE', 23464866], ['影子籃球員', 8070446], ['火影忍者', 6495240], ['宇宙兄弟', 5413899], ['FAIRY TAIL 魔導少年', 4128665]] },
+  2013: { src: 'https://www.animenewsnetwork.com/news/2013-12-01/top-selling-manga-in-japan-by-series/2013', rows: [['ONE PIECE', 18151599], ['進擊的巨人', 15933801], ['影子籃球員', 8761081], ['魔奇少年 MAGI', 7151001], ['火影忍者', 5553933]] },
+  2014: { src: 'https://www.animenewsnetwork.com/news/2014-11-30/top-selling-manga-in-japan-by-series-2014/.81607', rows: [['ONE PIECE', 11885957], ['進擊的巨人', 11728368], ['排球少年!!', 8283709], ['東京喰種', 6946203], ['影子籃球員', 6729439]] },
+  2015: { src: 'https://www.animenewsnetwork.com/news/2015-11-29/top-selling-manga-in-japan-by-series-2015/.95913', rows: [['ONE PIECE', 14102521], ['七大罪', 10304112], ['進擊的巨人', 8778048], ['暗殺教室', 8605861], ['王者天下', 8569215]] },
+  2016: { src: 'https://nendai-ryuukou.com/2016/comic.html', rows: [['ONE PIECE', 12314326], ['暗殺教室', 6887192], ['王者天下', 6595968], ['進擊的巨人', 6544081], ['排球少年!!', 6474394]] },
+  2017: { src: 'https://www.animenewsnetwork.com/news/2017-12-06/top-selling-manga-in-japan-by-series-2017/.124894', rows: [['ONE PIECE', 11495532], ['進擊的巨人', 6622781], ['王者天下', 6184214], ['我的英雄學院', 5852310], ['東京喰種（:re）', 5303514]] },
+  2018: { src: 'https://www.animenewsnetwork.com/news/2018-11-29/top-selling-manga-in-japan-by-series-2018/.140163', rows: [['ONE PIECE', 8113317], ['我的英雄學院', 6718185], ['進擊的巨人', 5235963], ['灌籃高手（新裝再編版）', 5214085], ['排球少年!!', 5030624]] },
+  2019: { src: 'https://www.animenewsnetwork.com/news/2019-11-27/top-selling-manga-in-japan-by-series-2019/.153758', rows: [['鬼滅之刃', 12057628], ['ONE PIECE', 10134232], ['王者天下', 7661361], ['約定的夢幻島', 7454745], ['五等分的新娘', 5895000]] },
+  2020: { src: 'https://www.animenewsnetwork.com/news/2020-11-29/top-selling-manga-in-japan-by-series-2020/.166841', rows: [['鬼滅之刃', 82345447], ['王者天下', 8251058], ['ONE PIECE', 7709667], ['排球少年!!', 7212099], ['咒術迴戰', 6702736]] },
+  2021: { src: 'https://www.animenewsnetwork.com/news/2021-11-28/top-selling-manga-in-japan-by-series-2021-jujutsu-kaisen-edges-out-demon-slayer/.180075', rows: [['咒術迴戰', 30917746], ['鬼滅之刃', 29511021], ['東京卍復仇者', 24981486], ['進擊的巨人', 7332398], ['我的英雄學院', 7020361]] },
+  2022: { src: 'https://www.animenewsnetwork.com/news/2022-12-01/top-selling-manga-in-japan-by-series-2022-jujutsu-kaisen-edges-out-tokyo-revengers/.192470', rows: [['咒術迴戰', 12282260], ['東京卍復仇者', 11048067], ['SPY×FAMILY', 10600571], ['ONE PIECE', 10364102], ['我的英雄學院', 5353782]] },
+};
+// 2023 起 Oricon 不再公開「作品別」年榜，只剩單卷榜（來源為轉載，未直接確認）
+const ORICON_TANKAN = [
+  { y: 2023, rows: [['ONE PIECE 105', 1912008], ['咒術迴戰 21', 1777867], ['ONE PIECE 106', 1690973], ['咒術迴戰 22', 1643782], ['咒術迴戰 23', 1456419]], src: 'https://onepiece.ria10.com/Entry/6238/' },
+  { y: 2024, rows: [['ONE PIECE 108', 1552215], ['咒術迴戰 25', 1542345], ['ONE PIECE 109', 1467881], ['咒術迴戰 26', 1420000], ['咒術迴戰 27', 1190000]], src: 'https://x.com/oricon_anime_/status/1861487588160479506' },
+  { y: 2025, rows: [['ONE PIECE 111', 1370000], ['咒術迴戰 30', 1330000], ['咒術迴戰 29', 1299000], ['ONE PIECE 112', null], ['我的英雄學院 42', null]], src: 'https://realsound.jp/book/2025/11/post-2231813.html' },
+];
+
+// 各年代一句話（給年代分頁用）
+const ERA_NOTES = {
+  '1950-60s': '戰後少年漫畫從租書店與月刊起步，1959 年 Sunday、Magazine 兩本週刊創刊，1963 年原子小金剛成為日本第一部電視動畫。這個年代沒有銷售榜，「暢銷」看的是誰被動畫化、誰讓雜誌破百萬。',
+  '1970s': '巨人之星、小拳王帶起「運動根性」熱潮，少女漫畫迎來凡爾賽玫瑰與花之 24 年組；Jump 靠讀者問卷制度崛起。台灣這時看的多是盜版日漫與《漫畫大王》一類刊物。',
+  '1980s': 'Jump 黃金期開始：怪博士、七龍珠、北斗神拳、足球小將翼、聖鬥士星矢，週刊發行量衝向 500 萬。台灣 1980 年代本土漫畫復興：烏龍院、蔡志忠、朱德庸。',
+  '1990s': '1995 年 Jump 單期 653 萬部創世界紀錄，靠的是七龍珠、灌籃高手、幽遊白書；少女漫畫有美少女戰士與流星花園。1992 年台灣新著作權法上路，日漫正版代理（東立、尖端、大然）從這裡開始。',
+  '2000s': 'ONE PIECE、火影忍者、BLEACH 的「Jump 三大」時代；死亡筆記本、鋼之鍊金術師證明短而完整的作品也能賣。2008 年起 Oricon 開始公布年度作品別銷量榜，之後的「暢銷」有硬數據。',
+  '2010s': '進擊的巨人（2013 年唯一擠下 ONE PIECE 的作品）、排球少年、王者天下、我的英雄學院；動畫化對銷量的放大效應越來越明顯。台灣的日漫閱讀大量轉向電子書。',
+  '2020s': '鬼滅之刃 2020 年一年賣出 8,234 萬部，是 Oricon 有紀錄以來最高；之後是咒術迴戰、東京卍復仇者、SPY×FAMILY。2023 年起 Oricon 不再公開作品別年榜，只能看單卷榜與出版社公布的累計發行量。',
+};
+// 年代分桶：用作品 s（開始年）判斷；另可手動指定 hitDecade
+const DECADES = [['1950-60s', 1950, 1969], ['1970s', 1970, 1979], ['1980s', 1980, 1989], ['1990s', 1990, 1999], ['2000s', 2000, 2009], ['2010s', 2010, 2019], ['2020s', 2020, 2029]];
+
+// 台灣通路觀察（Openbook 閱讀誌年度通路報導轉述；博客來／金石堂年度漫畫類逐名榜抓不到）
+const TW_HITS = [
+  { y: 2021, t: '博客來年度百大：《鬼滅之刃》23 集全數入榜、集中在前 50 名，約占百大四分之一。', src: 'https://www.openbook.org.tw/article/p-65724', ok: false },
+  { y: 2022, t: '博客來年度百大：《SPY×FAMILY 間諜家家酒》1–9 集全數入榜，東立成為博客來暢銷出版社榜首。', src: 'https://www.openbook.org.tw/article/p-67145', ok: false },
+  { y: 2023, t: '博客來百大的漫畫品項從 2021 年 24 種降到 6 種；年初《灌籃高手》電影帶動舊作長銷。讀墨電子書的漫畫銷售金額占比從 2018 年 1.7% 升到 11.2%。', src: 'https://www.openbook.org.tw/article/p-68635', ok: false },
+  { y: 2024, t: '博客來百大：漫畫與圖文書 12 種入榜，《排球少年!!》相關品項在前 10 名占 2 席；讀墨漫畫銷售金額成長 46%，前三大出版社為東立、尖端、角川。', src: 'https://www.openbook.org.tw/article/p-70219', ok: false },
+  { y: 2025, t: '各通路年度觀察：《我所看見的未來》、《鬼滅之刃》、《SPY×FAMILY》、《葬送的芙莉蓮》、《膽大黨》；台漫《16647》進入誠品漫畫榜 Top 10。', src: 'https://www.openbook.org.tw/article/p-72168', ok: false },
+  { y: 2025, t: '金石堂 2025 秋季漫畫榜（季榜）：1 位 ONE PIECE 111、2 位 葬送的芙莉蓮 14、4 位 我的英雄學院 42（完）、7 位 SPY×FAMILY 15。', src: 'https://www.kingstone.com.tw/theme/1674/', ok: true },
+  { y: 2025, t: '金石堂 2025 暢銷百大總榜：漫畫／圖像類進榜的有《如果歷史是一群喵 15》（第 5）、《我所看見的未來 完全版》（第 13）、《吉伊卡哇 1》（第 22）、《屁屁偵探動畫漫畫 12》（第 53）。', src: 'https://www.kingstone.com.tw/theme/1807/', ok: true },
+];
+
+// 依作品標題附掛的暢銷紀錄（含既有作者的作品與新增作者的作品）
+const HITS = {
+  'ONE PIECE': [
+    { k: 'oricon', y: '2008–2012、2014–2018', r: '1', n: '連續 11 年第 1（2013 年第 2）；2011 年 3,799 萬部為單一作品年銷量紀錄，直到 2020 年被鬼滅超過' },
+    { k: 'oricon', y: '2019', r: 2 }, { k: 'oricon', y: '2020', r: 3 }, { k: 'oricon', y: '2022', r: 4 },
+    { k: 'circ', n: '6 億部', s: '全世界累計（國內 4.5 億以上、海外 1.5 億以上）', d: '2026-03', src: 'https://one-piece.com/news/78258/index.html' },
+  ],
+  '七龍珠': [
+    { k: 'circ', n: '2.6 億部', s: '全世界累計', d: '2024-11', src: 'https://mantan-web.jp/article/20241120dog00m200026000c.html' },
+    { k: 'era', t: '1980 年代後半到 1995 年 Jump 衝到單期 653 萬部的第一支柱；1986 年起動畫在台灣長播不衰。' },
+  ],
+  '怪博士與機器娃娃': [{ k: 'era', t: '1981 年動畫化後的「阿拉蕾」熱潮，是鳥山明在七龍珠之前的第一次社會現象。' }, { k: 'est', n: '約 3,500 萬部' }],
+  '火影忍者': [
+    { k: 'oricon', y: '2008–2011', r: 2 }, { k: 'oricon', y: '2012', r: 3 }, { k: 'oricon', y: '2013', r: 5 },
+    { k: 'circ', n: '2.5 億部以上', s: '全世界累計（含電子版），海外版 1 億以上', d: '2022-12', src: 'https://www.tv-tokyo.co.jp/information/202212/3796.html' },
+  ],
+  '名偵探柯南': [{ k: 'circ', n: '2.5 億部', s: '全世界累計', d: '2021-10', src: 'https://mantan-web.jp/article/20211018dog00m200004000c.html' }, { k: 'era', t: '每年 4 月的劇場版是日本票房常客，也是台灣每年固定上映的日本動畫電影。' }],
+  '鬼滅之刃': [
+    { k: 'oricon', y: '2019', r: 1 }, { k: 'oricon', y: '2020', r: 1, n: '8,234 萬部，Oricon 有紀錄以來單一作品年銷量最高' }, { k: 'oricon', y: '2021', r: 2 },
+    { k: 'circ', n: '2.2 億部', s: '全世界累計（國內 1.64 億、海外 5,600 萬，含電子版）', d: '2025-07', src: 'https://animeanime.jp/article/2025/07/17/91819.html' },
+    { k: 'tw', y: 2021, t: '博客來年度百大 23 集全數入榜（Openbook 轉述）' },
+  ],
+  '進擊的巨人': [
+    { k: 'oricon', y: '2013', r: 2, n: '1,593 萬部，2008 年以來唯一逼近 ONE PIECE 的作品' }, { k: 'oricon', y: '2014', r: 2 }, { k: 'oricon', y: '2015', r: 3 }, { k: 'oricon', y: '2016', r: 4 }, { k: 'oricon', y: '2017', r: 2 }, { k: 'oricon', y: '2018', r: 3 }, { k: 'oricon', y: '2021', r: 4 },
+    { k: 'circ', n: '1.4 億部', s: '全 34 卷世界累計', d: '2024-05', src: 'https://mediact.info/release_info/13570/' },
+  ],
+  '灌籃高手': [
+    { k: 'circ', n: '1.2 億部以上', s: '國內累計', d: '2023-02', src: 'https://www.animatetimes.com/news/details.php?id=1677480754' },
+    { k: 'oricon', y: '2018', r: 4, n: '新裝再編版' },
+    { k: 'era', t: '1990 年代 Jump 黃金期三本柱之一；台灣 1990 年代的集體記憶。' },
+    { k: 'tw', y: 2023, t: '電影《THE FIRST SLAM DUNK》帶動舊作在台灣長銷（Openbook 轉述）' },
+  ],
+  '浪人劍客': [{ k: 'est', n: '約 8,200 萬部' }],
+  'JOJO的奇妙冒險': [{ k: 'circ', n: '1.2 億部', s: '全系列單行本全世界累計（版權方頁面，無日期）', d: '—', src: 'https://www.shopro.co.jp/license/title/770/' }],
+  '鋼之鍊金術師': [{ k: 'oricon', y: '2009', r: 4 }, { k: 'circ', n: '8,000 萬部', s: '全世界系列累計', d: '2022-08', src: 'https://prtimes.jp/main/html/rd/p/000000001.000106718.html' }],
+  '排球少年!!': [{ k: 'oricon', y: '2014', r: 3 }, { k: 'oricon', y: '2016', r: 5 }, { k: 'oricon', y: '2018', r: 5 }, { k: 'oricon', y: '2020', r: 4 }, { k: 'circ', n: '6,000 萬部', s: '全 45 卷累計', d: '2024-04', src: 'https://animeanime.jp/article/2024/04/16/83913.html' }, { k: 'tw', y: 2024, t: '博客來百大前 10 名占 2 席（Openbook 轉述）' }],
+  '葬送的芙莉蓮': [{ k: 'circ', n: '3,000 萬部', s: '全世界累計', d: '2025-07', src: 'https://prtimes.jp/main/html/rd/p/000003261.000013640.html' }, { k: 'tw', y: 2025, t: '金石堂 2025 秋季漫畫榜第 2（第 14 集特裝版）' }],
+  '鏈鋸人': [{ k: 'est', n: '約 3,500 萬部（2026-01，彙整站）' }],
+  '20世紀少年': [{ k: 'oricon', y: '2008', r: 3, n: '真人電影三部曲上映年' }],
+  '好想告訴你': [{ k: 'oricon', y: '2010', r: 3, n: '少女漫畫在 Oricon 作品別榜的最高名次之一' }, { k: 'est', n: '約 3,600 萬部' }],
+  'HUNTER×HUNTER': [{ k: 'est', n: '約 8,400 萬～1 億部（口徑不一）' }],
+  '幽遊白書': [{ k: 'est', n: '約 5,000 萬部' }, { k: 'era', t: '1990 年代 Jump 黃金期三本柱之一。' }],
+  '鄰家女孩': [{ k: 'est', n: '約 1 億部' }, { k: 'era', t: '1985 年電視動畫收視率超過 30%，安達充成為 Sunday 的招牌。' }],
+  '原子小金剛': [{ k: 'est', n: '約 1 億部' }, { k: 'era', t: '1963 年日本第一部連續電視動畫，戰後少年漫畫產業的起點。' }],
+  '怪醫黑傑克': [{ k: 'est', n: '約 4,800 萬部' }],
+  '哆啦A夢': [{ k: 'est', n: '約 1 億部（另有含全集與海外的「約 3 億」口徑）' }, { k: 'era', t: '1979 年電視動畫開播後成為國民漫畫；台灣 1990 年代前叫「小叮噹」。' }],
+  '烙印勇士': [{ k: 'est', n: '約 7,000 萬部' }],
+  'NANA': [{ k: 'est', n: '約 5,000 萬部' }, { k: 'era', t: '2005 年真人電影（中島美嘉主演），主題曲在台灣也紅。' }],
+  '美少女戰士': [{ k: 'est', n: '約 4,600 萬部' }, { k: 'era', t: '1992 年動畫開播後的全球現象，1990 年代少女漫畫的代表。' }],
+  '千面女郎（玻璃假面）': [{ k: 'est', n: '約 5,000 萬部' }],
+  '凡爾賽玫瑰': [{ k: 'era', t: '1974 年寶塚歌劇改編、1979 年動畫化，是少女漫畫第一次成為社會現象。' }],
+  '交響情人夢': [{ k: 'est', n: '約 3,900 萬部' }, { k: 'era', t: '2006 年日劇（上野樹里、玉木宏）在台灣熱播，帶動古典音樂 CD 銷售。' }],
+  '死亡筆記本': [{ k: 'era', t: '2006 年真人電影兩部曲，日本票房合計超過 80 億日圓；在台灣也是話題作。' }],
+  '烏龍院': [{ k: 'tw', y: 2019, t: '《烏龍院活寶》全系列 23 冊在台灣銷售破百萬冊（時報文化，中央社報導）', src: 'https://www.cna.com.tw/news/acul/201903230175.aspx', ok: true }],
+  '莊子說': [{ k: 'tw', y: 2020, t: '蔡志忠全部著作以多種語言在 59 個國家和地區出版，總發行量逾 5,000 萬冊（中央社報導，未標明統計單位）', src: 'https://www.cna.com.tw/news/firstnews/202011170221.aspx', ok: true }],
+  // ---- 新增作者的作品 ----
+  '骷髏13': [{ k: 'circ', n: '3 億部', s: '系列累計', d: '2022-09', src: 'https://prtimes.jp/main/html/rd/p/000001878.000013640.html' }, { k: 'era', t: '1968 年連載至今，卷數（200 卷以上）的金氏世界紀錄保持者。' }],
+  '烏龍派出所': [{ k: 'circ', n: '1.5 億部以上', s: '累計', d: '2026-08', src: 'https://mantan-web.jp/article/20260618dog00m200095000a.html' }, { k: 'era', t: '1976–2016 連載 40 年、200 卷，Jump 最長壽的作品。' }],
+  '北斗神拳': [{ k: 'circ', n: '1 億部以上', s: '全世界累計', d: '2023-09', src: 'https://prtimes.jp/main/html/rd/p/000000047.000124073.html' }, { k: 'era', t: '1980 年代 Jump 黃金期的開端之一，「你已經死了」成為流行語。' }],
+  '足球小將翼': [{ k: 'est', n: '約 9,000 萬部（系列累計）' }, { k: 'era', t: '讓 1980 年代日本足球人口暴增，多位日本與歐洲職業球員自稱受它影響。' }],
+  '聖鬥士星矢': [{ k: 'est', n: '約 5,000 萬部' }, { k: 'era', t: '1986 年動畫化，在台灣、歐洲、拉丁美洲都是 1980 年代末的現象。' }],
+  '城市獵人': [{ k: 'est', n: '約 5,000 萬部' }],
+  '金肉人': [{ k: 'est', n: '約 8,500 萬部（系列累計）' }, { k: 'era', t: '1980 年代前半的「金肉人橡皮擦」風潮，Jump 讀者投稿超人制度的代表。' }],
+  '巨人之星': [{ k: 'era', t: '1960 年代末「運動根性」漫畫的原點，1968 年動畫化；讓少年 Magazine 發行量首次突破 100 萬。' }],
+  '小拳王': [{ k: 'era', t: '1970 年力石徹的告別式有數百人參加，是漫畫角色第一次有真實葬禮；1970 年代日本的時代記憶。' }],
+  '鐵人28號': [{ k: 'era', t: '1956 年起連載，巨大機器人題材的起點；1963 年動畫化。' }],
+  '天才妙老爹': [{ k: 'era', t: '1960–70 年代搞笑漫畫的代表，「這樣就好」成為流行語。' }],
+  '鬼太郎': [{ k: 'era', t: '1968 年起動畫化六次以上，跨越半世紀的國民妖怪漫畫。' }],
+  '惡魔人': [{ k: 'era', t: '1972 年動畫與漫畫同時推出，漫畫版的黑暗結局影響後來的進擊的巨人等作。' }],
+  '銀河鐵道999': [{ k: 'era', t: '1978 年動畫、1979 年電影版為當年日本票房冠軍。' }],
+  '大飯桶': [{ k: 'est', n: '約 4,800 萬部' }, { k: 'era', t: '1970 年代 Champion 的支柱，高中棒球漫畫的原型。' }],
+  '美味大挑戰': [{ k: 'est', n: '約 1.3 億部' }, { k: 'era', t: '1983 年起連載的美食漫畫始祖，讓青年誌 Big Comic Spirits 站穩腳步。' }],
+  '蠟筆小新': [{ k: 'est', n: '約 5,400 萬部' }, { k: 'era', t: '1992 年動畫開播至今，每年一部劇場版；台灣 1990 年代的國民級卡通。' }],
+  '櫻桃小丸子': [{ k: 'era', t: '1990 年動畫開播後最高收視 39.9%，主題曲賣出 160 萬張；台灣 1990 年代同樣家喻戶曉。' }],
+  '神劍闖江湖': [{ k: 'circ', n: '7,200 萬部', s: '系列累計', d: '2025-03', src: 'https://www.animatetimes.com/news/details.php?id=1742644593' }],
+  '遊戲王': [{ k: 'est', n: '約 4,400 萬部' }, { k: 'era', t: '衍生的集換式卡牌遊戲是金氏世界紀錄最暢銷的卡牌遊戲。' }],
+  '金田一少年之事件簿': [{ k: 'est', n: '約 1 億部（系列累計）' }, { k: 'era', t: '1990 年代推理漫畫熱潮的起點，比柯南早兩年。' }],
+  '麻辣教師GTO': [{ k: 'est', n: '約 5,000 萬部' }, { k: 'era', t: '1998 年日劇（反町隆史）最終回收視 35.7%，在台灣也是熱門日劇。' }],
+  '流星花園': [{ k: 'est', n: '約 6,100 萬部，少女漫畫史上最高' }, { k: 'tw', y: 2001, t: '台灣偶像劇《流星花園》（F4）從這部改編，是台灣偶像劇外銷亞洲的起點。' }],
+  '頭文字D': [{ k: 'est', n: '約 5,600 萬部' }, { k: 'tw', y: 2005, t: '港片《頭文字D》由周杰倫主演，在台灣票房與話題都高。' }],
+  '王家的紋章': [{ k: 'est', n: '約 4,000 萬部' }, { k: 'era', t: '1976 年連載至今仍未完結，少女漫畫最長壽的作品之一。' }],
+  '小甜甜': [{ k: 'era', t: '1976–79 年動畫在台灣、歐洲、拉美都大紅，是 1970 年代台灣女孩的共同記憶。' }],
+  'BLEACH': [{ k: 'oricon', y: '2008', r: 5 }, { k: 'oricon', y: '2009', r: 3 }, { k: 'oricon', y: '2010', r: 5 }, { k: 'circ', n: '1.3 億部以上', s: '系列累計（Aniplex 作品頁，無日期）', d: '—', src: 'https://www.aniplex.co.jp/lineup/bleach-anime/' }],
+  '網球王子': [{ k: 'est', n: '約 6,000 萬部（系列累計）' }, { k: 'era', t: '2003 年起的音樂劇「網球王子舞台劇」開創了 2.5 次元舞台劇這個類型。' }],
+  '家庭教師HITMAN REBORN!': [{ k: 'oricon', y: '2008', r: 4 }],
+  '銀魂': [{ k: 'oricon', y: '2009', r: 5 }, { k: 'est', n: '約 7,300 萬部' }],
+  'FAIRY TAIL 魔導少年': [{ k: 'oricon', y: '2010', r: 4 }, { k: 'oricon', y: '2011', r: 4 }, { k: 'oricon', y: '2012', r: 5 }, { k: 'est', n: '約 7,200 萬部' }],
+  '青之驅魔師': [{ k: 'oricon', y: '2011', r: 3, n: '動畫化那年' }],
+  '美食獵人 TORIKO': [{ k: 'oricon', y: '2011', r: 5 }],
+  '影子籃球員': [{ k: 'oricon', y: '2012', r: 2 }, { k: 'oricon', y: '2013', r: 3 }, { k: 'oricon', y: '2014', r: 5 }],
+  '宇宙兄弟': [{ k: 'oricon', y: '2012', r: 4, n: '動畫與真人電影同年' }, { k: 'est', n: '約 3,400 萬部' }],
+  '魔奇少年 MAGI': [{ k: 'oricon', y: '2013', r: 4 }],
+  '東京喰種': [{ k: 'oricon', y: '2014', r: 4 }, { k: 'oricon', y: '2017', r: 5, n: ':re' }, { k: 'est', n: '約 4,700 萬部（含 :re）' }],
+  '七大罪': [{ k: 'oricon', y: '2015', r: 2 }, { k: 'est', n: '約 5,500 萬部' }],
+  '暗殺教室': [{ k: 'oricon', y: '2015', r: 4 }, { k: 'oricon', y: '2016', r: 2 }],
+  '王者天下': [{ k: 'oricon', y: '2015', r: 5 }, { k: 'oricon', y: '2016', r: 3 }, { k: 'oricon', y: '2017', r: 3 }, { k: 'oricon', y: '2019', r: 3 }, { k: 'oricon', y: '2020', r: 2 }, { k: 'circ', n: '1.2 億部', s: '累計（含電子版）', d: '2026-01', src: 'https://www.cinematoday.jp/news/N0152856' }],
+  '我的英雄學院': [{ k: 'oricon', y: '2017', r: 4 }, { k: 'oricon', y: '2018', r: 2 }, { k: 'oricon', y: '2021', r: 5 }, { k: 'oricon', y: '2022', r: 5 }, { k: 'circ', n: '1 億部', s: '系列世界累計（國內 6,000 萬以上、海外 4,000 萬以上）', d: '2024-04', src: 'https://www.animatetimes.com/news/details.php?id=1712145472' }, { k: 'tw', y: 2025, t: '金石堂 2025 秋季漫畫榜第 4（第 42 集完結）' }],
+  '約定的夢幻島': [{ k: 'oricon', y: '2019', r: 4 }, { k: 'est', n: '約 4,200 萬部' }],
+  '五等分的新娘': [{ k: 'oricon', y: '2019', r: 5 }],
+  '咒術迴戰': [{ k: 'oricon', y: '2020', r: 5 }, { k: 'oricon', y: '2021', r: 1, n: '3,092 萬部，險勝鬼滅' }, { k: 'oricon', y: '2022', r: 1 }, { k: 'circ', n: '1.5 億部', s: '全世界系列累計（含電子版）', d: '2025-12', src: 'https://mantan-web.jp/article/20251220dog00m200036000c.html' }],
+  '東京卍復仇者': [{ k: 'oricon', y: '2021', r: 3 }, { k: 'oricon', y: '2022', r: 2 }, { k: 'circ', n: '6,500 萬部', s: '累計（講談社 IP 站）', d: '2022-12', src: 'https://cstation.kodansha.co.jp/mangaip/article/6973' }],
+  'SPY×FAMILY': [{ k: 'oricon', y: '2022', r: 3 }, { k: 'circ', n: '4,200 萬部', s: '系列累計', d: '2026-05', src: 'https://note.ebookstore.sony.jp/n/nd4eed66e900d' }, { k: 'tw', y: 2022, t: '博客來年度百大 1–9 集全數入榜（Openbook 轉述）' }],
+  '藍色監獄': [{ k: 'circ', n: '6,000 萬部', s: '全世界累計', d: '2026-06', src: 'https://news.livedoor.com/article/detail/31493486/' }],
+  '【我推的孩子】': [{ k: 'circ', n: '1,800 萬部以上', s: '系列累計', d: '2024-10', src: 'https://animeanime.jp/article/2024/10/10/87026.html' }],
+  '藥師少女的獨語': [{ k: 'circ', n: '5,700 萬部', s: '系列累計（含原作小說與兩種漫畫版，不能與純漫畫數字並列）', d: '2026-08', src: 'https://mantan-web.jp/article/20260815dog00m200007000a.html' }],
+  '怪獸8號': [{ k: 'est', n: '約 1,500 萬～1,900 萬部（媒體標題，未開全文）' }],
+  '膽大黨': [{ k: 'circ', n: '1,000 萬部', s: '原作漫畫累計', d: '2025-04', src: 'https://manga.watch.impress.co.jp/docs/news/2004044.html' }, { k: 'tw', y: 2025, t: '各通路年度觀察提到的熱門作（Openbook 轉述）' }],
+  '關於我轉生變成史萊姆這檔事': [{ k: 'circ', n: '5,600 萬部', s: '系列累計（含原作小說）', d: '2025-09', src: 'https://prtimes.jp/main/html/rd/p/000002391.000048095.html' }],
+  '夏目友人帳': [{ k: 'era', t: '2008 年起動畫六季以上，白泉社 LaLa 的長銷代表。' }],
+  '魔法水果籃': [{ k: 'est', n: '約 3,000 萬部' }, { k: 'era', t: '2000 年代初期北美銷量最高的少女漫畫之一。' }],
+};
+
+// 為暢銷層新增的作者（ext:true）
+const EXT_AUTHORS = [
+  { id: 'saito', name: 'さいとう・たかを', alt: 'Takao Saito', region: 'jp', born: 1936, died: 2021, demo: 'seinen', ext: true,
+    intro: '劇畫的代表人物。骷髏13 從 1968 年連載至今（作者過世後由工作室接續），是卷數最多的漫畫，也是「上班族在通勤電車上看的漫畫」的代名詞。',
+    works: [{ t: '骷髏13', o: 'ゴルゴ13', s: 1968, e: null, mag: 'Big Comic', pub: '小學館', demo: 'seinen', g: ['mystery', 'social'] }] },
+  { id: 'akimoto', name: '秋本治', alt: 'あきもと おさむ / Osamu Akimoto', region: 'jp', born: 1952, demo: 'shonen', ext: true,
+    intro: '烏龍派出所 1976–2016 連載 40 年、200 卷完結，一次都沒有休載，是 Jump 最長壽的作品；下町警察兩津勘吉的搞笑單元劇，也是昭和到平成的風俗記錄。',
+    works: [{ t: '烏龍派出所', o: 'こちら葛飾区亀有公園前派出所', s: 1976, e: 2016, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['comedy', 'daily'], vols: 200 }] },
+  { id: 'hara', name: '原哲夫 × 武論尊', alt: 'はら てつお × ぶろんそん', region: 'jp', demo: 'shonen', ext: true,
+    intro: '作畫 原哲夫、原作 武論尊。北斗神拳 1983–88 是 1980 年代 Jump 黃金期的開端之一：核戰後的世界、拳法與「你已經死了」。',
+    works: [{ t: '北斗神拳', o: '北斗の拳', s: 1983, e: 1988, mag: '週刊少年Jump', pub: '集英社', demo: 'shonen', g: ['battle', 'scifi'], vols: 27 }] },
+  { id: 'takahashi-y', name: '高橋陽一', alt: 'たかはし よういち / Yōichi Takahashi', region: 'jp', born: 1960, demo: 'shonen', ext: true,
+    intro: '足球小將翼 1981 年起連載，讓日本的足球人口在 1980 年代暴增；系列續作連載到 2024 年。',
+    works: [{ t: '足球小將翼', o: 'キャプテン翼', s: 1981, e: 1988, mag: '週刊少年Jump', pub: '集英社', demo: 'shonen', g: ['sport', 'growth'], vols: 37, note: '之後有 World Youth 篇、Road to 2002 等續作，2024 年完結。' }] },
+  { id: 'kurumada', name: '車田正美', alt: 'くるまだ まさみ / Masami Kurumada', region: 'jp', born: 1953, demo: 'shonen', ext: true,
+    intro: '聖鬥士星矢 1985–90 連載，希臘神話加聖衣的少年格鬥，1986 年動畫化後在台灣、歐洲、拉丁美洲都是現象級。',
+    works: [{ t: '聖鬥士星矢', o: '聖闘士星矢', s: 1985, e: 1990, mag: '週刊少年Jump', pub: '集英社', demo: 'shonen', g: ['battle', 'fantasy'], vols: 28 }] },
+  { id: 'hojo', name: '北条司', alt: 'ほうじょう つかさ / Tsukasa Hojo', region: 'jp', born: 1959, demo: 'shonen', ext: true,
+    intro: '城市獵人 1985–91 連載，新宿的清道夫冴羽獠，都會硬派加喜劇；2024 年 Netflix 真人版再度翻紅。',
+    works: [{ t: '城市獵人', o: 'シティーハンター', s: 1985, e: 1991, mag: '週刊少年Jump', pub: '集英社', demo: 'shonen', g: ['battle', 'comedy', 'mystery'], vols: 35 }] },
+  { id: 'yudetamago', name: 'ゆでたまご', alt: 'Yudetamago（嶋田隆司 × 中井義則）', region: 'jp', demo: 'shonen', ext: true,
+    intro: '兩人組合。金肉人 1979–87 連載，讀者投稿的超人角色制度與「金肉人橡皮擦」是 1980 年代前半的小學生現象；2011 年起續篇連載至今。',
+    works: [{ t: '金肉人', o: 'キン肉マン', s: 1979, e: 1987, mag: '週刊少年Jump', pub: '集英社', demo: 'shonen', g: ['battle', 'comedy'], vols: 36 }] },
+  { id: 'kajiwara', name: '梶原一騎（原作）', alt: 'かじわら いっき / Ikki Kajiwara', region: 'jp', born: 1936, died: 1987, demo: 'shonen', ext: true,
+    intro: '1960–70 年代最重要的漫畫原作者。巨人之星（作畫 川崎のぼる）與小拳王（作畫 ちばてつや，以高森朝雄名義）定義了「運動根性」這個類型，也把少年 Magazine 推到百萬發行量。',
+    works: [
+      { t: '巨人之星', o: '巨人の星', s: 1966, e: 1971, mag: '週刊少年Magazine', pub: '講談社', demo: 'shonen', g: ['sport', 'growth'], vols: 19, note: '作畫 川崎のぼる。' },
+      { t: '小拳王', o: 'あしたのジョー', s: 1968, e: 1973, mag: '週刊少年Magazine', pub: '講談社', demo: 'shonen', g: ['sport', 'social', 'growth'], vols: 20, note: '作畫 ちばてつや。' },
+    ] },
+  { id: 'yokoyama', name: '横山光輝', alt: 'よこやま みつてる / Mitsuteru Yokoyama', region: 'jp', born: 1934, died: 2004, demo: 'shonen', ext: true,
+    intro: '與手塚同世代的巨匠。鐵人28號是巨大機器人題材的起點，三國志（1971–87）是很多日本人認識三國的入口；魔法使莎莉則是魔法少女的原點。',
+    works: [
+      { t: '鐵人28號', o: '鉄人28号', s: 1956, e: 1966, mag: '少年', pub: '光文社', demo: 'shonen', g: ['scifi', 'battle'] },
+      { t: '三國志', o: '三国志', s: 1971, e: 1987, mag: '希望之友', pub: '潮出版社', demo: 'shonen', g: ['history', 'classic'], vols: 60 },
+    ] },
+  { id: 'akatsuka', name: '赤塚不二夫', alt: 'あかつか ふじお / Fujio Akatsuka', region: 'jp', born: 1935, died: 2008, demo: 'shonen', ext: true,
+    intro: '「搞笑漫畫之王」。小松君（1962）與天才妙老爹（1967）是 1960–70 年代最紅的搞笑漫畫，2015 年小松君的動畫化《阿松》又紅了一次。',
+    works: [
+      { t: '小松君', o: 'おそ松くん', s: 1962, e: 1969, mag: '週刊少年Sunday', pub: '小學館', demo: 'shonen', g: ['comedy'] },
+      { t: '天才妙老爹', o: '天才バカボン', s: 1967, e: 1976, mag: '週刊少年Magazine 等', pub: '講談社', demo: 'shonen', g: ['comedy'] },
+    ] },
+  { id: 'mizuki', name: '水木茂', alt: 'みずき しげる / Shigeru Mizuki', region: 'jp', born: 1922, died: 2015, demo: 'shonen', ext: true,
+    intro: '妖怪漫畫的代表。鬼太郎從 1960 年代的租書店漫畫走到 Magazine 連載，動畫化六次以上；他的戰爭經驗與自傳作品在日本評價也很高。',
+    works: [{ t: '鬼太郎', o: 'ゲゲゲの鬼太郎', s: 1965, e: 1969, mag: '週刊少年Magazine', pub: '講談社', demo: 'shonen', g: ['fantasy', 'horror', 'comedy'], note: '之後在多本雜誌斷續連載到 1990 年代。' }] },
+  { id: 'nagai', name: '永井豪', alt: 'ながい ごう / Go Nagai', region: 'jp', born: 1945, demo: 'shonen', ext: true,
+    intro: '惡魔人與無敵鐵金剛（1972）幾乎同時推出：前者是黑暗結局的先驅，後者開創了駕駛型巨大機器人。1970 年代最有爭議也最有影響力的作者之一。',
+    works: [
+      { t: '惡魔人', o: 'デビルマン', s: 1972, e: 1973, mag: '週刊少年Magazine', pub: '講談社', demo: 'shonen', g: ['horror', 'battle', 'social'], vols: 5 },
+      { t: '無敵鐵金剛', o: 'マジンガーZ', s: 1972, e: 1974, mag: '週刊少年Jump 等', pub: '集英社 等', demo: 'shonen', g: ['scifi', 'battle'] },
+    ] },
+  { id: 'matsumoto-l', name: '松本零士', alt: 'まつもと れいじ / Leiji Matsumoto', region: 'jp', born: 1938, died: 2023, demo: 'shonen', ext: true,
+    intro: '銀河鐵道999 與宇宙海賊哈洛克是 1970 年代末「宇宙浪漫」的代表；1979 年電影版《銀河鐵道999》是當年日本票房冠軍。',
+    works: [{ t: '銀河鐵道999', o: '銀河鉄道999', s: 1977, e: 1981, mag: '週刊少年King', pub: '少年畫報社', demo: 'shonen', g: ['scifi', 'growth'], vols: 18 }] },
+  { id: 'mizushima', name: '水島新司', alt: 'みずしま しんじ / Shinji Mizushima', region: 'jp', born: 1939, died: 2022, demo: 'shonen', ext: true,
+    intro: '棒球漫畫的代名詞。大飯桶（1972–81）與續篇連載超過 40 年，是秋田書店 Champion 的支柱。',
+    works: [{ t: '大飯桶', o: 'ドカベン', s: 1972, e: 1981, mag: '週刊少年Champion', pub: '秋田書店', demo: 'shonen', g: ['sport'], vols: 48 }] },
+  { id: 'kariya', name: '雁屋哲 × 花咲アキラ', alt: 'かりや てつ × はなさき あきら', region: 'jp', demo: 'seinen', ext: true,
+    intro: '原作 雁屋哲、作畫 花咲アキラ。美味大挑戰 1983 年起連載，美食漫畫的始祖，也是 1980 年代青年誌最賣的作品之一；2014 年起休載。',
+    works: [{ t: '美味大挑戰', o: '美味しんぼ', s: 1983, e: null, hiatus: true, mag: 'Big Comic Spirits', pub: '小學館', tw: '尖端', demo: 'seinen', g: ['food', 'social', 'daily'], note: '111 卷，2014 年起休載。' }] },
+  { id: 'usui', name: '臼井儀人', alt: 'うすい よしと / Yoshito Usui', region: 'jp', born: 1958, died: 2009, demo: 'seinen', ext: true,
+    intro: '蠟筆小新原本是青年誌的家庭搞笑漫畫，1992 年動畫化後變成國民卡通；作者 2009 年過世後由助手團隊以「新蠟筆小新」續畫。',
+    works: [{ t: '蠟筆小新', o: 'クレヨンしんちゃん', s: 1990, e: 2010, mag: '漫畫Action', pub: '雙葉社', tw: '東立', demo: 'seinen', g: ['comedy', 'daily'], vols: 50 }] },
+  { id: 'sakura', name: 'さくらももこ', alt: 'Momoko Sakura', region: 'jp', born: 1965, died: 2018, demo: 'shojo', ext: true,
+    intro: '櫻桃小丸子以作者自己 1970 年代的靜岡童年為底，1990 年動畫開播後最高收視 39.9%，主題曲賣出 160 萬張；台灣 1990 年代同樣家喻戶曉。',
+    works: [{ t: '櫻桃小丸子', o: 'ちびまる子ちゃん', s: 1986, e: 2022, mag: 'りぼん', pub: '集英社', demo: 'shojo', g: ['daily', 'comedy'], vols: 18 }] },
+  { id: 'watsuki', name: '和月伸宏', alt: 'わつき のぶひろ / Nobuhiro Watsuki', region: 'jp', born: 1970, demo: 'shonen', ext: true,
+    intro: '神劍闖江湖 1994–99 連載，明治維新後的浪人劍心，是 1990 年代後半 Jump 的代表作之一；2012–21 年真人電影五部曲在台灣也賣座。',
+    works: [{ t: '神劍闖江湖', o: 'るろうに剣心', s: 1994, e: 1999, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'history'], vols: 28 }] },
+  { id: 'takahashi-k', name: '高橋和希', alt: 'たかはし かずき / Kazuki Takahashi', region: 'jp', born: 1961, died: 2022, demo: 'shonen', ext: true,
+    intro: '遊戲王 1996–2004 連載，原本是各種遊戲對決的單元劇，「決鬥怪獸」卡牌篇大紅後衍生成全球最暢銷的集換式卡牌遊戲。',
+    works: [{ t: '遊戲王', o: '遊☆戯☆王', s: 1996, e: 2004, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'fantasy'], vols: 38 }] },
+  { id: 'kindaichi', name: '天樹征丸 × さとうふみや', alt: 'あまぎ せいまる × さとう ふみや', region: 'jp', demo: 'shonen', ext: true,
+    intro: '原作 天樹征丸（前期另有 金成陽三郎）、作畫 さとうふみや。金田一少年之事件簿 1992 年起連載，是 1990 年代推理漫畫熱潮的起點，比柯南早兩年。',
+    works: [{ t: '金田一少年之事件簿', o: '金田一少年の事件簿', s: 1992, e: null, mag: '週刊少年Magazine', pub: '講談社', tw: '東立', demo: 'shonen', g: ['mystery'], note: '系列斷續連載至今。' }] },
+  { id: 'fujisawa', name: '藤澤亨', alt: 'ふじさわ とおる / Tohru Fujisawa', region: 'jp', born: 1967, demo: 'shonen', ext: true,
+    intro: '麻辣教師 GTO 1997–2002 連載，前不良少年當老師；1998 年日劇最終回收視 35.7%，在台灣也是熱門日劇。',
+    works: [{ t: '麻辣教師GTO', o: 'GTO', s: 1997, e: 2002, mag: '週刊少年Magazine', pub: '講談社', tw: '東立', demo: 'shonen', g: ['comedy', 'social', 'growth'], vols: 25 }] },
+  { id: 'kamio', name: '神尾葉子', alt: 'かみお ようこ / Yoko Kamio', region: 'jp', born: 1966, demo: 'shojo', ext: true,
+    intro: '流星花園（花より男子）1992–2003 連載，是少女漫畫史上發行量最高的作品；2001 年台灣偶像劇《流星花園》從這部改編，反過來紅遍亞洲。',
+    works: [{ t: '流星花園', o: '花より男子', s: 1992, e: 2003, mag: 'Margaret', pub: '集英社', tw: '東立', demo: 'shojo', g: ['romance', 'growth'], vols: 37 }] },
+  { id: 'shigeno', name: 'しげの秀一', alt: 'Shuichi Shigeno', region: 'jp', born: 1958, demo: 'seinen', ext: true,
+    intro: '頭文字D 1995–2013 連載，秋名山的 AE86，把山路飆車變成一個類型；2005 年港片版由周杰倫主演。',
+    works: [{ t: '頭文字D', o: '頭文字D', s: 1995, e: 2013, mag: 'Young Magazine', pub: '講談社', tw: '東立', demo: 'seinen', g: ['sport', 'growth'], vols: 48 }] },
+  { id: 'hosokawa', name: '細川智榮子', alt: 'ほそかわ ちえこ / Chieko Hosokawa', region: 'jp', born: 1935, demo: 'shojo', ext: true,
+    intro: '王家的紋章 1976 年連載至今仍未完結，現代少女穿越到古埃及，是少女漫畫最長壽的作品之一。',
+    works: [{ t: '王家的紋章', o: '王家の紋章', s: 1976, e: null, mag: '月刊Princess', pub: '秋田書店', tw: '長鴻', demo: 'shojo', g: ['romance', 'history', 'fantasy'], note: '70 卷以上，連載中。' }] },
+  { id: 'igarashi', name: 'いがらしゆみこ × 水木杏子', alt: 'Yumiko Igarashi × Kyoko Mizuki', region: 'jp', demo: 'shojo', ext: true,
+    intro: '作畫 いがらしゆみこ、原作 水木杏子。小甜甜 1975–79 連載，動畫在台灣、歐洲、拉丁美洲都大紅；因著作權糾紛長期未再版。',
+    works: [{ t: '小甜甜', o: 'キャンディ・キャンディ', s: 1975, e: 1979, mag: 'なかよし', pub: '講談社', demo: 'shojo', g: ['romance', 'growth', 'history'], vols: 9, note: '因原作與作畫的著作權糾紛，日本長期未再版。' }] },
+  { id: 'kubo', name: '久保帶人', alt: 'くぼ たいと / Tite Kubo', region: 'jp', born: 1977, demo: 'shonen', ext: true,
+    intro: 'BLEACH 2001–2016 連載、74 卷完結，與 ONE PIECE、火影忍者並稱 2000 年代 Jump 三大。死神、斬魄刀、俐落的分鏡與時尚感是它的特色。',
+    works: [{ t: 'BLEACH', o: 'BLEACH', s: 2001, e: 2016, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'fantasy'], vols: 74 }] },
+  { id: 'konomi', name: '許斐剛', alt: 'このみ たけし / Takeshi Konomi', region: 'jp', born: 1970, demo: 'shonen', ext: true,
+    intro: '網球王子 1999–2008 連載，續篇新網球王子至今；2003 年起的舞台劇版開創了「2.5 次元舞台劇」這個產業。',
+    works: [{ t: '網球王子', o: 'テニスの王子様', s: 1999, e: 2008, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['sport'], vols: 42 }] },
+  { id: 'amano', name: '天野明', alt: 'あまの あきら / Akira Amano', region: 'jp', demo: 'shonen', ext: true,
+    intro: '家庭教師 HITMAN REBORN! 2004–12 連載，從搞笑日常轉成黑手黨戰鬥，2008 年 Oricon 年榜第 4。',
+    works: [{ t: '家庭教師HITMAN REBORN!', o: '家庭教師ヒットマンREBORN!', s: 2004, e: 2012, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'comedy'], vols: 42 }] },
+  { id: 'sorachi', name: '空知英秋', alt: 'そらち ひであき / Hideaki Sorachi', region: 'jp', born: 1979, demo: 'shonen', ext: true,
+    intro: '銀魂 2003–19 連載、77 卷完結，幕末加外星人的搞笑時代劇，惡搞與淚點並存。',
+    works: [{ t: '銀魂', o: '銀魂', s: 2003, e: 2019, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['comedy', 'battle', 'history'], vols: 77 }] },
+  { id: 'mashima', name: '真島浩', alt: 'ましま ひろ / Hiro Mashima', region: 'jp', born: 1977, demo: 'shonen', ext: true,
+    intro: 'FAIRY TAIL 魔導少年 2006–17 連載、63 卷完結，是 2010 年代前半講談社 Magazine 最賣的少年漫畫，連續三年進 Oricon 前五。',
+    works: [{ t: 'FAIRY TAIL 魔導少年', o: 'FAIRY TAIL', s: 2006, e: 2017, mag: '週刊少年Magazine', pub: '講談社', tw: '東立', demo: 'shonen', g: ['fantasy', 'battle'], vols: 63 }] },
+  { id: 'kato-k', name: '加藤和惠', alt: 'かとう かずえ / Kazue Kato', region: 'jp', born: 1980, demo: 'shonen', ext: true,
+    intro: '青之驅魔師 2009 年起連載，撒旦之子當驅魔師；2011 年動畫化那年衝到 Oricon 年榜第 3。',
+    works: [{ t: '青之驅魔師', o: '青の祓魔師', s: 2009, e: null, mag: 'Jump SQ.', pub: '集英社', tw: '東立', demo: 'shonen', g: ['fantasy', 'battle'] }] },
+  { id: 'shimabukuro', name: '島袋光年', alt: 'しまぶくろ みつとし / Mitsutoshi Shimabukuro', region: 'jp', born: 1975, demo: 'shonen', ext: true,
+    intro: '美食獵人 TORIKO 2008–16 連載，美食獵人捕捉奇珍異獸；2011 年 Oricon 年榜第 5。',
+    works: [{ t: '美食獵人 TORIKO', o: 'トリコ', s: 2008, e: 2016, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'food', 'fantasy'], vols: 43 }] },
+  { id: 'fujimaki', name: '藤卷忠俊', alt: 'ふじまき ただとし / Tadatoshi Fujimaki', region: 'jp', born: 1982, demo: 'shonen', ext: true,
+    intro: '影子籃球員 2008–14 連載、30 卷完結，2012 年動畫化後連續三年進 Oricon 前五，是 2010 年代初期女性讀者最多的少年運動漫畫。',
+    works: [{ t: '影子籃球員', o: '黒子のバスケ', s: 2008, e: 2014, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['sport', 'growth'], vols: 30 }] },
+  { id: 'koyama', name: '小山宙哉', alt: 'こやま ちゅうや / Chūya Koyama', region: 'jp', born: 1978, demo: 'seinen', ext: true,
+    intro: '宇宙兄弟 2007 年起連載，兩兄弟追太空人夢想的青年漫畫；2012 年動畫與真人電影同年推出，衝到 Oricon 年榜第 4。',
+    works: [{ t: '宇宙兄弟', o: '宇宙兄弟', s: 2007, e: null, mag: 'Morning', pub: '講談社', tw: '東立', demo: 'seinen', g: ['growth', 'work', 'scifi'], note: '接近完結。' }] },
+  { id: 'ohtaka', name: '大高忍', alt: 'おおたか しのぶ / Shinobu Ohtaka', region: 'jp', born: 1983, demo: 'shonen', ext: true,
+    intro: '魔奇少年 MAGI 2009–17 連載、37 卷完結，以一千零一夜為底的奇幻冒險，2013 年 Oricon 年榜第 4。',
+    works: [{ t: '魔奇少年 MAGI', o: 'マギ', s: 2009, e: 2017, mag: '週刊少年Sunday', pub: '小學館', tw: '青文', demo: 'shonen', g: ['fantasy', 'battle'], vols: 37 }] },
+  { id: 'ishida', name: '石田翠', alt: 'いしだ すい / Sui Ishida', region: 'jp', born: 1986, demo: 'seinen', ext: true,
+    intro: '東京喰種 2011–14 與續篇 :re 2014–18，吃人的喰種與人類共存的東京，是 2010 年代青年誌銷量最高的作品之一。',
+    works: [{ t: '東京喰種', o: '東京喰種トーキョーグール', s: 2011, e: 2018, mag: 'Young Jump', pub: '集英社', tw: '尖端', demo: 'seinen', g: ['horror', 'battle', 'social'], vols: 30, note: '無印 14 卷（2011–14）＋ :re 16 卷（2014–18）。' }] },
+  { id: 'suzuki-n', name: '鈴木央', alt: 'すずき なかば / Nakaba Suzuki', region: 'jp', born: 1977, demo: 'shonen', ext: true,
+    intro: '七大罪 2012–20 連載、41 卷完結，亞瑟王傳說為底的奇幻冒險，2015 年 Oricon 年榜第 2。',
+    works: [{ t: '七大罪', o: '七つの大罪', s: 2012, e: 2020, mag: '週刊少年Magazine', pub: '講談社', tw: '東立', demo: 'shonen', g: ['fantasy', 'battle'], vols: 41 }] },
+  { id: 'matsui', name: '松井優征', alt: 'まつい ゆうせい / Yūsei Matsui', region: 'jp', born: 1979, demo: 'shonen', ext: true,
+    intro: '暗殺教室 2012–16 連載、21 卷完結，學生要暗殺自己的章魚老師；2015、2016 兩年都在 Oricon 前四。之後的逃出鬼門關（逃げ上手の若君）也動畫化。',
+    works: [{ t: '暗殺教室', o: '暗殺教室', s: 2012, e: 2016, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['comedy', 'growth', 'battle'], vols: 21 }] },
+  { id: 'hara-y', name: '原泰久', alt: 'はら やすひさ / Yasuhisa Hara', region: 'jp', born: 1975, demo: 'seinen', ext: true,
+    intro: '王者天下 2006 年起連載，戰國時代秦國的信與嬴政，是 2010 年代後半青年誌最賣的作品，連續多年進 Oricon 前五，累計 1.2 億部。',
+    works: [{ t: '王者天下', o: 'キングダム', s: 2006, e: null, mag: 'Young Jump', pub: '集英社', tw: '東立', demo: 'seinen', g: ['history', 'battle'], note: '70 卷以上，連載中。' }] },
+  { id: 'horikoshi', name: '堀越耕平', alt: 'ほりこし こうへい / Kōhei Horikoshi', region: 'jp', born: 1986, demo: 'shonen', ext: true,
+    intro: '我的英雄學院 2014–24 連載、42 卷完結，超能力社會的英雄學校，是 2010 年代後半到 2020 年代初 Jump 在海外最紅的作品之一。',
+    works: [{ t: '我的英雄學院', o: '僕のヒーローアカデミア', s: 2014, e: 2024, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'growth'], vols: 42 }] },
+  { id: 'shirai-demizu', name: '白井カイウ × 出水ぽすか', alt: 'Kaiu Shirai × Posuka Demizu', region: 'jp', demo: 'shonen', ext: true,
+    intro: '原作 白井カイウ、作畫 出水ぽすか。約定的夢幻島 2016–20 連載、20 卷完結，孤兒院其實是農場的逃亡故事，2019 年 Oricon 年榜第 4。',
+    works: [{ t: '約定的夢幻島', o: '約束のネバーランド', s: 2016, e: 2020, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['mystery', 'horror', 'growth'], vols: 20 }] },
+  { id: 'haruba', name: '春場ねぎ', alt: 'はるば ねぎ / Negi Haruba', region: 'jp', born: 1991, demo: 'shonen', ext: true,
+    intro: '五等分的新娘 2017–20 連載、14 卷完結，五胞胎與家教的戀愛喜劇，2019 年 Oricon 年榜第 5，是少年誌戀愛喜劇少見的銷量。',
+    works: [{ t: '五等分的新娘', o: '五等分の花嫁', s: 2017, e: 2020, mag: '週刊少年Magazine', pub: '講談社', tw: '東立', demo: 'shonen', g: ['romance', 'comedy'], vols: 14 }] },
+  { id: 'akutami', name: '芥見下下', alt: 'あくたみ げげ / Gege Akutami', region: 'jp', born: 1992, demo: 'shonen', ext: true,
+    intro: '咒術迴戰 2018–24 連載、30 卷完結，咒術師與咒靈的現代異能戰鬥；2021 年以 3,092 萬部險勝鬼滅拿下 Oricon 年榜第 1，2022 年蟬聯。',
+    works: [{ t: '咒術迴戰', o: '呪術廻戦', s: 2018, e: 2024, mag: '週刊少年Jump', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'fantasy', 'horror'], vols: 30 }] },
+  { id: 'wakui', name: '和久井健', alt: 'わくい けん / Ken Wakui', region: 'jp', born: 1980, demo: 'shonen', ext: true,
+    intro: '東京卍復仇者 2017–22 連載、31 卷完結，回到 12 年前拯救前女友的不良少年時間穿越；2021 年動畫化後單年賣出 2,498 萬部。',
+    works: [{ t: '東京卍復仇者', o: '東京卍リベンジャーズ', s: 2017, e: 2022, mag: '週刊少年Magazine', pub: '講談社', tw: '東立', demo: 'shonen', g: ['battle', 'scifi', 'growth'], vols: 31 }] },
+  { id: 'endo', name: '遠藤達哉', alt: 'えんどう たつや / Tatsuya Endo', region: 'jp', born: 1980, demo: 'shonen', ext: true,
+    intro: 'SPY×FAMILY 2019 年起在網路平台 Jump+ 連載，間諜、殺手、超能力女兒組成的假家庭；是第一部從網路連載衝進 Oricon 年榜前三的作品。',
+    works: [{ t: 'SPY×FAMILY', o: 'SPY×FAMILY', s: 2019, e: null, mag: '少年Jump+', pub: '集英社', tw: '東立', demo: 'shonen', g: ['comedy', 'daily', 'mystery'] }] },
+  { id: 'kaneshiro-nomura', name: '金城宗幸 × ノ村優介', alt: 'Muneyuki Kaneshiro × Yusuke Nomura', region: 'jp', demo: 'shonen', ext: true,
+    intro: '原作 金城宗幸、作畫 ノ村優介。藍色監獄 2018 年起連載，300 名前鋒的淘汰賽，2022 年動畫化後成為 2020 年代最賣的運動漫畫。',
+    works: [{ t: '藍色監獄', o: 'ブルーロック', s: 2018, e: null, mag: '週刊少年Magazine', pub: '講談社', tw: '東立', demo: 'shonen', g: ['sport', 'growth'] }] },
+  { id: 'akasaka-yokoyari', name: '赤坂アカ × 横槍メンゴ', alt: 'Aka Akasaka × Mengo Yokoyari', region: 'jp', demo: 'seinen', ext: true,
+    intro: '原作 赤坂アカ、作畫 横槍メンゴ。【我推的孩子】2020–24 連載、16 卷完結，偶像產業的黑暗面加轉生復仇，2023 年動畫主題曲〈IDOL〉全球爆紅。',
+    works: [{ t: '【我推的孩子】', o: '【推しの子】', s: 2020, e: 2024, mag: 'Young Jump', pub: '集英社', demo: 'seinen', g: ['mystery', 'social', 'work'], vols: 16 }] },
+  { id: 'kusuriya', name: '日向夏（原作）× ねこクラゲ', alt: 'Natsu Hyūga × Nekokurage', region: 'jp', demo: 'seinen', ext: true,
+    intro: '藥師少女的獨語有兩個漫畫版：ビッグガンガン版（作畫 ねこクラゲ，2017–）與 サンデーGX 版（作畫 倉田三ノ路）。後宮推理加藥學，2023 年動畫化後系列累計（含小說）5,700 萬部。',
+    works: [{ t: '藥師少女的獨語', o: '薬屋のひとりごと', s: 2017, e: null, mag: '月刊Big Gangan', pub: 'Square Enix', demo: 'seinen', g: ['mystery', 'history', 'romance'], note: '另有小學館 サンデーGX 版《藥師少女的獨語～貓貓的後宮解謎手帳～》。' }] },
+  { id: 'matsumoto-n', name: '松本直也', alt: 'まつもと なおや / Naoya Matsumoto', region: 'jp', born: 1982, demo: 'shonen', ext: true,
+    intro: '怪獸8號 2020–25 在 Jump+ 連載、16 卷完結，32 歲的怪獸清潔員變成怪獸；Jump+ 史上點閱最快破億的作品之一。',
+    works: [{ t: '怪獸8號', o: '怪獣8号', s: 2020, e: 2025, mag: '少年Jump+', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'scifi'], vols: 16 }] },
+  { id: 'tatsu', name: '龍幸伸', alt: 'たつ ゆきのぶ / Yukinobu Tatsu', region: 'jp', demo: 'shonen', ext: true,
+    intro: '膽大黨 2021 年起在 Jump+ 連載，幽靈與外星人同時存在的怪奇戀愛喜劇，畫面密度極高；2024 年動畫化後大紅，2026 年小學館漫畫賞得獎。',
+    works: [{ t: '膽大黨', o: 'ダンダダン', s: 2021, e: null, mag: '少年Jump+', pub: '集英社', tw: '東立', demo: 'shonen', g: ['battle', 'comedy', 'horror', 'romance'] }] },
+  { id: 'tensura', name: '伏瀬（原作）× 川上泰樹', alt: 'Fuse × Taiki Kawakami', region: 'jp', demo: 'shonen', ext: true,
+    intro: '關於我轉生變成史萊姆這檔事的漫畫版 2015 年起連載，是網路小說「異世界轉生」熱潮中賣最好的漫畫化之一；系列累計（含小說）5,600 萬部。',
+    works: [{ t: '關於我轉生變成史萊姆這檔事', o: '転生したらスライムだった件', s: 2015, e: null, mag: '月刊少年Sirius', pub: '講談社', demo: 'shonen', g: ['fantasy', 'battle', 'comedy'] }] },
+  { id: 'midorikawa', name: '綠川幸', alt: 'みどりかわ ゆき / Yuki Midorikawa', region: 'jp', demo: 'shojo', ext: true,
+    intro: '夏目友人帳 2005 年起連載，能看見妖怪的少年把名字還給妖怪，2008 年起動畫六季以上，是白泉社 LaLa 的長銷代表，療癒系的代名詞。',
+    works: [{ t: '夏目友人帳', o: '夏目友人帳', s: 2005, e: null, mag: 'LaLa', pub: '白泉社', tw: '東立', demo: 'shojo', g: ['fantasy', 'daily', 'growth'] }] },
+  { id: 'takaya', name: '高屋奈月', alt: 'たかや なつき / Natsuki Takaya', region: 'jp', born: 1973, demo: 'shojo', ext: true,
+    intro: '魔法水果籃（幻影天使）1998–2006 連載、23 卷完結，十二生肖詛咒的家族，是 2000 年代初期北美賣最好的少女漫畫之一，2019 年重新動畫化。',
+    works: [{ t: '魔法水果籃', o: 'フルーツバスケット', s: 1998, e: 2006, mag: '花與夢', pub: '白泉社', demo: 'shojo', g: ['romance', 'fantasy', 'growth'], vols: 23 }] },
+];
+
+</script>
+<script>
+// ===== 找漫畫資源 資料層 =====
+// 查證日 2026-09-15。ok:true 表示當天有打開官方頁確認；ok:false 表示只從第三方或商店頁佐證，內容可能有出入。
+// tw 欄（只有日本資源有）：可用／部分／限日／未確認 → 從台灣能不能用。price 一律照頁面原文抄，含日期。
+
+const RES_GROUPS = {
+  tw: [
+    ['library', '圖書館借閱／實體閱覽'],
+    ['free', '免費・合法線上'],
+    ['paid', '付費購買／訂閱／實體店'],
+    ['picks', '選書參考：獎項・展會・評論'],
+    ['video', '影音：YouTube・Podcast'],
+  ],
+  jp: [
+    ['free', '出版社官方免費 app／網站'],
+    ['paid', '付費商店／訂閱（含台灣可用性）'],
+    ['picks', '獎項・年度榜單'],
+    ['info', '資訊・評論網站'],
+    ['video', 'YouTube・電視'],
+  ],
+};
+
+const RES_STEPS = {
+  tw: [
+    ['1', '先借', '用戶籍地圖書館借閱證登入 HyRead，「漫畫繪本」分類直接借；台北市圖的 udn／雲端書庫也可以。零成本試錯。'],
+    ['2', '看台漫', 'CCC 追漫台（文策院）與 MOJOIN 免費看台灣原創；金漫獎入圍名單就是選書清單。'],
+    ['3', '再買', '確定想收藏的再買：BOOK☆WALKER 台灣（各社集中）、Kobo／Google Play 圖書（單冊多為 NT$80 上下）。'],
+    ['4', '跟榜單', '每年 12 月このマンガがすごい！、3 月マンガ大賞、10 月金漫獎；台灣 YouTuber 會做中文整理影片。'],
+  ],
+  jp: [
+    ['1', '免費看原文', '出版社官方 app 的網頁版多半在台灣打得開（少年ジャンプ＋、コミックDAYS、サンデーうぇぶり、ComicWalker），免費話與限時整卷免費很多。'],
+    ['2', '避開限日服務', 'シーモア、Renta!、honto、LINEマンガ、ピッコマ、めちゃコミ 官方明寫限日本國內，不用浪費時間。'],
+    ['3', '買原文', 'BOOK☆WALKER（bookwalker.jp）官方 FAQ 說海外可買、部分作品除外；Kindle JP 需日本居住地帳號，先買一本測試。'],
+    ['4', '選書', 'マンガ大賞（8 卷以內新作）、このマンガがすごい！（年度）、手塚治虫文化賞（文學性）；マンバ 看讀者口碑，コミックナタリー 看新聞。'],
+  ],
+};
+
+const RESOURCES = [
+  // ================= 台灣 =================
+  { id:'hyread-lib', region:'tw', group:'library', name:'HyRead 電子書（公共圖書館版）', url:'https://tpml.ebook.hyread.com.tw/', cost:'免費（需借閱證）',
+    what:'各縣市公共圖書館的 HyRead 館藏有「漫畫繪本」大類，下分少年漫畫、少女漫畫、日本漫畫、台港漫畫、條漫等；東立、尖端的日漫都借得到（例：一拳超人 22、我獨自升級 漫畫版 12）。',
+    how:'用戶籍地圖書館借閱證登入網頁或 HyRead App。新竹縣 hchcc.ebook.hyread.com.tw／新竹市 hcmlgov.ebook.hyread.com.tw／台北市 tpml.ebook.hyread.com.tw。',
+    tags:['日本漫畫','台灣漫畫','電子書','App'], ok:true, conf:'high', note:'分類與書目頁已確認；可借冊數要登入才看得到。' },
+  { id:'cloud-lib', region:'tw', group:'library', name:'台灣雲端書庫', url:'https://www.ebookservice.tw/', cost:'免費（需借閱證）',
+    what:'「準公共借閱權」平台，合作縣市讀者免費借電子書；站內有漫畫子分類（運動／競技、奇幻／科幻、青春／校園漫畫）。',
+    how:'選所屬合作縣市，用該縣市圖書館借閱證登入；借期 14 天自動歸還，部分縣市有每月點數上限。',
+    tags:['電子書','App'], ok:true, conf:'medium', note:'首頁是動態頁抓不到分類，漫畫子分類由搜尋索引佐證；合作縣市名單可能變動，新竹縣市是否在內未確認。' },
+  { id:'nlpi', region:'tw', group:'library', name:'國立公共資訊圖書館 電子書服務平台', url:'https://ebook.nlpi.edu.tw/', cost:'免費（需借閱證）',
+    what:'國資圖的公共電子書平台，全台公共圖書館讀者都能用；站內有漫畫書目（例：名偵探柯南 32）。',
+    how:'持任一縣市公共圖書館借閱證，首次在平台「立即註冊」；每帳號可借 8 本、借期 14 天。',
+    tags:['電子書','App'], ok:true, conf:'medium', note:'漫畫是否有獨立分類未確認，書目頁需登入。' },
+  { id:'tpml-zhonglun', region:'tw', group:'library', name:'臺北市立圖書館 中崙分館（漫畫特藏）', url:'https://tpml.gov.taipei/News_Content.aspx?n=4F66F55F388033A7&sms=CFFFC938B352678A&s=72657041F7AA3992', cost:'免費',
+    what:'國內第一所以漫畫為特藏的分館：9 樓漫畫閱覽區（含 1966–1987 台灣早期漫畫）、7 樓漫畫期刊合訂本。',
+    how:'台北市長安東路二段 229 號 7–10 樓；現場閱覽免證，外借需北市圖借閱證。',
+    tags:['實體','日本漫畫','台灣漫畫'], ok:true, conf:'high', note:'開館時間請另查北市圖「開館資訊」。' },
+  { id:'ntmc', region:'tw', group:'library', name:'國家漫畫博物館（台中，籌備處）', url:'https://www.ntmc.gov.tw/home/zh-tw/tickets', cost:'免費',
+    price:'「目前試營運期間，參觀各館舍展覽免費」（官網，2026-09-15）',
+    what:'台中刑務所官舍群改建的園區，多檔漫畫主題展；園區「漫畫宅 12 號」有可坐讀名作與得獎作的閱讀空間。',
+    how:'週二至週日 10:00–18:00，週一休；到場填入園表即可。',
+    tags:['實體','博物館'], ok:true, conf:'high', note:'閱讀區資訊來自 2026-04 參觀文，官網未載明；票價是否隨正式營運調整未確認。' },
+  { id:'tcb', region:'tw', group:'library', name:'臺灣漫畫基地／基地書店（台北華陰街）', url:'https://www.tcb.tw/zh/about', cost:'免費',
+    what:'文策院營運的台漫據點：1 樓基地書店以台灣漫畫為選書主軸，2 樓有講座與展覽，2026 年仍持續辦活動。',
+    how:'台北市大同區華陰街 38 號；週二至週日 10:00–21:00，週一與國定假日休。',
+    tags:['實體','台灣漫畫','書店'], ok:true, conf:'high' },
+  { id:'ncl-openlab', region:'tw', group:'library', name:'國家圖書館 多媒體創意實驗中心（台北西門）', url:'https://tenjo.tw/open-lab/', cost:'免費',
+    what:'國圖在秀山街 4 號 14 樓的空間，館內約一萬五千冊國內外漫畫可現場免費閱讀。',
+    how:'週二至週六 09:00–21:00、週日 09:00–17:00、週一休；櫃台登記即可入場，免辦證。',
+    tags:['實體','日本漫畫','台灣漫畫'], ok:false, conf:'medium', note:'國圖官方 FAQ 抓不到，資訊來自部落格與 2026-05 報導；時間以國圖官網為準。' },
+
+  { id:'ccc', region:'tw', group:'free', name:'CCC 追漫台（原 CCC 創作集，文策院）', url:'https://www.creative-comic.tw/', cost:'免費＋付費',
+    price:'App 內購鑽石／金幣 NT$30–990（App Store 台灣，2026-09-15）',
+    what:'文化內容策進院經營的台灣原創漫畫平台，大量台漫連載免費看，是認識台漫最直接的入口；金漫獎、漫博臺灣漫畫館的合作平台。',
+    how:'網頁或《CCC追漫台》App 免費註冊即可讀；部分搶先話數需用鑽石／金幣。',
+    tags:['台灣漫畫','網頁','App'], ok:false, conf:'medium', note:'官網擋爬蟲抓不到，由 App Store 頁與 2026 書展新聞稿佐證仍營運；免費範圍請到站確認。' },
+  { id:'webtoon-tw', region:'tw', group:'free', name:'LINE WEBTOON 台灣', url:'https://www.webtoons.com/zh-hant/', cost:'免費＋付費',
+    price:'代幣 11 枚 NT$33 起（App Store 台灣，2026-09-15）',
+    what:'韓系條漫為主、也有台灣原創的免費連載平台，「免費漫畫天天看」；想輕鬆入門直式漫畫從這裡。',
+    how:'網頁或 App 免費看已公開話數；「搶先看」最新話要代幣。',
+    tags:['韓國漫畫','台灣漫畫','條漫','App'], ok:true, conf:'high' },
+  { id:'mojoin', region:'tw', group:'free', name:'MOJOIN（前 beanfun! 漫畫星）', url:'https://mojoin.com/comics', cost:'免費',
+    what:'遊戲橘子旗下的台灣原創網路漫畫、小說平台，全站免費閱讀；站內有「台灣漫畫推薦 2026」之類的選書文章。',
+    how:'網頁直接讀。',
+    tags:['台灣漫畫','條漫','網頁'], ok:true, conf:'high', note:'漫畫星是 beanfun!（遊戲橘子）的產品，不是 KADOKAWA；comics.beanfun.com 已轉址到 MOJOIN。' },
+  { id:'renta-tw', region:'tw', group:'free', name:'Renta！亂搭 租書網', url:'https://tw.myrenta.com/about', cost:'免費＋付費',
+    price:'「最低只要 10 元起」（官網，2026-09-15）',
+    what:'日本 Renta! 在台子公司經營的線上租書／購書平台，7.8 萬部以上漫畫，有免費試讀與不定期免費作品，可 48 小時租閱或買斷。',
+    how:'網頁或 App 註冊，先看「無料」專區，再按需租或買。',
+    tags:['日本漫畫','電子書','租書','App'], ok:true, conf:'high' },
+  { id:'tongli-ebook', region:'tw', group:'free', name:'東立電子書城', url:'https://ebook.tongli.com.tw/', cost:'免費＋付費',
+    what:'東立官方電子書平台，「連載」與「漫畫」兩區，有免費／試閱標籤；App 主打漫畫雜誌線上閱讀。',
+    how:'註冊會員後讀免費／試閱內容；購買以東立幣計價。',
+    tags:['日本漫畫','台灣漫畫','電子書','App'], ok:true, conf:'high', note:'頁面為模板，實際東立幣價格未顯示。' },
+  { id:'mangaplus-tw', region:'tw', group:'free', name:'MANGA Plus by SHUEISHA（集英社官方，無繁體中文）', url:'https://apps.apple.com/tw/app/manga-plus-by-shueisha/id1442476536', cost:'免費＋付費',
+    price:'內購 Standard Plan $60、Deluxe Plan $150（App Store 台灣頁，幣別未標示，2026-09-15）',
+    what:'集英社官方免費同步連載 App（Jump 系作品首 3 話與最新 3 話免費），但語言只有英、西、泰、葡、印尼、俄、法、德、越，沒有繁體中文。',
+    how:'台灣可下載，願意讀英文的人可用；要繁中請用東立／BOOK☆WALKER 台灣。',
+    tags:['日本漫畫','App','英文'], ok:true, conf:'high' },
+
+  { id:'bookwalker-tw', region:'tw', group:'paid', name:'BOOK☆WALKER 台灣漫讀', url:'https://www.bookwalker.com.tw/manga', cost:'付費',
+    price:'例：網球王子(42) 63 元；新會員 79 折；9/15–9/17 全館 8 折起（官網，2026-09-15）',
+    what:'台灣角川系電子書城，漫畫區集合台灣角川、東立、尖端、青文、長鴻的正版電子漫畫，「連載」區有免費試閱。',
+    how:'註冊後先看試閱與免費連載，單冊購買（無訂閱制）；網頁與 App。',
+    tags:['日本漫畫','台灣漫畫','電子書','App'], ok:true, conf:'high' },
+  { id:'readmoo', region:'tw', group:'paid', name:'Readmoo 讀墨（圖文漫畫分類）', url:'https://readmoo.com/collection/56', cost:'付費',
+    price:'例：愛戀流星鏡 電子書 NT$69／紙本定價 NT$99（官網，2026-09-15）',
+    what:'台灣最大繁中 EPUB 電子書店，有「圖文漫畫」分類可單冊買；另有「暢讀」訂閱。',
+    how:'網頁、App 或 mooInk 閱讀器。',
+    tags:['日本漫畫','台灣漫畫','電子書','App'], ok:true, conf:'high', note:'暢讀方案頁回 403，月費與是否含漫畫未確認。' },
+  { id:'kobo-tw', region:'tw', group:'paid', name:'樂天 Kobo 台灣（漫畫、圖文小說）', url:'https://www.kobo.com/tw/zh/category/comics-graphic-novels', cost:'付費／訂閱',
+    price:'單冊例：鬼滅之刃(23) NT$80、ONE PIECE(113) NT$80；Kobo Plus 閱讀方案 NT$199／月、綜合方案 NT$259／月，14 天免費試用（官網，2026-09-15）',
+    what:'國際電子書店台灣站，可單冊買主流日漫；Kobo Plus 訂閱的可瀏覽分類含「漫畫、圖文小說與連環漫畫」。',
+    how:'註冊 Kobo 台灣帳號；想吃到飽先用 14 天試用確認想看的書在不在 Plus 書單。',
+    tags:['日本漫畫','電子書','訂閱','App'], ok:true, conf:'high' },
+  { id:'play-books-tw', region:'tw', group:'paid', name:'Google Play 圖書（台灣，漫畫）', url:'https://play.google.com/store/books/category/coll_1401?hl=zh_TW&gl=TW', cost:'付費',
+    price:'例：ONE PIECE(113) $80、死神 第 1 卷 $80、進擊的巨人 第 1 卷 $80（Google Play 台灣，2026-09-15）',
+    what:'台灣區有「熱門漫畫、輕小說排行榜」，主流日漫單冊多為 NT$80 上下；你已經在用 Play 圖書，直接搜書名就好。',
+    how:'Google 帳號購買，Play 圖書 App 或網頁閱讀。',
+    tags:['日本漫畫','電子書','App'], ok:true, conf:'high' },
+  { id:'hyread-store', region:'tw', group:'paid', name:'HyRead 電子書店（個人購買／租書）', url:'https://ebook.hyread.com.tw/', cost:'付費',
+    price:'例：一拳超人 22 NT$80；部分漫畫「租書價 NT$20」；儲值 NT$200 起（官網，2026-09-15）',
+    what:'HyRead 的個人書店，分類有「日本漫畫本」「條漫也好看」；部分漫畫可用較低價租。',
+    how:'與圖書館版共用 HyRead App，購買需儲值點數。',
+    tags:['日本漫畫','電子書','租書','App'], ok:true, conf:'high' },
+  { id:'books-tw', region:'tw', group:'paid', name:'博客來 漫畫／圖文書', url:'https://www.books.com.tw/web/books_topm_16', cost:'實體＋電子書',
+    what:'台灣最大網路書店，漫畫分類有新書上架與編輯推薦，多數書號有「(電子書)」版本。',
+    how:'網站或 App 購買紙本，電子書用博客來電子書 App。',
+    tags:['日本漫畫','台灣漫畫','實體','電子書'], ok:true, conf:'medium', note:'商品頁回 403，價格未記錄。' },
+  { id:'kingstone', region:'tw', group:'paid', name:'金石堂 動漫 ACG 專區', url:'https://www.kingstone.com.tw/acg/', cost:'實體',
+    price:'例：孤獨搖滾！(首刷限定版) 08 85 折 238 元（官網，2026-09-15）',
+    what:'金石堂網路書店的動漫專區，有漫畫新書子類與暢銷榜。',
+    how:'線上購買或門市；新書常 85 折。',
+    tags:['日本漫畫','實體'], ok:true, conf:'high' },
+  { id:'mangasick', region:'tw', group:'paid', name:'Mangasick 漫畫私倉（台北公館）', url:'https://www.mangasick.com/', cost:'實體',
+    what:'台灣第一家獨立漫畫店，聚焦另類圖像創作與自費出版，每月換展，賣台日歐獨立刊物與 1960 年代以來的非主流日漫。',
+    how:'羅斯福路三段 244 巷 10 弄 2 號 B1，週五六日一 14:00–21:00；付費內閱區「藥局」2024-06 起暫停。',
+    tags:['獨立漫畫','實體','書店'], ok:true, conf:'high' },
+  { id:'manmanchih', region:'tw', group:'paid', name:'漫漫喫 漫畫咖啡廳（台北中山）', url:'https://www.walkerland.com.tw/subject/view/412793', cost:'實體',
+    price:'「低消一杯飲料，不限時內用」（媒體報導 2025-06-13）',
+    what:'租書店改造的不限時漫畫咖啡廳，藏書上萬本，主流日漫、台漫都有。',
+    how:'長安西路 12 號，11:00–21:00。',
+    tags:['日本漫畫','實體','漫畫咖啡'], ok:false, conf:'medium', note:'無官網，價格與時間可能變動。' },
+  { id:'bailudong', region:'tw', group:'paid', name:'白鹿洞書坊 師大店（傳統租書店）', url:'https://www.villagetaipei.net/Post?PId=15381', cost:'實體',
+    what:'1996 年起的連鎖租書店品牌，從極盛 50 家縮到個位數；師大店是台北少數仍營運的老派租書空間。',
+    how:'到店辦會員後租借；租金請到店詢問。',
+    tags:['日本漫畫','實體','租書店'], ok:false, conf:'medium', note:'無官網，依 2025-11 專文與 2026-05 報導。其他分店現況未確認。' },
+
+  { id:'gca', region:'tw', group:'picks', name:'金漫獎 Golden Comic Awards（文化部）', url:'https://gca.moc.gov.tw/home/zh-tw', cost:'免費',
+    what:'台灣漫畫的國家級獎項（2010 年起），每年入圍與得獎名單是挑台漫最省力的清單；2026 年第 17 屆入圍名單 8 月已公布（24 件入圍，麥人杰獲特別貢獻獎），10 月下旬頒獎。',
+    how:'官網看各屆名單，再到 CCC 追漫台或書店找作品。',
+    tags:['台灣漫畫','獎項'], ok:true, conf:'high' },
+  { id:'openbook', region:'tw', group:'picks', name:'Openbook 閱讀誌 漫畫專區（漫評／漫射計畫）', url:'https://www.openbook.org.tw/article/5373', cost:'免費',
+    what:'書評媒體的漫畫分類，有「漫評」與國家漫畫博物館籌備處合作的「漫射計畫」專欄，常有台漫選書與作者專訪。',
+    how:'看漫畫分類頁，或「漫射計畫」基地書店推薦文。',
+    tags:['台灣漫畫','評論'], ok:true, conf:'high', note:'Openbook 好書獎 2025 年沒有漫畫獨立類別。' },
+  { id:'comic-expo', region:'tw', group:'picks', name:'漫畫博覽會（中華動漫出版協會）', url:'https://www.ccpa.org.tw/comic/', cost:'實體',
+    what:'台灣最大漫畫展售會，2026 第 25 屆 7/23–7/27 台北世貿一館；各社首賣、簽名會與「臺灣漫畫館」都在這。',
+    how:'每年夏天看官網售票資訊（2026 年在 7 月，不是 8 月）。',
+    tags:['展覽','實體'], ok:true, conf:'high' },
+  { id:'tibe', region:'tw', group:'picks', name:'台北國際書展 臺灣漫畫館', url:'https://www.tibe.org.tw/tw/news_detail/18/1749', cost:'實體',
+    what:'2026 第 34 屆（2/3–2/8）設臺灣漫畫館與數位漫畫體驗區（CCC 追漫台、LINE WEBTOON、MOJOIN、Renta！亂搭）；2027 年展期 2/16–2/21。',
+    how:'每年 2 月世貿一館。',
+    tags:['展覽','實體','台灣漫畫'], ok:true, conf:'high' },
+  { id:'gnn', region:'tw', group:'picks', name:'巴哈姆特 GNN 新聞（動漫）', url:'https://gnn.gamer.com.tw/', cost:'免費',
+    what:'台灣最大 ACG 社群的新聞站，每日更新漫畫新刊、動畫化、金漫獎、漫博消息。',
+    how:'直接瀏覽或搜作品名；哈啦區「動漫相關綜合」板（bsn=60037）有很多「求漫畫推薦」討論串。',
+    tags:['新聞','社群'], ok:true, conf:'high', note:'哈啦區頁面回 403，板名由搜尋索引確認。' },
+  { id:'blog-manmandays', region:'tw', group:'picks', name:'漫漫日和（動漫推薦部落格）', url:'https://manmandays.com/best-manga-picks/', cost:'免費',
+    what:'以類型（熱血、懸疑、療癒）整理漫畫與動畫推薦清單的繁中部落格，文章持續更新（最後修改 2026-09-04）。',
+    how:'從「人生必看」清單挑一部合口味的。',
+    tags:['日本漫畫','評論','部落格'], ok:true, conf:'high' },
+  { id:'blog-shonm32', region:'tw', group:'picks', name:'花落時再見（動漫評論部落格）', url:'https://shonm32.com/comics/', cost:'免費',
+    what:'繁中動漫評論站，有「18 個正版漫畫線上看平台」總整理（2026-08-16 更新）與單部作品評論，2026 年 7–9 月仍每週更新。',
+    how:'先讀平台總整理決定去哪看，再看單部評論挑書。',
+    tags:['日本漫畫','評論','部落格'], ok:true, conf:'high' },
+
+  { id:'yt-gabulaga', region:'tw', group:'video', name:'嘎不拉嘎（YouTube，漫畫介紹）', url:'https://www.youtube.com/@gabulaga_', cost:'免費',
+    what:'台灣少數專做漫畫介紹／推薦的頻道；每年整理《這本漫畫真厲害！》與マンガ大賞榜單，另有每月私心推薦與完結漫畫精選。',
+    how:'先看《這本漫畫真厲害！2026》與「漫畫大賞 2026」兩支榜單影片，再看「完結漫畫 7 選」。',
+    tags:['日本漫畫','YouTube','推薦'], ok:true, conf:'high', note:'訂閱數未顯示。' },
+  { id:'yt-yorke', region:'tw', group:'video', name:'孫沁岳 @yorke（YouTube）', url:'https://www.youtube.com/@yorke', cost:'免費',
+    what:'台灣演員／YouTuber，每年做「這本漫畫真厲害榜單整理」「日本漫畫大賞總整理」與金漫獎台漫推薦影片，語速快、適合快速掃榜單。頻道不只漫畫，也有動畫與宅文化。',
+    how:'看「2026 年這本漫畫真厲害榜單整理」「2026 日本漫畫大賞總整理」。',
+    tags:['日本漫畫','台灣漫畫','YouTube','推薦'], ok:true, conf:'high' },
+  { id:'yt-otakuzac', region:'tw', group:'video', name:'Zac 宅客宅【宅客漫慢聊】（YouTube）', url:'https://www.youtube.com/@otakuzac', cost:'免費',
+    what:'以「喜歡推薦漫畫」自介的台灣頻道，【宅客漫慢聊】系列談漫畫推薦、收藏與保養；2025-04 達 1 萬訂閱。',
+    how:'從【宅客漫慢聊】ep.1「三大王道熱血漫畫」入門。',
+    tags:['日本漫畫','YouTube','推薦'], ok:true, conf:'medium', note:'2026 年是否仍持續上傳未確認。' },
+  { id:'yt-likong', region:'tw', group:'video', name:'璃空 Li-Kong（YouTube，少女漫畫／韓漫）', url:'https://www.youtube.com/@li-kong', cost:'免費',
+    what:'看少女漫畫、玩乙女遊戲的台灣頻道，有【韓漫推薦】系列與「看漫畫必備 5 大 APP & 網站 正版平台推薦」。',
+    how:'女性向／少女漫畫新手從「正版平台推薦」影片開始。',
+    tags:['少女漫畫','韓國漫畫','YouTube'], ok:true, conf:'medium', note:'2025–2026 活躍度未確認。' },
+  { id:'pod-kidult', region:'tw', group:'video', name:'大人的漫畫社（Podcast）', url:'https://podcasts.apple.com/tw/podcast/%E5%A4%A7%E4%BA%BA%E7%9A%84%E6%BC%AB%E7%95%AB%E7%A4%BE/id1557092247', cost:'免費',
+    what:'「Kidult，再老都想看漫畫」，主持人陳怡靜訪談台灣漫畫家與出版人，談台漫、獨立出版與國際漫畫節；79 集，Apple 評分 4.7。',
+    how:'Apple Podcasts、Spotify、KKBOX。',
+    tags:['台灣漫畫','Podcast','訪談'], ok:true, conf:'medium', note:'最新一集 EP74 的年份 KKBOX 顯示 2026-06-28、Spotify 顯示 2025-06-28，兩來源不一致。' },
+  { id:'pod-expired', region:'tw', group:'video', name:'過期少年快報（Podcast）', url:'https://podcasts.apple.com/tw/podcast/%E9%81%8E%E6%9C%9F%E5%B0%91%E5%B9%B4%E5%BF%AB%E5%A0%B1/id1556169305', cost:'免費',
+    what:'「以介紹漫畫為主題，著重 90 年代日本漫畫」，隔週更新、153 集，Apple 評分 4.3；想補經典舊作的人最合用。',
+    how:'Apple Podcasts／Spotify；最新集 9/3、8/27。',
+    tags:['日本漫畫','Podcast','經典'], ok:true, conf:'high' },
+
+  // ================= 日本 =================
+  { id:'jump-plus', region:'jp', group:'free', name:'少年ジャンプ＋（集英社 Jump+ 官方 app／網站）', url:'https://shonenjumpplus.com/', cost:'免費＋付費', tw:'部分',
+    price:'週刊少年ジャンプ定期購読 月額 980 円；新會員送 100pt（官方ヘルプ，2026-09-15）',
+    what:'集英社原創連載平台（怪獸 8 號、SPY×FAMILY、ダンダダン 的出處），每天更新，多數原創作品「初回全話無料」。',
+    how:'瀏覽器直接開網站就能免費看；app 只在日本商店上架，網頁購買需日本發行的信用卡。',
+    tags:['集英社','App','網頁'], ok:true, conf:'high', note:'官方ヘルプ原文：「日本国内向けサービスのため…海外でご利用のお客様へサービスの保証ができかねます」。' },
+  { id:'mangaplus-jp', region:'jp', group:'free', name:'MANGA Plus by SHUEISHA（集英社海外版）', url:'https://mangaplus.shueisha.co.jp/', cost:'免費＋付費', tw:'可用',
+    price:'免費：各作品最初 3 話＋最新 3 話；MANGA Plus MAX 訂閱有 Standard／Deluxe 兩種，價格未取得',
+    what:'集英社給海外讀者的官方 app／網站，與日本同日更新 Jump 系作品；語言為英、西、泰、葡、印尼、俄、法、德、越，沒有繁體中文。',
+    how:'開網站或裝 app 即可，不需帳號。Google Play 頁寫「Unavailable in Japan, China, and Korea」，台灣不在排除名單。',
+    tags:['集英社','App','英文'], ok:true, conf:'high' },
+  { id:'magapoke', region:'jp', group:'free', name:'マガポケ（講談社 少年マガジン系）', url:'https://pocket.shonenmagazine.com/', cost:'免費＋付費', tw:'未確認',
+    what:'講談社少年マガジン系連載平台，「無料話」「待てば無料」與ポイント制，常有整卷限時免費。',
+    how:'先用網頁版看免費話；app 版免費話較多。',
+    tags:['講談社','App','網頁'], ok:true, conf:'high', note:'官方頁無海外說明。' },
+  { id:'comic-days', region:'jp', group:'free', name:'コミックDAYS（講談社 青年／女性誌）', url:'https://comic-days.com/', cost:'免費＋付費', tw:'未確認',
+    price:'DAYSプレミアム 月額 720 円（5 誌讀到飽）／もっとプレミアム 月額 960 円（18 誌）（官網 /premium，2026-09-15）',
+    what:'講談社 ヤンマガ、モーニング、アフタヌーン、Kiss、BE・LOVE 的網路版，每天更新免費話，另有雜誌訂閱。',
+    how:'網頁直接看免費話；喜歡青年誌再考慮月費。',
+    tags:['講談社','網頁','App','雜誌訂閱'], ok:true, conf:'high' },
+  { id:'sunday-webry', region:'jp', group:'free', name:'サンデーうぇぶり（小学館 少年サンデー系）', url:'https://www.sunday-webry.com/', cost:'免費＋付費', tw:'未確認',
+    what:'週刊少年サンデー、ゲッサン、サンデーGX 作品的官方平台，「無料／チケット／コイン」三種機制。',
+    how:'網頁開啟即可讀免費話；app 有每日券。',
+    tags:['小學館','App','網頁'], ok:true, conf:'high' },
+  { id:'manga-one', region:'jp', group:'free', name:'マンガワン（小学館 綜合網路漫畫）', url:'https://manga-one.com/', cost:'免費＋付費', tw:'未確認',
+    what:'小学館原創（モブサイコ100、ケンガンアシュラ）＋サンデー、スピリッツ 作品；以每日回復的免費點數為主。',
+    how:'先看網頁版；完整機制在 app。',
+    tags:['小學館','App','網頁'], ok:true, conf:'medium', note:'ライフ 機制未見於官方首頁文字。' },
+  { id:'tonari-yj', region:'jp', group:'free', name:'となりのヤングジャンプ（集英社 免費網站）', url:'https://tonarinoyj.jp/', cost:'免費', tw:'未確認',
+    what:'ヤングジャンプ編集部的免費網站，代表作『ワンパンマン』（一拳超人），原創作品固定週二／三／五更新。',
+    how:'免登入直接開網頁。',
+    tags:['集英社','網頁'], ok:true, conf:'high' },
+  { id:'ynjn', region:'jp', group:'free', name:'ヤンジャン＋（集英社 青年誌官方 app）', url:'https://ynjn.jp/', cost:'免費＋付費', tw:'未確認',
+    what:'ヤングジャンプ、グランドジャンプ 等青年誌綜合站／app，有免費話與每日配發的免費點數。',
+    how:'網站看作品資訊，讀漫畫主要靠 app。',
+    tags:['集英社','App'], ok:true, conf:'medium', note:'免費機制取自第三方文章（2026-02）。' },
+  { id:'comic-walker', region:'jp', group:'free', name:'ComicWalker／カドコミ（KADOKAWA）', url:'https://comic-walker.com/', cost:'免費＋付費', tw:'未確認',
+    what:'KADOKAWA 各系列連載，主打「毎日無料」與 app 限定「初回全話無料」。',
+    how:'網頁可直接讀；全話免費活動多在 app。',
+    tags:['KADOKAWA','App','網頁'], ok:true, conf:'high' },
+  { id:'gangan', region:'jp', group:'free', name:'ガンガンONLINE（Square Enix）', url:'https://www.ganganonline.com/', cost:'免費', tw:'未確認',
+    what:'スクウェア・エニックス 的免費 web 雜誌，「購読無料・登録不要」。',
+    how:'免登入直接開網頁。',
+    tags:['Square Enix','網頁'], ok:true, conf:'high' },
+  { id:'kurage', region:'jp', group:'free', name:'くらげバンチ（新潮社）', url:'https://kuragebunch.com/', cost:'免費', tw:'未確認',
+    what:'新潮社的免費站，「登録不要！完全無料！」，每週二、五中午更新。',
+    how:'直接開網頁。',
+    tags:['新潮社','網頁'], ok:true, conf:'high' },
+  { id:'mangaz', region:'jp', group:'free', name:'マンガ図書館Z（合法免費絕版／經典漫畫）', url:'https://www.mangaz.com/', cost:'免費＋付費', tw:'未確認',
+    what:'J-Comic Terrace 經營，免登入讀作者授權的絕版作 15,000 冊以上；2024-11 曾停站，募資後 2025-04-25 重開，2026 年仍營運。',
+    how:'免登入直接讀；有 PDF 販售與プレミアム 會員。',
+    tags:['經典','絕版','網頁'], ok:true, conf:'high' },
+  { id:'nico-manga', region:'jp', group:'free', name:'ニコニコ漫画（ドワンゴ）', url:'https://manga.nicovideo.jp/', cost:'免費＋付費', tw:'未確認',
+    what:'混合使用者投稿與各雜誌官方作品，多數話數標「無料」。',
+    how:'免登入可讀免費話。',
+    tags:['投稿','網頁','App'], ok:true, conf:'high' },
+  { id:'jump-rookie', region:'jp', group:'free', name:'ジャンプルーキー!（集英社 新人投稿平台）', url:'https://rookie.shonenjump.com/', cost:'免費', tw:'未確認',
+    what:'素人與新人投稿平台，「投稿作が読み放題」，優勝者可在ジャンプ＋連載。',
+    how:'想看未出道新人作品時開網頁。',
+    tags:['集英社','投稿','網頁'], ok:true, conf:'high' },
+
+  { id:'bookwalker-jp', region:'jp', group:'paid', name:'BOOK☆WALKER（bookwalker.jp，KADOKAWA）', url:'https://bookwalker.jp/', cost:'付費／訂閱', tw:'部分',
+    price:'読み放題 マンガコース 月額 836 円／MAXコース 月額 1,100 円，初回 14 日免費；新戶 50% コイン還元（官網，2026-09-15）',
+    what:'對海外最友善的日本大型電子書店，漫畫／輕小說齊全，另有月費讀到飽。',
+    how:'直接註冊即可購買，可用信用卡、PayPal。官方 FAQ #87：海外「ご利用いただけますが、一部購入できない作品…がございます」。',
+    tags:['KADOKAWA','電子書','訂閱'], ok:true, conf:'high', note:'読み放題 能否自海外訂閱，FAQ 未提及。' },
+  { id:'bookwalker-global', region:'jp', group:'paid', name:'BOOK☆WALKER Global（bookwalker.com，英文版）', url:'https://bookwalker.com/', cost:'付費', tw:'可用',
+    what:'2025-03 移交 KADOKAWA 集團旗下 M12 Media（原 J-Novel Club），2026 年改版為英文商店；要買日文原版請用 bookwalker.jp。',
+    how:'買英文版用這裡。',
+    tags:['KADOKAWA','電子書','英文'], ok:true, conf:'medium' },
+  { id:'kindle-jp', region:'jp', group:'paid', name:'Amazon.co.jp Kindle マンガ／Kindle Unlimited', url:'https://www.amazon.co.jp/', cost:'付費／訂閱', tw:'部分',
+    price:'Kindle Unlimited 月額 980 円（第三方 2026-07-22；官方頁抓不到）',
+    what:'日本最大電子書店之一，幾乎所有日文單行本都有，常有大特價；KU 讀到飽的漫畫多為前幾卷或中小出版社。',
+    how:'需 Amazon.co.jp 帳號並把 Kindle 內容國家設為日本；第三方文章稱非日本地址／卡片會被限制，先買一本測試。',
+    tags:['Amazon','電子書','訂閱'], ok:false, conf:'low', note:'amazon.co.jp 全站擋爬蟲，價格與限制都來自第三方。' },
+  { id:'ebookjapan', region:'jp', group:'paid', name:'ebookjapan（LINEヤフー）', url:'https://ebookjapan.yahoo.co.jp/', cost:'免費＋付費', tw:'未確認',
+    price:'初回ログイン 最大 70% OFF クーポン×6 回（官網，2026-09-15）',
+    what:'Yahoo! JAPAN 系最大漫畫電子書店，免費試讀與整卷免費多，折價券很兇。',
+    how:'需 Yahoo! JAPAN ID；先領新戶券再買。',
+    tags:['LINEヤフー','電子書'], ok:true, conf:'high', note:'官方ヘルプ未找到海外條目。' },
+  { id:'booklive', region:'jp', group:'paid', name:'BookLive!（TOPPAN 系）', url:'https://booklive.jp/', cost:'免費＋付費', tw:'未確認',
+    what:'約 199 萬冊，每天クーポンガチャ抽折價券。',
+    how:'註冊後每日抽券再買。',
+    tags:['電子書'], ok:true, conf:'high', note:'官方無海外說明；第三方稱海外可用。' },
+  { id:'dmm-books', region:'jp', group:'paid', name:'DMMブックス', url:'https://book.dmm.com/', cost:'付費', tw:'未確認',
+    what:'常有大額ポイント還元活動，也有絕版書。',
+    how:'需 DMM 帳號；DMM 官方只泛稱「日本国外からは一部サービス利用不可」。',
+    tags:['DMM','電子書'], ok:true, conf:'medium' },
+  { id:'play-books-jp', region:'jp', group:'paid', name:'Google Play ブックス（日本區漫畫）', url:'https://play.google.com/store/books?hl=ja&gl=JP', cost:'付費', tw:'部分',
+    what:'日本區有 マンガ 分類與 KADOKAWA 等特賣；台灣與日本都在 Google 的電子書提供國清單，但個別日文書能否賣給台灣帳號依出版社設定。',
+    how:'用台灣 Google 帳號直接搜日文書名，看得到價格就能買。',
+    tags:['Google','電子書'], ok:true, conf:'medium' },
+  { id:'apple-books-jp', region:'jp', group:'paid', name:'Apple Books（日本區）', url:'https://www.apple.com/jp/apple-books/', cost:'付費', tw:'部分',
+    what:'日本區有完整漫畫販售與試閱；Apple 官方一覽表：台灣區 Apple Books 只有公版書，日本區才有購買。',
+    how:'要另建日本區 Apple Account，官方指引說可能需該國有效付款方式。',
+    tags:['Apple','電子書'], ok:true, conf:'high' },
+  { id:'cmoa', region:'jp', group:'paid', name:'コミックシーモア（NTTソルマーレ）', url:'https://www.cmoa.jp/', cost:'付費／訂閱', tw:'限日',
+    price:'読み放題ライト 780 円／月、フル 1,480 円／月（官網，2026-09-15）',
+    what:'196 萬冊的大型電子書店，購買、租閱、讀到飽三種模式。',
+    how:'官方 FAQ：「日本国内のみのサービスです。海外からのご利用はできません。」台灣讀者略過。',
+    tags:['電子書','訂閱'], ok:true, conf:'high' },
+  { id:'renta-jp', region:'jp', group:'paid', name:'Renta!（パピレス，48 小時租閱）', url:'https://renta.papy.co.jp/', cost:'付費', tw:'限日',
+    price:'48 時間レンタル 100 円〜（官網，2026-09-15）',
+    what:'以「租」為主的電子書店；台灣有子公司「Renta！亂搭」（見台灣頁）。',
+    how:'官方 FAQ：海外からのご利用はお断り。台灣讀者用亂搭。',
+    tags:['電子書','租閱'], ok:true, conf:'high' },
+  { id:'honto', region:'jp', group:'paid', name:'honto（大日本印刷）', url:'https://honto.jp/', cost:'付費', tw:'限日',
+    what:'與丸善／ジュンク堂連動的書店，電子書與紙本點數共通。',
+    how:'官方ヘルプ：電子書籍サービスは日本国内でのみ。台灣讀者略過。',
+    tags:['電子書'], ok:true, conf:'high' },
+  { id:'line-manga-jp', region:'jp', group:'paid', name:'LINEマンガ（日本版）', url:'https://manga.line.me/', cost:'免費＋付費', tw:'限日',
+    what:'日本最大手機漫畫 app 之一，「毎日無料」等待制。',
+    how:'官方ヘルプ：LINE 帳號認證國非日本者無法使用。台灣改用 LINE WEBTOON。',
+    tags:['LINE','App'], ok:false, conf:'high', note:'首頁回 412，限制取自官方ヘルプ。' },
+  { id:'piccoma-jp', region:'jp', group:'paid', name:'ピッコマ（Piccoma 日本版）', url:'https://piccoma.com/web/', cost:'免費＋付費', tw:'限日',
+    what:'「待てば¥0」等待制始祖，6 萬部以上。',
+    how:'官方 FAQ #148：日本国外からは利用不可，已購作品海外亦不能看。',
+    tags:['Kakao','App','網頁'], ok:true, conf:'high' },
+  { id:'mechacomic', region:'jp', group:'paid', name:'めちゃコミック（アムタス）', url:'https://mechacomic.jp/', cost:'免費＋付費', tw:'限日',
+    price:'1 話 30pt〜（官網，2026-09-15）',
+    what:'一話一話買的老牌平台，女性向與獨占作多。',
+    how:'官方 FAQ #39：日本在住の方のみ。',
+    tags:['App','網頁'], ok:true, conf:'high' },
+
+  { id:'kono-manga', region:'jp', group:'picks', name:'このマンガがすごい！2026（宝島社 年度榜單）', url:'https://sugoiweb.jp/column/3590/', cost:'免費', tw:'可用',
+    price:'書籍『このマンガがすごい！2026』¥1,000，2025-12-15 發售',
+    what:'日本最具指標的年度榜單。2026 版：オトコ編 1 位『本なら売るほど』（児島青／KADOKAWA）、オンナ編 1 位『半分姉弟』（藤見よいこ／リイド社）。',
+    how:'每年 12 月中看公布，前 20 名是新手最安全的清單；官方站 konomanga.jp 本次打不開（403），改看宝島社 sugoiweb。',
+    tags:['宝島社','榜單','年度'], ok:true, conf:'high' },
+  { id:'manga-taisho', region:'jp', group:'picks', name:'マンガ大賞（書店員等票選）', url:'https://www.mangataisho.com/', cost:'免費', tw:'可用',
+    what:'每年 3 月公布，只選「8 卷以內」的新作。マンガ大賞 2026（3/26 發表）大賞『本なら売るほど』，另有 10 部入圍。',
+    how:'看官網入圍名單，10 部都是當年值得追的新作；卷數少，最適合新手。',
+    tags:['獎項','新作'], ok:true, conf:'high' },
+  { id:'tezuka-prize', region:'jp', group:'picks', name:'手塚治虫文化賞（朝日新聞社）', url:'https://prtimes.jp/main/html/rd/p/000002144.000009214.html', cost:'免費', tw:'可用',
+    what:'第 30 回（2026-04-27）：マンガ大賞『本なら売るほど』、新生賞『怪獣を解剖する』、短編賞『あたらしいともだち』、特別賞 武田一義『ペリリュー』。',
+    how:'每年 4 月下旬；偏文學性、成人向。朝日官方頁從沙盒打不開，連結是官方新聞稿。',
+    tags:['朝日新聞','獎項'], ok:true, conf:'high' },
+  { id:'kodansha-award', region:'jp', group:'picks', name:'講談社漫画賞（第 50 回・2026）', url:'https://news.kodansha.co.jp/comics/20151877', cost:'免費', tw:'可用',
+    what:'2026 年度：少年部門『ガチアクタ』、少女部門『死に戻りの魔法学校生活を、元恋人とプロローグから』、総合部門『ダーウィン事変』。',
+    how:'想入門講談社作品從得獎作開始。',
+    tags:['講談社','獎項'], ok:true, conf:'high' },
+  { id:'shogakukan-award', region:'jp', group:'picks', name:'小学館漫画賞（第 71 回・2026-01）', url:'https://shogakukan-comic.jp/news/65082', cost:'免費', tw:'可用',
+    what:'第 71 回 5 作：『運命の巻戻士』『COSMOS』『ダンダダン』『出禁のモグラ』『ひらやすみ』，審査委員特別賞 萩尾望都；第 72 回 2027 年 1 月下旬發表。',
+    how:'不分部門、範圍廣。',
+    tags:['小學館','獎項'], ok:true, conf:'high' },
+  { id:'tsugi-manga', region:'jp', group:'picks', name:'次にくるマンガ大賞（KADOKAWA／niconico 讀者票選）', url:'https://tsugimanga.jp/', cost:'免費', tw:'可用',
+    what:'預測「下一部會紅」的票選，分コミックス部門與Web マンガ部門；2026 版結果 2026-09-16 發表。',
+    how:'適合找剛起步、卷數少的新作。',
+    tags:['KADOKAWA','獎項','新作'], ok:true, conf:'high' },
+  { id:'shotenin-osusume', region:'jp', group:'picks', name:'全国書店員が選んだおすすめコミック 2026（日販）', url:'https://prtimes.jp/main/html/rd/p/000000700.000023227.html', cost:'免費', tw:'可用',
+    what:'2026-01-29 發表：1 位『ベル・プペーのスパダリ婚約』、2 位『本なら売るほど』、3 位『あなたのお城の小人さん』。',
+    how:'每年 1 月底看日販新聞稿或「ほんのひきだし」；官方站內容停在 2023 版。',
+    tags:['日販','榜單'], ok:true, conf:'high' },
+  { id:'mangaka-kyokai', region:'jp', group:'picks', name:'日本漫画家協会賞（第 55 回・2026）', url:'https://nihonmangakakyokai.or.jp/archives/news/20260414', cost:'免費', tw:'可用',
+    what:'2026-04-14：コミック部門大賞『天幕のジャードゥーガル』（トマトスープ）、萬画部門『漫画いしぶみ』、文部科学大臣賞 ビッグ錠。',
+    how:'偏藝術性與資深作家。',
+    tags:['獎項','協會'], ok:true, conf:'high' },
+
+  { id:'natalie', region:'jp', group:'info', name:'コミックナタリー（漫畫新聞站）', url:'https://natalie.mu/comic', cost:'免費', tw:'可用',
+    what:'新連載、完結、動畫化、獎項、每週銷售榜的一手新聞，日本業界與讀者的共同資訊源。',
+    how:'每天掃標題；查某作品最新消息時站內搜尋。',
+    tags:['新聞'], ok:true, conf:'high', note:'個別文章頁從沙盒回 403。' },
+  { id:'manba', region:'jp', group:'info', name:'マンバ（漫畫口碑／書櫃社群）', url:'https://manba.co.jp/', cost:'免費', tw:'可用',
+    what:'自稱日本最大漫畫綜合資訊站：讀者クチコミ、各種排行、免費漫畫活動整理、個人本棚；2026-09 仍每日更新。',
+    how:'用作品名搜尋看讀者評價，再到「無料マンガ」頁找目前免費的。',
+    tags:['評論','社群'], ok:true, conf:'high' },
+  { id:'mangapedia', region:'jp', group:'info', name:'マンガペディア（漫畫百科）', url:'https://mangapedia.com/', cost:'免費', tw:'可用',
+    what:'作品、角色、作者條目，另有新刊日曆與排行，2026 年仍更新。',
+    how:'查作品背景與作者資料，可取代 Wikipedia。',
+    tags:['百科'], ok:true, conf:'high' },
+  { id:'hon-hikidashi', region:'jp', group:'info', name:'ほんのひきだし（日販 書店情報）', url:'https://hon-hikidashi.jp/', cost:'免費', tw:'可用',
+    what:'每週整理「今週の注目コミック」新刊與書店銷售動向，也是書店員票選榜的發布處。',
+    how:'每週看一次新刊整理，掌握日本書店在推什麼。',
+    tags:['日販','新刊'], ok:true, conf:'high' },
+  { id:'shonenjump-official', region:'jp', group:'info', name:'週刊少年ジャンプ 公式サイト', url:'https://www.shonenjump.com/j/', cost:'免費', tw:'可用',
+    price:'週刊少年ジャンプ 2026 年 42・43 合併号 ¥330，紙／電子同價（官網，2026-09-15）',
+    what:'連載一覽、試讀、新連載公告；注意根網址 shonenjump.com 會轉到 VIZ 英文站，日文版在 /j/。',
+    how:'看「連載作品」一覽決定追哪部，再到ジャンプ＋讀。',
+    tags:['集英社','官方'], ok:true, conf:'high' },
+  { id:'ddnavi', region:'jp', group:'info', name:'ダ・ヴィンチWeb（KADOKAWA 書籍／漫畫媒體）', url:'https://ddnavi.com/', cost:'免費', tw:'可用',
+    what:'書籍情報誌網路版，有漫畫書評、作者訪談與「次にくるマンガ大賞」報導。',
+    how:'找深度訪談與書評；新聞速度看ナタリー。',
+    tags:['KADOKAWA','評論'], ok:true, conf:'medium', note:'/comic/ 分類頁回 403。' },
+  { id:'alu', region:'jp', group:'info', name:'アル（alu.jp，漫畫格投稿站）', url:'https://alu.jp/', cost:'免費', tw:'可用',
+    what:'以「コマ投稿」（分享喜歡的畫格）聞名；2022-03 起停止定期更新，網站仍可瀏覽但活躍度低。',
+    how:'當作找「名場面」與讀者感想的資料庫，不要期待新資訊。',
+    tags:['社群','低活躍'], ok:true, conf:'high' },
+
+  { id:'yt-yamada', region:'jp', group:'video', name:'山田玲司のヤングサンデー（漫畫家談話節目）', url:'https://www.youtube.com/@reijinoyoungsunday', cost:'免費＋付費', tw:'可用',
+    what:'漫畫家山田玲司主持的長壽直播談話節目，深聊漫畫、動畫、作者論；訂閱約 18.1 萬（ユーチュラ 2026-09-15），2016 年開台。',
+    how:'搜「作品名＋山田玲司」看單集；適合讀完想聽解析的人。',
+    tags:['YouTube','評論','談話'], ok:true, conf:'high' },
+  { id:'yt-jump', region:'jp', group:'video', name:'ジャンプチャンネル（週刊少年ジャンプ 官方）', url:'https://www.youtube.com/@jumpchannel', cost:'免費', tw:'可用',
+    what:'新連載 PV、合併號預告、舊作動畫免費播出；訂閱約 270 萬（ユーチュラ 2026-09-15）。',
+    how:'訂閱後看每週新刊預告，快速知道 Jump 現在在連載什麼。',
+    tags:['集英社','YouTube','官方'], ok:true, conf:'high' },
+  { id:'yt-magazine', region:'jp', group:'video', name:'マガジンチャンネル（講談社 少年マガジン 官方）', url:'https://www.youtube.com/channel/UCmH9SgzzvDlxG6mpcYg2jJw', cost:'免費', tw:'可用',
+    what:'新連載／連載中作品 PV 與獨自企劃；訂閱約 30 萬（ユーチュラ 2026-09-15）。',
+    how:'配合マガポケ使用。',
+    tags:['講談社','YouTube','官方'], ok:true, conf:'high' },
+  { id:'yt-yj', region:'jp', group:'video', name:'ヤンジャンTV（集英社 ヤングジャンプ 官方）', url:'https://www.youtube.com/@youngjump_tv', cost:'免費＋付費', tw:'可用',
+    what:'聲優配音漫畫（ボイスコミック）與寫真影片；訂閱約 52.7 萬（ユーチュラ 2026-08-19）。',
+    how:'看ボイスコミック試水溫青年誌作品。',
+    tags:['集英社','YouTube','青年誌'], ok:true, conf:'high' },
+  { id:'yt-yoru', region:'jp', group:'video', name:'ヨル@漫画紹介（個人推薦頻道）', url:'https://www.youtube.com/@mangasanso', cost:'免費', tw:'可用',
+    what:'自稱讀過約 2 萬冊的推薦型頻道，主題式「〇〇な漫画 3 選／5 選」；訂閱約 8.9 萬（ユーチュラ 2026-09），2026-07 仍有新片。',
+    how:'找「1 巻発売前」「新作」系列，挑容易入坑的短篇。',
+    tags:['YouTube','推薦'], ok:true, conf:'high' },
+  { id:'yt-magazon', region:'jp', group:'video', name:'マガゾン【漫画バラエティch】（經典／冷門短篇解說）', url:'https://www.youtube.com/@magazon', cost:'免費', tw:'可用',
+    what:'藏書 6,000 冊以上的經營者以「ゆっくり解説」介紹非主流與昭和經典（藤子不二雄A、永井豪）；訂閱約 12.8 萬（ユーチュラ 2026-09-15）。',
+    how:'想跳脫熱門作、認識老作品時看。',
+    tags:['YouTube','經典'], ok:true, conf:'high' },
+  { id:'nhk-manben', region:'jp', group:'video', name:'浦沢直樹の漫勉neo（NHK 紀錄片）', url:'https://www.web.nhk/tv/an/manben/pl/series-tep-7W327R2Y4N', cost:'免費＋付費', tw:'部分',
+    what:'浦沢直樹貼身拍攝漫畫家作畫過程；官方頁顯示仍在播：第 20 回 大友克洋（2025-03）、第 21 回 羽海野チカ（2025-11）、拡大スペシャル（2026-03）。',
+    how:'在日本用 NHKプラス／NHKオンデマンド；從台灣能否收看未確認，可先看官網介紹。',
+    tags:['NHK','紀錄片','電視'], ok:true, conf:'high' },
+];
+
+// 已結束或改名的服務（避雷；多為社群整理，未見官方公告原文）
+const RES_DEAD = [
+  'Pocket Comics 中文版：2024-09-30 結束（Dcard 貼文，未確認）',
+  'KAKAO WEBTOON 台灣：2024-10-28 宣布終止（Dcard 整理，未確認）',
+  'PODO 漫畫：2025-07-01 停止營運（Dcard 整理，未確認）',
+  'comico 台灣：早年已轉為 Pocket Comics',
+  '漫畫星（beanfun!）：已併入 MOJOIN（轉址確認）',
+  '台灣角川 Kado+（NT$120／月）：輕小說訂閱，不含漫畫',
+  'udn 讀書館：頁面未見漫畫分類，是否有漫畫未確認',
+];
+
+</script>
+<script>
+// ===== 漫畫入門地圖 應用層 =====
+(function(){
+'use strict';
+const $ = (s, el=document) => el.querySelector(s);
+const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
+const YMIN = 1950, YMAX = 2026, NOW = 2026;
+const DEMO_ORDER = ['shonen','shojo','seinen','josei','all'];
+const DEMO_VAR = { shonen:'--shonen', shojo:'--shojo', seinen:'--seinen', josei:'--josei', all:'--all' };
+
+// 起手 16 部
+const START = [
+  { demo:'shonen', items:[ ['obata','死亡筆記本'], ['inoue','灌籃高手'], ['arakawa','鋼之鍊金術師'], ['fujimoto','驀然回首'] ] },
+  { demo:'shojo',  items:[ ['clamp','庫洛魔法使'], ['yoshida','海街日記'], ['umino','蜂蜜幸運草'] ] },
+  { demo:'seinen', items:[ ['urasawa','MONSTER'], ['iwaaki','寄生獸'], ['kui','迷宮飯'], ['ishizuka','BLUE GIANT'] ] },
+  { demo:'josei',  items:[ ['ninomiya','交響情人夢'] ] },
+  { demo:'tw',     items:[ ['chen-uen','阿鼻劍'], ['juan','用九柑仔店'], ['changsheng','閻鐵花'], ['akru','北城百畫帖'] ] },
+];
+
+// 雜誌正規化（篩選用）
+const MAGS = [
+  ['週刊少年Jump', /週刊少年Jump/], ['少年Jump+', /少年Jump\+/], ['Ultra Jump', /Ultra Jump/], ['Young Jump', /Young Jump/],
+  ['週刊少年Sunday', /週刊少年Sunday/], ['Big Comic Spirits', /Big Comic Spirits/], ['Big Comic Original', /Big Comic Original/], ['Big Comic', /Big Comic(?! Spirits| Original)/], ['月刊flowers', /flowers/], ['月刊IKKI', /IKKI/],
+  ['週刊少年Magazine', /週刊少年Magazine/], ['別冊少年Magazine', /別冊少年Magazine/], ['Young Magazine', /Young Magazine/], ['Morning', /Morning/], ['Afternoon', /Afternoon/], ['Kiss', /Kiss/], ['BE·LOVE', /BE·LOVE/], ['Nakayoshi', /Nakayoshi/], ['Evening', /Evening/],
+  ['花與夢', /花與夢/], ['Young Animal', /Young Animal/],
+  ['週刊少年Champion', /Champion/], ['月刊少年Gangan', /Gangan/], ['Harta', /Harta/], ['Margaret', /Margaret/], ['少女Comic', /少女Comic/], ['Cookie', /Cookie/], ['FEEL YOUNG', /FEEL YOUNG/], ['月刊Comic Beam', /Comic Beam/], ['中國時報（四格）', /中國時報/],
+];
+
+// ---- 狀態 ----
+const S = { region:'all', demos:new Set(), genres:new Set(), mag:'', recOnly:false, hitOnly:false, scope:'all', mode:'start', lo:YMIN, hi:YMAX, view:'cards', q:'' };
+let visibleAuthors = [];
+const HIT_K = { oricon:['榜單','hk-oricon'], circ:['發行量','hk-circ'], est:['估計','hk-est'], era:['印象','hk-era'], tw:['台灣','hk-tw'] };
+const workHits = w => (typeof HITS!=='undefined' && HITS[w.t]) ? HITS[w.t] : null;
+
+// 把暢銷層併進主資料：新增作者 + 依標題附掛 hits
+function mergeHits(){
+  if (typeof EXT_AUTHORS!=='undefined') EXT_AUTHORS.forEach(a=>{ if(!AUTHORS.some(x=>x.id===a.id)) AUTHORS.push(a); });
+  AUTHORS.forEach(a=>a.works.forEach(w=>{ const h=workHits(w); if (h) w.hits=h; }));
+}
+function fmtCopies(n){ if (n==null) return '—'; if (n>=100000000) return (n/100000000).toFixed(2).replace(/\.?0+$/,'')+' 億部'; return Math.round(n/10000).toLocaleString('zh-TW')+' 萬部'; }
+function hitPill(h){
+  const [lab,cls] = HIT_K[h.k] || [h.k,''];
+  let txt='';
+  if (h.k==='oricon') txt = `${h.y} 第 ${h.r}${h.n?'：'+h.n:''}`;
+  else if (h.k==='circ') txt = `${h.n}（${h.s||'累計'}，截至 ${h.d||'—'}）`;
+  else if (h.k==='est') txt = `${h.n}，彙整站數字未查證`;
+  else if (h.k==='era') txt = h.t;
+  else if (h.k==='tw') txt = `${h.y?h.y+'：':''}${h.t}`;
+  return `<span class="hp ${cls}"><b>${lab}</b>${esc(txt)}${h.src?` <a href="${esc(h.src)}" target="_blank" rel="noopener" title="來源">↗</a>`:''}</span>`;
+}
+
+// ---- 工具 ----
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} },
+};
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function fmtYears(w){
+  let end;
+  if (w.e === null) end = w.hiatus ? '休載' : '今';
+  else if (w.e === w.s) end = '';
+  else end = String(w.e);
+  const txt = end ? `${w.s}–${end}` : `${w.s}`;
+  return w.approx ? `<span class="approx" title="年份待查證，可能差一兩年">約${txt}</span>` : txt;
+}
+const demoLabel = k => DEMO[k] ? DEMO[k].label : k;
+const authorYears = a => {
+  const ss = a.works.map(w=>w.s), es = a.works.map(w=>w.e===null?NOW:w.e);
+  return [Math.min(...ss), Math.max(...es), a.works.some(w=>w.e===null)];
+};
+const workGenres = a => { const s=new Set(); a.works.forEach(w=>w.g.forEach(g=>s.add(g))); return Array.from(s); };
+
+// ---- 篩選邏輯 ----
+function magMatch(w){
+  if (!S.mag) return true;
+  const [kind, val] = [S.mag.slice(0,1), S.mag.slice(2)];
+  if (kind==='m'){ const m = MAGS.find(x=>x[0]===val); return m ? m[1].test(w.mag) : false; }
+  return (w.pub||'').includes(val) || (w.tw||'').includes(val);
+}
+function yearMatch(w){
+  if (S.mode==='start') return w.s >= S.lo && w.s <= S.hi;
+  const e = w.e===null ? NOW : w.e;
+  return w.s <= S.hi && e >= S.lo;
+}
+function baseMatch(w){ // 年代以外的條件
+  if (S.demos.size && !S.demos.has(w.demo)) return false;
+  if (S.genres.size && !w.g.some(g=>S.genres.has(g))) return false;
+  if (!magMatch(w)) return false;
+  if (S.recOnly && !w.rec) return false;
+  if (S.hitOnly && !w.hits) return false;
+  return true;
+}
+function searchAuthor(a){
+  if (!S.q) return { author:true, works:null };
+  const q = S.q.toLowerCase();
+  if ((a.name+' '+(a.alt||'')).toLowerCase().includes(q)) return { author:true, works:null };
+  const ws = a.works.filter(w=>(w.t+' '+(w.o||'')).toLowerCase().includes(q));
+  return { author: ws.length>0, works: new Set(ws) };
+}
+function evalAuthor(a){
+  if (S.region!=='all' && a.region!==S.region) return null;
+  if (S.scope==='core' && a.ext) return null;
+  if (S.scope==='ext' && !a.ext) return null;
+  const sr = searchAuthor(a); if (!sr.author) return null;
+  const inRange = [], outRange = [];
+  for (const w of a.works){
+    if (sr.works && !sr.works.has(w)) continue;
+    if (!baseMatch(w)) continue;
+    (yearMatch(w) ? inRange : outRange).push(w);
+  }
+  if (!inRange.length) return null;
+  return { a, inRange, outRange };
+}
+
+// ---- 建 UI ----
+function chip(label, attrs={}, cnt){
+  const b = document.createElement('button');
+  b.className = 'chip'; b.type='button'; b.setAttribute('aria-pressed','false');
+  b.innerHTML = esc(label) + (cnt!=null ? `<span class="cnt num">${cnt}</span>` : '');
+  Object.entries(attrs).forEach(([k,v])=>b.setAttribute(k,v));
+  return b;
+}
+function buildControls(){
+  // 地區
+  const rc = $('#regionChips');
+  [['all','全部'],['jp','日本'],['tw','台灣']].forEach(([v,l])=>{
+    const n = v==='all' ? AUTHORS.length : AUTHORS.filter(a=>a.region===v).length;
+    const b = chip(l, {'data-v':v}, n); if (v==='all') b.setAttribute('aria-pressed','true');
+    b.onclick = ()=>{ S.region=v; $$('#regionChips .chip').forEach(x=>x.setAttribute('aria-pressed', x.dataset.v===v)); render(); };
+    rc.appendChild(b);
+  });
+  // 讀者群
+  const dc = $('#demoChips');
+  DEMO_ORDER.forEach(k=>{
+    const n = AUTHORS.reduce((s,a)=>s+a.works.filter(w=>w.demo===k).length,0);
+    const b = chip(demoLabel(k)+' '+DEMO[k].en, {'data-v':k}, n); b.classList.add('demo-chip'); b.style.setProperty('--c', `var(${DEMO_VAR[k]})`);
+    b.onclick = ()=>{ S.demos.has(k)?S.demos.delete(k):S.demos.add(k); b.setAttribute('aria-pressed', S.demos.has(k)); render(); };
+    dc.appendChild(b);
+  });
+  // 題材
+  const gc = $('#genreChips');
+  const gcount = {}; AUTHORS.forEach(a=>a.works.forEach(w=>w.g.forEach(g=>gcount[g]=(gcount[g]||0)+1)));
+  Object.entries(GENRES).sort((x,y)=>gcount[y[0]]-gcount[x[0]]).forEach(([k,l])=>{
+    const b = chip(l, {'data-v':k}, gcount[k]||0);
+    b.onclick = ()=>{ S.genres.has(k)?S.genres.delete(k):S.genres.add(k); b.setAttribute('aria-pressed', S.genres.has(k)); render(); };
+    gc.appendChild(b);
+  });
+  // 雜誌／出版社
+  const sel = $('#magSel');
+  const mcount = MAGS.map(([n,re])=>[n, AUTHORS.reduce((s,a)=>s+a.works.filter(w=>re.test(w.mag)).length,0)]).filter(x=>x[1]>0);
+  const pcount = {}; AUTHORS.forEach(a=>a.works.forEach(w=>{
+    String(w.pub||'').split(/ → |、| 等|,/).map(s=>s.trim()).filter(Boolean).forEach(p=>pcount[p]=(pcount[p]||0)+1);
+    if (w.tw) String(w.tw).split(/ → /).map(s=>s.trim()).forEach(p=>pcount[p]=(pcount[p]||0)+1);
+  }));
+  const pubs = Object.entries(pcount).filter(x=>x[1]>=2).sort((x,y)=>y[1]-x[1]);
+  sel.innerHTML = `<option value="">全部雜誌／出版社</option>
+    <optgroup label="連載雜誌（日本）">${mcount.map(([n,c])=>`<option value="m:${esc(n)}">${esc(n)}（${c}）</option>`).join('')}</optgroup>
+    <optgroup label="出版社（日本原出版社＋台灣出版社）">${pubs.map(([n,c])=>`<option value="p:${esc(n)}">${esc(n)}（${c}）</option>`).join('')}</optgroup>`;
+  sel.onchange = ()=>{ S.mag = sel.value; render(); };
+  $('#recOnly').onchange = e=>{ S.recOnly = e.target.checked; render(); };
+  $('#hitOnly').onchange = e=>{ S.hitOnly = e.target.checked; render(); };
+  $$('#scopeSeg button').forEach(b=>b.onclick=()=>{ S.scope=b.dataset.v; $$('#scopeSeg button').forEach(x=>x.setAttribute('aria-pressed', x===b)); render(); });
+  $('#search').oninput = e=>{ S.q = e.target.value.trim(); render(); };
+  $('#modeStart').onclick = ()=>setMode('start'); $('#modeActive').onclick = ()=>setMode('active');
+  $('#viewCards').onclick = ()=>setView('cards'); $('#viewTimeline').onclick = ()=>setView('timeline');
+  $('#reset').onclick = resetAll;
+  // 年代
+  const lo=$('#lo'), hi=$('#hi');
+  const onRange = ()=>{ let a=+lo.value, b=+hi.value; if (a>b){ [a,b]=[b,a]; } S.lo=a; S.hi=b; updateRangeUI(); render(); };
+  lo.oninput = onRange; hi.oninput = onRange;
+  // 預設按鈕
+  const pr = $('#presets');
+  const presets = [['全部',YMIN,YMAX],['50–60s',1950,1969],['70s',1970,1979],['80s',1980,1989],['90s',1990,1999],['00s',2000,2009],['10s',2010,2019],['20s',2020,YMAX]];
+  presets.forEach(([l,a,b])=>{ const x=document.createElement('button'); x.type='button'; x.textContent=l; x.onclick=()=>{ lo.value=a; hi.value=b; onRange(); }; pr.appendChild(x); });
+  // 刻度
+  const tk=$('#ticks');
+  for (let y=1950;y<=2020;y+=10){ const s=document.createElement('span'); s.textContent=y; s.style.left=((y-YMIN)/(YMAX-YMIN)*100)+'%'; tk.appendChild(s); }
+  // 直方圖
+  const h=$('#histo'); const byYear = new Array(YMAX-YMIN+1).fill(0);
+  AUTHORS.forEach(a=>a.works.forEach(w=>byYear[w.s-YMIN]++));
+  const mx = Math.max(...byYear);
+  byYear.forEach((n,i)=>{ const b=document.createElement('i'); b.style.height=(n?Math.max(2,n/mx*26):1)+'px'; b.dataset.y=YMIN+i; b.title=`${YMIN+i}：${n} 部開始連載`; h.appendChild(b); });
+  updateRangeUI();
+}
+function updateRangeUI(){
+  $('#rangeLo').textContent=S.lo; $('#rangeHi').textContent=S.hi;
+  const p = y=> (y-YMIN)/(YMAX-YMIN)*100;
+  const f=$('#fill'); f.style.left=p(S.lo)+'%'; f.style.width=(p(S.hi)-p(S.lo))+'%';
+  $$('#histo i').forEach(b=>{ const y=+b.dataset.y; b.classList.toggle('in', y>=S.lo && y<=S.hi); });
+  const n = AUTHORS.reduce((s,a)=>s+a.works.filter(w=>w.s>=S.lo&&w.s<=S.hi).length,0);
+  $('#rangeCnt').textContent = `${n} 部在這段開始連載`;
+}
+function setMode(m){ S.mode=m; $('#modeStart').setAttribute('aria-pressed',m==='start'); $('#modeActive').setAttribute('aria-pressed',m==='active'); render(); }
+function setView(v){ S.view=v; $('#viewCards').setAttribute('aria-pressed',v==='cards'); $('#viewTimeline').setAttribute('aria-pressed',v==='timeline'); $('#cards').hidden = v!=='cards'; $('#timeline').hidden = v!=='timeline'; render(); }
+function resetAll(){
+  S.region='all'; S.demos.clear(); S.genres.clear(); S.mag=''; S.recOnly=false; S.hitOnly=false; S.scope='all'; S.q=''; S.lo=YMIN; S.hi=YMAX; S.mode='start';
+  $$('#regionChips .chip').forEach(x=>x.setAttribute('aria-pressed', x.dataset.v==='all'));
+  $$('#demoChips .chip, #genreChips .chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+  $$('#scopeSeg button').forEach(x=>x.setAttribute('aria-pressed', x.dataset.v==='all'));
+  $('#magSel').value=''; $('#recOnly').checked=false; $('#hitOnly').checked=false; $('#search').value=''; $('#lo').value=YMIN; $('#hi').value=YMAX;
+  $('#modeStart').setAttribute('aria-pressed',true); $('#modeActive').setAttribute('aria-pressed',false);
+  updateRangeUI(); render();
+}
+
+// ---- 靜態區塊 ----
+function buildStatic(){
+  const nA=AUTHORS.length, nW=AUTHORS.reduce((s,a)=>s+a.works.length,0), nR=AUTHORS.reduce((s,a)=>s+a.works.filter(w=>w.rec).length,0);
+  const nJ=AUTHORS.filter(a=>a.region==='jp').length, nT=nA-nJ;
+  const nRes = (typeof RESOURCES!=='undefined') ? RESOURCES.length : 0;
+  const nExt = AUTHORS.filter(a=>a.ext).length, nHit = AUTHORS.reduce((s,a)=>s+a.works.filter(w=>w.hits).length,0);
+  $('#meta').innerHTML = `<span><b class="num">${nA}</b>位作者（精選 ${nA-nExt}＋暢銷擴充 ${nExt}；日 ${nJ}・台 ${nT}）</span><span><b class="num">${nW}</b>部作品</span><span><b class="num">${nR}</b>部 <span class="star">★</span>入門推薦</span><span><b class="num">${nHit}</b>部有<span class="hitpill">暢</span>紀錄</span><span><b class="num">${nRes}</b>個資源</span><span>v1.2 · 2026-09-16</span>`;
+  // 起手
+  const sg=$('#startGroups');
+  START.forEach(g=>{
+    const isTw = g.demo==='tw';
+    const div=document.createElement('div'); div.className='start-group'; div.style.setProperty('--g', isTw?'var(--ink)':`var(${DEMO_VAR[g.demo]})`);
+    div.innerHTML = `<h3>${isTw?'台灣漫畫':demoLabel(g.demo)} <span class="en">${isTw?'Taiwan':DEMO[g.demo].en}</span></h3><ul class="start-list"></ul>`;
+    const ul=$('ul',div);
+    g.items.forEach(([id,t])=>{
+      const a=AUTHORS.find(x=>x.id===id); const w=a.works.find(x=>x.t===t);
+      const li=document.createElement('li'); const b=document.createElement('button'); b.type='button'; b.className='start-item';
+      b.innerHTML = `<span class="t">${esc(w.t)}</span><span class="a">${esc(a.name)}</span><span class="y num">${fmtYears(w)}${w.vols?` · ${w.vols} 卷`:''}</span><span class="w">${esc(w.why||'')}</span>`;
+      b.onclick=()=>openAuthor(a.id, w.t); li.appendChild(b); ul.appendChild(li);
+    });
+    sg.appendChild(div);
+  });
+  // 讀者群說明
+  const dg=$('#demoGrid');
+  DEMO_ORDER.forEach(k=>{ const d=document.createElement('div'); d.className='demo-card'; d.style.setProperty('--c',`var(${DEMO_VAR[k]})`); d.style.setProperty('--cb',`var(${DEMO_VAR[k]}-bg)`);
+    d.innerHTML=`<h4>${demoLabel(k)} <span class="en">${DEMO[k].en}</span></h4><p>${esc(DEMO[k].desc)}</p>`; dg.appendChild(d); });
+  // 圖例
+  $('#legend').innerHTML = DEMO_ORDER.map(k=>`<span style="--c:var(${DEMO_VAR[k]})"><i></i>${demoLabel(k)}</span>`).join('') + `<span><span class="star">★</span>入門推薦</span><span style="opacity:.6">淡色＝年代範圍外</span>`;
+  // 候補
+  $('#backlog').innerHTML = `<div><b>日本</b><ul>${BACKLOG.jp.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div><b>台灣</b><ul>${BACKLOG.tw.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
+}
+
+// ---- 渲染 ----
+function render(){
+  const rows = AUTHORS.map(evalAuthor).filter(Boolean);
+  rows.sort((x,y)=> Math.min(...x.inRange.map(w=>w.s)) - Math.min(...y.inRange.map(w=>w.s)));
+  visibleAuthors = rows.map(r=>r.a);
+  const nW = rows.reduce((s,r)=>s+r.inRange.length,0);
+  $('#count').innerHTML = `${rows.length} 位作者 <small>${nW} 部作品符合</small>`;
+  if (S.view==='cards') renderCards(rows); else renderTimeline(rows);
+}
+function tagsHTML(a, demos){
+  const ds = demos || Array.from(new Set(a.works.map(w=>w.demo)));
+  return `<span class="tag region ${a.region}">${REGION[a.region]}</span>` +
+    ds.map(k=>`<span class="tag demo" style="--c:var(${DEMO_VAR[k]});--cb:var(${DEMO_VAR[k]}-bg)">${demoLabel(k)}</span>`).join('') +
+    workGenres(a).slice(0,6).map(g=>`<span class="tag">${GENRES[g]}</span>`).join('');
+}
+function renderCards(rows){
+  const el=$('#cards'); el.innerHTML='';
+  if (!rows.length){ el.innerHTML=`<div class="empty" style="grid-column:1/-1">這個條件下沒有作品。試試放寬年代，或把「年代比對」切成「連載中」。</div>`; return; }
+  const frag=document.createDocumentFragment();
+  rows.forEach(({a,inRange,outRange})=>{
+    const [y0,y1,ongoing]=authorYears(a);
+    const card=document.createElement('button'); card.type='button'; card.className='card'; card.style.setProperty('--c',`var(${DEMO_VAR[a.demo]})`);
+    card.setAttribute('aria-label', `${a.name}，開啟詳情`);
+    const list = inRange.slice().sort((x,y)=>x.s-y.s).map(w=>`<li><span class="wy num">${fmtYears(w)}</span><span><span class="wt">${w.rec?'<span class="star">★</span>':''}${esc(w.t)}</span>${w.hits?'<span class="hitpill" title="有暢銷紀錄">暢</span>':''}<span class="wm">${esc(w.mag.split(' → ')[0].split('（')[0])}</span></span></li>`);
+    const outs = outRange.slice().sort((x,y)=>x.s-y.s);
+    const MAXOUT = Math.max(0, 5-list.length);
+    outs.slice(0,MAXOUT).forEach(w=>list.push(`<li class="out"><span class="wy num">${fmtYears(w)}</span><span><span class="wt">${esc(w.t)}</span></span></li>`));
+    if (outs.length>MAXOUT) list.push(`<li class="out"><span class="wy"></span><span class="more">另有 ${outs.length-MAXOUT} 部在年代範圍外</span></li>`);
+    card.innerHTML = `<div class="stripe"></div><div class="body">
+      <div class="name"><b>${esc(a.name)}</b><span class="alt">${esc((a.alt||'').split(' / ').pop())}</span>${a.ext?'<span class="tag ext" title="為暢銷層新增的作者">暢銷擴充</span>':''}</div>
+      <div class="years num">${a.born?`${a.born}${a.died?`–${a.died}`:'–'} · `:''}活躍 ${y0}–${ongoing?'→':y1}</div>
+      <div class="tags">${tagsHTML(a)}</div>
+      <p class="intro">${esc(a.intro)}</p>
+      <ul class="wlist">${list.join('')}</ul></div><span class="open">OPEN ↗</span>`;
+    card.onclick=()=>openAuthor(a.id);
+    frag.appendChild(card);
+  });
+  el.appendChild(frag);
+}
+
+// 年代軸
+function packLanes(works){
+  const lanes=[]; const out=[];
+  works.slice().sort((x,y)=>x.s-y.s).forEach(w=>{
+    const e = w.e===null?NOW:w.e;
+    let li = lanes.findIndex(last => w.s > last);
+    if (li<0){ li=lanes.length; lanes.push(e); } else lanes[li]=e;
+    out.push([w,li]);
+  });
+  return [out, lanes.length];
+}
+function renderTimeline(rows){
+  const el=$('#timeline'); el.innerHTML='';
+  if (!rows.length){ el.innerHTML=`<div class="empty">這個條件下沒有作品。試試放寬年代，或把「年代比對」切成「連載中」。</div>`; return; }
+  const wrapW = el.clientWidth || 1200; const labw = wrapW<700?120:170;
+  const ppy = Math.max(11, Math.floor((wrapW - labw - 24)/(YMAX-YMIN+1)));
+  const totalW = ppy*(YMAX-YMIN+1);
+  const wrap=document.createElement('div'); wrap.className='tl-wrap';
+  const tl=document.createElement('div'); tl.className='tl'; tl.style.setProperty('--labw',labw+'px'); tl.style.setProperty('--ppy',ppy+'px'); tl.style.width=(labw+totalW)+'px';
+  // 軸
+  let axis=''; for (let y=1950;y<=2020;y+=10) axis+=`<span style="left:${(y-YMIN)*ppy}px${y===YMIN?';transform:none':''}">${y}</span>`;
+  tl.innerHTML=`<div class="tl-head"><div class="corner">作者 / 年代</div><div class="tl-axis" style="width:${totalW}px">${axis}</div></div>`;
+  // 分組（依作者主要讀者群）
+  const groups = {}; rows.forEach(r=>{ (groups[r.a.demo] ||= []).push(r); });
+  const outl = (S.lo-YMIN)*ppy, outr = (YMAX-S.hi)*ppy;
+  DEMO_ORDER.forEach(k=>{
+    const rs = groups[k]; if (!rs) return;
+    const g=document.createElement('div'); g.className='tl-group'; g.style.setProperty('--c',`var(${DEMO_VAR[k]})`); g.style.setProperty('--cb',`var(${DEMO_VAR[k]}-bg)`);
+    g.innerHTML=`<div class="glabel">${demoLabel(k)} ${DEMO[k].en}</div><div class="gfill"></div>`; tl.appendChild(g);
+    rs.forEach(({a,inRange,outRange})=>{
+      const shown = inRange.concat(outRange);
+      const [placed, nl] = packLanes(shown);
+      const row=document.createElement('div'); row.className='tl-row'; row.tabIndex=0; row.setAttribute('role','button');
+      row.innerHTML=`<div class="lab">${a.region==='tw'?'<span class="tag region" style="align-self:flex-start;margin-bottom:2px">台灣</span>':''}${esc(a.name)}<small class="num">${a.born?`b.${a.born}`:''}</small></div><div class="lanes" style="height:${nl*24+6}px;--outl:${outl}px;--outr:${outr}px"></div>`;
+      const lanes=$('.lanes',row);
+      placed.forEach(([w,li])=>{
+        const e = w.e===null?NOW:w.e; const left=(w.s-YMIN)*ppy; const width=Math.max(ppy,(e-w.s+1)*ppy);
+        const b=document.createElement('div'); b.className='bar'+(w.e===null&&!w.hiatus?' ongoing':'')+(w.rec?' rec':'')+(inRange.includes(w)?'':' dim');
+        b.style.cssText=`left:${left}px;width:${width}px;top:${li*24+3}px;--c:var(${DEMO_VAR[w.demo]})`;
+        b.title=`${w.t}（${w.s}–${w.e===null?(w.hiatus?'休載':'連載中'):w.e}）· ${w.mag}`;
+        b.textContent = (w.hits?'◆':'') + (width>=ppy*3 ? w.t : (width>=ppy*1.5 ? w.t.slice(0,2) : ''));
+        lanes.appendChild(b);
+      });
+      row.onclick=()=>openAuthor(a.id); row.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openAuthor(a.id);} };
+      tl.appendChild(row);
+    });
+  });
+  wrap.appendChild(tl); el.appendChild(wrap);
+  const note=document.createElement('p'); note.className='tl-note'; note.textContent='橫條＝連載期間（同一位作者同時期的作品會疊成多行）；紅框＝★ 入門推薦；◆＝有暢銷紀錄；灰底＝拉桿範圍外；箭頭＝連載中。點任一列開啟作者。';
+  el.appendChild(note);
+}
+
+// ---- 詳情 ----
+function openAuthor(id, hlTitle){
+  const a=AUTHORS.find(x=>x.id===id); if(!a) return;
+  const list = visibleAuthors.length ? visibleAuthors : AUTHORS;
+  const idx = list.findIndex(x=>x.id===id);
+  const prev = idx>0 ? list[idx-1] : null, next = idx>=0 && idx<list.length-1 ? list[idx+1] : null;
+  const [y0,y1,ongoing]=authorYears(a);
+  const rowsHTML = a.works.slice().sort((x,y)=>x.s-y.s).map(w=>`<tr class="${hlTitle===w.t?'hl':''}">
+    <td class="y num">${fmtYears(w)}</td>
+    <td class="t"><b>${w.rec?'<span class="star">★</span>':''}${esc(w.t)}</b>${w.hits?'<span class="hitpill">暢</span>':''}${w.o&&w.o!==w.t?`<span class="o">${esc(w.o)}</span>`:''}${w.why?`<span class="why">${esc(w.why)}</span>`:''}${w.note?`<span class="note">${esc(w.note)}</span>`:''}${w.hits?`<span class="hits">${w.hits.map(hitPill).join('')}</span>`:''}</td>
+    <td><span class="tag demo" style="--c:var(${DEMO_VAR[w.demo]});--cb:var(${DEMO_VAR[w.demo]}-bg)">${demoLabel(w.demo)}</span></td>
+    <td>${esc(w.mag)}<br><span style="color:var(--ink-faint);font-size:.78rem">${esc(w.pub)}</span></td>
+    <td>${w.g.map(g=>`<span class="tag">${GENRES[g]}</span>`).join(' ')}</td>
+    <td>${esc(w.tw||(a.region==='tw'?w.pub:'—'))}</td>
+    <td class="num">${w.vols?`${w.vols} 卷`:(w.e===null?'連載中':'—')}</td></tr>`).join('');
+  const kw = a.works.filter(w=>w.rec).map(w=>w.t).slice(0,3);
+  $('#dlg').innerHTML = `<button class="close" id="dlgClose" aria-label="關閉">✕</button>
+    <div class="dhead" style="--c:var(${DEMO_VAR[a.demo]})"><h2 id="dlgTitle">${esc(a.name)}</h2><div class="alt">${esc(a.alt||'')}${a.born?` · ${a.born}${a.died?`–${a.died}`:'–'}`:''} · 活躍 ${y0}–${ongoing?'→':y1}</div><div class="tags">${tagsHTML(a)}</div></div>
+    <p class="intro">${esc(a.intro)}</p>
+    <div class="tblwrap"><table><thead><tr><th>連載年</th><th>作品</th><th>讀者群</th><th>連載雜誌／原出版社</th><th>題材</th><th>台灣出版</th><th>卷數</th></tr></thead><tbody>${rowsHTML}</tbody></table></div>
+    <div class="lib">圖書館電子書搜尋關鍵字建議：${kw.length?kw.map(k=>`<code>${esc(k)}</code>`).join(' '):`<code>${esc(a.name)}</code>`}${a.works.some(w=>w.tw)?`　加上出版社名（${Array.from(new Set(a.works.map(w=>w.tw).filter(Boolean))).map(esc).join('／')}）通常更準。`:''}</div>
+    <div class="nav"><button id="dlgPrev" ${prev?'':'disabled'}>← ${prev?esc(prev.name):''}</button><button id="dlgNext" ${next?'':'disabled'}>${next?esc(next.name):''} →</button></div>`;
+  const m=$('#modal'); m.setAttribute('open',''); document.body.style.overflow='hidden';
+  $('#dlgClose').onclick=closeModal; if(prev) $('#dlgPrev').onclick=()=>openAuthor(prev.id); if(next) $('#dlgNext').onclick=()=>openAuthor(next.id);
+  $('#dlg').scrollTop=0; $('#dlgClose').focus();
+}
+function closeModal(){ $('#modal').removeAttribute('open'); document.body.style.overflow=''; }
+
+// ---- 各年代大家在看什麼（暢銷層） ----
+const H = { dec: '1990s' };
+function decadeOf(y){ const d = DECADES.find(([,a,b])=>y>=a&&y<=b); return d?d[0]:null; }
+function oriconYearsOf(h){ // 'y' 可能是 '2008–2012、2014–2018' 這種字串
+  const ys=[]; String(h.y).split(/[、,]/).forEach(p=>{ const m=p.match(/(\d{4})\s*[–-]\s*(\d{4})/); if(m){ for(let y=+m[1];y<=+m[2];y++) ys.push(y);} else { const n=parseInt(p,10); if(n) ys.push(n);} }); return ys;
+}
+function hitsByDecade(){
+  const map = {}; DECADES.forEach(([k])=>map[k]=new Map());
+  AUTHORS.forEach(a=>a.works.forEach(w=>{
+    if (!w.hits) return;
+    const decs = new Set(); let bestRank = {};
+    w.hits.forEach(h=>{
+      if (h.k==='oricon') oriconYearsOf(h).forEach(y=>{ const d=decadeOf(y); if(d){ decs.add(d); bestRank[d]=Math.min(bestRank[d]||99, +String(h.r).replace(/\D/g,'')||99); } });
+      else if (h.k==='tw' && h.y){ const d=decadeOf(+h.y); if(d) decs.add(d); }
+    });
+    const sd = decadeOf(w.s); if (sd) decs.add(sd);
+    decs.forEach(d=>{
+      const circ = w.hits.find(h=>h.k==='circ'), est = w.hits.find(h=>h.k==='est');
+      const copies = circ ? parseCopies(circ.n) : (est ? parseCopies(est.n) : 0);
+      map[d].set(w.t, { w, a, rank: bestRank[d]||99, copies, inDec: decadeOf(w.s)===d });
+    });
+  }));
+  return map;
+}
+function parseCopies(s){ if(!s) return 0; const m=String(s).replace(/,/g,'').match(/([\d.]+)\s*(億|萬)/); if(!m) return 0; return parseFloat(m[1])*(m[2]==='億'?1e8:1e4); }
+function buildHitsSection(){
+  const tabs=$('#decTabs'); tabs.innerHTML='';
+  DECADES.forEach(([k])=>{ const b=chip(k.replace('s',' 年代').replace('1950-60','1950–60'), {'data-v':k}); b.onclick=()=>{ H.dec=k; renderDecade(); }; tabs.appendChild(b); });
+  $('#hitLegend').innerHTML = Object.entries(HIT_K).map(([k,[lab,cls]])=>`<span class="hp ${cls}"><b>${lab}</b>${{oricon:'Oricon 年間作品別榜（2008–2022），硬數據',circ:'出版社／媒體公布的累計發行部數，附日期，會一直長',est:'彙整站數字，沒有一手出處，只當量級參考',era:'榜單前的年代，用動畫化與社會現象佐證',tw:'博客來、金石堂或 Openbook 轉述'}[k]}</span>`).join('');
+  renderDecade();
+}
+function renderDecade(){
+  const k=H.dec; $$('#decTabs .chip').forEach(x=>x.setAttribute('aria-pressed', x.dataset.v===k));
+  $('#decNote').textContent = ERA_NOTES[k]||'';
+  const [,y0,y1] = DECADES.find(d=>d[0]===k);
+  // Oricon 表
+  const years = Object.keys(ORICON).map(Number).filter(y=>y>=y0&&y<=y1);
+  let tbl='';
+  if (years.length){
+    tbl = `<div class="tblwrap"><table class="oricon"><thead><tr><th>年</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody>` +
+      years.map(y=>`<tr><td class="y num"><a href="${esc(ORICON[y].src)}" target="_blank" rel="noopener" title="來源">${y}</a></td>${ORICON[y].rows.map(([t,n],i)=>`<td><button type="button" class="olink" data-t="${esc(t)}"><b>${esc(t)}</b><small class="num">${fmtCopies(n)}</small></button></td>`).join('')}</tr>`).join('') + `</tbody></table></div>`;
+    const tk = ORICON_TANKAN.filter(x=>x.y>=y0&&x.y<=y1);
+    if (tk.length) tbl += `<p class="oricon-note">2023 年起 Oricon 不再公開「作品別」年榜，只剩單卷榜（以下為轉載，未直接確認）：${tk.map(x=>`<b class="num">${x.y}</b> ${x.rows.map(([t,n])=>`${esc(t)}${n?`（${fmtCopies(n)}）`:''}`).join('、')}`).join('；')}。</p>`;
+  } else {
+    tbl = `<p class="oricon-note">這個年代還沒有公開的年度銷量榜（Oricon 從 2008 年才開始），下面的「暢銷」用發行量、動畫化與社會現象來看。</p>`;
+  }
+  $('#oriconBox').innerHTML = tbl;
+  $$('#oriconBox .olink').forEach(b=>b.onclick=()=>{ const t=b.dataset.t.replace(/（.*）$/,''); const hit = AUTHORS.find(a=>a.works.some(w=>w.t===t)); if (hit) openAuthor(hit.id, t); });
+  // 暢銷作品卡
+  const m = hitsByDecade()[k];
+  const items = Array.from(m.values()).sort((x,y)=> (x.rank-y.rank) || (y.copies-x.copies) || (x.w.s-y.w.s));
+  const grid=$('#decGrid'); grid.innerHTML='';
+  items.forEach(({w,a,inDec})=>{
+    const card=document.createElement('button'); card.type='button'; card.className='hcard'; card.style.setProperty('--c',`var(${DEMO_VAR[w.demo]})`); card.style.setProperty('--cb',`var(${DEMO_VAR[w.demo]}-bg)`);
+    const hs = w.hits.filter(h=> h.k==='oricon' ? oriconYearsOf(h).some(y=>y>=y0&&y<=y1) : (h.k==='tw' && h.y ? (inDec || (+h.y>=y0 && +h.y<=y1)) : true));
+    card.innerHTML = `<div class="hh"><b>${esc(w.t)}</b><span class="tag demo">${demoLabel(w.demo)}</span>${a.region==='tw'?'<span class="tag region">台灣</span>':''}${inDec?'':'<span class="tag" title="在這個年代開始連載之前就已連載">跨年代</span>'}</div>
+      <div class="ha">${esc(a.name)} · <span class="num">${fmtYears(w)}</span>${w.vols?` · ${w.vols} 卷`:''}</div>
+      <div class="hl">${hs.map(hitPill).join('')}</div>`;
+    card.onclick=()=>openAuthor(a.id, w.t);
+    grid.appendChild(card);
+  });
+  $('#decCount').textContent = `${items.length} 部`;
+  // 台灣通路
+  const tw = TW_HITS.filter(x=>x.y>=y0&&x.y<=y1);
+  $('#twBox').hidden = !tw.length;
+  $('#twBox').innerHTML = tw.length ? `<h4>台灣通路這幾年在賣什麼</h4><ul>${tw.map(x=>`<li><b class="num">${x.y}</b> ${esc(x.t)} <a href="${esc(x.src)}" target="_blank" rel="noopener">↗</a> <span class="vf ${x.ok?'':'no'}">${x.ok?'✓ 頁面已確認':'△ 媒體轉述'}</span></li>`).join('')}</ul>` : '';
+}
+
+// ---- 找漫畫資源 ----
+const R = { region:'tw', group:'library' };
+const RES_INTRO = {
+  tw: '台灣這邊的順序是：先用圖書館借（零成本），台漫用文策院的免費平台，確定想收藏再買。所有價格與時間都是 2026-09-15 當天看到的，會變。',
+  jp: '日本這邊最重要的是「從台灣能不能用」：出版社官方 app 的網頁版多半打得開，但幾個大型電子書店官方明寫限日本國內。把時間花在可用的那幾個就好。',
+};
+const TW_LABEL = { '可用':'從台灣可用', '部分':'部分可用', '限日':'限日本國內', '未確認':'可用性未確認' };
+function buildResources(){
+  $('#resTw').onclick = ()=>setResRegion('tw'); $('#resJp').onclick = ()=>setResRegion('jp');
+  $('#resDead').innerHTML = RES_DEAD.map(x=>`<li>${esc(x)}</li>`).join('');
+  setResRegion('tw');
+}
+function setResRegion(r){
+  R.region = r; R.group = RES_GROUPS[r][0][0];
+  $('#resTw').setAttribute('aria-pressed', r==='tw'); $('#resJp').setAttribute('aria-pressed', r==='jp');
+  $('#resIntro').textContent = RES_INTRO[r];
+  $('#resSteps').innerHTML = RES_STEPS[r].map(([n,t,d])=>`<li data-n="${n}"><b>${esc(t)}</b>${esc(d)}</li>`).join('');
+  const gc = $('#resGroups'); gc.innerHTML = '';
+  const all = chip('全部', {'data-v':'all'}, RESOURCES.filter(x=>x.region===r).length);
+  all.onclick = ()=>setResGroup('all'); gc.appendChild(all);
+  RES_GROUPS[r].forEach(([k,l])=>{
+    const n = RESOURCES.filter(x=>x.region===r && x.group===k).length;
+    const b = chip(l, {'data-v':k}, n); b.onclick = ()=>setResGroup(k); gc.appendChild(b);
+  });
+  $('#resLegend').innerHTML = (r==='jp'
+    ? `<span><span class="pill tw-可用">從台灣可用</span></span><span><span class="pill tw-部分">部分可用</span> 需日本帳號或部分作品買不到</span><span><span class="pill tw-限日">限日本國內</span> 官方明寫</span><span><span class="pill tw-未確認">可用性未確認</span> 官方頁沒寫</span>`
+    : `<span><span class="pill cost">免費（需借閱證）</span> 用圖書館借閱證登入</span><span><span class="pill cost">免費＋付費</span> 免費看一部分、要追新話才付</span><span><span class="pill cost">實體</span> 要出門</span>`)
+    + `<span style="margin-left:auto">卡片右下：<span class="vf">✓ 已查證</span>／<span class="vf no">△ 未直接確認</span></span>`;
+  setResGroup(R.group);
+}
+function setResGroup(k){
+  R.group = k;
+  $$('#resGroups .chip').forEach(x=>x.setAttribute('aria-pressed', x.dataset.v===k));
+  const list = RESOURCES.filter(x=>x.region===R.region && (k==='all' || x.group===k));
+  const grid = $('#resGrid'); grid.innerHTML = '';
+  if (!list.length){ grid.innerHTML = '<div class="res-empty">這一類還沒有資料。</div>'; return; }
+  const groupLabel = Object.fromEntries(RES_GROUPS[R.region]);
+  const frag = document.createDocumentFragment();
+  list.forEach(x=>{
+    const a = document.createElement('a'); a.className='res-card'; a.href=x.url; a.target='_blank'; a.rel='noopener';
+    a.innerHTML = `<div class="rh"><b>${esc(x.name)}</b><span class="pill cost">${esc(x.cost)}</span>${x.tw?`<span class="pill tw-${x.tw}">${TW_LABEL[x.tw]||x.tw}</span>`:''}${k==='all'?`<span class="pill">${esc(groupLabel[x.group]||x.group)}</span>`:''}</div>
+      <p>${esc(x.what)}</p>
+      <p class="how">${esc(x.how)}</p>
+      ${x.price?`<p class="price">${esc(x.price)}</p>`:''}
+      <div class="tags">${x.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
+      <div class="rf"><span class="vnote">${x.note?esc(x.note):''}</span><span class="vf ${x.ok?'':'no'}">${x.ok?'✓ 已查證 2026-09-15':'△ 未直接確認'}${x.conf==='low'?'（把握低）':''}</span></div>`;
+    frag.appendChild(a);
+  });
+  grid.appendChild(frag);
+}
+
+// ---- 主題 / 留白 ----
+function applyReserve(on){ document.documentElement.setAttribute('data-reserve', on?'on':'off'); $('#reserveBtn').setAttribute('aria-pressed', on); store.set('ma_reserve', on?'1':'0'); if (S.view==='timeline') render(); }
+function effectiveDark(){ const t=document.documentElement.getAttribute('data-theme'); if (t) return t==='dark'; return matchMedia('(prefers-color-scheme: dark)').matches; }
+function applyTheme(t){ if (t) document.documentElement.setAttribute('data-theme',t); else document.documentElement.removeAttribute('data-theme'); const d=effectiveDark(); $('#themeBtn').setAttribute('aria-pressed', d); $('#themeBtn').textContent = d ? '◑ 淺色' : '◐ 深色'; }
+
+// ---- 啟動 ----
+function init(){
+  mergeHits(); buildControls(); buildStatic(); buildHitsSection(); buildResources();
+  const rs = store.get('ma_reserve'); applyReserve(rs===null ? true : rs==='1');
+  const th = store.get('ma_theme'); applyTheme(th||null);
+  $('#reserveBtn').onclick=()=>applyReserve(document.documentElement.getAttribute('data-reserve')!=='on');
+  $('#themeBtn').onclick=()=>{ const next = effectiveDark()?'light':'dark'; store.set('ma_theme',next); applyTheme(next); };
+  $('#backdrop').onclick=closeModal;
+  document.addEventListener('keydown', e=>{ if (e.key==='Escape' && $('#modal').hasAttribute('open')) closeModal(); });
+  const fab=$('#fab'); fab.onclick=()=>$('#filters').scrollIntoView({behavior:'smooth',block:'start'});
+  const io = new IntersectionObserver(([en])=>fab.classList.toggle('show', !en.isIntersecting), {threshold:0}); io.observe($('#filters'));
+  let rt; addEventListener('resize', ()=>{ clearTimeout(rt); rt=setTimeout(()=>{ if (S.view==='timeline') render(); }, 150); });
+  render();
+}
+if (document.readyState==='loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+</script>
+
+</body></html>
