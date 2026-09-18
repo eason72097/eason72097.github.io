@@ -1,0 +1,440 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>爵士悅周邊慶生餐廳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F4F6F4; --surface:#FFFFFF; --surface2:#EAEEEA;
+  --ink:#1C231F; --ink2:#55605A; --ink3:#7E8A83;
+  --line:#DCE3DC; --line2:#C8D2C9;
+  --accent:#2C6B58; --accent-soft:#E1EFE8;
+  --warm:#9E6226; --warm-soft:#F5E9DB;
+  --alert:#8F4436; --alert-soft:#F5E3DF;
+  --font-display:'Noto Serif TC','Songti TC',serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'PingFang TC','Noto Sans TC','Microsoft JhengHei','Helvetica Neue',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121614; --surface:#1A1F1C; --surface2:#232A26;
+    --ink:#E7ECE7; --ink2:#A4AFA9; --ink3:#7C8781;
+    --line:#2B322E; --line2:#3A433D;
+    --accent:#72C2A4; --accent-soft:#1C2F28;
+    --warm:#D6A063; --warm-soft:#312619;
+    --alert:#DE8C7D; --alert-soft:#33211D;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121614; --surface:#1A1F1C; --surface2:#232A26;
+  --ink:#E7ECE7; --ink2:#A4AFA9; --ink3:#7C8781;
+  --line:#2B322E; --line2:#3A433D;
+  --accent:#72C2A4; --accent-soft:#1C2F28;
+  --warm:#D6A063; --warm-soft:#312619;
+  --alert:#DE8C7D; --alert-soft:#33211D;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--font-body); font-size:15px; line-height:1.75;
+  letter-spacing:.01em; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1060px; margin:0; padding-inline:20px; padding-block:40px 64px}
+@media (min-width:1400px){ .wrap{margin-left:56px} }
+
+h1,h2,h3{font-family:var(--font-display); font-weight:700; text-wrap:balance; margin:0; line-height:1.35}
+h1{font-size:clamp(26px,4.5vw,38px); letter-spacing:.02em}
+h2{font-size:20px; letter-spacing:.03em}
+h3{font-size:17px; letter-spacing:.02em}
+p{margin:0}
+a{color:inherit}
+
+.eyebrow{font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:14px}
+.lede{margin-top:14px; color:var(--ink2); max-width:62ch}
+.facts{
+  display:flex; flex-wrap:wrap; gap:0; margin-top:26px;
+  border:1px solid var(--line); border-radius:3px; background:var(--surface); overflow:hidden;
+}
+.fact{flex:1 1 180px; padding:14px 18px; border-right:1px solid var(--line)}
+.fact:last-child{border-right:none}
+.fact dt{font-size:11px; font-family:var(--font-mono); letter-spacing:.12em; text-transform:uppercase; color:var(--ink3)}
+.fact dd{margin:3px 0 0; font-size:14px; color:var(--ink)}
+@media (max-width:620px){ .fact{flex:1 1 100%; border-right:none; border-bottom:1px solid var(--line)} .fact:last-child{border-bottom:none} }
+
+section{margin-top:52px}
+.sec-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; padding-bottom:10px; border-bottom:2px solid var(--ink); margin-bottom:22px}
+.sec-head p{font-size:13px; color:var(--ink3)}
+
+.picks{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px}
+.pick{background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--accent); border-radius:2px; padding:20px}
+.pick .role{font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; color:var(--accent); text-transform:uppercase}
+.pick h3{margin:8px 0 6px}
+.pick .money{font-family:var(--font-mono); font-size:13px; color:var(--ink2); font-variant-numeric:tabular-nums}
+.pick p.why{margin-top:10px; font-size:14px; color:var(--ink2)}
+
+.filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px}
+.chip{
+  font:inherit; font-size:13px; cursor:pointer; padding:6px 14px; border-radius:999px;
+  border:1px solid var(--line2); background:transparent; color:var(--ink2); transition:.15s;
+}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--ink); border-color:var(--ink); color:var(--bg)}
+.chip:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:14px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:2px; padding:20px; display:flex; flex-direction:column; gap:12px}
+.card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px}
+.card h3{line-height:1.3}
+.card .sub{font-size:12.5px; color:var(--ink3); margin-top:3px}
+.kind{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; padding:3px 8px; border:1px solid var(--line2); border-radius:2px; color:var(--ink2); white-space:nowrap}
+.rows{display:flex; flex-direction:column; gap:6px; font-size:13.5px}
+.row{display:grid; grid-template-columns:52px 1fr; gap:10px; align-items:start}
+.row b{font-weight:400; color:var(--ink3); font-size:12px; letter-spacing:.06em; padding-top:2px}
+.row span{color:var(--ink2)}
+.row .num{font-family:var(--font-mono); font-variant-numeric:tabular-nums; color:var(--ink)}
+.row a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-soft)}
+.why{font-size:13.5px; color:var(--ink); background:var(--surface2); padding:11px 13px; border-radius:2px; line-height:1.7}
+.tags{display:flex; flex-wrap:wrap; gap:5px}
+.tag{font-size:11.5px; padding:2px 8px; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
+.tag.warm{background:var(--warm-soft); color:var(--warm)}
+.notes{margin:0; padding-left:16px; font-size:12.5px; color:var(--ink2); line-height:1.65}
+.notes li{margin-bottom:3px}
+.src{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.05em; color:var(--ink3); margin-top:auto; padding-top:10px; border-top:1px solid var(--line)}
+.src.official::before{content:"● "; color:var(--accent)}
+.src.media::before{content:"● "; color:var(--warm)}
+.src.unverified::before{content:"● "; color:var(--alert)}
+
+.checklist{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:0; border:1px solid var(--line); border-radius:2px; overflow:hidden; background:var(--surface)}
+.check{padding:16px 18px; border-bottom:1px solid var(--line)}
+.check b{display:block; font-size:14px; margin-bottom:4px}
+.check span{font-size:13px; color:var(--ink2)}
+.note-box{margin-top:18px; border-left:3px solid var(--warm); background:var(--warm-soft); padding:14px 16px; font-size:13.5px; color:var(--ink); border-radius:0 2px 2px 0}
+
+.legend{display:flex; flex-wrap:wrap; gap:18px; font-size:12.5px; color:var(--ink2); margin-bottom:14px}
+.legend span{display:inline-flex; align-items:center; gap:7px}
+.legend .dot{width:8px; height:8px; border-radius:50%; display:inline-block; flex:0 0 auto}
+footer{margin-top:52px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--ink3); line-height:1.8}
+footer a{color:var(--accent)}
+.hidden{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Zhubei · 2026.09.17</p>
+  <h1>爵士悅周邊慶生餐廳</h1>
+  <p class="lede">以竹北市光明九路（爵士悅）為起點，挑出開車十分鐘內、一家五口帶得動的慶生選擇。每一類各列幾家，價位、包廂、停車、小孩友善程度分開標示，方便直接打電話問。</p>
+  <dl class="facts">
+    <div class="fact"><dt>起點</dt><dd>竹北市光明九路 · 爵士悅</dd></div>
+    <div class="fact"><dt>人數</dt><dd>4 大 1 小（含長輩 2 位、5 歲）</dd></div>
+    <div class="fact"><dt>預算</dt><dd>每人 600–1,800 元</dd></div>
+    <div class="fact"><dt>範圍</dt><dd>車程 10 分鐘內為主</dd></div>
+  </dl>
+</header>
+
+<section>
+  <div class="sec-head"><h2>不想一家家看的話</h2><p>三個預算帶各一家，直接打電話就能訂</p></div>
+  <div class="picks">
+    <div class="pick">
+      <p class="role">預算 600–1,000</p>
+      <h3>和平小館</h3>
+      <p class="money">合菜／一鴨四吃 $2,180</p>
+      <p class="why">就在社區附近，圓桌合菜是長輩最習慣的形式，現片櫻桃鴨有「今天有在慶祝」的份量感，隔壁就有停車場。</p>
+    </div>
+    <div class="pick">
+      <p class="role">預算 1,000–1,800</p>
+      <h3>喜來登 盛宴自助餐廳</h3>
+      <p class="money">平日晚餐 $1,390＋10%</p>
+      <p class="why">口味不必喬，長輩吃清淡的、小孩自己挑，70 歲以上還有樂齡價、兒童半價。三代同堂最不會出錯的一家。</p>
+    </div>
+    <div class="pick">
+      <p class="role">要有儀式感</p>
+      <h3>采悅軒中餐廳</h3>
+      <p class="money">喜來登 4F · 四間包廂</p>
+      <p class="why">飯店包廂桌菜，關起門來自己一家人，長輩講話聽得清楚、小孩吵一點也不影響別桌。適合當成年度的正式生日。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><h2>完整清單</h2><p>點類型篩選</p></div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section>
+  <div class="sec-head"><h2>訂位前先問清楚這幾件事</h2><p>多半是現場才發現、來不及補救的</p></div>
+  <div class="checklist">
+    <div class="check"><b>蛋糕可以自己帶嗎？</b><span>多數餐廳可以，但要事先講，有些收開盤費。樂軒事先告知會招待生日蛋糕；飯店通常可代訂。</span></div>
+    <div class="check"><b>包廂幾人起跳、有沒有低消？</b><span>五個人常常卡在門檻上。包廂低消、服務費、是否另計，一次問完。</span></div>
+    <div class="check"><b>有兒童椅和兒童餐具嗎？</b><span>五歲通常可以坐大人椅了，但有兒童餐具會好吃很多。吃到飽記得問 3–6 歲怎麼算。</span></div>
+    <div class="check"><b>長輩的菜有軟一點的嗎？</b><span>鍋物記得多點一鍋清湯；燒肉店問有沒有非燒烤的品項；鐵板燒可以請師傅把牛排切小。</span></div>
+    <div class="check"><b>停車是自家的還是旁邊的？</b><span>有沒有折抵、停車場離門口多遠。長輩下車距離比停車費重要。</span></div>
+    <div class="check"><b>壽星優惠訂位時就要講</b><span>喜來登 2026 全年有壽星方案（內容官網沒寫），現場才說通常不算。</span></div>
+  </div>
+  <div class="note-box"><b>時段建議：</b>帶長輩和五歲小孩，中午場幾乎都比晚上好——長輩不必摸黑回家，小孩還沒進入盧的時段，而且同一家店午餐常常便宜三到五成。假日中午要提早兩到四週訂位，飯店餐廳再更早。</div>
+</section>
+
+<footer>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--accent)"></i>官網／官方網頁確認（2026-09-17）</span>
+    <span><i class="dot" style="background:var(--warm)"></i>媒體或部落格整理，未經官方確認</span>
+    <span><i class="dot" style="background:var(--alert)"></i>僅知店名與位置，細節待確認</span>
+  </div>
+  <p>車程為依地址粗估，實際請以導航為準。價格與營業時間變動頻繁，尤其飯店餐期價、吃到飽價格與兒童收費，訂位前務必再確認一次。標示「未確認」的欄位表示手上沒有可信來源，不是猜測值。</p>
+  <p>資料整理於 2026 年 9 月 17 日。</p>
+</footer>
+
+</div>
+
+<script>
+const DATA = [
+ {
+  name:'盛宴自助餐廳', sub:'新竹喜來登大飯店 東館 2F', kind:'飯店自助餐', type:'hotel',
+  area:'光明六路東一段 · 約 5 分鐘車程',
+  addr:'竹北市光明六路東一段 265 號',
+  tel:'03-620-6092',
+  price:'平日午 1,190／晚 1,390；假日午晚 1,690（成人，另加一成）',
+  extra:'兒童半價；70 歲以上出示身分證有樂齡優惠',
+  hours:'午 11:30–14:00｜下午茶 14:30–16:30｜晚 17:30–21:00',
+  why:'三代口味最難喬的時候，自助餐是最不會吵架的答案。長輩挑清淡的、小孩自己拿，壽星也不用配合別人點的菜。',
+  tags:['停車方便','兒童半價','長者優惠','飯店服務'],
+  notes:['只收官方 TableCheck 線上訂位，不接受第三方平台','週六晚餐分 17:00–19:00、19:30–21:30 兩輪，長輩吃得慢建議選第二輪','蛋糕與壽星優惠訂位時一起問'],
+  src:'official'
+ },
+ {
+  name:'采悅軒中餐廳', sub:'新竹喜來登大飯店 東館 4F', kind:'粵式桌菜', type:'chinese',
+  area:'光明六路東一段 · 約 5 分鐘車程',
+  addr:'竹北市光明六路東一段 265 號',
+  tel:'03-620-6042',
+  price:'官網未公布，需電話或 TableCheck 查看（未確認）',
+  extra:'共 4 間包廂（梅軒廳、竹蘭廳等），全店 147 席',
+  hours:'午 11:30–14:30｜晚 17:30–21:30',
+  why:'要辦得正式一點就選這裡。粵菜長輩接受度高、菜色好分食，包廂關起門來一家人自己講話，小孩坐不住也不影響別桌。',
+  tags:['包廂','停車方便','適合長輩'],
+  notes:['只收官方 TableCheck 訂位','自備酒水另收 500–1,000 元服務費','包廂人數門檻與低消要先問'],
+  src:'official'
+ },
+ {
+  name:'和平小館', sub:'在地老店，脆皮櫻桃鴨', kind:'中式合菜', type:'chinese',
+  area:'光明五街 · 約 3 分鐘車程',
+  addr:'竹北市光明五街 354 號',
+  tel:'03-657-1118',
+  price:'一鴨四吃 $2,180；四人以上合菜套餐',
+  extra:'老師傅五十年手藝，上海菜底加烤鴨',
+  hours:'11:00–15:00｜17:00–21:00',
+  why:'離家最近的一家，圓桌合菜是長輩最習慣的吃法。現片櫻桃鴨端上桌有慶祝的樣子，五歲小孩也吃得下鴨肉捲餅。',
+  tags:['包廂','旁邊有停車場','離家最近'],
+  notes:['有包廂，但要事先訂','烤鴨需要時間，建議訂位時先預訂','招牌另有燒蜜汁富貴雙方、炒鴨架'],
+  src:'media'
+ },
+ {
+  name:'初菜寓所', sub:'懷舊台式家常菜', kind:'台菜', type:'chinese',
+  area:'文興路一段 · 約 8 分鐘車程',
+  addr:'竹北市文興路一段 253 號 1 樓',
+  tel:'03-550-6488',
+  price:'家常菜價位，人均偏平價（未確認）',
+  extra:'兒童椅與兒童餐具齊全，推車進出方便',
+  hours:'11:00–15:00｜17:00–21:00（週一公休）',
+  why:'店裡擺大同電鍋、彈珠汽水這類老東西，長輩坐下來會有話講。菜是家常口味，不必擔心誰吃不慣，也是少數把親子友善做出來的台菜店。',
+  tags:['兒童椅','親子友善','適合長輩'],
+  notes:['週一公休，生日剛好落在週一要避開','沒查到包廂資訊，人多要先問能不能併桌','市中心停車位要碰運氣'],
+  src:'media'
+ },
+ {
+  name:'這一鍋 竹北光明殿', sub:'皇室秘藏鍋物', kind:'個人鍋物', type:'hotpot',
+  area:'光明一路 · 約 4 分鐘車程',
+  addr:'竹北市光明一路 288 號',
+  tel:'03-657-5151',
+  price:'鍋物單點制，非吃到飽（價位未確認）',
+  extra:'宮廷風裝潢，一人一鍋',
+  hours:'一至四 11:30–22:30｜五至日 11:30–23:00',
+  why:'一人一鍋最好控制，長輩要清淡就點養生鍋、要熱鬧就麻辣鍋，小孩份量也能自己調。裝潢有排場，拍照看得出是在慶生。',
+  tags:['好停車','一人一鍋','長輩友善'],
+  notes:['包廂與慶生服務官網沒寫，訂位時要問','末次收客時間比打烊早一小時','麻辣鍋記得另外配一鍋清湯給長輩和小孩'],
+  src:'official'
+ },
+ {
+  name:'樂軒和牛專門店 新竹店', sub:'全包廂和牛燒肉', kind:'和牛燒肉', type:'yakiniku',
+  area:'成功八路 · 約 4 分鐘車程',
+  addr:'竹北市成功八路 262 號',
+  tel:'03-550-0777',
+  price:'晚間大滿足雙人 $8,800＋10%；午間套餐較經濟',
+  extra:'全包廂設計，另有視聽室、撞球與麻將桌，附停車場',
+  hours:'11:30–14:30｜17:30–21:30',
+  why:'全程專人桌邊代烤，長輩不必自己顧火，小孩也不會碰到烤網。獨立包廂關起來唱生日歌不尷尬，是這一帶最像在辦生日會的地方。',
+  tags:['全包廂','桌邊代烤','自有停車場','可招待蛋糕'],
+  notes:['事先告知可招待生日蛋糕','晚間套餐人均偏高，超出 1,800 預算；午間划算很多','包廂人數規格與兒童收費要先問'],
+  src:'media'
+ },
+ {
+  name:'老井極上燒肉 竹北店', sub:'台中來的燒肉店', kind:'燒肉', type:'yakiniku',
+  area:'文興路一段 · 約 8 分鐘車程',
+  addr:'竹北市文興路一段 31 號',
+  tel:'03-668-8238',
+  price:'山海豚頂級套餐雙人 $3,506；亦可單點',
+  extra:'座位多為 4–6 人桌，隔板隔出半包廂感',
+  hours:'11:00–01:00',
+  why:'有桌邊代烤，長輩坐著吃就好。獨棟空間、半包廂隔板，不像一般燒肉店那麼吵，價位比樂軒好入手。',
+  tags:['半包廂','桌邊代烤','獨棟'],
+  notes:['沒查到兒童椅與低消規定，要先問','另收服務費','停車資訊未確認'],
+  src:'media'
+ },
+ {
+  name:'迎月庭', sub:'豐邑喜來登 西館', kind:'鐵板燒＋日料', type:'teppan',
+  area:'光明六路東一段 · 約 5 分鐘車程',
+  addr:'竹北市光明六路東一段 263 號',
+  tel:'03-576-5888（總機）',
+  price:'套餐制（價位未確認）',
+  extra:'鐵板料理與日本料理結合，附設咖啡廳',
+  hours:'未確認，請電話確認',
+  why:'鐵板燒是小孩最愛看的一種：師傅在眼前現做，五歲坐得住。一人一份不必分菜，長輩也不用跟人搶。飯店體系服務穩定。',
+  tags:['飯店服務','現場料理','小孩愛看'],
+  notes:['官網未列價位與時段，需致電總機','六個人是否能安排同一檯鐵板要先問','部分資料顯示另有「邀月亭鐵板料理」名稱，訂位時確認清楚'],
+  src:'unverified'
+ },
+ {
+  name:'享廚鐵板燒', sub:'低調精緻路線', kind:'鐵板燒', type:'teppan',
+  area:'文信路 · 約 5 分鐘車程',
+  addr:'竹北市文信路 285 號',
+  tel:'03-558-5559',
+  price:'多種套餐，屬精緻價位（未確認）',
+  extra:'空間偏私密，常被寫成慶祝用餐廳',
+  hours:'未確認',
+  why:'比飯店輕鬆、比連鎖有誠意的中間選項。師傅在面前做，不用擔心上菜節奏，適合想把重點放在「一起吃一頓好的」而不是排場。',
+  tags:['現場料理','適合慶祝'],
+  notes:['價位與是否收小孩要先問','鐵板檯座位數有限，五人以上務必提早訂'],
+  src:'media'
+ },
+ {
+  name:'佐林鐵板燒', sub:'高 CP 值路線', kind:'鐵板燒', type:'teppan',
+  area:'勝利十三街 · 約 4 分鐘車程',
+  addr:'竹北市勝利十三街 12 號',
+  tel:'03-550-3968',
+  price:'$550 起',
+  extra:'空間寬敞舒適',
+  hours:'未確認',
+  why:'預算抓 600–800 又想吃得有人服務，這家最實在。離家近，臨時決定也來得及。',
+  tags:['價位友善','離家近'],
+  notes:['價位資料來自媒體整理，可能已調整','包廂與兒童椅需確認'],
+  src:'media'
+ },
+ {
+  name:'漢神 legacy 鉄板焼き', sub:'現代工業風', kind:'鐵板燒', type:'teppan',
+  area:'成功一街 · 約 3 分鐘車程',
+  addr:'竹北市成功一街 30 號',
+  tel:'03-668-8829',
+  price:'龍蝦海陸套餐、主廚套餐（價位未確認）',
+  extra:'距離最近的鐵板燒之一',
+  hours:'未確認',
+  why:'走路加開車都很快，裝潢偏現代，適合想拍照又不想太老派的場合。長輩對鐵板燒接受度普遍不錯。',
+  tags:['離家最近','海陸套餐'],
+  notes:['裝潢偏工業風，長輩可能覺得偏冷調','價位與訂位規則需致電'],
+  src:'media'
+ },
+ {
+  name:'旭集和食集錦 竹北遠百店', sub:'遠百竹北 8F', kind:'日式吃到飽', type:'hotel',
+  area:'高鐵特區 · 約 10 分鐘車程',
+  addr:'竹北市莊敬北路 18 號 8F',
+  tel:'03-550-8191',
+  price:'平日午 1,490／下午茶 1,090／晚 1,790；假日午 1,790／下午茶 1,490／晚 2,090（另加一成）',
+  extra:'未滿 3 歲免費、3–6 歲四分之一、6–12 歲半價',
+  hours:'午 11:30–14:00｜下午茶 14:30–16:30｜晚 17:30 起',
+  why:'比飯店 buffet 更偏日式，帝王蟹、干貝這類長輩會覺得「有被招待到」的品項多。百貨樓上，吃完可以逛逛、小孩有地方放電。',
+  tags:['吃到飽','兒童分齡計價','百貨停車'],
+  notes:['每日 09:00 開放網路訂位、10:00 開放電話訂位，可訂兩個月內','每位需預付訂金 500 元（含 0–12 歲兒童）','晚餐已超出 1,800 預算，平日下午茶 1,090 是最划算的切入點','價格為 2026 年部落格整理，訂位時再確認'],
+  src:'media'
+ },
+ {
+  name:'托斯卡尼尼 竹北文信店', sub:'義大利庭園餐廳', kind:'義式', type:'western',
+  area:'文信路 · 約 5 分鐘車程',
+  addr:'竹北市文信路 355 號',
+  tel:'03-558-8388',
+  price:'主餐＋$149 升級套餐（麵包、濃湯、甜點、飲品）',
+  extra:'提供兒童座椅、兒童餐具與圍兜；寵物友善',
+  hours:'11:30–15:00｜17:00–21:00',
+  why:'庭園式空間，小孩不會被關在一張桌子上。義大利麵、燉飯這類主食五歲很好餵，長輩也能點到不辣不油的選擇。親子配備是這一帶做得最完整的。',
+  tags:['兒童椅','兒童餐具','對面有停車場','可洽包場'],
+  notes:['可洽詢包場，但沒有固定包廂','慶生服務未寫明，蛋糕要先問','後方文信爬蟲兩棲公園旁有公三停車場'],
+  src:'media'
+ },
+ {
+  name:'韓宮館', sub:'韓式家常料理', kind:'韓式', type:'western',
+  area:'復興三路二段 · 約 7 分鐘車程',
+  addr:'竹北市復興三路二段 168-5 號',
+  tel:'03-668-2345',
+  price:'家常價位（未確認）',
+  extra:'可預訂包廂',
+  hours:'未確認',
+  why:'想吃得熱鬧又不想太貴的選項。韓式鍋物和烤肉分食方便，可預訂包廂，媒體整理時就是寫「適合聚會慶生」。',
+  tags:['包廂','適合聚會'],
+  notes:['辣度要先講，長輩與小孩的菜另外點','價位與包廂人數門檻需致電'],
+  src:'media'
+ },
+ {
+  name:'遠百竹北 7–8 樓餐廳群', sub:'一次備案很多的選項', kind:'百貨餐廳', type:'chinese',
+  area:'高鐵特區 · 約 10 分鐘車程',
+  addr:'竹北市莊敬北路 18 號',
+  tel:'各店不同，需另查（未確認）',
+  price:'多數落在每人 600–1,200',
+  extra:'四川吳抄手（7F，有大包廂）、上菜片皮鴨（7F，烤鴨）、黑毛屋（6F，和牛鍋物）、MO MO PARADISE 與涮乃葉（7F，鍋物吃到飽）、果然匯（8F，蔬食吃到飽）、開飯川食堂（6F）',
+  hours:'依百貨營業時間',
+  why:'訂不到位、臨時改主意的時候最好用：同一棟樓裡合菜、烤鴨、鍋物、吃到飽都有，停車一次解決，小孩吃完還能逛。其中四川吳抄手有大包廂，是包廂需求的備案。',
+  tags:['選擇多','百貨停車','有包廂選項'],
+  notes:['各店電話與價位需個別查詢','假日中午人多，一樣要訂位','百貨營業時間與停車折抵未確認'],
+  src:'unverified'
+ }
+];
+
+const TYPES = [
+  {k:'all', label:'全部'},
+  {k:'hotel', label:'飯店／吃到飽'},
+  {k:'chinese', label:'中式合菜・台菜'},
+  {k:'hotpot', label:'鍋物'},
+  {k:'yakiniku', label:'燒肉'},
+  {k:'teppan', label:'鐵板燒'},
+  {k:'western', label:'西式・異國'}
+];
+
+const SRC_LABEL = {official:'官網確認', media:'媒體／部落格整理', unverified:'細節待確認'};
+
+function card(r){
+  const tags = r.tags.map(t=>`<span class="tag${/蛋糕|優惠|半價|兒童/.test(t)?' warm':''}">${t}</span>`).join('');
+  const notes = r.notes.map(n=>`<li>${n}</li>`).join('');
+  const telHtml = /\d/.test(r.tel) ? `<a href="tel:${r.tel.replace(/[^0-9]/g,'')}">${r.tel}</a>` : r.tel;
+  return `<article class="card" data-type="${r.type}">
+    <div class="card-top">
+      <div><h3>${r.name}</h3><p class="sub">${r.sub}</p></div>
+      <span class="kind">${r.kind}</span>
+    </div>
+    <p class="why">${r.why}</p>
+    <div class="rows">
+      <div class="row"><b>位置</b><span>${r.area}<br>${r.addr}</span></div>
+      <div class="row"><b>電話</b><span class="num">${telHtml}</span></div>
+      <div class="row"><b>時間</b><span class="num">${r.hours}</span></div>
+      <div class="row"><b>價位</b><span class="num">${r.price}</span></div>
+      <div class="row"><b>備註</b><span>${r.extra}</span></div>
+    </div>
+    <div class="tags">${tags}</div>
+    <ul class="notes">${notes}</ul>
+    <p class="src ${r.src}">${SRC_LABEL[r.src]}</p>
+  </article>`;
+}
+
+const grid = document.getElementById('grid');
+const filters = document.getElementById('filters');
+grid.innerHTML = DATA.map(card).join('');
+filters.innerHTML = TYPES.map((t,i)=>`<button class="chip" type="button" data-k="${t.k}" aria-pressed="${i===0}">${t.label}</button>`).join('');
+
+filters.addEventListener('click', e=>{
+  const b = e.target.closest('.chip'); if(!b) return;
+  filters.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed', String(c===b)));
+  const k = b.dataset.k;
+  grid.querySelectorAll('.card').forEach(c=>{
+    c.classList.toggle('hidden', k!=='all' && c.dataset.type!==k);
+  });
+});
+</script>
+
+</body></html>
