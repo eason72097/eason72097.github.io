@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>竹北・新竹 蛋糕店指南</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&amp;display=swap" rel="stylesheet"/>
+<style>
+/* === 🟤 溫暖敘事 Warm Narrative === */
+:root {
+  --bg:#f5f3ef; --bg-sub:#eae7e0; --ink:#1c1c28; --ink-soft:#6a6878;
+  --accent:#b85a2b; --accent2:#3a7ca5; --card:#ffffff; --border:#d8d4cb;
+  --tag-bg:rgba(184,90,43,.1); --tag-fg:#b85a2b;
+  --tag-bg2:rgba(58,124,165,.1); --tag-fg2:#3a7ca5;
+  --hover-shadow:rgba(28,28,40,.08);
+  --reserve:0px;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101018; --bg-sub:#1a1a28; --ink:#e0ddd6; --ink-soft:#9090a0;
+  --accent:#d9884a; --accent2:#5aa0cc; --card:#1c1c2e; --border:#2e2e40;
+  --tag-bg:rgba(217,136,74,.15); --tag-fg:#d9884a;
+  --tag-bg2:rgba(90,160,204,.15); --tag-fg2:#5aa0cc;
+  --hover-shadow:rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --bg:#101018; --bg-sub:#1a1a28; --ink:#e0ddd6; --ink-soft:#9090a0;
+  --accent:#d9884a; --accent2:#5aa0cc; --card:#1c1c2e; --border:#2e2e40;
+  --tag-bg:rgba(217,136,74,.15); --tag-fg:#d9884a;
+  --tag-bg2:rgba(90,160,204,.15); --tag-fg2:#5aa0cc;
+  --hover-shadow:rgba(0,0,0,.3);
+}
+
+/* category semantic colors */
+:root {
+  --cat-mille:#a0522d; --cat-mille-bg:rgba(160,82,45,.1);
+  --cat-chiffon:#6b8e23; --cat-chiffon-bg:rgba(107,142,35,.1);
+  --cat-cheese:#daa520; --cat-cheese-bg:rgba(218,165,32,.1);
+  --cat-tart:#c2185b; --cat-tart-bg:rgba(194,24,91,.1);
+  --cat-bday:#7b1fa2; --cat-bday-bg:rgba(123,31,162,.1);
+  --cat-lowsugar:#2e7d32; --cat-lowsugar-bg:rgba(46,125,50,.1);
+  --cat-classic:#795548; --cat-classic-bg:rgba(121,85,72,.1);
+  --cat-choco:#4e342e; --cat-choco-bg:rgba(78,52,46,.1);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --cat-mille:#d4956a; --cat-mille-bg:rgba(212,149,106,.12);
+  --cat-chiffon:#a4c639; --cat-chiffon-bg:rgba(164,198,57,.12);
+  --cat-cheese:#ffd54f; --cat-cheese-bg:rgba(255,213,79,.12);
+  --cat-tart:#f06292; --cat-tart-bg:rgba(240,98,146,.12);
+  --cat-bday:#ce93d8; --cat-bday-bg:rgba(206,147,216,.12);
+  --cat-lowsugar:#66bb6a; --cat-lowsugar-bg:rgba(102,187,106,.12);
+  --cat-classic:#a1887f; --cat-classic-bg:rgba(161,136,127,.12);
+  --cat-choco:#8d6e63; --cat-choco-bg:rgba(141,110,99,.12);
+}}
+:root[data-theme="dark"]{
+  --cat-mille:#d4956a; --cat-mille-bg:rgba(212,149,106,.12);
+  --cat-chiffon:#a4c639; --cat-chiffon-bg:rgba(164,198,57,.12);
+  --cat-cheese:#ffd54f; --cat-cheese-bg:rgba(255,213,79,.12);
+  --cat-tart:#f06292; --cat-tart-bg:rgba(240,98,146,.12);
+  --cat-bday:#ce93d8; --cat-bday-bg:rgba(206,147,216,.12);
+  --cat-lowsugar:#66bb6a; --cat-lowsugar-bg:rgba(102,187,106,.12);
+  --cat-classic:#a1887f; --cat-classic-bg:rgba(161,136,127,.12);
+  --cat-choco:#8d6e63; --cat-choco-bg:rgba(141,110,99,.12);
+}
+
+@media(min-width:1280px){
+  :root[data-reserve="on"]{ --reserve:340px }
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Helvetica Neue",Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  line-height:1.7; padding:32px 24px 64px;
+  transition:background .3s,color .3s;
+}
+.wrap{
+  max-width:min(1200px, calc(100vw - var(--reserve) - 48px));
+  margin:0 auto 0 0; padding-left:max(16px, calc((100vw - var(--reserve) - 1200px)/2));
+}
+
+/* header */
+.page-header{margin-bottom:40px; position:relative}
+.page-header h1{
+  font-family:'Fraunces',Georgia,serif; font-weight:700;
+  font-size:clamp(1.8rem,4vw,2.6rem); color:var(--accent);
+  text-wrap:balance; margin-bottom:8px;
+}
+.page-header .subtitle{color:var(--ink-soft); font-size:.95rem; margin-bottom:4px}
+.page-header .meta{color:var(--ink-soft); font-size:.82rem; margin-top:8px}
+
+/* controls row */
+.controls{
+  position:sticky; top:0; z-index:100;
+  background:var(--bg); padding:12px 0 8px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:24px;
+}
+.controls-inner{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.chip-group{display:flex; flex-wrap:wrap; gap:6px}
+.chip-group-label{font-size:.75rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em; align-self:center; margin-right:4px; white-space:nowrap}
+
+.chip{
+  display:inline-flex; align-items:center; gap:4px;
+  padding:5px 14px; border-radius:20px; border:1px solid var(--border);
+  background:var(--card); color:var(--ink); font-size:.82rem;
+  cursor:pointer; transition:all .2s; white-space:nowrap;
+  font-family:inherit;
+}
+.chip:hover{border-color:var(--accent); color:var(--accent)}
+.chip[aria-pressed="true"]{
+  background:var(--accent); color:#fff; border-color:var(--accent);
+}
+.chip .emoji{font-size:1rem}
+
+.search-box{
+  flex:1; min-width:180px; max-width:320px;
+  padding:6px 12px; border:1px solid var(--border); border-radius:20px;
+  background:var(--card); color:var(--ink); font-size:.85rem;
+  font-family:inherit; outline:none;
+}
+.search-box:focus{border-color:var(--accent)}
+.search-box::placeholder{color:var(--ink-soft)}
+
+.counter{font-size:.82rem; color:var(--ink-soft); white-space:nowrap; margin-left:auto}
+
+/* toolbar */
+.toolbar{display:flex; gap:8px; align-items:center; margin-left:auto}
+.icon-btn{
+  width:32px; height:32px; border-radius:6px; border:1px solid var(--border);
+  background:var(--card); color:var(--ink-soft); cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:.9rem; transition:all .2s;
+}
+.icon-btn:hover{border-color:var(--accent); color:var(--accent)}
+.icon-btn.active{background:var(--accent); color:#fff; border-color:var(--accent)}
+
+/* grid */
+.shop-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(340px,1fr));
+  gap:20px;
+}
+
+/* shop card */
+.shop-card{
+  background:var(--card); border:1px solid var(--border); border-radius:12px;
+  padding:20px; position:relative;
+  transition:box-shadow .2s, transform .2s;
+  display:flex; flex-direction:column;
+}
+.shop-card:hover{
+  box-shadow:0 4px 20px var(--hover-shadow);
+  transform:translateY(-2px);
+}
+.shop-card[data-hidden="true"]{display:none}
+
+.card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:10px}
+.shop-name{
+  font-family:'Fraunces',Georgia,serif; font-weight:600;
+  font-size:1.15rem; color:var(--ink); line-height:1.3;
+}
+.shop-name-en{font-size:.8rem; color:var(--ink-soft); font-weight:400; margin-top:2px}
+
+.cat-badge{
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 10px; border-radius:12px; font-size:.72rem; font-weight:500;
+  white-space:nowrap; flex-shrink:0;
+}
+
+.shop-desc{font-size:.88rem; color:var(--ink-soft); margin-bottom:12px; line-height:1.6; flex:1}
+.shop-desc strong{color:var(--ink); font-weight:500}
+
+.shop-meta{display:flex; flex-direction:column; gap:6px; font-size:.8rem; color:var(--ink-soft)}
+.shop-meta-row{display:flex; align-items:flex-start; gap:6px}
+.shop-meta-row .icon{flex-shrink:0; width:16px; text-align:center}
+.shop-meta-row a{color:var(--accent2); text-decoration:none}
+.shop-meta-row a:hover{text-decoration:underline}
+
+.tags{display:flex; flex-wrap:wrap; gap:4px; margin-top:10px}
+.tag{
+  display:inline-block; padding:2px 8px; border-radius:4px;
+  font-size:.72rem; white-space:nowrap;
+}
+.tag-area{background:var(--tag-bg2); color:var(--tag-fg2)}
+.tag-feat{background:var(--tag-bg); color:var(--tag-fg)}
+
+.google-rating{
+  display:inline-flex; align-items:center; gap:3px;
+  font-size:.78rem; font-weight:500; color:var(--accent);
+}
+.google-rating .star{color:#f5a623}
+
+/* section headers in grid */
+.section-header{
+  grid-column:1/-1; margin:24px 0 4px;
+  padding-bottom:8px; border-bottom:2px solid var(--border);
+  display:flex; align-items:center; gap:10px;
+}
+.section-header[data-hidden="true"]{display:none}
+.section-header h2{
+  font-family:'Fraunces',Georgia,serif; font-weight:600;
+  font-size:clamp(1.2rem,2.5vw,1.5rem); color:var(--accent2);
+  text-wrap:balance;
+}
+.section-header .sec-emoji{font-size:1.3rem}
+.section-count{font-size:.78rem; color:var(--ink-soft)}
+
+/* footer */
+.page-footer{
+  margin-top:48px; padding-top:24px; border-top:1px solid var(--border);
+  font-size:.78rem; color:var(--ink-soft); line-height:1.7;
+}
+.page-footer a{color:var(--accent2)}
+
+/* start-here section */
+.start-here{
+  background:var(--bg-sub); border-radius:12px; padding:20px 24px;
+  margin-bottom:28px;
+}
+.start-here h2{
+  font-family:'Fraunces',Georgia,serif; font-weight:600;
+  font-size:1.15rem; color:var(--accent); margin-bottom:12px;
+}
+.start-cols{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px}
+.start-item{
+  background:var(--card); border-radius:8px; padding:12px 16px;
+  border-left:3px solid var(--accent);
+}
+.start-item .si-name{font-weight:600; font-size:.92rem; margin-bottom:2px}
+.start-item .si-why{font-size:.82rem; color:var(--ink-soft)}
+.start-item .si-cat{font-size:.72rem; color:var(--accent2); margin-top:4px}
+
+
+/* social links */
+.shop-links{
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;
+  padding-top:10px; border-top:1px dashed var(--border);
+}
+.shop-link{
+  display:inline-flex; align-items:center; gap:4px;
+  padding:4px 10px; border-radius:6px; border:1px solid var(--border);
+  background:var(--bg-sub); color:var(--ink-soft); font-size:.75rem;
+  text-decoration:none; transition:all .2s; white-space:nowrap;
+}
+.shop-link:hover{border-color:var(--accent); color:var(--accent)}
+.shop-link .link-icon{font-size:.85rem}
+
+/* responsive */
+@media(max-width:600px){
+  body{padding:16px 14px 48px}
+  .wrap{padding-left:0; max-width:100%}
+  .shop-grid{grid-template-columns:1fr}
+  .controls-inner{gap:6px}
+  .search-box{min-width:140px; max-width:100%}
+  .start-cols{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="page-header">
+<h1>🍰 竹北・新竹 蛋糕店指南</h1>
+<p class="subtitle">精選 24 家高評價蛋糕店，依特色分類整理，附官方社群連結</p>
+<p class="meta">資料整理日期：2026-09-18 ｜ 營業時間與價格請以店家公告為準</p>
+<div style="position:absolute;top:8px;right:0;display:flex;gap:6px">
+<button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="切換深淺色">🌓</button>
+<button class="icon-btn" id="reserveBtn" onclick="toggleReserve()" title="切換右側留白">◫</button>
+</div>
+</header>
+<!-- 起手推薦 -->
+<section class="start-here">
+<h2>🎯 先從這 5 家開始</h2>
+<div class="start-cols">
+<div class="start-item">
+<div class="si-name">一百種味道</div>
+<div class="si-why">新竹手作甜塔代名詞，Google 四千多則評價，外縣市會專程來買</div>
+<div class="si-cat">水果塔 ｜ 新竹＋竹北</div>
+</div>
+<div class="start-item">
+<div class="si-name">MANO MANO</div>
+<div class="si-why">法式甜點標竿，四間分店最好找，馬卡龍和戚風都有水準</div>
+<div class="si-cat">法式甜點 ｜ 竹北＋新竹</div>
+</div>
+<div class="start-item">
+<div class="si-name">氣死人起司蛋糕</div>
+<div class="si-why">只賣整顆 6 吋、價格 260–400 元，重起士控的朝聖地</div>
+<div class="si-cat">乳酪蛋糕 ｜ 竹北</div>
+</div>
+<div class="start-item">
+<div class="si-name">時甜 L'idée Sweet</div>
+<div class="si-why">減糖不減風味的日式洋風甜點，怕甜的人首選</div>
+<div class="si-cat">減糖甜點 ｜ 竹北</div>
+</div>
+<div class="start-item">
+<div class="si-name">蛋然有味</div>
+<div class="si-why">竹北戚風蛋糕專賣，網路起家轉實體店，韓系空間好拍</div>
+<div class="si-cat">戚風蛋糕 ｜ 竹北</div>
+</div>
+</div>
+</section>
+<!-- 篩選控制列 -->
+<div class="controls">
+<div class="controls-inner">
+<div class="chip-group">
+<span class="chip-group-label">分類</span>
+<button aria-pressed="true" class="chip" data-f="cat" data-v="all" onclick="filterClick(this)">全部</button>
+<button aria-pressed="false" class="chip" data-f="cat" data-v="mille" onclick="filterClick(this)"><span class="emoji">🍰</span>千層／法式</button>
+<button aria-pressed="false" class="chip" data-f="cat" data-v="chiffon" onclick="filterClick(this)"><span class="emoji">🧁</span>戚風</button>
+<button aria-pressed="false" class="chip" data-f="cat" data-v="cheese" onclick="filterClick(this)"><span class="emoji">🧀</span>乳酪</button>
+<button aria-pressed="false" class="chip" data-f="cat" data-v="tart" onclick="filterClick(this)"><span class="emoji">🍓</span>水果塔</button>
+<button aria-pressed="false" class="chip" data-f="cat" data-v="bday" onclick="filterClick(this)"><span class="emoji">🎂</span>生日蛋糕</button>
+<button aria-pressed="false" class="chip" data-f="cat" data-v="lowsugar" onclick="filterClick(this)"><span class="emoji">🌿</span>減糖</button>
+<button aria-pressed="false" class="chip" data-f="cat" data-v="classic" onclick="filterClick(this)"><span class="emoji">🏠</span>古早味</button>
+<button aria-pressed="false" class="chip" data-f="cat" data-v="choco" onclick="filterClick(this)"><span class="emoji">🍫</span>巧克力</button>
+</div>
+<div class="chip-group">
+<span class="chip-group-label">地區</span>
+<button aria-pressed="true" class="chip" data-f="area" data-v="all" onclick="filterClick(this)">全部</button>
+<button aria-pressed="false" class="chip" data-f="area" data-v="竹北" onclick="filterClick(this)">竹北</button>
+<button aria-pressed="false" class="chip" data-f="area" data-v="新竹" onclick="filterClick(this)">新竹</button>
+</div>
+<input class="search-box" oninput="doFilter()" placeholder="搜尋店名、品項⋯" type="text"/>
+<span class="counter" id="counter"></span>
+</div>
+</div>
+<!-- 店家卡片 -->
+<div class="shop-grid" id="grid">
+<!-- ===== 千層 / 法式甜點 ===== -->
+<div class="section-header" data-cat="mille"><span class="sec-emoji">🍰</span><h2>千層／法式甜點</h2><span class="section-count"></span></div>
+<div class="shop-card" data-area="竹北,新竹" data-cat="mille" data-kw="MANO MANO 法式 馬卡龍 可麗露 戚風 水果塔">
+<div class="card-top">
+<div><div class="shop-name">MANO MANO</div><div class="shop-name-en">法式手工甜點</div></div>
+<span class="cat-badge" style="background:var(--cat-mille-bg);color:var(--cat-mille)">千層／法式</span>
+</div>
+<div class="shop-desc">新竹法式甜點的代名詞，<strong>馬卡龍、戚風蛋糕、可麗露、水果塔</strong>都有高水準。四間分店涵蓋竹北與新竹市區，容易買到。勝利旗艦門市挑高空間有內用法式套餐體驗。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span>竹北勝利旗艦：莊敬六街 160 號 ／ 竹北遠百 B2 ／ 新竹竹科：長春街 77 號 ／ 新竹新州屋：東前街 16 號</div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:00–19:00～19:30（依分店略異）</div>
+<div class="shop-meta-row"><span class="icon">📞</span>03-667-5798（勝利旗艦）</div>
+</div>
+<div class="tags"><span class="tag tag-area">竹北</span><span class="tag tag-area">新竹</span><span class="tag tag-feat">多分店</span><span class="tag tag-feat">馬卡龍</span><span class="tag tag-feat">內用</span></div><div class="shop-links"><a class="shop-link" href="https://www.manomanocafe.com/" rel="noopener" target="_blank"><span class="link-icon">🌐</span>官網</a><a class="shop-link" href="https://www.facebook.com/MANOMANOCAFE" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a></div>
+</div>
+<div class="shop-card" data-area="竹北" data-cat="mille" data-kw="法蕾熊 Fale Soufflé 舒芙蕾 千層 花生千層">
+<div class="card-top">
+<div><div class="shop-name">法蕾熊 Fale Soufflé</div><div class="shop-name-en">法式經典手工舒芙蕾</div></div>
+<span class="cat-badge" style="background:var(--cat-mille-bg);color:var(--cat-mille)">千層／法式</span>
+</div>
+<div class="shop-desc">主打<strong>生乳舒芙蕾</strong>與 <strong>24 層法式千層</strong>。竹北限定<strong>花生千層蛋糕</strong>用新竹在地福源花生醬，是外地買不到的口味。北海道十勝鮮乳奶霜，輕盈蓬鬆。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹縣竹北市莊敬六街198號" rel="noopener" target="_blank">竹北市莊敬六街 198 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:00–19:30</div>
+<div class="shop-meta-row"><span class="icon">📞</span>03-667-2529</div>
+<div class="shop-meta-row"><span class="icon">💰</span>舒芙蕾 620 元起、千層 8 吋</div>
+</div>
+<div class="tags"><span class="tag tag-area">竹北</span><span class="tag tag-feat">舒芙蕾</span><span class="tag tag-feat">千層</span><span class="tag tag-feat">竹北限定</span></div><div class="shop-links"><a class="shop-link" href="https://www.facebook.com/falesouffle" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/fale_souffle/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="mille" data-kw="烘烘甜點工作室 千層蛋糕 鮮乳蛋糕捲">
+<div class="card-top">
+<div><div class="shop-name">烘烘甜點工作室</div></div>
+<div style="display:flex;align-items:center;gap:8px">
+<span class="google-rating"><span class="star">★</span> 4.8</span>
+<span class="cat-badge" style="background:var(--cat-mille-bg);color:var(--cat-mille)">千層／法式</span>
+</div>
+</div>
+<div class="shop-desc">極隱密的外帶型甜點工作室，Google 4.8 高分。招牌<strong>千層蛋糕</strong>餅皮細緻、奶餡清爽，另有<strong>鮮乳蛋糕捲</strong>等特殊口味。注意每週只開三天。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區高翠路292巷3號" rel="noopener" target="_blank">新竹市東區高翠路 292 巷 3 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>12:00–19:00（僅週三、四、五營業）</div>
+<div class="shop-meta-row"><span class="icon">📞</span>03-561-9300</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">千層</span><span class="tag tag-feat">外帶</span><span class="tag tag-feat">限日營業</span></div><div class="shop-links"><a class="shop-link" href="https://www.facebook.com/home2sweets" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/home2sweets/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="竹北" data-cat="mille" data-kw="The Secret 謐謐 水果塔 法式塔 白雪檸檬塔 乳酪塔">
+<div class="card-top">
+<div><div class="shop-name">The Secret 謐謐</div><div class="shop-name-en">法式水果塔專賣</div></div>
+<span class="cat-badge" style="background:var(--cat-mille-bg);color:var(--cat-mille)">千層／法式</span>
+</div>
+<div class="shop-desc">以<strong>酥脆法式塔皮</strong>聞名，水果塔隨季節變換。招牌<strong>白雪檸檬塔</strong>酸甜清爽，<strong>伯爵茶凍生乳酪</strong>四層味覺層次分明。竹北嘉豐門市有舒適內用空間，寵物友善。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹縣竹北市嘉豐南路二段11號" rel="noopener" target="_blank">竹北市嘉豐南路二段 11 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:00–19:30（週二公休）</div>
+<div class="shop-meta-row"><span class="icon">📞</span>03-668-2999</div>
+</div>
+<div class="tags"><span class="tag tag-area">竹北</span><span class="tag tag-feat">水果塔</span><span class="tag tag-feat">內用</span><span class="tag tag-feat">寵物友善</span></div><div class="shop-links"><a class="shop-link" href="https://www.instagram.com/thesecret.hsinchu/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="竹北" data-cat="mille" data-kw="木木江鳥衣谷千層 海鹽焦糖 泰奶 珍珠奶茶千層">
+<div class="card-top">
+<div><div class="shop-name">木木江鳥衣谷千層</div></div>
+<span class="cat-badge" style="background:var(--cat-mille-bg);color:var(--cat-mille)">千層／法式</span>
+</div>
+<div class="shop-desc">手工薄餅千層蛋糕專門，口味創意多元：<strong>海鹽焦糖、泰奶、珍珠奶茶千層</strong>等。價格比深藍親民，選擇更多樣。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹縣竹北市嘉豐" rel="noopener" target="_blank">竹北市嘉豐地區</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:00–19:00（週一公休）</div>
+</div>
+<div class="tags"><span class="tag tag-area">竹北</span><span class="tag tag-feat">千層</span><span class="tag tag-feat">創意口味</span><span class="tag tag-feat">平價</span></div><div class="shop-links"><a class="shop-link" href="https://www.mumujbaker.com/" rel="noopener" target="_blank"><span class="link-icon">🌐</span>官網</a><a class="shop-link" href="https://www.facebook.com/MuMujBaker" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/bird_baking/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<!-- ===== 戚風蛋糕 ===== -->
+<div class="section-header" data-cat="chiffon"><span class="sec-emoji">🧁</span><h2>戚風蛋糕</h2><span class="section-count"></span></div>
+<div class="shop-card" data-area="竹北" data-cat="chiffon" data-kw="蛋然有味 戚風蛋糕 客製 生日蛋糕 韓系">
+<div class="card-top">
+<div><div class="shop-name">蛋然有味</div><div class="shop-name-en">戚風蛋糕製造所</div></div>
+<span class="cat-badge" style="background:var(--cat-chiffon-bg);color:var(--cat-chiffon)">戚風</span>
+</div>
+<div class="shop-desc">竹北人氣<strong>戚風蛋糕專賣店</strong>，從網路甜點起家後開設實體店面。招牌<strong>戚風水果蛋糕</strong> 180 元、費南雪 60 元。韓系混木質調空間好拍，可訂購<strong>客製化生日蛋糕</strong>。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹縣竹北市中華路158號" rel="noopener" target="_blank">竹北市中華路 158 號</a></div>
+<div class="shop-meta-row"><span class="icon">💰</span>戚風水果蛋糕 180 元、費南雪 60 元</div>
+</div>
+<div class="tags"><span class="tag tag-area">竹北</span><span class="tag tag-feat">戚風專賣</span><span class="tag tag-feat">客製蛋糕</span><span class="tag tag-feat">韓系空間</span></div><div class="shop-links"><a class="shop-link" href="https://www.instagram.com/danranyoway_cakes/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="chiffon" data-kw="階段甜點 草莓戚風 抹茶牛奶 生乳捲">
+<div class="card-top">
+<div><div class="shop-name">階段甜點</div></div>
+<span class="cat-badge" style="background:var(--cat-chiffon-bg);color:var(--cat-chiffon)">戚風</span>
+</div>
+<div class="shop-desc"><strong>熊本草莓戚風、抹茶牛奶、生乳捲</strong>是招牌。用料扎實，甜度適中，是新竹北區低調但穩定的好選擇。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市北區長安街89號" rel="noopener" target="_blank">新竹市北區長安街 89 號</a></div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">草莓季節限定</span><span class="tag tag-feat">生乳捲</span></div><div class="shop-links"><a class="shop-link" href="https://www.instagram.com/kaidan_dessert/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="chiffon" data-kw="Hidden off 鐵觀音戚風 伯爵戚風 老宅 預約制">
+<div class="card-top">
+<div><div class="shop-name">Hidden off</div><div class="shop-name-en">隱藏老宅咖啡廳</div></div>
+<div style="display:flex;align-items:center;gap:8px">
+<span class="google-rating"><span class="star">★</span> 4.8</span>
+<span class="cat-badge" style="background:var(--cat-chiffon-bg);color:var(--cat-chiffon)">戚風</span>
+</div>
+</div>
+<div class="shop-desc">隱身巷弄的<strong>預約制</strong>老宅咖啡廳，Google 4.8 高分。<strong>鐵觀音戚風、伯爵無花果戚風</strong>是必點。厚蛋三明治也很受歡迎。文青風佈置，限時 90 分鐘。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市北區建興街13號" rel="noopener" target="_blank">新竹市北區建興街 13 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>10:30–18:30（週三、四公休）</div>
+<div class="shop-meta-row"><span class="icon">📞</span>03-528-1110</div>
+<div class="shop-meta-row"><span class="icon">💰</span>均消約 500 元</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">預約制</span><span class="tag tag-feat">老宅</span><span class="tag tag-feat">早午餐</span></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="chiffon" data-kw="小墊子 ImMat Cafe 伯爵戚風 檸檬生乳酪 老宅">
+<div class="card-top">
+<div><div class="shop-name">小墊子 I'mmat Cafe</div></div>
+<span class="cat-badge" style="background:var(--cat-chiffon-bg);color:var(--cat-chiffon)">戚風</span>
+</div>
+<div class="shop-desc">復古老宅咖啡廳，<strong>原味伯爵戚風蛋糕</strong>濕潤綿密是招牌，<strong>檸檬生乳酪蛋糕</strong>清爽解膩。裝飾藝術感十足，適合午後坐坐。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區三民路154號" rel="noopener" target="_blank">新竹市東區三民路 154 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>週一公休</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">伯爵茶</span><span class="tag tag-feat">老宅</span><span class="tag tag-feat">內用</span></div><div class="shop-links"><a class="shop-link" href="https://www.facebook.com/CafeImMat" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/immat_cafe/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<!-- ===== 乳酪 / 起司蛋糕 ===== -->
+<div class="section-header" data-cat="cheese"><span class="sec-emoji">🧀</span><h2>乳酪／起司蛋糕</h2><span class="section-count"></span></div>
+<div class="shop-card" data-area="竹北" data-cat="cheese" data-kw="氣死人起司蛋糕 Cheese People 重起士 乳酪 伴手禮">
+<div class="card-top">
+<div><div class="shop-name">氣死人起司蛋糕</div><div class="shop-name-en">Cheese People</div></div>
+<span class="cat-badge" style="background:var(--cat-cheese-bg);color:var(--cat-cheese)">乳酪</span>
+</div>
+<div class="shop-desc">只賣<strong>整顆 6 吋</strong>、恕不單片出售——這就是「氣死人」的由來。重起士紮實綿密、滑順好吃不膩口，底層餅乾酥鬆。<strong>260–400 元</strong>的親民價位很適合當新竹伴手禮。高鐵站步行可達。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹縣竹北市文興路二段507號" rel="noopener" target="_blank">竹北市文興路二段 507 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:00–20:00</div>
+<div class="shop-meta-row"><span class="icon">📞</span>03-668-1561</div>
+<div class="shop-meta-row"><span class="icon">💰</span>6 吋 260–400 元</div>
+</div>
+<div class="tags"><span class="tag tag-area">竹北</span><span class="tag tag-feat">起司專賣</span><span class="tag tag-feat">伴手禮</span><span class="tag tag-feat">高鐵站旁</span></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="cheese" data-kw="巴布爾尼乳酪蛋糕 重乳酪 白酒玫瑰 香芒抹茶 巨城">
+<div class="card-top">
+<div><div class="shop-name">巴布爾尼乳酪蛋糕</div><div class="shop-name-en">重乳酪專賣</div></div>
+<span class="cat-badge" style="background:var(--cat-cheese-bg);color:var(--cat-cheese)">乳酪</span>
+</div>
+<div class="shop-desc">巨城商圈旁的<strong>重乳酪蛋糕專賣</strong>，口感紮實綿密。多款歐風口味選擇：<strong>白酒玫瑰、香芒抹茶</strong>等，不定期推出季節限定。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區中央路328號" rel="noopener" target="_blank">新竹市東區中央路 328 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>週一至六 10:00–21:00 ／ 週日 10:00–19:00</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">重乳酪</span><span class="tag tag-feat">近巨城</span><span class="tag tag-feat">歐風口味</span></div>
+</div>
+<!-- ===== 水果塔 ===== -->
+<div class="section-header" data-cat="tart"><span class="sec-emoji">🍓</span><h2>水果塔／手工塔</h2><span class="section-count"></span></div>
+<div class="shop-card" data-area="新竹,竹北" data-cat="tart" data-kw="一百種味道 水果塔 甜塔 乳酪塔 季節限定 手作">
+<div class="card-top">
+<div><div class="shop-name">一百種味道</div><div class="shop-name-en">新竹手作甜塔代名詞</div></div>
+<div style="display:flex;align-items:center;gap:8px">
+<span class="google-rating"><span class="star">★</span> 4000+ 則</span>
+<span class="cat-badge" style="background:var(--cat-tart-bg);color:var(--cat-tart)">水果塔</span>
+</div>
+</div>
+<div class="shop-desc">紅到<strong>外縣市會專程來買</strong>的手作甜塔名店。塔皮酥脆帶奶香，餡料豐富，每月推<strong>季節限定乳酪塔</strong>。水果塔隨季節變換，視覺和味道都到位。Google 累積四千多則評價。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市北區勝利路183號" rel="noopener" target="_blank">新竹市北區勝利路 183 號</a>（竹北三民路亦有分店）</div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:00–21:00（週一公休）</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-area">竹北</span><span class="tag tag-feat">甜塔名店</span><span class="tag tag-feat">季節限定</span><span class="tag tag-feat">多分店</span></div><div class="shop-links"><a class="shop-link" href="https://www.100tastes.com/" rel="noopener" target="_blank"><span class="link-icon">🌐</span>官網</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="tart" data-kw="于塔手工水果塔 IG預約 限量 草莓可可布朗">
+<div class="card-top">
+<div><div class="shop-name">于塔手工水果塔</div></div>
+<span class="cat-badge" style="background:var(--cat-tart-bg);color:var(--cat-tart)">水果塔</span>
+</div>
+<div class="shop-desc"><strong>限時限量</strong>的純手工甜點，以 IG 訂購、預約取貨制。<strong>草莓可可布朗</strong>是人氣品項。手工質感突出，每批數量有限，要搶要快。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區勝利路151號" rel="noopener" target="_blank">新竹市東區勝利路 151 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>週一、二公休（建議先 IG 確認）</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">限量</span><span class="tag tag-feat">IG 預約</span><span class="tag tag-feat">手工</span></div><div class="shop-links"><a class="shop-link" href="https://www.yupudding.com/" rel="noopener" target="_blank"><span class="link-icon">🌐</span>官網</a><a class="shop-link" href="https://www.instagram.com/yu.tarte/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="tart" data-kw="墨咖啡 INK COFFEE 巧克力塔 法國莊園級巧克力">
+<div class="card-top">
+<div><div class="shop-name">墨咖啡 INK COFFEE</div></div>
+<div style="display:flex;align-items:center;gap:8px">
+<span class="google-rating"><span class="star">★</span> 4.5（2000+則）</span>
+<span class="cat-badge" style="background:var(--cat-tart-bg);color:var(--cat-tart)">水果塔</span>
+</div>
+</div>
+<div class="shop-desc"><strong>72% 巧克力塔</strong>用法國 Michel Cluizel 莊園級巧克力，是這裡的靈魂品項。整模蛋糕需三天前預訂。咖啡水準也高，適合下午茶。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區林森路180號" rel="noopener" target="_blank">新竹市東區林森路 180 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>12:00–21:00</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">巧克力塔</span><span class="tag tag-feat">莊園級可可</span><span class="tag tag-feat">內用</span></div><div class="shop-links"><a class="shop-link" href="https://www.facebook.com/inkcoffee99" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/inkcafe/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<!-- ===== 生日蛋糕 / 造型蛋糕 ===== -->
+<div class="section-header" data-cat="bday"><span class="sec-emoji">🎂</span><h2>生日蛋糕／造型蛋糕</h2><span class="section-count"></span></div>
+<div class="shop-card" data-area="新竹" data-cat="bday" data-kw="LADY KELLY 凱莉小姐 千層 海鹽乳酪 黑絲綢巧克力 巨城">
+<div class="card-top">
+<div><div class="shop-name">LADY KELLY 凱莉小姐</div></div>
+<span class="cat-badge" style="background:var(--cat-bday-bg);color:var(--cat-bday)">生日蛋糕</span>
+</div>
+<div class="shop-desc">粉專 15 萬追蹤的知名甜點品牌。<strong>海鹽雙層乳酪</strong>（Mascarpone 慕斯＋舒芙蕾起司）、<strong>黑絲綢巧克力</strong>（法國 Michel Cluizel 63%）都是人氣款。千層蛋糕與禮盒選擇多，送禮體面。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區中央路229號" rel="noopener" target="_blank">新竹巨城 B1（中央路 229 號 B1）</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:00–21:30（週五六至 22:00）</div>
+<div class="shop-meta-row"><span class="icon">📞</span>03-535-2628</div>
+<div class="shop-meta-row"><span class="icon">💰</span>蛋糕約 450–1,480 元</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">知名品牌</span><span class="tag tag-feat">巨城</span><span class="tag tag-feat">送禮</span></div><div class="shop-links"><a class="shop-link" href="https://www.ladykelly.com.tw/" rel="noopener" target="_blank"><span class="link-icon">🌐</span>官網</a><a class="shop-link" href="https://www.facebook.com/ladykellyofficial" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/ladykelly__official/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="bday" data-kw="艾立蛋糕 Elly Family 森林系 冰淇淋蛋糕 芋泥布丁">
+<div class="card-top">
+<div><div class="shop-name">艾立蛋糕 Elly Family</div></div>
+<span class="cat-badge" style="background:var(--cat-bday-bg);color:var(--cat-bday)">生日蛋糕</span>
+</div>
+<div class="shop-desc">生日蛋糕與甜點禮盒專家，造型跟著節慶更新。<strong>森林系栗子蛋糕、草莓優格冰淇淋蛋糕、芋泥布丁蛋糕</strong>各有擁護者。建議三天前預訂。多間分店，竹北也有。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區東大路一段230號" rel="noopener" target="_blank">新竹市東區東大路一段 230 號</a>（另有光復店、竹北店）</div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:30–20:30</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-area">竹北</span><span class="tag tag-feat">生日蛋糕</span><span class="tag tag-feat">多分店</span><span class="tag tag-feat">禮盒</span></div><div class="shop-links"><a class="shop-link" href="https://www.facebook.com/ellyfamilylife" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/ellyfamilybakery/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="bday" data-kw="Cake wei 私宅甜點 芋泥 現貨挑選 生日蛋糕">
+<div class="card-top">
+<div><div class="shop-name">Cake wei 私宅甜點</div></div>
+<div style="display:flex;align-items:center;gap:8px">
+<span class="google-rating"><span class="star">★</span> 4.5</span>
+<span class="cat-badge" style="background:var(--cat-bday-bg);color:var(--cat-bday)">生日蛋糕</span>
+</div>
+</div>
+<div class="shop-desc">近十年的在地蛋糕店，生日蛋糕採<strong>現貨挑選制</strong>，不用提前預訂也能買到。招牌<strong>「芋見泥真好」</strong>芋泥口味綿密滑順，是芋頭控的最愛。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區光復路二段880號" rel="noopener" target="_blank">新竹市東區光復路二段 880 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>週一、日公休</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">現貨制</span><span class="tag tag-feat">芋泥</span><span class="tag tag-feat">免預約</span></div><div class="shop-links"><a class="shop-link" href="https://www.instagram.com/cakewei_studio/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="bday" data-kw="克莉斯蛋糕 Christine's Cake 造型蛋糕 派對 彌月">
+<div class="card-top">
+<div><div class="shop-name">克莉斯蛋糕</div><div class="shop-name-en">Christine's Cake</div></div>
+<div style="display:flex;align-items:center;gap:8px">
+<span class="google-rating"><span class="star">★</span> 4.4</span>
+<span class="cat-badge" style="background:var(--cat-bday-bg);color:var(--cat-bday)">生日蛋糕</span>
+</div>
+</div>
+<div class="shop-desc"><strong>造型可愛多樣的派對蛋糕專賣</strong>，價格平實，適合性別派對、小孩生日。也有<strong>彌月蛋糕、季節蛋糕</strong>。泡泡蛋糕和生乳捲也是人氣品項。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市北區磐石路65號" rel="noopener" target="_blank">新竹市北區磐石路 65 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:00–19:00（週六至 17:00，週日公休）</div>
+<div class="shop-meta-row"><span class="icon">📞</span>03-526-9869</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">造型蛋糕</span><span class="tag tag-feat">彌月</span><span class="tag tag-feat">平價</span></div><div class="shop-links"><a class="shop-link" href="https://www.facebook.com/christinecake2012" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="bday" data-kw="甜蜜之丘 客製化造型 公仔 精品包 全台宅配">
+<div class="card-top">
+<div><div class="shop-name">甜蜜之丘</div><div class="shop-name-en">創意造型蛋糕</div></div>
+<div style="display:flex;align-items:center;gap:8px">
+<span class="google-rating"><span class="star">★</span> 4.5</span>
+<span class="cat-badge" style="background:var(--cat-bday-bg);color:var(--cat-bday)">生日蛋糕</span>
+</div>
+</div>
+<div class="shop-desc"><strong>客製化造型蛋糕專家</strong>，可設計公仔、精品包包等各種造型，適合有特殊主題需求的生日或紀念日。提供<strong>全台宅配</strong>服務。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區民主路51號" rel="noopener" target="_blank">新竹市東區民主路 51 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>12:00–19:00</div>
+<div class="shop-meta-row"><span class="icon">📞</span>0958-150-042</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">客製造型</span><span class="tag tag-feat">全台宅配</span></div>
+</div>
+<!-- ===== 減糖 / 健康 ===== -->
+<div class="section-header" data-cat="lowsugar"><span class="sec-emoji">🌿</span><h2>減糖／健康取向</h2><span class="section-count"></span></div>
+<div class="shop-card" data-area="竹北" data-cat="lowsugar" data-kw="時甜 L'idée Sweet 減糖 日式洋風 千層 彌月">
+<div class="card-top">
+<div><div class="shop-name">時甜 L'idée Sweet</div><div class="shop-name-en">日式洋風手作減糖甜點</div></div>
+<span class="cat-badge" style="background:var(--cat-lowsugar-bg);color:var(--cat-lowsugar)">減糖</span>
+</div>
+<div class="shop-desc"><strong>減糖不減風味</strong>的日式洋風甜點店。<strong>16 層法式水果千層</strong>鮮奶油比例低、清爽不膩。也有<strong>彌月喜餅禮盒</strong>。歐風質感空間，怕甜的人終於有地方去了。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹縣竹北市光明六路東二段355號" rel="noopener" target="_blank">竹北市光明六路東二段 355 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>週一公休</div>
+</div>
+<div class="tags"><span class="tag tag-area">竹北</span><span class="tag tag-feat">減糖</span><span class="tag tag-feat">千層</span><span class="tag tag-feat">彌月禮盒</span></div><div class="shop-links"><a class="shop-link" href="https://www.lideesweet.com/" rel="noopener" target="_blank"><span class="link-icon">🌐</span>官網</a><a class="shop-link" href="https://www.facebook.com/lideesweet" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/lideesweet/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="lowsugar" data-kw="芙甜 Fu Dessert 減糖 日本麵粉 法國奶油 黑金磚巧克力">
+<div class="card-top">
+<div><div class="shop-name">芙甜</div><div class="shop-name-en">Fu Dessert Cake</div></div>
+<span class="cat-badge" style="background:var(--cat-lowsugar-bg);color:var(--cat-lowsugar)">減糖</span>
+</div>
+<div class="shop-desc">26 年糕點師傅經驗，用<strong>日本麵粉、法國奶油、有機蛋</strong>做減糖甜點。大遠百後面的小型外帶店（無內用）。<strong>黑金磚巧克力蛋糕</strong> 160 元、<strong>焦糖海鹽生乳捲</strong> 100 元都值得一試。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市北區西門街106號" rel="noopener" target="_blank">新竹市北區西門街 106 號（大遠百後方）</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>13:00–20:00（週一公休）</div>
+<div class="shop-meta-row"><span class="icon">📞</span>03-526-0011</div>
+<div class="shop-meta-row"><span class="icon">💰</span>生乳捲 100 元、巧克力蛋糕 160 元、戚風蛋糕 220 元</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">減糖</span><span class="tag tag-feat">外帶</span><span class="tag tag-feat">嚴選食材</span><span class="tag tag-feat">平價</span></div><div class="shop-links"><a class="shop-link" href="https://www.instagram.com/fortune_sweets2016/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<!-- ===== 古早味 / 平價 ===== -->
+<div class="section-header" data-cat="classic"><span class="sec-emoji">🏠</span><h2>古早味／平價伴手禮</h2><span class="section-count"></span></div>
+<div class="shop-card" data-area="新竹,竹北" data-cat="classic" data-kw="春上布丁蛋糕 古早味 布丁 伴手禮 百元">
+<div class="card-top">
+<div><div class="shop-name">春上布丁蛋糕</div></div>
+<span class="cat-badge" style="background:var(--cat-classic-bg);color:var(--cat-classic)">古早味</span>
+</div>
+<div class="shop-desc">新竹古早味布丁蛋糕的代名詞。蓬鬆綿密又不乾口，蛋香濃郁，<strong>百元價位</strong>就能買到一整條。城隍廟旁本店人氣最旺，竹北也有分店。<strong>平價伴手禮首選</strong>，送人不失禮。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span>新竹城隍廟旁（本店）／竹北文興路一段（分店）</div>
+<div class="shop-meta-row"><span class="icon">🕐</span>約 09:00–21:00</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-area">竹北</span><span class="tag tag-feat">古早味</span><span class="tag tag-feat">百元</span><span class="tag tag-feat">伴手禮</span></div><div class="shop-links"><a class="shop-link" href="https://www.chunsun-cake.com/" rel="noopener" target="_blank"><span class="link-icon">🌐</span>官網</a><a class="shop-link" href="https://www.facebook.com/chunsuncake" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/chunsuncake/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="classic" data-kw="福山現烤蛋糕 古早味 紅豆 季節限定 現烤">
+<div class="card-top">
+<div><div class="shop-name">福山現烤蛋糕</div></div>
+<span class="cat-badge" style="background:var(--cat-classic-bg);color:var(--cat-classic)">古早味</span>
+</div>
+<div class="shop-desc"><strong>古早味現烤</strong>蛋糕，出爐時香氣撲鼻。<strong>紅豆蛋糕</strong>是經典招牌，也有不定期的季節限定口味。簡單樸實但好吃，在地人的日常甜食。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區南大路217號" rel="noopener" target="_blank">新竹市東區南大路 217 號</a></div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">現烤</span><span class="tag tag-feat">紅豆</span><span class="tag tag-feat">平價</span></div><div class="shop-links"><a class="shop-link" href="https://www.facebook.com/Larry930731" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a></div>
+</div>
+<!-- ===== 巧克力 / 老牌烘焙 ===== -->
+<div class="section-header" data-cat="choco"><span class="sec-emoji">🍫</span><h2>巧克力／老牌烘焙</h2><span class="section-count"></span></div>
+<div class="shop-card" data-area="竹北" data-cat="choco" data-kw="BAC Cake Sweets 巧克力 頂級 大人味">
+<div class="card-top">
+<div><div class="shop-name">BAC Cake &amp; Sweets</div></div>
+<span class="cat-badge" style="background:var(--cat-choco-bg);color:var(--cat-choco)">巧克力</span>
+</div>
+<div class="shop-desc"><strong>頂級巧克力蛋糕</strong>專門，濃鬱大人味，是巧克力控的天堂。甜度較高但層次豐富，配黑咖啡剛好。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹縣竹北市文興路一段" rel="noopener" target="_blank">竹北市文興路一段</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>週日至四 11:00–21:30 ／ 週五六 11:00–22:00</div>
+</div>
+<div class="tags"><span class="tag tag-area">竹北</span><span class="tag tag-feat">頂級巧克力</span><span class="tag tag-feat">大人味</span></div><div class="shop-links"><a class="shop-link" href="https://www.baccake.com/" rel="noopener" target="_blank"><span class="link-icon">🌐</span>官網</a><a class="shop-link" href="https://www.facebook.com/BACcakesweets" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/bac_cakesweets/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+<div class="shop-card" data-area="新竹" data-cat="choco" data-kw="RT Baker House 烘焙老舖 歐培拉巧克力 30年">
+<div class="card-top">
+<div><div class="shop-name">RT Baker House</div><div class="shop-name-en">30 年烘焙老舖</div></div>
+<span class="cat-badge" style="background:var(--cat-choco-bg);color:var(--cat-choco)">巧克力</span>
+</div>
+<div class="shop-desc">開業<strong>超過 30 年</strong>的新竹烘焙老牌，從麵包、常溫點心到生日蛋糕品項齊全。<strong>歐培拉巧克力蛋糕</strong>層次豐富，玫瑰花巧克力裝飾精緻。穩定出品是它的最大優勢。</div>
+<div class="shop-meta">
+<div class="shop-meta-row"><span class="icon">📍</span><a href="https://maps.google.com/?q=新竹市東區建功二路10號" rel="noopener" target="_blank">新竹市東區建功二路 10 號</a></div>
+<div class="shop-meta-row"><span class="icon">🕐</span>11:00–20:30</div>
+</div>
+<div class="tags"><span class="tag tag-area">新竹</span><span class="tag tag-feat">30年老店</span><span class="tag tag-feat">品項齊全</span><span class="tag tag-feat">穩定</span></div><div class="shop-links"><a class="shop-link" href="https://www.facebook.com/rtbakerhouse.tw" rel="noopener" target="_blank"><span class="link-icon">📘</span>Facebook</a><a class="shop-link" href="https://www.instagram.com/rt_bakeryhouse/" rel="noopener" target="_blank"><span class="link-icon">📷</span>Instagram</a></div>
+</div>
+</div><!-- /shop-grid -->
+<!-- 頁尾 -->
+<footer class="page-footer">
+<p><strong>使用說明：</strong>點選上方分類或地區 chip 篩選，或直接輸入關鍵字搜尋。營業時間與價格以各店家最新公告為準，建議出發前查詢 Google Maps 或致電確認。部分店家為預約制或限日營業，請特別注意。</p>
+<p style="margin-top:8px">資料來源整理自多篇部落格食記、Google 評價與店家官網（2026 年 9 月），僅供參考。</p>
+</footer>
+</div><!-- /wrap -->
+<script>
+// theme toggle
+function toggleTheme(){
+  const r=document.documentElement;
+  const cur=r.getAttribute('data-theme');
+  const next=cur==='dark'?'light':cur==='light'?null:'dark';
+  if(next) r.setAttribute('data-theme',next); else r.removeAttribute('data-theme');
+  try{localStorage.setItem('theme',next||'auto')}catch(e){}
+}
+// reserve toggle
+function toggleReserve(){
+  const r=document.documentElement;
+  const on=r.getAttribute('data-reserve')==='on';
+  r.setAttribute('data-reserve',on?'off':'on');
+  document.getElementById('reserveBtn').classList.toggle('active',!on);
+  try{localStorage.setItem('reserve',on?'off':'on')}catch(e){}
+}
+// init from localStorage
+try{
+  const t=localStorage.getItem('theme');
+  if(t&&t!=='auto') document.documentElement.setAttribute('data-theme',t);
+  const rv=localStorage.getItem('reserve');
+  if(rv==='on'){document.documentElement.setAttribute('data-reserve','on');document.getElementById('reserveBtn').classList.add('active')}
+  else if(!rv){document.documentElement.setAttribute('data-reserve','on');document.getElementById('reserveBtn').classList.add('active')} // default on
+}catch(e){}
+
+// filtering
+let activeCat='all', activeArea='all';
+function filterClick(btn){
+  const f=btn.dataset.f, v=btn.dataset.v;
+  // deselect siblings
+  btn.closest('.chip-group').querySelectorAll('.chip').forEach(c=>{c.setAttribute('aria-pressed','false')});
+  btn.setAttribute('aria-pressed','true');
+  if(f==='cat') activeCat=v;
+  if(f==='area') activeArea=v;
+  doFilter();
+}
+function doFilter(){
+  const q=document.querySelector('.search-box').value.trim().toLowerCase();
+  const cards=document.querySelectorAll('.shop-card');
+  const headers=document.querySelectorAll('.section-header');
+  const catCounts={};
+  let shown=0, total=cards.length;
+  cards.forEach(c=>{
+    const cCat=c.dataset.cat;
+    const cArea=c.dataset.area||'';
+    const cKw=(c.dataset.kw||'').toLowerCase()+' '+c.textContent.toLowerCase();
+    let vis=true;
+    if(activeCat!=='all' && cCat!==activeCat) vis=false;
+    if(activeArea!=='all' && !cArea.includes(activeArea)) vis=false;
+    if(q && !cKw.includes(q)) vis=false;
+    c.setAttribute('data-hidden',vis?'false':'true');
+    if(vis){shown++; catCounts[cCat]=(catCounts[cCat]||0)+1}
+  });
+  headers.forEach(h=>{
+    const hCat=h.dataset.cat;
+    const hide=activeCat!=='all' && hCat!==activeCat;
+    const noCards=!catCounts[hCat];
+    h.setAttribute('data-hidden',(hide||noCards)?'true':'false');
+    const cnt=h.querySelector('.section-count');
+    if(cnt) cnt.textContent=catCounts[hCat]?`（${catCounts[hCat]} 家）`:'';
+  });
+  document.getElementById('counter').textContent=`顯示 ${shown} / ${total} 家`;
+}
+doFilter();
+</script>
+</body>
+</html>
