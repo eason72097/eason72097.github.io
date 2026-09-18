@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eason 的生活基地</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── 🟡 清新專業 Clean Professional ── */
+:root {
+  --bg:#ffffff; --bg-sub:#f9fafb; --ink:#1f2937; --ink-soft:#6b7280;
+  --accent:#2563eb; --accent2:#059669; --card:#f9fafb; --border:#e5e7eb;
+  --hover-lift:0 4px 20px rgba(0,0,0,.06);
+  --reserve:0px;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f172a; --bg-sub:#1e293b; --ink:#f1f5f9; --ink-soft:#94a3b8;
+  --accent:#60a5fa; --accent2:#34d399; --card:#1e293b; --border:#334155;
+  --hover-lift:0 4px 20px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --bg:#0f172a; --bg-sub:#1e293b; --ink:#f1f5f9; --ink-soft:#94a3b8;
+  --accent:#60a5fa; --accent2:#34d399; --card:#1e293b; --border:#334155;
+  --hover-lift:0 4px 20px rgba(0,0,0,.3);
+}
+@media(min-width:1280px){
+  :root[data-reserve="on"]{ --reserve:340px; }
+}
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family: "Outfit","Helvetica Neue",Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s, color .3s;
+}
+
+.wrap {
+  max-width: min(960px, calc(100vw - var(--reserve) - 48px));
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ── */
+.hero {
+  padding: 64px 0 48px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+  margin-bottom: 12px;
+}
+.hero h1 .accent { color: var(--accent); }
+.hero h1 .accent2 { color: var(--accent2); }
+.hero p {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── Top bar ── */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+}
+.topbar-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: min(960px, calc(100vw - var(--reserve) - 48px));
+  margin: 0 auto; padding: 0 24px;
+}
+.topbar-brand {
+  font-weight: 600; font-size: .95rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.topbar-actions { display:flex; gap:8px; align-items:center; }
+.btn-icon {
+  background: none; border: 1px solid var(--border); border-radius: 8px;
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--ink-soft); font-size: 1rem;
+  transition: border-color .2s, color .2s;
+}
+.btn-icon:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── Section ── */
+.section { margin-bottom: 48px; }
+.section-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+.section-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.section-icon.blue  { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.section-icon.green { background: color-mix(in srgb, var(--accent2) 12%, transparent); }
+.section-icon.amber { background: color-mix(in srgb, #f59e0b 12%, transparent); }
+.section-icon.rose  { background: color-mix(in srgb, #f43f5e 12%, transparent); }
+.section-title {
+  font-size: 1.15rem; font-weight: 600;
+  text-wrap: balance;
+}
+
+/* ── Card grid ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: box-shadow .25s, transform .25s, border-color .25s;
+  display: flex; flex-direction: column; gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: 12px 12px 0 0;
+  opacity: 0; transition: opacity .25s;
+}
+.card:hover {
+  box-shadow: var(--hover-lift);
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.card:hover::before { opacity: 1; }
+.card.blue::before  { background: var(--accent); }
+.card.green::before { background: var(--accent2); }
+.card.amber::before { background: #f59e0b; }
+.card.rose::before  { background: #f43f5e; }
+
+.card-title {
+  font-weight: 600; font-size: 1.05rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.card-title .emoji { font-size: 1.2rem; }
+.card-desc {
+  color: var(--ink-soft); font-size: .88rem;
+  line-height: 1.6;
+}
+.card-tag {
+  display: inline-block;
+  font-size: .72rem; font-weight: 500;
+  padding: 2px 8px; border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--accent);
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.card-tag.new {
+  background: color-mix(in srgb, var(--accent2) 10%, transparent);
+  color: var(--accent2);
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  padding: 40px 0 48px;
+  color: var(--ink-soft);
+  font-size: .82rem;
+  border-top: 1px solid var(--border);
+}
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.footer a:hover { text-decoration: underline; }
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  body { padding: 0; }
+  .wrap { padding: 0 16px; }
+  .topbar-inner { padding: 0 16px; }
+  .hero { padding: 40px 0 32px; }
+  .card-grid { grid-template-columns: 1fr; }
+}
+@media(prefers-reduced-motion:reduce){
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="topbar-brand">Eason's Hub</a>
+    <div class="topbar-actions">
+      <button class="btn-icon" id="btn-reserve" title="切換右側留白" aria-label="切換右側留白">◫</button>
+      <button class="btn-icon" id="btn-theme" title="切換主題" aria-label="切換主題">◑</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="wrap">
+    <h1><span class="accent">Eason</span> 的<span class="accent2">生活基地</span></h1>
+    <p>把散落各處的工具和資源收在一起，方便自己隨時查。</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 閱讀地圖 -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-icon blue">📚</div>
+      <h2 class="section-title">閱讀地圖</h2>
+    </div>
+    <div class="card-grid">
+      <a class="card blue" href="/novel-map.html">
+        <span class="card-tag new">new</span>
+        <div class="card-title"><span class="emoji">📖</span>小說地圖</div>
+        <div class="card-desc">從類型與年代切入，收錄中英文世界 200 多位作者的代表作與入門推薦，附時間軸和篩選器。</div>
+      </a>
+      <a class="card blue" href="/manga-atlas.html">
+        <span class="card-tag new">new</span>
+        <div class="card-title"><span class="emoji">🗾</span>漫畫入門地圖</div>
+        <div class="card-desc">110 位日本與台灣漫畫家、175 部作品，含讀者群篩選、年代軸、暢銷層分析與找漫畫資源。</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 親子與旅遊 -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-icon green">👨‍👩‍👦</div>
+      <h2 class="section-title">親子與旅遊</h2>
+    </div>
+    <div class="card-grid">
+      <a class="card green" href="/family-trips/">
+        <div class="card-title"><span class="emoji">🗺️</span>台灣親子旅遊地圖</div>
+        <div class="card-desc">全台適合帶小孩去的景點，用地圖標注，方便週末出遊規劃。</div>
+      </a>
+      <a class="card green" href="/family-trips/us-trip.html">
+        <div class="card-title"><span class="emoji">🇺🇸</span>美國賓州旅遊</div>
+        <div class="card-desc">費城及賓州周邊的旅遊資訊整理。</div>
+      </a>
+      <a class="card green" href="/family-trips/elementary-prep.html">
+        <div class="card-title"><span class="emoji">🎒</span>小孩上學指南</div>
+        <div class="card-desc">光明國小入學準備——從報到流程到用品清單的完整攻略。</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 學習資源 -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-icon amber">🎓</div>
+      <h2 class="section-title">學習資源</h2>
+    </div>
+    <div class="card-grid">
+      <a class="card amber" href="/family-trips/english_hub.html">
+        <div class="card-title"><span class="emoji">🔤</span>英文學習中心</div>
+        <div class="card-desc">英文學習資源彙整，從課程到自學工具一站找齊。</div>
+      </a>
+      <a class="card amber" href="/family-trips/listening.html">
+        <div class="card-title"><span class="emoji">🎧</span>聽力資源中心</div>
+        <div class="card-desc">英文聽力練習資源——Podcast、影片、互動平台全蒐集。</div>
+      </a>
+      <a class="card amber" href="/family-trips/thinking.html">
+        <div class="card-title"><span class="emoji">🧠</span>思考校準</div>
+        <div class="card-desc">認知偏誤、邏輯謬誤與決策框架的個人整理。</div>
+      </a>
+      <a class="card amber" href="/family-trips/thinking-cases.html">
+        <div class="card-title"><span class="emoji">📋</span>思考案例集</div>
+        <div class="card-desc">思考校準的實際案例，從生活與工作中練習辨識。</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 健身 -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-icon rose">💪</div>
+      <h2 class="section-title">健身</h2>
+    </div>
+    <div class="card-grid">
+      <a class="card rose" href="/ppl-plan/">
+        <div class="card-title"><span class="emoji">🏋️</span>健身菜單</div>
+        <div class="card-desc">PPL 三分化訓練計畫，動作示範與組數紀錄，搭配 Firestore 跨裝置同步。</div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    Built by Eason · Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const root = document.documentElement;
+  const $ = id => document.getElementById(id);
+
+  /* ── Theme ── */
+  let theme = null;
+  try { theme = localStorage.getItem('eason-hub-theme'); } catch(e){}
+
+  function applyTheme(t) {
+    if (t) { root.setAttribute('data-theme', t); }
+    else { root.removeAttribute('data-theme'); }
+    const isDark = t === 'dark' || (!t && matchMedia('(prefers-color-scheme:dark)').matches);
+    $('btn-theme').textContent = isDark ? '☀' : '◑';
+    $('btn-theme').title = isDark ? '切換淺色' : '切換深色';
+  }
+  applyTheme(theme);
+
+  $('btn-theme').addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme:dark)').matches);
+    theme = isDark ? 'light' : 'dark';
+    try { localStorage.setItem('eason-hub-theme', theme); } catch(e){}
+    applyTheme(theme);
+  });
+
+  /* ── Right-side reserve ── */
+  let reserve = 'on';
+  try { reserve = localStorage.getItem('eason-hub-reserve') || 'on'; } catch(e){}
+  function applyReserve(v) {
+    root.setAttribute('data-reserve', v);
+    $('btn-reserve').style.opacity = v === 'on' ? 1 : .45;
+    $('btn-reserve').title = v === 'on' ? '關閉右側留白' : '開啟右側留白';
+  }
+  applyReserve(reserve);
+
+  $('btn-reserve').addEventListener('click', () => {
+    reserve = reserve === 'on' ? 'off' : 'on';
+    try { localStorage.setItem('eason-hub-reserve', reserve); } catch(e){}
+    applyReserve(reserve);
+  });
+})();
+</script>
+</body>
+</html>
