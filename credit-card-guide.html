@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>信用卡速查指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&display=swap" rel="stylesheet">
+<style>
+/* ── 🟤 溫暖敘事 Warm Narrative ── */
+:root {
+  --bg:#f5f3ef; --bg-sub:#eae7e0; --ink:#1c1c28; --ink-soft:#6a6878;
+  --accent:#b85a2b; --accent2:#3a7ca5; --card:#ffffff; --border:#d8d4cb;
+  --core-c:#b85a2b; --core-bg:rgba(184,90,43,.1);
+  --keep-c:#3a7ca5; --keep-bg:rgba(58,124,165,.1);
+  --eval-c:#b88a2b; --eval-bg:rgba(184,138,43,.1);
+  --cut-c:#999;     --cut-bg:rgba(153,153,153,.08);
+  --hover-lift:0 4px 16px rgba(28,28,40,.07);
+  --reserve:0px;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101018; --bg-sub:#1a1a28; --ink:#e0ddd6; --ink-soft:#9090a0;
+  --accent:#d9884a; --accent2:#5aa0cc; --card:#1c1c2e; --border:#2e2e40;
+  --core-c:#d9884a; --core-bg:rgba(217,136,74,.15);
+  --keep-c:#5aa0cc; --keep-bg:rgba(90,160,204,.15);
+  --eval-c:#d4a840; --eval-bg:rgba(212,168,64,.15);
+  --cut-c:#777;     --cut-bg:rgba(119,119,119,.12);
+  --hover-lift:0 4px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --bg:#101018; --bg-sub:#1a1a28; --ink:#e0ddd6; --ink-soft:#9090a0;
+  --accent:#d9884a; --accent2:#5aa0cc; --card:#1c1c2e; --border:#2e2e40;
+  --core-c:#d9884a; --core-bg:rgba(217,136,74,.15);
+  --keep-c:#5aa0cc; --keep-bg:rgba(90,160,204,.15);
+  --eval-c:#d4a840; --eval-bg:rgba(212,168,64,.15);
+  --cut-c:#777;     --cut-bg:rgba(119,119,119,.12);
+  --hover-lift:0 4px 16px rgba(0,0,0,.3);
+}
+@media(min-width:1280px){
+  :root[data-reserve="on"]{ --reserve:340px; }
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Helvetica Neue",Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  transition:background .3s,color .3s;
+}
+h1,h2,h3{font-family:"Fraunces","Noto Serif TC",serif;text-wrap:balance}
+.wrap{max-width:min(1100px,calc(100vw - var(--reserve) - 48px));margin:0 auto;padding:0 24px}
+
+/* ── Topbar ── */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);padding:10px 0;
+}
+.topbar-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  max-width:min(1100px,calc(100vw - var(--reserve) - 48px));
+  margin:0 auto;padding:0 24px;
+}
+.topbar-brand{font-weight:600;font-size:.95rem;color:var(--ink);text-decoration:none}
+.topbar-actions{display:flex;gap:8px;align-items:center}
+.btn-icon{
+  background:none;border:1px solid var(--border);border-radius:8px;
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--ink-soft);font-size:1rem;
+  transition:border-color .2s,color .2s;
+}
+.btn-icon:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── Hero ── */
+.hero{padding:48px 0 24px;text-align:center}
+.hero h1{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:700;margin-bottom:8px}
+.hero h1 .accent{color:var(--accent)}
+.hero .sub{color:var(--ink-soft);font-size:.92rem}
+.hero .sub a{color:var(--accent2);text-decoration:none}
+.hero .sub a:hover{text-decoration:underline}
+.hero .verified{
+  display:inline-block;margin-top:12px;padding:4px 14px;border-radius:6px;
+  background:var(--bg-sub);color:var(--ink-soft);font-size:.78rem;
+}
+
+/* ── Tabs ── */
+.tab-bar{
+  display:flex;gap:4px;padding:8px 0 16px;
+  border-bottom:2px solid var(--border);margin-bottom:24px;
+  overflow-x:auto;
+}
+.tab-btn{
+  padding:8px 20px;border:none;border-radius:8px 8px 0 0;
+  background:transparent;color:var(--ink-soft);font-size:.92rem;
+  font-weight:500;cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;margin-bottom:-2px;
+  transition:all .2s;
+}
+.tab-btn:hover{color:var(--ink);background:var(--bg-sub)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--bg-sub)}
+.tab-panel{padding-bottom:48px}
+
+/* ── Chips ── */
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;align-items:center}
+.chip-label{font-size:.78rem;color:var(--ink-soft);margin-right:4px;white-space:nowrap}
+.chip{
+  padding:4px 12px;border:1px solid var(--border);border-radius:20px;
+  background:transparent;color:var(--ink-soft);font-size:.8rem;
+  cursor:pointer;transition:all .2s;white-space:nowrap;
+}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.counter{font-size:.8rem;color:var(--ink-soft);margin-left:auto;white-space:nowrap}
+
+/* ── Credit Card Cards ── */
+.cc-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;
+}
+.cc-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:20px;transition:box-shadow .25s,transform .25s;
+}
+.cc-card:hover{box-shadow:var(--hover-lift);transform:translateY(-2px)}
+.cc-card.hide{display:none}
+.cc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.cc-bank{font-size:.78rem;color:var(--ink-soft);letter-spacing:.04em}
+.cc-badge{font-size:.72rem;font-weight:600;padding:2px 10px;border-radius:4px}
+.cc-name{font-family:"Fraunces",serif;font-size:1.15rem;font-weight:600;margin-bottom:6px}
+.cc-mission{font-size:.85rem;color:var(--ink-soft);margin-bottom:12px;line-height:1.5}
+.cc-reward-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);font-weight:600;margin-bottom:2px}
+.cc-reward{font-size:.85rem;line-height:1.6;margin-bottom:10px}
+.cc-meta{display:flex;gap:16px;font-size:.78rem;color:var(--ink-soft);flex-wrap:wrap}
+.cc-details{margin-top:12px;border-top:1px solid var(--border);padding-top:8px}
+.cc-details summary{font-size:.82rem;color:var(--accent);cursor:pointer;font-weight:500}
+.cc-details summary:hover{text-decoration:underline}
+.cc-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-top:10px;font-size:.82rem}
+.cc-detail-grid .dl{display:block;font-size:.7rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;margin-bottom:1px}
+.cc-link{display:inline-block;margin-top:10px;font-size:.82rem;color:var(--accent2);text-decoration:none}
+.cc-link:hover{text-decoration:underline}
+
+/* ── Card status colors (via data-status) ── */
+.cc-card[data-status="core"]{border-left:3px solid var(--core-c)}
+.cc-card[data-status="keep"]{border-left:3px solid var(--keep-c)}
+.cc-card[data-status="eval"]{border-left:3px solid var(--eval-c)}
+.cc-card[data-status="cut"]{border-left:3px solid var(--cut-c);opacity:.75}
+
+/* ── Scene Table ── */
+.search-box{
+  display:flex;gap:8px;margin-bottom:12px;
+}
+.search-input{
+  flex:1;padding:8px 14px;border:1px solid var(--border);border-radius:8px;
+  background:var(--card);color:var(--ink);font-size:.88rem;
+  outline:none;transition:border-color .2s;max-width:360px;
+}
+.search-input:focus{border-color:var(--accent)}
+.scene-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.scene-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.scene-table th{
+  text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);
+  font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--ink-soft);font-weight:600;white-space:nowrap;
+}
+.scene-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.scene-table tr:hover td{background:var(--bg-sub)}
+.scene-table tr.hide{display:none}
+.scene-name{font-weight:500;white-space:nowrap}
+.scene-reward{color:var(--accent);font-weight:600;white-space:nowrap}
+.scene-cond{font-size:.8rem;color:var(--ink-soft);min-width:200px;max-width:340px}
+.scene-alt{font-size:.8rem;color:var(--ink-soft)}
+.scene-tip{
+  margin-top:16px;padding:12px 16px;border-radius:8px;
+  background:var(--bg-sub);font-size:.85rem;color:var(--ink-soft);
+  border-left:3px solid var(--accent);
+}
+
+/* ── Benefits ── */
+.benefit-group{margin-bottom:24px}
+.benefit-group-title{
+  font-size:1rem;font-weight:600;margin-bottom:10px;
+  padding-bottom:6px;border-bottom:1px solid var(--border);
+  color:var(--accent);
+}
+.benefit-row{
+  padding:12px 16px;background:var(--card);border:1px solid var(--border);
+  border-radius:8px;margin-bottom:8px;
+}
+.benefit-feature{font-weight:600;font-size:.9rem;margin-bottom:4px}
+.benefit-detail{font-size:.82rem;color:var(--ink-soft);line-height:1.7}
+.benefit-detail .sep{color:var(--border);margin:0 2px}
+
+/* ── Footer ── */
+.footer{
+  text-align:center;padding:32px 0 40px;color:var(--ink-soft);
+  font-size:.78rem;border-top:1px solid var(--border);margin-top:24px;
+}
+.footer a{color:var(--accent2);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .wrap{padding:0 14px}
+  .topbar-inner{padding:0 14px}
+  .hero{padding:32px 0 16px}
+  .cc-grid{grid-template-columns:1fr}
+  .cc-detail-grid{grid-template-columns:1fr}
+  .tab-btn{padding:8px 14px;font-size:.85rem}
+  .scene-cond{min-width:160px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="topbar-brand" id="btn-back">← Eason's Hub</a>
+    <div class="topbar-actions">
+      <button class="btn-icon" id="btn-reserve" title="切換右側留白" aria-label="切換右側留白">◫</button>
+      <button class="btn-icon" id="btn-theme" title="切換主題" aria-label="切換主題">◑</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1><span class="accent">信用卡</span>速查指南</h1>
+    <p class="sub">19 張卡、25 種場景、15 項附加權益——哪裡刷什麼一頁查完<br>
+      完整可編輯版：<a href="https://docs.google.com/spreadsheets/d/1CY9TUh9mMtLptdQqYgNoGZEoUVAVpcAZuWB81AAhIfo" target="_blank" rel="noopener">Google Sheet ↗</a></p>
+    <div class="verified">權益查證日 2026/9/10，以各銀行官網現行方案為準</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="tab-cards">💳 信用卡總覽</button>
+    <button class="tab-btn" data-tab="tab-scenes">🎯 刷卡場景速查</button>
+    <button class="tab-btn" data-tab="tab-benefits">🎁 附加權益</button>
+  </div>
+
+  <!-- Tab 1: Cards -->
+  <div class="tab-panel" id="tab-cards">
+    <div class="chip-row">
+      <span class="chip-label">狀態</span>
+      <div id="status-chips">
+        <button class="chip on" data-v="all">全部</button>
+        <button class="chip" data-v="core">主力</button>
+        <button class="chip" data-v="keep">保留</button>
+        <button class="chip" data-v="eval">評估</button>
+        <button class="chip" data-v="cut">剪卡</button>
+      </div>
+    </div>
+    <div class="chip-row">
+      <span class="chip-label">銀行</span>
+      <div id="bank-chips"></div>
+      <span class="counter" id="card-count"></span>
+    </div>
+    <div class="cc-grid" id="card-grid"></div>
+  </div>
+
+  <!-- Tab 2: Scenes -->
+  <div class="tab-panel" id="tab-scenes" hidden>
+    <div class="search-box">
+      <input type="search" class="search-input" id="scene-search" placeholder="搜尋場景或卡片名稱…">
+      <span class="counter" id="scene-count"></span>
+    </div>
+    <div class="chip-row" id="scene-chips"></div>
+    <div class="scene-wrap">
+      <table class="scene-table">
+        <thead><tr>
+          <th>消費場景</th><th>首選</th><th>回饋</th><th>條件／上限</th><th>備選</th>
+        </tr></thead>
+        <tbody id="scene-tbody"></tbody>
+      </table>
+    </div>
+    <div class="scene-tip">💡 不確定就刷 HSBC 現金回饋御璽卡——國內 1.22%、海外 2.22%，無上限、免登錄。</div>
+  </div>
+
+  <!-- Tab 3: Benefits -->
+  <div class="tab-panel" id="tab-benefits" hidden>
+    <div id="benefits-list"></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    資料來源：各銀行官網 · 查證日 2026/9/10 · Built by Eason<br>
+    <a href="/">← 回生活基地</a>
+  </div>
+</footer>
+
+<script>
+// ── 信用卡總覽 ──
+const CARDS = [
+  {id:"allme",bank:"中國信託",name:"ALL ME 卡",status:"keep",mission:"全家等超商（掃 Pi／Hami Pay）、PChome、中華電信",basic:"國內 1%、國外實體 2.2%",best:"Pi／Hami Pay 掃碼指定商店 3%；PChome、中華電信 3%；兩組加碼合計月上限 300 點",fee:"1,800",waiver:"綁 Pi 或 Hami Pay 即免；或電子帳單／自扣",debit:"兆豐",setup:"綁 Pi 拍錢包",period:"2026/7/1–12/31",url:"https://www.ctbcbank.com/content/dam/minisite/long/creditcard/ALLME/promotions.html"},
+  {id:"hotai",bank:"中國信託",name:"和泰聯名卡",status:"keep",mission:"Toyota 保養、iRent／yoxi",basic:"國內 1%",best:"服務廠 4%（和泰 Pay）；購車尾款 0.6% 無上限；yoxi／iRent／充電最高 10%；中信加碼月上限 800 點",fee:"1,800",waiver:"綁和泰 Pay、電子帳單或自扣",debit:"兆豐",setup:"綁和泰 Pay",period:"2026/7/1–12/31",url:"https://www.ctbcbank.com/content/dam/minisite/long/creditcard/Hotai/index.html"},
+  {id:"uniopen",bank:"中國信託",name:"UNIOPEN 聯名卡",status:"core",mission:"7-ELEVEN、統一集團、海外小額",basic:"國內 1%、國外 2%（實體 3%）",best:"統一集團最高 11%（多組加碼）；海外實體 +8% → 11%（月上限 500 點）；愛金卡加值 10%（上限 50 點）",fee:"1,800",waiver:"電子帳單或自扣",debit:"兆豐",setup:"icash Pay 與加值加碼每月登錄",period:"2026/7/1–12/31",url:"https://www.ctbcbank.com/content/twrbo/zh_tw/cc_index/cc_product/cc_introduction_index/C_uniopen.html"},
+  {id:"hsbc",bank:"滙豐",name:"現金回饋御璽卡",status:"core",mission:"兜底卡、保費",basic:"國內 1.22%、海外 2.22%",best:"保費一次付清 1.22% 無上限（分期照給）；全部無上限免登錄",fee:"2,000",waiver:"電子帳單即終身免",debit:"兆豐",setup:"無",period:"2026/7/1–9/30（逐季延長）",url:"https://www.hsbc.com.tw/credit-cards/products/cashback-signature/"},
+  {id:"jcard",bank:"台北富邦",name:"J 卡",status:"keep",mission:"日本、韓國",basic:"國內 1%",best:"日韓 3% 無上限；日韓泰實體單筆滿 1,000 → 6%（季上限 1,000 元、每月 20 日限量登錄）；Suica 等儲值 10%",fee:"1,800",waiver:"電子帳單、綁 LINE 官方帳號或自扣",debit:"兆豐",setup:"⚠️ 必須開電子帳單（扣兆豐不符自扣條件），否則全部降 0.5%",period:"基本 2026/4/1–12/31，加碼至 9/30",url:"https://www.fubon.com/banking/Personal/credit_card/all_card/omiyage/omiyage.htm"},
+  {id:"momo",bank:"台北富邦",name:"momo 聯名卡",status:"keep",mission:"momo 購物",basic:"店外 1% 現金",best:"momo 3% mo 幣（每期上限 1,000，10 月帳單起 2,000）；精選品牌最高 7%；一卡通交通 2%",fee:"1,800",waiver:"momo 任刷一筆、電子帳單、LINE 好友或自扣",debit:"兆豐",setup:"無",period:"2026/4/1–12/31，精選品牌至 9/30",url:"https://www.fubon.com/banking/Personal/credit_card/all_card/momo/momo.htm"},
+  {id:"pi",bank:"玉山",name:"Pi 拍錢包信用卡",status:"cut",mission:"原：保費",basic:"1% P 幣（未 e 化 0.3%）",best:"保費一次付清 1.2% 無上限或 6／12 期 0 利率；月刷滿 3 萬 → 3%（上限 3,000 P）",fee:"3,000",waiver:"電子帳單、自扣或任刷一筆",debit:"玉山",setup:"帳單 e 化",period:"2026/9/1–2027/2/28",url:"https://www.esunbank.com/zh-tw/personal/credit-card/intro/co-branded-card/pi-card"},
+  {id:"ubear",bank:"玉山",name:"U Bear 卡",status:"keep",mission:"Netflix、ChatGPT 等指定訂閱",basic:"e 化 0.5% + 自扣 0.5% = 1%",best:"指定訂閱 10%（每期上限 100 元）；網購／行動支付 +2%（每期上限 150 元）；旅平險 3,000 萬、機場停車 4 次",fee:"3,000",waiver:"電子帳單、自扣或任刷一筆",debit:"玉山",setup:"e 化＋自扣兩者都要",period:"2026/9/1–2027/2/28",url:"https://www.esunbank.com/zh-tw/personal/credit-card/intro/bank-card/u-bear"},
+  {id:"unicard",bank:"玉山",name:"Unicard",status:"core",mission:"LINE Pay、街口等行動支付",basic:"1% e point（只 e 化 0.3%）",best:"任意選 8 家通路 +2.5% → 3.5%（月上限 1,000 點）；UP 選 +3.5%（需上月刷 3 萬＋資產 30 萬）；壽險保費 1.1%",fee:"3,000",waiver:"有消費或電子帳單／自扣",debit:"玉山",setup:"e 化＋自扣，App 選好「任意選」含 LINE Pay",period:"2026/7/1–12/31",url:"https://www.esunbank.com/zh-tw/personal/credit-card/intro/bank-card/unicard"},
+  {id:"ecard",bank:"玉山",name:"數位 e 卡（寵生活）",status:"cut",mission:"原：寵物（通路已全部取消）",basic:"0.5%（未 e 化＋自扣 = 0%）",best:"cama／路易莎／星巴克 3%（上限 250 點）；共享運具 5%（上限 250 點）",fee:"900",waiver:"任刷一筆或電子帳單／自扣",debit:"玉山",setup:"e 化＋自扣",period:"2026/7/1–12/31",url:"https://www.esunbank.com/zh-tw/personal/credit-card/intro/bank-card/e-card"},
+  {id:"cube",bank:"國泰世華",name:"CUBE 卡",status:"core",mission:"網購、訂閱、Uber、外送、海外實體",basic:"0.3%",best:"玩數位／樂饗購／趣旅行 L2 3% 無上限（每天切換一次）；旅平險 3,500 萬；週四餐廳滿 2,000 加碼 5%",fee:"1,800",waiver:"電子帳單、年刷 12 次或 18 萬",debit:"國泰數位帳戶",setup:"當天切對方案；勿選固定回饋",period:"2026/1/1–12/31",url:"https://www.cathay-cube.com.tw/cathaybk/personal/product/credit-card/cards/cube-list"},
+  {id:"shopee",bank:"國泰世華",name:"蝦皮購物聯名卡",status:"eval",mission:"蝦皮、機票高鐵（限量登錄）",basic:"站外 0.5%",best:"蝦皮最高 4%（月累積滿 3,000 才觸發）；品牌日 +6%；交通旅遊 7%（每波上限 3,000 蝦幣、限 1 萬名）；海外免手續費至 12/31",fee:"1,800",waiver:"年消費 3 萬或 6 筆，或電子帳單＋任刷一筆",debit:"國泰數位帳戶",setup:"7% 需 App 登錄（第二波 9/22 16:00）",period:"站內至 2026/12/31；交通旅遊 10/1–12/31",url:"https://www.cathay-cube.com.tw/cathaybk/personal/product/credit-card/cards/shopee"},
+  {id:"green",bank:"聯邦",name:"綠卡",status:"keep",mission:"水電瓦斯電信自扣、電動車共享運具",basic:"國內 1%、國外 2%",best:"代扣繳台電／自來水／瓦斯／電信 1%（月上限 100 元）；綠色通路 6%（月上限 300 元）",fee:"1,000",waiver:"電子帳單，或年消費 6 萬／6 次",debit:"LINE Bank",setup:"電子帳單＋代扣繳設定",period:"2026/7/1–12/31",url:"https://activity.ubot.com.tw/2025GreenCard/index.htm"},
+  {id:"jiho",bank:"聯邦",name:"吉鶴卡（JCB）",status:"cut",mission:"原：日本",basic:"國內 1%",best:"日幣 2.5% 無上限；日本實體 Apple／Google Pay 疊加最高 11%；Suica 儲值 1.5%",fee:"1,000",waiver:"電子帳單，或年消費 1 萬／10 次",debit:"LINE Bank",setup:"電子帳單",period:"2026/7/1–12/31",url:"https://activity.ubot.com.tw/2026JiHoCard/index.htm"},
+  {id:"linebank",bank:"聯邦",name:"LINE Bank 聯名卡",status:"eval",mission:"Spotify／Disney+ 等串流備用、海外備用",basic:"國內 1%、國外 2.5%、保費 1%",best:"指定通路 +3% → 4%（月上限 300 元）",fee:"1,000",waiver:"電子帳單，或年消費 6 萬",debit:"LINE Bank",setup:"電子帳單",period:"2026/8/1–2027/7/31",url:"https://activity.ubot.com.tw/LINEBankCard/index.htm"},
+  {id:"dawho",bank:"永豐",name:"DAWHO 現金回饋卡",status:"cut",mission:"幾乎不用",basic:"國內 1%、國外 2%",best:"大戶 3.5%／4.5%（月平均財富 ≥30 萬，上限 400 元）；大戶 Plus 5%／6%（≥100 萬）",fee:"3,000",waiver:"電子帳單期間免，或年消費 15 萬／12 筆",debit:"永豐 DAWHO",setup:"DAWHO 自扣＋電子帳單",period:"2026/7/1–12/31",url:"https://dawho.tw/hot/2026h2offer"},
+  {id:"lejia",bank:"遠東商銀",name:"樂家+ 卡",status:"keep",mission:"餐廳、超市、加油、遠傳帳單",basic:"0.5%、海外 2.5%",best:"大小安心刷／生活禮遇各 4%（各每期上限 200 元）；寵物 10%（上限 400 元，免門檻）",fee:"2,000",waiver:"年消費 6 萬、任刷 12 筆，或電子帳單＋遠銀自扣＋3 筆",debit:"遠銀帳戶",setup:"遠銀自扣＋當期消費滿 3,000＋一次付清",period:"2026/7/1–12/31",url:"https://www.feib.com.tw/upload/creditcard/YACard/page2.html"},
+  {id:"richart",bank:"台新",name:"Richart 卡",status:"core",mission:"週末假日不限通路、保費、餐廳超額備援",basic:"未切換 0.3%",best:"7+1 大刷每日可切：台新 Pay 3.8%、LINE Pay 2.3%；假日刷不限通路 2%；皆無上限；保費 1.3% 免切換",fee:"3,000 或 4,500",waiver:"電子或行動簡訊帳單即免",debit:"台新 Richart",setup:"台新帳戶自扣升 Level 2；建議固定「假日刷」",period:"2026/7/1–2027/3/31",url:"https://www.taishinbank.com.tw/TSB/personal/credit/intro/overview/cg047/card001/"},
+  {id:"rakuten",bank:"台灣樂天",name:"樂天信用卡",status:"cut",mission:"幾乎沒在用",basic:"國內 0.5%、海外 1.5%",best:"LINE Pay／街口／航空／加油 +2.5% → 3%（上限 250 元）；日韓泰實體 +2.5% → 4%（上限 300 元）",fee:"2,000（玫瑰金卡免）",waiver:"電子帳單首年免；次年需年刷 12 次",debit:"未設定",setup:"—",period:"2026/7/1–12/31",url:"https://www.card.rakuten.com.tw/corp/ads/04-sp.xhtml"}
+];
+
+// ── 刷卡場景速查 ──
+const SCENES = [
+  {scene:"7-ELEVEN、星巴克、康是美等統一集團",cat:"超商",primary:"中信 UNIOPEN",reward:"3% 起，最高 11%",cond:"集團 +2%（月上限 500 點）＋踩點 1～4%（單筆滿 199）＋icash Pay 4%（月上限 150 點、需登錄）",alt:"ALL ME 掃 Pi 3%"},
+  {scene:"全家、萊爾富、OK",cat:"超商",primary:"中信 ALL ME",reward:"3%",cond:"須 Pi 拍錢包或 Hami Pay 掃碼；加碼月上限 300 點",alt:"HSBC 1.22%"},
+  {scene:"全聯、量販、超市",cat:"量販",primary:"遠東樂家+",reward:"4%",cond:"需遠銀自扣＋當期滿 3,000；生活禮遇組每期上限 200 元",alt:"HSBC 1.22%"},
+  {scene:"momo",cat:"電商",primary:"富邦 momo 卡",reward:"3%，精選品牌最高 7%",cond:"mo 幣每期上限 1,000（10 月起 2,000）",alt:"CUBE 玩數位 3%"},
+  {scene:"蝦皮",cat:"電商",primary:"國泰蝦皮聯名卡",reward:"最高 4%，品牌日 +6%",cond:"月累積滿 3,000 才 2%＋2%；蝦幣 3 個月到期",alt:"CUBE 玩數位 3%"},
+  {scene:"PChome、一般網購",cat:"電商",primary:"國泰 CUBE 玩數位",reward:"3% 無上限",cond:"當天切到玩數位；L2 需國泰自扣",alt:"ALL ME PChome 3%、Ubear 3%（上限 150 元）"},
+  {scene:"Netflix、ChatGPT、Gemini、Steam 等",cat:"訂閱",primary:"玉山 Ubear",reward:"10%",cond:"每期上限 100 元；須平台直接扣款",alt:"CUBE 玩數位 3%"},
+  {scene:"Spotify、Disney+、KKBOX 等其他訂閱",cat:"訂閱",primary:"聯邦 LINE Bank 卡",reward:"4%",cond:"加碼月上限 300 元",alt:"CUBE 玩數位 3%"},
+  {scene:"Claude 等未列名 AI／軟體訂閱",cat:"訂閱",primary:"國泰 CUBE 玩數位",reward:"3%（依國泰認定）",cond:"若被歸一般消費只有 0.3%，刷一次看帳單",alt:"HSBC 1.22%"},
+  {scene:"LINE Pay",cat:"支付",primary:"玉山 Unicard 任意選",reward:"3.5%",cond:"月上限 1,000 點（約刷 4 萬）；超商、全聯、繳費除外",alt:"樂天 3%、Ubear 3%"},
+  {scene:"街口、其他行動支付",cat:"支付",primary:"玉山 Unicard 任意選",reward:"3.5%",cond:"要把該支付選進 8 家通路",alt:"Ubear 3%"},
+  {scene:"Uber、Uber Eats、foodpanda",cat:"外食交通",primary:"國泰 CUBE",reward:"3%",cond:"Uber 切趣旅行；外送切樂饗購",alt:"蝦皮卡 Uber 7%（限量）、樂家+ Uber 4%"},
+  {scene:"餐廳",cat:"外食交通",primary:"遠東樂家+",reward:"4%",cond:"大小安心刷組每期上限 200 元；需遠銀自扣＋當期滿 3,000；超過上限改刷 Richart 好饗刷 3.3% 無上限",alt:"Richart 好饗刷 3.3%；CUBE 樂饗購 3%"},
+  {scene:"週末、國定假日的任何實體消費",cat:"生活",primary:"台新 Richart（固定假日刷）",reward:"2% 無上限",cond:"需台新帳戶自扣；四大超商、繳稅費等不算",alt:"HSBC 1.22%"},
+  {scene:"加油（不限品牌）",cat:"外食交通",primary:"遠東樂家+",reward:"4%",cond:"生活禮遇組上限 200 元，與超市、遠傳共用",alt:"和泰卡中油 2%"},
+  {scene:"Toyota 保養",cat:"外食交通",primary:"中信和泰聯名卡",reward:"4%（和泰 Pay）／3%",cond:"中信加碼月上限 800 點；板噴工資 9 折",alt:"—"},
+  {scene:"電動車充電、GoShare、iRent、WeMo",cat:"生活",primary:"聯邦綠卡",reward:"6%",cond:"月上限 300 元；需電子帳單",alt:"和泰卡 iRent／yoxi 10%"},
+  {scene:"水電瓦斯電信自動扣繳",cat:"生活",primary:"聯邦綠卡",reward:"1%",cond:"月上限 100 元；需設代扣繳",alt:"遠傳改扣樂家+ 4%"},
+  {scene:"保費（一次付清）",cat:"保費",primary:"台新 Richart 或 HSBC",reward:"1.3%／1.22% 無上限",cond:"Richart 免切換但點數每筆折抵上限 30%；HSBC 直接折抵帳單、分期照給",alt:"Pi 卡 1.2% 或 12 期 0 利率；Unicard 壽險 1.1%"},
+  {scene:"日本",cat:"海外",primary:"富邦 J 卡",reward:"3% 無上限；實體滿 1,000 → 6%",cond:"6% 需每季登錄（每月 20 日限 2 萬名）、季上限 1,000 元；電子帳單為前提",alt:"聯邦吉鶴 JPY 2.5% 無上限"},
+  {scene:"韓國",cat:"海外",primary:"富邦 J 卡",reward:"3%／6%",cond:"同上",alt:"CUBE 趣旅行 3%"},
+  {scene:"其他海外實體",cat:"海外",primary:"先 UNIOPEN，超額換 CUBE",reward:"11% → 3%",cond:"UNIOPEN 加碼 8% 月上限 500 點（約刷 6,250）；CUBE 3% 無上限",alt:"LINE Bank 卡 2.5%、HSBC 2.22%"},
+  {scene:"機票、高鐵、台鐵、旅行社",cat:"海外",primary:"國泰蝦皮聯名卡",reward:"7%",cond:"每波限 1 萬名登錄、上限 3,000 蝦幣",alt:"CUBE 趣旅行 3%（旅平險 3,500 萬）"},
+  {scene:"捷運、公車（一卡通）",cat:"生活",primary:"富邦 J 卡或 momo 卡",reward:"2%",cond:"月滿 100 元",alt:"綠卡一卡通綠點"},
+  {scene:"找不到對應卡的一般消費",cat:"兜底",primary:"平日 HSBC、假日 Richart",reward:"1.22%／2%",cond:"HSBC 無條件無上限；Richart 固定假日刷",alt:"UNIOPEN 1%、綠卡 1%"}
+];
+
+// ── 附加權益 ──
+const BENEFITS = [
+  {feature:"旅平險",group:"旅遊",detail:"CUBE 3,500 萬｜Ubear 3,000 萬｜Richart 3,000 萬（海外全程險 500 萬）｜ALL ME、和泰、UNIOPEN、HSBC、J 卡、樂天 2,000 萬｜momo 1,000 萬｜樂家+ 涵蓋配偶父母子女。前提：刷該卡付全額機票或 8 成團費"},
+  {feature:"旅遊不便險",group:"旅遊",detail:"HSBC、J 卡、momo、樂天（班機延誤 1 萬、行李 3 萬）｜CUBE（公共運輸）"},
+  {feature:"機場周邊免費停車",group:"旅遊",detail:"Ubear 一年 4 次、每次 7 天｜J 卡、momo、DAWHO 一年 2 次、每次 5 天｜樂家+ 有。多需刷機票或團費且單筆滿 2 萬"},
+  {feature:"機場貴賓室",group:"旅遊",detail:"UNIOPEN 最高一年 4 次（達門檻）｜和泰 2 次（達門檻）｜吉鶴 LoungeKey（依 JCB 月活動）｜J 卡 JCB 日本／夏威夷貴賓室｜樂家+ 累積 20 萬換次數"},
+  {feature:"機場接送",group:"旅遊",detail:"HSBC 675 元起｜蝦皮卡 668 元起｜CUBE 僅 L3"},
+  {feature:"道路救援",group:"交通",detail:"ALL ME、和泰、UNIOPEN、J 卡、momo：一年 3 次 50 km 免條件｜Ubear、Pi 卡需年刷 10 萬"},
+  {feature:"市區停車",group:"交通",detail:"樂家+ 嘟嘟房／永固每月 5 次、各 2 小時｜UNIOPEN 統一時代／夢時代 1～4 小時"},
+  {feature:"悠遊卡／icash 自動加值",group:"交通",detail:"UNIOPEN 愛金卡版 10%（月登錄、上限 50 點）｜J 卡、吉鶴 JCB 月活動 10%（上限 50）｜DAWHO 大戶 3%"},
+  {feature:"保費",group:"保費",detail:"Richart 1.3% 無上限免切換（或 12 期 0 利率）｜HSBC 1.22% 無上限、分期照給｜Pi 卡 1.2% 或 6／12 期 0 利率｜Unicard 壽險 1.1%｜LINE Bank 卡 1%｜J 卡、momo 0.5% 或最高 12 期 0 利率｜樂家+ 滿 3,000 享 6 期 0 利率"},
+  {feature:"學費、繳稅",group:"保費",detail:"樂家+ 學費滿 6,000 享 3 期 0 利率｜和泰綜所稅 0.2% 或 6 期 0 利率、UNIOPEN 牌照稅 0.5%"},
+  {feature:"海外交易手續費",group:"海外",detail:"全部約 1.5%｜蝦皮卡 12/31 前免手續費"},
+  {feature:"換哩程",group:"海外",detail:"HSBC 現金積點 1 元＝2 哩（華航、亞萬、新航、長榮）｜Unicard e point 200 點換 300 哩"},
+  {feature:"電動車、共享運具",group:"交通",detail:"綠卡 6%｜和泰 iRent／yoxi／充電 10%｜數位 e 卡 5%｜樂家+ Uber／iRent／Bolt 4%"},
+  {feature:"寵物",group:"生活",detail:"樂家+ 10%（上限 400 元／月，免門檻）。數位 e 卡已無寵物通路"},
+  {feature:"免年費難度",group:"生活",detail:"電子帳單即免：UNIOPEN、HSBC、J 卡、momo、Pi、Ubear、Unicard、e 卡、CUBE、綠卡、吉鶴、LINE Bank、DAWHO｜綁支付即免：ALL ME、和泰｜有消費門檻：樂家+、樂天"}
+];
+
+const SCENE_CATS = [
+  {key:"all",label:"全部"},
+  {key:"超商",label:"超商"},
+  {key:"量販",label:"量販超市"},
+  {key:"電商",label:"電商"},
+  {key:"訂閱",label:"訂閱"},
+  {key:"支付",label:"行動支付"},
+  {key:"外食交通",label:"外食交通"},
+  {key:"生活",label:"生活"},
+  {key:"保費",label:"保費"},
+  {key:"海外",label:"海外"},
+  {key:"兜底",label:"兜底"}
+];
+
+const STATUS_MAP = {
+  core:{label:"主力",color:"#b85a2b",bg:"rgba(184,90,43,.12)"},
+  keep:{label:"保留",color:"#3a7ca5",bg:"rgba(58,124,165,.12)"},
+  eval:{label:"評估",color:"#b88a2b",bg:"rgba(184,138,43,.12)"},
+  cut:{label:"剪卡",color:"#999",bg:"rgba(153,153,153,.1)"}
+};
+
+const BANKS = [...new Set(CARDS.map(c=>c.bank))];
+
+</script>
+<script>
+// ── App logic ──
+(function(){
+const root = document.documentElement;
+const $=id=>document.getElementById(id);
+
+/* ── Theme ── */
+let theme=null;
+try{theme=localStorage.getItem('cc-theme')}catch(e){}
+function applyTheme(t){
+  if(t)root.setAttribute('data-theme',t);else root.removeAttribute('data-theme');
+  const dk=t==='dark'||(!t&&matchMedia('(prefers-color-scheme:dark)').matches);
+  $('btn-theme').textContent=dk?'☀':'◑';
+  $('btn-theme').title=dk?'切換淺色':'切換深色';
+}
+applyTheme(theme);
+$('btn-theme').onclick=()=>{
+  const dk=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);
+  theme=dk?'light':'dark';
+  try{localStorage.setItem('cc-theme',theme)}catch(e){}
+  applyTheme(theme);
+};
+
+/* ── Reserve ── */
+let reserve='on';
+try{reserve=localStorage.getItem('cc-reserve')||'on'}catch(e){}
+function applyReserve(v){
+  root.setAttribute('data-reserve',v);
+  $('btn-reserve').style.opacity=v==='on'?1:.45;
+  $('btn-reserve').title=v==='on'?'關閉右側留白':'開啟右側留白';
+}
+applyReserve(reserve);
+$('btn-reserve').onclick=()=>{
+  reserve=reserve==='on'?'off':'on';
+  try{localStorage.setItem('cc-reserve',reserve)}catch(e){}
+  applyReserve(reserve);
+};
+
+/* ── Tabs ── */
+const tabs=document.querySelectorAll('.tab-btn');
+const panels=document.querySelectorAll('.tab-panel');
+tabs.forEach(btn=>{
+  btn.onclick=()=>{
+    tabs.forEach(t=>t.classList.remove('active'));
+    panels.forEach(p=>p.hidden=true);
+    btn.classList.add('active');
+    $(btn.dataset.tab).hidden=false;
+  };
+});
+
+/* ── Tab 1: Credit Cards ── */
+let cardStatusFilter='all', cardBankFilter='all';
+
+function renderCards(){
+  const grid=$('card-grid');
+  let shown=0, total=CARDS.length;
+  const items=CARDS.map(c=>{
+    const show=(cardStatusFilter==='all'||c.status===cardStatusFilter)
+      &&(cardBankFilter==='all'||c.bank===cardBankFilter);
+    if(show) shown++;
+    const s=STATUS_MAP[c.status];
+    return `<div class="cc-card${show?'':' hide'}" data-status="${c.status}" data-bank="${c.bank}" data-id="${c.id}">
+      <div class="cc-head">
+        <span class="cc-bank">${c.bank}</span>
+        <span class="cc-badge" style="color:${s.color};background:${s.bg}">${s.label}</span>
+      </div>
+      <div class="cc-name">${c.name}</div>
+      <div class="cc-mission">${c.mission}</div>
+      <div class="cc-reward-label">最佳回饋</div>
+      <div class="cc-reward">${c.best}</div>
+      <div class="cc-meta">
+        <span>基本：${c.basic}</span>
+        <span>年費：${c.fee}</span>
+      </div>
+      <details class="cc-details">
+        <summary>展開詳情</summary>
+        <div class="cc-detail-grid">
+          <div><span class="dl">免年費</span>${c.waiver}</div>
+          <div><span class="dl">扣款帳戶</span>${c.debit}</div>
+          <div><span class="dl">必要設定</span>${c.setup}</div>
+          <div><span class="dl">方案期間</span>${c.period}</div>
+        </div>
+        <a class="cc-link" href="${c.url}" target="_blank" rel="noopener">官網方案頁 →</a>
+      </details>
+    </div>`;
+  });
+  grid.innerHTML=items.join('');
+  $('card-count').textContent=`顯示 ${shown} / ${total} 張`;
+}
+
+// Status chips
+document.querySelectorAll('#status-chips .chip').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('#status-chips .chip').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    cardStatusFilter=btn.dataset.v;
+    renderCards();
+  };
+});
+
+// Bank chips
+const bankChips=$('bank-chips');
+bankChips.innerHTML=`<button class="chip on" data-v="all">全部</button>`+BANKS.map(b=>`<button class="chip" data-v="${b}">${b}</button>`).join('');
+bankChips.querySelectorAll('.chip').forEach(btn=>{
+  btn.onclick=()=>{
+    bankChips.querySelectorAll('.chip').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    cardBankFilter=btn.dataset.v;
+    renderCards();
+  };
+});
+
+renderCards();
+
+/* ── Tab 2: Spending Scenes ── */
+let sceneCatFilter='all', sceneSearch='';
+
+function renderScenes(){
+  const tbody=$('scene-tbody');
+  let shown=0;
+  const rows=SCENES.map(s=>{
+    const matchCat=sceneCatFilter==='all'||s.cat===sceneCatFilter;
+    const matchSearch=!sceneSearch||s.scene.toLowerCase().includes(sceneSearch)||s.primary.toLowerCase().includes(sceneSearch);
+    const show=matchCat&&matchSearch;
+    if(show) shown++;
+    return `<tr class="${show?'':'hide'}">
+      <td class="scene-name">${s.scene}</td>
+      <td><strong>${s.primary}</strong></td>
+      <td class="scene-reward">${s.reward}</td>
+      <td class="scene-cond">${s.cond}</td>
+      <td class="scene-alt">${s.alt}</td>
+    </tr>`;
+  });
+  tbody.innerHTML=rows.join('');
+  $('scene-count').textContent=`顯示 ${shown} / ${SCENES.length} 筆`;
+}
+
+// Scene cat chips
+const sceneChips=$('scene-chips');
+sceneChips.innerHTML=SCENE_CATS.map(c=>`<button class="chip${c.key==='all'?' on':''}" data-v="${c.key}">${c.label}</button>`).join('');
+sceneChips.querySelectorAll('.chip').forEach(btn=>{
+  btn.onclick=()=>{
+    sceneChips.querySelectorAll('.chip').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    sceneCatFilter=btn.dataset.v;
+    renderScenes();
+  };
+});
+
+$('scene-search').oninput=e=>{
+  sceneSearch=e.target.value.toLowerCase();
+  renderScenes();
+};
+
+renderScenes();
+
+/* ── Tab 3: Benefits ── */
+function renderBenefits(){
+  const container=$('benefits-list');
+  const groups={};
+  BENEFITS.forEach(b=>{
+    if(!groups[b.group])groups[b.group]=[];
+    groups[b.group].push(b);
+  });
+  const groupLabels={旅遊:"✈️ 旅遊相關",交通:"🚗 交通與加值",保費:"💰 保費與稅費",海外:"🌏 海外相關",生活:"🏠 生活"};
+  let html='';
+  for(const[g,items]of Object.entries(groups)){
+    html+=`<div class="benefit-group">
+      <h3 class="benefit-group-title">${groupLabels[g]||g}</h3>
+      ${items.map(b=>`<div class="benefit-row">
+        <div class="benefit-feature">${b.feature}</div>
+        <div class="benefit-detail">${b.detail.replace(/｜/g,'<span class="sep">｜</span>')}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+  container.innerHTML=html;
+}
+
+renderBenefits();
+
+/* ── Back to hub ── */
+const backBtn=$('btn-back');
+if(backBtn) backBtn.onclick=()=>location.href='/';
+
+})();
+
+</script>
+
+</body>
+</html>
