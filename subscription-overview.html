@@ -1,0 +1,640 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>訂閱管理總覽</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg:#f7f8fa; --bg-sub:#eceef2; --ink:#1d2028; --ink-soft:#6b7080;
+  --accent:#0055b8; --accent2:#6c5ce7; --card:#ffffff; --border:#dce0e6;
+  --high:#0a8a5e; --mid:#c07b00; --low:#c03030;
+  --tag-bg:#e4edf8; --tag-text:#0055b8;
+  --highlight:#fef9e7; --highlight-border:#e6d584;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1117; --bg-sub:#161b22; --ink:#e1e6ed; --ink-soft:#8b949e;
+  --accent:#58a6ff; --accent2:#bc8cff; --card:#161b22; --border:#2e3440;
+  --high:#34d399; --mid:#fbbf24; --low:#f87171;
+  --tag-bg:#1a2a44; --tag-text:#58a6ff;
+  --highlight:#2a2518; --highlight-border:#6b5c28;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1117; --bg-sub:#161b22; --ink:#e1e6ed; --ink-soft:#8b949e;
+  --accent:#58a6ff; --accent2:#bc8cff; --card:#161b22; --border:#2e3440;
+  --high:#34d399; --mid:#fbbf24; --low:#f87171;
+  --tag-bg:#1a2a44; --tag-text:#58a6ff;
+  --highlight:#2a2518; --highlight-border:#6b5c28;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Inter","Helvetica Neue",Arial,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  line-height:1.7; padding:32px 24px 64px;
+}
+h1,h2,h3{font-family:"DM Serif Display",Georgia,serif;text-wrap:balance;font-weight:400}
+h1{font-size:clamp(1.8rem,4vw,2.4rem);margin-bottom:4px}
+h2{font-size:clamp(1.2rem,2.5vw,1.5rem);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
+h3{font-size:1.1rem}
+.subtitle{color:var(--ink-soft);font-size:.95rem;margin-bottom:32px}
+.container{max-width:900px;margin:0 auto}
+
+/* Summary tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:40px}
+.tile{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center}
+.tile .num{font-size:1.6rem;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.3}
+.tile .num.warn{color:var(--mid)}
+.tile .label{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin-top:4px}
+.tile .sub{font-size:.72rem;color:var(--ink-soft);margin-top:2px}
+
+/* Category header */
+.cat-header{display:flex;align-items:center;gap:8px;margin:32px 0 12px}
+.cat-header .emoji{font-size:1.2rem}
+.cat-header h2{margin:0;padding:0;border:0;flex:1}
+
+/* Service card */
+.svc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:14px}
+.svc-top{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.svc-name{font-size:1.1rem;font-weight:600;flex:1}
+.badge{display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:4px;font-weight:500;letter-spacing:.03em;white-space:nowrap}
+.badge-plan{background:var(--tag-bg);color:var(--tag-text)}
+.badge-high{background:#d5f5e8;color:#0a6640}
+.badge-mid{background:#fef3cd;color:#7a5a00}
+.badge-low{background:#fde8e8;color:#9b2020}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .badge-high{background:#0a3d2a;color:#6ee7b7}
+  :root:not([data-theme="light"]) .badge-mid{background:#3d2e00;color:#fcd34d}
+  :root:not([data-theme="light"]) .badge-low{background:#3d1010;color:#fca5a5}
+}
+:root[data-theme="dark"] .badge-high{background:#0a3d2a;color:#6ee7b7}
+:root[data-theme="dark"] .badge-mid{background:#3d2e00;color:#fcd34d}
+:root[data-theme="dark"] .badge-low{background:#3d1010;color:#fca5a5}
+
+.svc-meta{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px 16px;font-size:.88rem;margin-bottom:10px}
+.svc-meta dt{color:var(--ink-soft);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.svc-meta dd{margin-bottom:6px;font-variant-numeric:tabular-nums}
+.svc-note{font-size:.85rem;color:var(--ink-soft);padding:8px 12px;background:var(--bg-sub);border-radius:6px;margin-top:10px}
+.svc-note::before{content:"📝 "}
+
+/* Plans table */
+details{margin-top:12px}
+summary{font-size:.85rem;font-weight:500;color:var(--accent);cursor:pointer;padding:6px 0}
+summary:hover{text-decoration:underline}
+.plans-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px}
+.plans-table th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);padding:6px 8px;border-bottom:2px solid var(--border);font-weight:500}
+.plans-table td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+.plans-table tr.current{background:var(--highlight);font-weight:500}
+.plans-table .price{font-variant-numeric:tabular-nums;white-space:nowrap}
+.plan-link{display:inline-block;margin-top:8px;font-size:.82rem;color:var(--accent);text-decoration:none;font-weight:500}
+.plan-link:hover{text-decoration:underline}
+.plan-link::before{content:"🔗 "}
+.overflow-x{overflow-x:auto}
+
+/* Course cards */
+.course{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border)}
+.course:last-child{border-bottom:0}
+.course-status{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+.course-info{flex:1;min-width:0}
+.course-name{font-weight:600;font-size:.95rem}
+.course-note{font-size:.83rem;color:var(--ink-soft);margin-top:2px}
+.course-link{font-size:.8rem;color:var(--accent);text-decoration:none}
+.course-link:hover{text-decoration:underline}
+
+/* Past subs */
+.past-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.past-item{padding:10px 14px;background:var(--bg-sub);border-radius:6px;font-size:.88rem}
+.past-item .name{font-weight:500}
+.past-item .reason{font-size:.8rem;color:var(--ink-soft);margin-top:2px}
+
+/* Analysis */
+.analysis{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:24px;margin-top:32px}
+.analysis h2{color:var(--accent);border-color:var(--accent)}
+.pattern{margin-bottom:20px}
+.pattern-title{font-weight:600;font-size:.95rem;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.pattern-body{font-size:.88rem;color:var(--ink-soft);line-height:1.8}
+.pattern-body strong{color:var(--ink);font-weight:500}
+.suggestions{border-left:3px solid var(--accent);padding-left:16px;margin-top:20px}
+.suggestions p{font-size:.9rem;margin-bottom:10px;line-height:1.7}
+.closing{margin-top:20px;padding:16px;background:var(--highlight);border:1px solid var(--highlight-border);border-radius:6px;font-size:.88rem;line-height:1.8}
+
+/* Cost bar */
+.cost-bar{margin:8px 0 4px;height:18px;border-radius:3px;overflow:hidden;display:flex;background:var(--bg-sub)}
+.cost-bar span{display:block;height:100%;min-width:2px;transition:width .3s}
+.bar-label{font-size:.72rem;color:var(--ink-soft);display:flex;justify-content:space-between;margin-bottom:16px;font-variant-numeric:tabular-nums}
+
+@media(max-width:600px){
+  body{padding:16px 14px 48px}
+  .tiles{grid-template-columns:1fr 1fr}
+  .svc-meta{grid-template-columns:1fr}
+  .past-list{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="container">
+  <h1>訂閱管理總覽</h1>
+  <p class="subtitle">現行方案、費用、可選方案連結，以及使用模式分析 ── 2026.09 更新</p>
+
+  <!-- Summary Tiles -->
+  <div class="tiles">
+    <div class="tile">
+      <div class="num">~$5,260</div>
+      <div class="label">每月自付估計</div>
+      <div class="sub">不含 Spotify（老婆付）</div>
+    </div>
+    <div class="tile">
+      <div class="num">10</div>
+      <div class="label">進行中訂閱</div>
+      <div class="sub">含 1 項考慮中</div>
+    </div>
+    <div class="tile">
+      <div class="num warn">1 / 5</div>
+      <div class="label">線上課完成率</div>
+      <div class="sub">浩爾文法已完成；Python 上到一半</div>
+    </div>
+    <div class="tile">
+      <div class="num">8</div>
+      <div class="label">已取消 / 停用</div>
+      <div class="sub">多數原因：看的頻率不高</div>
+    </div>
+  </div>
+
+  <!-- Cost breakdown bar -->
+  <div style="font-size:.82rem;font-weight:500;margin-bottom:4px">每月自付費用佔比</div>
+  <div class="cost-bar">
+    <span style="width:60.5%;background:var(--accent2)" title="Claude ~NT$3,200"></span>
+    <span style="width:9.4%;background:var(--mid)" title="Speak ~NT$499"></span>
+    <span style="width:8.5%;background:var(--accent)" title="曼報Pro ~NT$448"></span>
+    <span style="width:5.8%;background:#43a9c9" title="微軟 NT$309"></span>
+    <span style="width:4.2%;background:var(--high)" title="Heptabase ~NT$221"></span>
+    <span style="width:4.2%;background:#6b8fa3" title="Netflix NT$220"></span>
+    <span style="width:3.8%;background:#7c8590" title="YouTube NT$199"></span>
+    <span style="width:2.6%;background:#a0a8b4" title="Google NT$138"></span>
+    <span style="width:0.5%;background:#c0c8d0" title="Whoscall ~NT$25"></span>
+  </div>
+  <div class="bar-label">
+    <span>Claude 60% (~$3,200)</span>
+    <span>其他合計 40% (~$2,090)</span>
+  </div>
+
+  <!-- ==================== 影音 ==================== -->
+  <div class="cat-header">
+    <span class="emoji">🎬</span>
+    <h2>影音娛樂</h2>
+  </div>
+
+  <!-- Netflix -->
+  <div class="svc">
+    <div class="svc-top">
+      <div class="svc-name">Netflix</div>
+      <span class="badge badge-plan">Premium（共享）</span>
+      <span class="badge badge-high">續用：高</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>Premium（你稱 Family）</dd>
+      <dt>實付費用</dt><dd>NT$1,320/半年（≈NT$220/月）</dd>
+      <dt>付款方式</dt><dd>給同事，半年繳一次</dd>
+      <dt>方案內容</dt><dd>4K HDR・4 裝置同時・6 台下載</dd>
+    </dl>
+    <div class="svc-note">Netflix 台灣沒有叫「Family」的方案，你用的應該是 Premium，再跟同事分攤費用。Premium 可加最多 2 位「額外成員」（非同住），每人另加 NT$100/月。</div>
+    <details>
+      <summary>所有可選方案比較</summary>
+      <div class="overflow-x">
+      <table class="plans-table">
+        <tr><th>方案</th><th>月費</th><th>畫質</th><th>同時觀看</th><th>下載裝置</th><th>廣告</th></tr>
+        <tr><td>基本 Basic</td><td class="price">NT$290</td><td>720p</td><td>1</td><td>1</td><td>無</td></tr>
+        <tr><td>標準 Standard</td><td class="price">NT$380</td><td>1080p</td><td>2</td><td>2</td><td>無</td></tr>
+        <tr class="current"><td>進階 Premium ★</td><td class="price">NT$460</td><td>4K HDR</td><td>4</td><td>6</td><td>無</td></tr>
+      </table>
+      </div>
+    </details>
+    <a class="plan-link" href="https://www.netflix.com/tw/" target="_blank" rel="noopener">Netflix 台灣官網</a>
+  </div>
+
+  <!-- Spotify -->
+  <div class="svc">
+    <div class="svc-top">
+      <div class="svc-name">Spotify</div>
+      <span class="badge badge-plan">Family</span>
+      <span class="badge badge-high">續用：高</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>Family（家庭方案）</dd>
+      <dt>月費</dt><dd>NT$298/月</dd>
+      <dt>付款方式</dt><dd>老婆訂（非自付）</dd>
+      <dt>方案內容</dt><dd>最多 6 人・無廣告・離線下載・高音質</dd>
+    </dl>
+    <details>
+      <summary>所有可選方案比較</summary>
+      <div class="overflow-x">
+      <table class="plans-table">
+        <tr><th>方案</th><th>月費</th><th>人數</th><th>說明</th></tr>
+        <tr><td>學生 Student</td><td class="price">NT$88</td><td>1</td><td>需 SheerID 驗證，最長 4 年</td></tr>
+        <tr><td>個人 Individual</td><td class="price">NT$168</td><td>1</td><td>標準功能</td></tr>
+        <tr><td>雙人 Duo</td><td class="price">NT$228</td><td>2</td><td>限同住，各自獨立帳號</td></tr>
+        <tr class="current"><td>家庭 Family ★</td><td class="price">NT$298</td><td>最多 6</td><td>限同住，平均每人約 NT$50</td></tr>
+      </table>
+      </div>
+    </details>
+    <a class="plan-link" href="https://www.spotify.com/tw/premium/" target="_blank" rel="noopener">Spotify Premium 方案頁</a>
+  </div>
+
+  <!-- YouTube Premium -->
+  <div class="svc">
+    <div class="svc-top">
+      <div class="svc-name">YouTube Premium</div>
+      <span class="badge badge-plan">個人</span>
+      <span class="badge badge-high">續用：高</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>個人方案</dd>
+      <dt>月費</dt><dd>NT$199/月（網頁/Android 價）</dd>
+      <dt>付款方式</dt><dd>信用卡</dd>
+      <dt>方案內容</dt><dd>無廣告・離線・背景播放・YouTube Music</dd>
+    </dl>
+    <div class="svc-note">iOS 訂閱會貴很多（NT$260），如果是用 iPhone 訂的，建議改從網頁重新訂閱。另外，Google AI Pro 方案（NT$650/月）自帶 YouTube Premium Lite。</div>
+    <details>
+      <summary>所有可選方案比較</summary>
+      <div class="overflow-x">
+      <table class="plans-table">
+        <tr><th>方案</th><th>月費（網頁）</th><th>月費（iOS）</th><th>人數</th><th>說明</th></tr>
+        <tr><td>Premium Lite</td><td class="price">NT$119</td><td class="price">NT$160</td><td>1</td><td>多數影片無廣告，部分功能限制</td></tr>
+        <tr><td>學生</td><td class="price">NT$119</td><td>—</td><td>1</td><td>僅限大專院校在學</td></tr>
+        <tr class="current"><td>個人 ★</td><td class="price">NT$199</td><td class="price">NT$260</td><td>1</td><td>完整功能</td></tr>
+        <tr><td>雙人</td><td class="price">NT$299</td><td class="price">NT$390</td><td>2</td><td>含 1 位家庭成員</td></tr>
+        <tr><td>家庭</td><td class="price">NT$479</td><td class="price">NT$630</td><td>最多 6</td><td>含 5 位年滿 13 歲家庭成員</td></tr>
+      </table>
+      </div>
+    </details>
+    <a class="plan-link" href="https://www.youtube.com/premium" target="_blank" rel="noopener">YouTube Premium 方案頁</a>
+  </div>
+
+  <!-- ==================== AI / 雲端 ==================== -->
+  <div class="cat-header">
+    <span class="emoji">🤖</span>
+    <h2>AI 與雲端</h2>
+  </div>
+
+  <!-- Claude -->
+  <div class="svc" style="border-left:3px solid var(--accent2);border-radius:0 8px 8px 0">
+    <div class="svc-top">
+      <div class="svc-name">Claude（Anthropic）</div>
+      <span class="badge badge-plan">Max 5x</span>
+      <span class="badge badge-high">續用：高</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>Max 5x</dd>
+      <dt>月費</dt><dd>US$100/月（≈NT$3,200）</dd>
+      <dt>付款方式</dt><dd>信用卡</dd>
+      <dt>方案內容</dt><dd>5 小時窗口 ~225 則訊息・Claude Code・Cowork</dd>
+    </dl>
+    <div class="svc-note">佔所有自付訂閱的 63%，是最大單筆支出。5x 大多時候夠用，但偶爾會撞到上限，這時候會很想升 20x 但又捨不得多一倍的錢，只好暫時切去其他 AI 撐過去——雖然能用，但綁手綁腳。這是目前最卡的一筆訂閱決策。</div>
+    <details>
+      <summary>所有可選方案比較</summary>
+      <div class="overflow-x">
+      <table class="plans-table">
+        <tr><th>方案</th><th>月費</th><th>≈台幣</th><th>訊息量（/5hr）</th><th>說明</th></tr>
+        <tr><td>Free</td><td class="price">US$0</td><td>—</td><td>有限</td><td>基本功能</td></tr>
+        <tr><td>Pro</td><td class="price">US$20</td><td>~NT$640</td><td>~45 則</td><td>輕中度使用</td></tr>
+        <tr class="current"><td>Max 5x ★</td><td class="price">US$100</td><td>~NT$3,200</td><td>~225 則</td><td>中重度，含 Claude Code</td></tr>
+        <tr><td>Max 20x</td><td class="price">US$200</td><td>~NT$6,400</td><td>極大量</td><td>全天高強度不中斷</td></tr>
+      </table>
+      </div>
+    </details>
+    <a class="plan-link" href="https://claude.ai/settings/billing" target="_blank" rel="noopener">Claude 帳戶方案頁</a>
+    &nbsp;
+    <a class="plan-link" href="https://www.anthropic.com/pricing" target="_blank" rel="noopener">Anthropic 定價頁</a>
+  </div>
+
+  <!-- Google One -->
+  <div class="svc">
+    <div class="svc-top">
+      <div class="svc-name">Google One</div>
+      <span class="badge badge-plan">AI Plus 400GB</span>
+      <span class="badge badge-high">續用：高</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>Google AI Plus</dd>
+      <dt>年費</dt><dd>NT$1,650/年（≈NT$138/月）</dd>
+      <dt>付款頻率</dt><dd>年付</dd>
+      <dt>方案內容</dt><dd>400GB 空間・Gemini 用量 2 倍・NotebookLM</dd>
+    </dl>
+    <details>
+      <summary>所有可選方案比較</summary>
+      <div class="overflow-x">
+      <table class="plans-table">
+        <tr><th>方案</th><th>月費</th><th>容量</th><th>Gemini 倍數</th><th>附加</th></tr>
+        <tr><td>Basic</td><td class="price">NT$65</td><td>100GB</td><td>有限</td><td>家庭共享（5 人）</td></tr>
+        <tr><td>Standard</td><td class="price">NT$90</td><td>200GB</td><td>有限</td><td>家庭共享</td></tr>
+        <tr class="current"><td>AI Plus ★</td><td class="price">NT$165</td><td>400GB</td><td>2x</td><td>NotebookLM、圖片生成</td></tr>
+        <tr><td>AI Pro</td><td class="price">NT$650</td><td>5TB</td><td>4x</td><td>YouTube Premium Lite、進階 Meet</td></tr>
+        <tr><td>AI Ultra 5X</td><td class="price">NT$3,300</td><td>20TB</td><td>5x Pro</td><td>完整 YouTube Premium</td></tr>
+        <tr><td>AI Ultra 20X</td><td class="price">NT$6,500</td><td>30TB</td><td>20x</td><td>最大 Gemini 用量</td></tr>
+      </table>
+      </div>
+    </details>
+    <a class="plan-link" href="https://one.google.com/about/plans" target="_blank" rel="noopener">Google One 方案頁</a>
+  </div>
+
+  <!-- Microsoft 365 -->
+  <div class="svc">
+    <div class="svc-top">
+      <div class="svc-name">Microsoft 365</div>
+      <span class="badge badge-plan">個人版</span>
+      <span class="badge badge-mid">續用：高~中</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>個人版 Personal</dd>
+      <dt>月費</dt><dd>NT$309/月（年付 NT$3,090）</dd>
+      <dt>付款頻率</dt><dd>月付</dd>
+      <dt>方案內容</dt><dd>Word/Excel/PPT/Outlook・1TB OneDrive・Copilot</dd>
+    </dl>
+    <div class="svc-note">想停掉換蝦皮，OneDrive 不好用，但生成內容時需要 Office 365。如果改年付可省 NT$618/年（月付 NT$3,708 vs 年付 NT$3,090）。</div>
+    <details>
+      <summary>個人版定價</summary>
+      <div class="overflow-x">
+      <table class="plans-table">
+        <tr><th>付款方式</th><th>費用</th><th>每月均攤</th></tr>
+        <tr><td>月付</td><td class="price">NT$309/月</td><td class="price">NT$309</td></tr>
+        <tr><td>年付</td><td class="price">NT$3,090/年</td><td class="price">NT$258（省 17%）</td></tr>
+      </table>
+      </div>
+    </details>
+    <a class="plan-link" href="https://www.microsoft.com/zh-tw/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft 365 方案比較頁</a>
+  </div>
+
+  <!-- ==================== 電子報 ==================== -->
+  <div class="cat-header">
+    <span class="emoji">📰</span>
+    <h2>電子報</h2>
+  </div>
+
+  <!-- 曼報Pro -->
+  <div class="svc">
+    <div class="svc-top">
+      <div class="svc-name">曼報 Pro</div>
+      <span class="badge badge-plan">專業會員</span>
+      <span class="badge badge-low">續用：中~低</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>專業會員</dd>
+      <dt>年費</dt><dd>NT$5,380/年（≈NT$448/月）</dd>
+      <dt>付款方式</dt><dd>信用卡，年付</dd>
+      <dt>方案內容</dt><dd>商業解碼（月 1 篇）・曼潔拉報告（月 2+ 篇）・巨人之聲（月 2+ 篇）・每月 AMA・每季線下聚會</dd>
+    </dl>
+    <div class="svc-note">看的頻率不高，要續訂？── 以 NT$5,380/年來說，如果每月只看 1-2 篇，每篇成本超過 NT$200。</div>
+    <a class="plan-link" href="https://pro.manny-li.com/" target="_blank" rel="noopener">曼報 Pro 官網</a>
+  </div>
+
+  <!-- ==================== 英文 ==================== -->
+  <div class="cat-header">
+    <span class="emoji">🗣️</span>
+    <h2>英文學習</h2>
+  </div>
+
+  <!-- Speak -->
+  <div class="svc">
+    <div class="svc-top">
+      <div class="svc-name">Speak</div>
+      <span class="badge badge-plan">Premium Plus</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>Premium Plus</dd>
+      <dt>年費</dt><dd>NT$5,990/年（≈NT$499/月）</dd>
+      <dt>付款方式</dt><dd>信用卡，年付</dd>
+      <dt>方案內容</dt><dd>系統課程・AI 情境對話・無上限 AI 糾正・個人深度學習報告</dd>
+    </dl>
+    <div class="svc-note">你還有 2 門英文線上課（Lily Chen 聽力術、浩爾文法課）尚未完成。三筆英文投資可能互有重疊，建議評估是否需要同時維持。</div>
+    <details>
+      <summary>所有可選方案比較</summary>
+      <div class="overflow-x">
+      <table class="plans-table">
+        <tr><th>方案</th><th>年費</th><th>≈月費</th><th>差異</th></tr>
+        <tr><td>Premium</td><td class="price">NT$3,490/年</td><td class="price">~NT$291</td><td>AI 糾正和客製課程為限次體驗</td></tr>
+        <tr class="current"><td>Premium Plus ★</td><td class="price">NT$5,990/年</td><td class="price">~NT$499</td><td>所有 AI 功能無上限 + 學習報告</td></tr>
+      </table>
+      </div>
+    </details>
+    <a class="plan-link" href="https://www.speak.com/tw/purchase" target="_blank" rel="noopener">Speak 購買頁</a>
+  </div>
+
+  <!-- ==================== 功能型 ==================== -->
+  <div class="cat-header">
+    <span class="emoji">🛡️</span>
+    <h2>功能型工具</h2>
+  </div>
+
+  <!-- Whoscall -->
+  <div class="svc">
+    <div class="svc-top">
+      <div class="svc-name">Whoscall</div>
+      <span class="badge badge-plan">個人進階版</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>個人進階版（早期價）</dd>
+      <dt>年費</dt><dd>NT$300/年（≈NT$25/月）</dd>
+      <dt>付款方式</dt><dd>信用卡，年付</dd>
+      <dt>方案內容</dt><dd>自動封鎖騷擾・資料庫自動更新・智慧簡訊管家・無廣告</dd>
+    </dl>
+    <div class="svc-note">⚠️ 你的 NT$300/年是舊價格（凍漲優惠）。新用戶現在要 NT$890/年，差距將近 3 倍。如果取消再重訂，就要付新價了。建議繼續維持訂閱不中斷。</div>
+    <details>
+      <summary>目前新用戶方案</summary>
+      <div class="overflow-x">
+      <table class="plans-table">
+        <tr><th>方案</th><th>月費</th><th>年費</th><th>人數</th></tr>
+        <tr class="current"><td>個人（你的凍漲價）★</td><td>—</td><td class="price">NT$300/年</td><td>1</td></tr>
+        <tr><td>個人（新價）</td><td class="price">NT$95</td><td class="price">NT$890</td><td>1</td></tr>
+        <tr><td>雙人</td><td class="price">NT$155</td><td class="price">NT$1,390</td><td>2</td></tr>
+        <tr><td>家庭</td><td class="price">NT$295</td><td class="price">NT$2,590</td><td>5</td></tr>
+      </table>
+      </div>
+    </details>
+    <a class="plan-link" href="https://whoscall.com/zh-hant/download" target="_blank" rel="noopener">Whoscall 官網</a>
+  </div>
+
+  <!-- ==================== 筆記 ==================== -->
+  <div class="cat-header">
+    <span class="emoji">📓</span>
+    <h2>筆記工具</h2>
+  </div>
+
+  <!-- Heptabase -->
+  <div class="svc">
+    <div class="svc-top">
+      <div class="svc-name">Heptabase</div>
+      <span class="badge badge-plan">Pro（早期方案）</span>
+      <span class="badge badge-high">續用：高</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>目前方案</dt><dd>Pro（早期訂閱價）</dd>
+      <dt>年費</dt><dd>~US$83/年（≈NT$2,660/年，~NT$221/月）</dd>
+      <dt>付款方式</dt><dd>信用卡，年付</dd>
+      <dt>方案內容</dt><dd>白板式知識管理・卡片筆記・100 AI credits/月</dd>
+    </dl>
+    <div class="svc-note">⚠️ 早期訂閱方案，現在新用戶 Pro 要 US$107.88/年（貴 30%）。跟 Whoscall 一樣，取消就回不去舊價了。</div>
+    <details>
+      <summary>目前新用戶方案</summary>
+      <div class="overflow-x">
+      <table class="plans-table">
+        <tr><th>方案</th><th>月付</th><th>年付（/月）</th><th>AI 額度</th><th>PDF</th></tr>
+        <tr class="current"><td>Pro（你的早鳥價）★</td><td>—</td><td class="price">~US$6.9/月</td><td>100/月</td><td>有限</td></tr>
+        <tr><td>Pro（新價）</td><td class="price">US$11.99</td><td class="price">US$8.99</td><td>100/月</td><td>有限</td></tr>
+        <tr><td>Premium</td><td class="price">US$23.99</td><td class="price">US$17.99</td><td>1,800/月</td><td>無限</td></tr>
+        <tr><td>Premium+</td><td class="price">US$71.99</td><td class="price">US$53.99</td><td>8,100/月</td><td>無限</td></tr>
+      </table>
+      </div>
+    </details>
+    <a class="plan-link" href="https://heptabase.com/pricing" target="_blank" rel="noopener">Heptabase 定價頁</a>
+  </div>
+
+  <!-- ==================== 考慮中 ==================== -->
+  <div class="cat-header">
+    <span class="emoji">🤔</span>
+    <h2>考慮中</h2>
+  </div>
+
+  <!-- M觀點 -->
+  <div class="svc" style="border-left:3px solid var(--mid);border-radius:0 8px 8px 0">
+    <div class="svc-top">
+      <div class="svc-name">M 觀點・科技巨頭解碼</div>
+      <span class="badge badge-mid">考慮中</span>
+    </div>
+    <dl class="svc-meta">
+      <dt>方案</dt><dd>付費電子報</dd>
+      <dt>月費</dt><dd>NT$188/月（自動扣款，可隨時取消）</dd>
+      <dt>內容</dt><dd>蘋果/Google/Meta/Amazon/Tesla 等科技巨頭財報分析・商業模式解讀・每篇附商業思考</dd>
+    </dl>
+    <div class="svc-note">⚠️ 決定前請看下方「觀察與建議」── 你過去 6 個內容訂閱有 5 個因「看不完」取消。M觀點的主題（科技/商業）跟你的工作沒有直接關聯，被擱置的風險跟曼報Pro類似。月付制風險較低，建議先訂一個月測試實際閱讀頻率。</div>
+    <a class="plan-link" href="https://miula.tw/tgdc/" target="_blank" rel="noopener">科技巨頭解碼 訂閱頁</a>
+  </div>
+
+  <!-- ==================== 線上課 ==================== -->
+  <div class="cat-header">
+    <span class="emoji">🎓</span>
+    <h2>線上課程（一次買定）</h2>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
+    <div class="course">
+      <div class="course-status">⏸️</div>
+      <div class="course-info">
+        <div class="course-name">Mosky AI 課</div>
+        <div class="course-note">課程內容分階段上，體驗不好。續用意願低，但打算找時間回頭看</div>
+        <a class="course-link" href="https://learn.mosky.tw/" target="_blank" rel="noopener">→ learn.mosky.tw</a>
+      </div>
+    </div>
+    <div class="course">
+      <div class="course-status">⏸️</div>
+      <div class="course-info">
+        <div class="course-name">基礎肌動力學（GymeFit）</div>
+        <div class="course-note">內容很好，腳踝受傷時買的，後來沒時間看完</div>
+        <a class="course-link" href="https://academy.gymefit.tw/learning/kinesiology/6106a69e-a689-4025-b6d2-197eb10fc085" target="_blank" rel="noopener">→ academy.gymefit.tw</a>
+      </div>
+    </div>
+    <div class="course">
+      <div class="course-status">⏸️</div>
+      <div class="course-info">
+        <div class="course-name">Lily Chen 英文聽力術</div>
+        <div class="course-note">內容很好，需要再花時間聽完。續用意願：中~高</div>
+        <a class="course-link" href="https://courses.english.cool/p/listening" target="_blank" rel="noopener">→ courses.english.cool</a>
+      </div>
+    </div>
+    <div class="course">
+      <div class="course-status">✅</div>
+      <div class="course-info">
+        <div class="course-name">和浩爾老師一起不再死背文法（WordUp）</div>
+        <div class="course-note">已完成。需依實際狀況複習或使用</div>
+        <a class="course-link" href="https://shop.wordup.com.tw/product/1201" target="_blank" rel="noopener">→ shop.wordup.com.tw</a>
+      </div>
+    </div>
+    <div class="course">
+      <div class="course-status">⏸️</div>
+      <div class="course-info">
+        <div class="course-name">Python 入門特訓（Hahow）</div>
+        <div class="course-note">上到一半。後來工作沒實際用 Python，技能漸漸生疏</div>
+        <a class="course-link" href="https://hahow.in/courses/5bdaafa726b5640020754649" target="_blank" rel="noopener">→ hahow.in</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 已取消 ==================== -->
+  <div class="cat-header">
+    <span class="emoji">📦</span>
+    <h2>已取消 / 停用</h2>
+  </div>
+
+  <div class="past-list">
+    <div class="past-item"><span class="name">IEO 國際觀察</span><div class="reason">看的頻率不高</div></div>
+    <div class="past-item"><span class="name">財經 M 平方</span><div class="reason">內容很好，但看的頻率不高</div></div>
+    <div class="past-item"><span class="name">科技島讀</span><div class="reason">內容很好，但已停刊</div></div>
+    <div class="past-item"><span class="name">了概</span><div class="reason">內容很好，但已停刊</div></div>
+    <div class="past-item"><span class="name">定錨產業筆記</span><div class="reason">內容很好，但看的頻率不高</div></div>
+    <div class="past-item"><span class="name">哈佛商業評論</span><div class="reason">內容很好，但看的頻率不高</div></div>
+    <div class="past-item"><span class="name">Audible</span><div class="reason">跑步時有聽，跑步停後退訂</div></div>
+    <div class="past-item"><span class="name">CWMoney</span><div class="reason">免費記帳 app，但沒有記帳習慣</div></div>
+  </div>
+
+  <!-- ==================== 分析 ==================== -->
+  <div class="analysis">
+    <h2>觀察與建議</h2>
+    <p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:20px">你說想聽盲點和建議，以下是從資料裡看到的幾個模式，以一個旁觀者的角度講：</p>
+
+    <div class="pattern">
+      <div class="pattern-title">1.「內容很好」陷阱</div>
+      <div class="pattern-body">
+        你寫的每一個取消原因和未完成課程，幾乎都有「內容很好」這四個字。問題顯然不是內容品質，而是<strong>你可用的時間和注意力</strong>。買的時候你問的是「這東西值不值得？」──但真正該問的是<strong>「以我現在的生活節奏，我真的會看嗎？」</strong> 全職工程師、帶小孩、竹北通勤，一天能拿來「主動學習」的時段其實就那麼多。
+      </div>
+    </div>
+
+    <div class="pattern">
+      <div class="pattern-title">2. 被動消費 vs. 主動學習</div>
+      <div class="pattern-body">
+        留下來而且用得開心的（Netflix、Spotify、YouTube、Heptabase）有一個共通點：<strong>融入既有生活</strong>，不需要額外的認知投入。取消的幾乎全是需要你主動坐下來讀、思考、做筆記的東西。這不是「三分鐘熱度」，而是下班帶完小孩之後，<strong>認知能量已經見底了</strong>。大部分人都一樣，只是不會坐下來整理所以沒發現。
+      </div>
+    </div>
+
+    <div class="pattern">
+      <div class="pattern-title">3. Audible 其實成功過</div>
+      <div class="pattern-body">
+        你自己寫的：跑步的時候有聽好幾本書，做得不錯。<strong>Audible 之所以成功，是因為它綁在一個既有習慣上</strong>──跑步。跑步一停，Audible 就沒用了。這暗示一件事：要讓任何學習型內容活起來，不是靠意志力，而是<strong>綁一個已經存在的時段</strong>（通勤？午休？睡前固定 15 分鐘？）。沒有時段，再好的內容都會積灰。
+      </div>
+    </div>
+
+    <div class="pattern">
+      <div class="pattern-title">4. 英文學習分散投資</div>
+      <div class="pattern-body">
+        Speak（NT$5,990/年）+ Lily Chen 聽力術 + 浩爾文法課。三筆英文投資中，<strong>浩爾文法已完成</strong>（需持續複習），但 Lily Chen 聽力術和 Speak 都還在進行中。建議<strong>集中火力把 Lily Chen 聽力術做完</strong>（你自己給了中~高評價），再搭配 Speak 的 AI 對話做日常練習，形成「聽力打底 + AI 口說維持」的組合。
+      </div>
+    </div>
+
+    <div class="pattern">
+      <div class="pattern-title">5. Claude 5x 是最卡的決策——不夠又不甘心升</div>
+      <div class="pattern-body">
+        Claude Max 5x 每月 ~NT$3,200，<strong>佔所有自付訂閱的 63%</strong>。大多時候夠用，但偶爾撞上限，只好暫時切去其他 AI 頂著，綁手綁腳。升 20x 又多一倍（~NT$6,400/月），心裡過不去。這是典型的<strong>「卡在中間」困境</strong>：不升，偶爾痛；升了，大部分時間覺得多花了。建議換個角度想：<strong>撞上限時你在做什麼？</strong>如果是高密度的研究或工作產出，那些場景帶來的價值是否超過每月多花 NT$3,200？如果答案是「偶爾一兩天衝高而已」，那忍一下冷卻期或切其他 AI 的策略其實是對的，不用勉強升。
+      </div>
+    </div>
+
+    <div class="pattern">
+      <div class="pattern-title">6. 早鳥價是真正的「沉沒資產」</div>
+      <div class="pattern-body">
+        Whoscall（你付 NT$300/年，新客 NT$890/年）和 Heptabase（你 ~US$83/年，新客 US$107.88 起）都是早期優惠價。這種價格<strong>一旦取消就回不去</strong>，所以即使暫時用得少，只要未來有可能需要，建議維持不中斷。
+      </div>
+    </div>
+
+    <div class="suggestions">
+      <p><strong>具體行動建議：</strong></p>
+      <p>❶ <strong>M觀點先別急著訂。</strong>你過去 6 個內容訂閱有 5 個因「看不完」取消。如果真的想試，善用它的月付制——先訂一個月，嚴格觀察自己有沒有真的讀，再決定要不要繼續。</p>
+      <p>❷ <strong>曼報 Pro 到期前做個決定。</strong>續用意願「中~低」+ NT$5,380/年 = 每一篇你沒看的文章都在燒錢。如果一個月只看 1 篇，不如取消，把錢省下來。</p>
+      <p>❸ <strong>Claude 先記錄「撞牆」的場景。</strong>每次被迫切去其他 AI 時記一下在做什麼——如果集中在特定幾天的高密度產出，那偶爾忍一下比長期多付 NT$3,200 划算；如果發現每週都在撞，那升 20x 可能真的該考慮了。</p>
+      <p>❹ <strong>線上課：一次只做一門。</strong>每天 15 分鐘的微承諾，比「找時間把五門課看完」實際得多。建議先從 Lily Chen 聽力術開始（你自己給了中~高評價）。</p>
+      <p>❺ <strong>微軟 365 如果決定留，改年付。</strong>月付 NT$309 × 12 = NT$3,708，年付 NT$3,090，直接省 NT$618。</p>
+    </div>
+
+    <div class="closing">
+      最後一點：你能坐下來做這個整理，本身就比大多數人強——多數人只是無意識地付下去。不需要拿「三分鐘熱度」來苛責自己。你的生活已經很滿了，每天能拿來學習的時間確實有限。真正的問題不是「我怎麼這麼沒毅力」，而是<strong>「在我真實的時間預算裡，哪幾件事值得排進去」</strong>。排不進去的就果斷砍，把心力花在真的會用的東西上。
+    </div>
+  </div>
+
+  <p style="text-align:center;margin-top:32px;font-size:.75rem;color:var(--ink-soft)">
+    價格資料查詢於 2026 年 9 月，以各官網公開資訊為準。匯率以 US$1 ≈ NT$32 估算。
+  </p>
+</div>
+
+</body></html>
