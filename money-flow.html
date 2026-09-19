@@ -1,0 +1,1728 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>資金流向駕駛艙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#F3F4F0; --surface:#FFFFFF; --surface-2:#E9ECE6; --line:#D5DAD3; --line-strong:#B9C1B8;
+  --ink:#1A2529; --ink-2:#4A575B; --muted:#6E7A7D;
+  --accent:#A9772A; --accent-ink:#7E571A; --accent-soft:#F2E7CF;
+  --flow:#2C6E72; --flow-soft:#D9EBEA;
+  --good:#2B7A4B; --good-soft:#DCEEDF; --warn:#B8811A; --warn-soft:#F6E9C8; --crit:#B5433B; --crit-soft:#F5DCD9;
+  --shadow:0 1px 2px rgba(26,37,41,.06),0 8px 24px rgba(26,37,41,.06);
+  --font-head:"Schibsted Grotesk","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --font-body:"IBM Plex Sans","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --font-mono:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,"Noto Sans TC","PingFang TC",monospace;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1719; --surface:#162226; --surface-2:#1D2C31; --line:#2A3A40; --line-strong:#3B4E55;
+    --ink:#E5EBE8; --ink-2:#B7C3C3; --muted:#8C9B9C;
+    --accent:#D9AE55; --accent-ink:#E8C57A; --accent-soft:#3A2F17;
+    --flow:#63B3B7; --flow-soft:#1B3538;
+    --good:#5DBB82; --good-soft:#173324; --warn:#E0AA3E; --warn-soft:#3A2D12; --crit:#E1746B; --crit-soft:#3E1F1C;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1719; --surface:#162226; --surface-2:#1D2C31; --line:#2A3A40; --line-strong:#3B4E55;
+  --ink:#E5EBE8; --ink-2:#B7C3C3; --muted:#8C9B9C;
+  --accent:#D9AE55; --accent-ink:#E8C57A; --accent-soft:#3A2F17;
+  --flow:#63B3B7; --flow-soft:#1B3538;
+  --good:#5DBB82; --good-soft:#173324; --warn:#E0AA3E; --warn-soft:#3A2D12; --crit:#E1746B; --crit-soft:#3E1F1C;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.8;text-spacing-trim:space-all;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.3;text-wrap:balance;margin:0}
+h1{font-size:1.7rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.25rem;font-weight:700}
+h3{font-size:1.02rem;font-weight:700}
+p{margin:0;line-break:strict;text-wrap:pretty;overflow-wrap:break-word}
+a{color:var(--flow);text-decoration-thickness:1px;text-underline-offset:2px}
+.num,.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.en{font-family:var(--font-mono);font-size:.86em;color:var(--ink-2)}
+.eyebrow{font-family:var(--font-head);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto}
+.brand b{font-family:var(--font-head);font-size:1.05rem}
+.brand .snap{font-family:var(--font-mono);font-size:.78rem;color:var(--muted)}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:999px;padding:3px;background:var(--surface);gap:2px}
+.seg button{border:0;background:transparent;color:var(--ink-2);font:inherit;font-size:.84rem;padding:5px 12px;border-radius:999px;cursor:pointer;line-height:1.4}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);font-weight:600}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.levels{max-width:1120px;margin:0 auto;padding:0 16px 8px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.levels::-webkit-scrollbar{display:none}
+.levels a{white-space:nowrap;font-size:.82rem;text-decoration:none;color:var(--ink-2);padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.levels a b{font-family:var(--font-mono);color:var(--accent-ink);margin-right:4px}
+
+/* layout */
+main{max-width:1120px;margin:0 auto;padding:20px 16px 80px;display:grid;gap:44px}
+section{scroll-margin-top:110px;min-width:0}
+.grid>*,.hero>*,.ind,.pool>*,.pool-grid>*,.pool{min-width:0}
+.sec-head{display:grid;gap:6px;margin-bottom:16px;max-width:38em}
+.sec-head p{color:var(--ink-2)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.card.lift{box-shadow:var(--shadow)}
+.note{background:var(--surface-2);border-left:3px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;padding:2px 10px;border-radius:999px;font-weight:600;line-height:1.6;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.crit{background:var(--crit-soft);color:var(--crit)}
+.pill.flow{background:var(--flow-soft);color:var(--flow)}
+.pill.acc{background:var(--accent-soft);color:var(--accent-ink)}
+.pill.neutral{background:var(--surface-2);color:var(--ink-2)}
+
+/* fishing-mode blocks */
+.how{border-top:1px dashed var(--line-strong);margin-top:12px;padding-top:10px;font-size:.92rem;color:var(--ink-2)}
+.how .lbl{display:inline-block;margin-right:6px;font-family:var(--font-head);font-size:.7rem;letter-spacing:.1em;color:var(--accent-ink);font-weight:700;margin-bottom:2px}
+body.eat .how, body.eat .fish-only{display:none}
+body.fish .eat-only{display:none}
+
+/* hero */
+.hero{display:grid;gap:18px;grid-template-columns:1.4fr 1fr}
+@media (max-width:820px){.hero{grid-template-columns:1fr}}
+.verdict{display:grid;gap:12px}
+.verdict h1{max-width:16em}
+.verdict .lede{font-size:1.02rem;max-width:34em}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:2px}
+.kpi .k{font-size:.74rem;color:var(--muted)}
+.kpi .v{font-family:var(--font-mono);font-size:1.15rem;font-weight:500;line-height:1.3}
+.kpi .d{font-size:.74rem;color:var(--ink-2)}
+.kpi.up .v{color:var(--good)} .kpi.down .v{color:var(--crit)} .kpi.hot .v{color:var(--warn)}
+
+/* spine */
+.spine{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;counter-reset:q}
+.spine .card{position:relative;padding-top:40px}
+.spine .card::before{counter-increment:q;content:"Q" counter(q);position:absolute;top:12px;left:18px;font-family:var(--font-mono);font-size:.78rem;color:var(--accent-ink);font-weight:500}
+.spine .now{margin-top:10px;font-size:.9rem;padding:8px 10px;background:var(--surface-2);border-radius:6px}
+
+/* scale tabs */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{font:inherit;font-size:.86rem;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink-2);padding:6px 12px;border-radius:8px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+[hidden]{display:none!important}
+.scale-pane{display:grid;gap:12px}
+.timeline{display:grid;gap:8px}
+.ev{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.ev .dt{font-family:var(--font-mono);color:var(--accent-ink);font-size:.84rem}
+
+/* indicator cards */
+.ind{display:grid;gap:6px}
+.ind summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:baseline}
+.ind summary::-webkit-details-marker{display:none}
+.ind summary .t{font-weight:600}
+.ind summary .t small{display:block;font-family:var(--font-mono);font-size:.74rem;color:var(--muted);font-weight:400}
+.ind summary .v{font-family:var(--font-mono);font-size:1.05rem;text-align:right}
+.ind summary .v small{display:block;font-size:.72rem;color:var(--muted)}
+.ind .body{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;display:grid;gap:8px;font-size:.92rem}
+.ind .body b{color:var(--ink)}
+.ind[open] summary .t{color:var(--accent-ink)}
+.src{font-size:.78rem;color:var(--muted)}
+.src a{color:var(--muted)}
+
+/* map */
+.map-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;overflow-x:auto}
+.map-wrap svg{display:block;width:100%;min-width:640px;height:auto}
+.map-hint{display:none;font-size:.78rem;color:var(--muted);margin:0 0 6px}
+@media (max-width:700px){.map-hint{display:block}}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.8rem;color:var(--ink-2);margin-top:8px}
+.legend i{display:inline-block;width:22px;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.map-note{margin-top:12px}
+.node{cursor:pointer}
+.node:focus-visible rect{stroke:var(--accent);stroke-width:2}
+
+/* table */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.88rem}
+th{text-align:left;font-family:var(--font-head);font-size:.74rem;letter-spacing:.06em;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line-strong);white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+td.n{font-family:var(--font-mono);white-space:nowrap}
+td.name{min-width:160px;font-weight:500}
+td.name small{display:block;font-family:var(--font-mono);font-size:.74rem;color:var(--muted);font-weight:400}
+tr[hidden]{display:none}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.filters button{font:inherit;font-size:.8rem;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink-2);padding:3px 10px;border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--flow);border-color:var(--flow);color:#fff}
+
+/* checklist */
+.check{display:grid;gap:0}
+.check label{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem;align-items:start}
+.check input{margin-top:6px;accent-color:var(--accent)}
+.check .w{font-family:var(--font-mono);font-size:.78rem;color:var(--accent-ink);margin-right:6px}
+
+/* road */
+.road{display:grid;gap:8px}
+.road .r{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.road .r b{font-family:var(--font-mono);color:var(--accent-ink);font-weight:500}
+.road .r.done b{color:var(--good)}
+/* pools */
+.pool-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.pool-tabs button{font:inherit;font-size:.84rem;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink-2);padding:5px 12px;border-radius:8px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.pool-tabs button i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.pool-tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.pool{display:grid;gap:12px}
+.pool-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline}
+.pool-head .lede2{flex-basis:100%;color:var(--ink-2);max-width:38em}
+.pool-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:12px}
+@media (max-width:820px){.pool-grid{grid-template-columns:1fr}}
+.ev3{display:grid;gap:8px;margin:8px 0 0}
+.ev3 div{display:grid;grid-template-columns:64px 1fr;gap:10px;font-size:.9rem;padding:6px 0;border-top:1px solid var(--line)}
+.ev3 dt{font-family:var(--font-head);font-size:.76rem;font-weight:700;color:var(--accent-ink);padding-top:3px}
+.ev3 dd{margin:0}
+.steps{margin:6px 0 0;padding-left:1.3em;display:grid;gap:4px;font-size:.92rem}
+.mis{margin-top:10px;padding:8px 12px;background:var(--crit-soft);border-radius:6px;font-size:.88rem}
+.mis b{color:var(--crit)}
+.tools{min-width:560px}
+.tools td:first-child{font-family:var(--font-mono);white-space:nowrap;font-weight:500}
+/* L3 */
+.l3{display:grid;gap:12px}
+.l3>*,.l3 .card{min-width:0}
+.bar{position:relative;display:block;height:16px;background:var(--surface-2);border-radius:3px;overflow:hidden;min-width:120px}
+.bar i{position:absolute;top:0;bottom:0;background:var(--flow);opacity:.75}
+.bar i.neg{background:var(--crit)}
+.bar b{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line-strong)}
+td.bars{width:150px}
+.rel{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.rel .r{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:2px}
+.rel .r .k{font-family:var(--font-mono);font-size:.8rem;color:var(--muted)}
+.rel .r .v{font-family:var(--font-head);font-weight:700;font-size:1rem}
+.rel .r .d{font-size:.82rem;color:var(--ink-2)}
+.rel .r.up .v{color:var(--good)} .rel .r.down .v{color:var(--crit)} .rel .r.flat .v{color:var(--warn)}
+.fix{background:var(--warn-soft);border-left:3px solid var(--warn);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.9rem}
+.fix b{color:var(--warn)}
+/* L4 / method */
+.chain-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;overflow-x:auto}
+.chain-wrap svg{display:block;width:100%;min-width:720px;height:auto}
+.flow{display:grid;gap:0;counter-reset:st;align-content:start}
+.flow .st{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.flow .st::before{counter-increment:st;content:counter(st);font-family:var(--font-head);font-weight:700;font-size:1.1rem;color:var(--accent-ink);border:2px solid var(--accent);border-radius:50%;width:34px;height:34px;display:grid;place-items:center}
+.flow .st h4{font-family:var(--font-head);font-size:.98rem;margin:0 0 2px}
+.flow .st p{font-size:.9rem;color:var(--ink-2)}
+.flow .st .lv{font-family:var(--font-mono);font-size:.74rem;color:var(--muted);margin-left:6px}
+.score td.s{text-align:center;font-weight:700}
+.score td.ok{color:var(--good)} .score td.bad{color:var(--crit)} .score td.mix{color:var(--warn)}
+.errlog .r{grid-template-columns:90px 1fr}
+footer{max-width:1120px;margin:0 auto;padding:0 16px 40px;font-size:.8rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.ind .body{animation:fade .18s ease-out}@keyframes fade{from{opacity:.4}to{opacity:1}}}
+@media (max-width:640px){body{font-size:14.5px}h1{font-size:1.45rem}.ev{grid-template-columns:80px 1fr}}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><b>資金流向駕駛艙</b><span class="snap">快照 2026-09-03 · 第 4 輪</span></div>
+    <div class="seg" role="group" aria-label="模式">
+      <button id="mode-fish" aria-pressed="true">釣魚模式</button>
+      <button id="mode-eat" aria-pressed="false">吃魚模式</button>
+    </div>
+    <div class="seg" role="group" aria-label="時間尺度">
+      <button data-scale="near" aria-pressed="true">近期</button>
+      <button data-scale="mid" aria-pressed="false">中期</button>
+      <button data-scale="far" aria-pressed="false">拉遠</button>
+    </div>
+  </div>
+  <nav class="levels" aria-label="層級">
+    <a href="#now">現在在哪</a>
+    <a href="#spine">思考主軸</a>
+    <a href="#l0"><b>L0</b>時間尺度</a>
+    <a href="#l1"><b>L1</b>總體</a>
+    <a href="#plumb"><b>L1</b>流動性管道</a>
+    <a href="#l2"><b>L2</b>資產池</a>
+    <a href="#l3"><b>L3</b>池子內部</a>
+    <a href="#l4"><b>L4</b>個體</a>
+    <a href="#map">資金地圖</a>
+    <a href="#indmap">指標地圖</a>
+    <a href="#method">判讀流程</a>
+    <a href="#tw">台灣連動</a>
+    <a href="#weekly">每週檢查</a>
+    <a href="#road">後續輪次</a>
+  </nav>
+</header>
+
+<main>
+<!-- ===== 現在在哪 ===== -->
+<section id="now">
+  <div class="hero">
+    <div class="verdict">
+      <span class="eyebrow">Where we are · 2026 年 9 月初</span>
+      <h1>成長分歧、通膨回溫、Fed 轉鷹：錢躲在現金與黃金，股市靠 AI 資本支出撐著</h1>
+      <p class="lede">第二季 GDP 年化只有 1.5%，7 月非農轉負（−23k），但 GDPNow 估第三季 4.8%——景氣訊號互相打架。通膨因能源回升（CPI 3.4%、PCE 3.7%），新任 Fed 主席 Warsh 在 Jackson Hole 說通膨「廣泛且頑固」，市場把 9 月<b>升息</b>機率定價到約七成（9/2 68%）；8/31 起美伊再度交火，Brent 回到 $94。結果是：現金池（貨幣市場基金 $7.93 兆）還在長大、黃金 8 月大漲 9.7%（但今年累計約持平，去年才是 +65%）、2 年期美債今年升 92bp 把曲線壓平（30 年期 5.27%）、比特幣年減 29% 且 ETF 今年淨流出、房市被 6.66% 的房貸利率鎖住；股市 +12% 但 Mag-7 佔了三分之一。</p>
+      <div class="note fish-only small">怎麼讀這段：每個結論都對應下面三種訊號之一——價格（殖利率、金價）、資金流（MMF 資產、ETF 流量）、部位（融資餘額、Mag-7 佔比）。往下每一層都會告訴你這句話是從哪個指標推出來的。</div>
+    </div>
+    <div class="card lift">
+      <span class="eyebrow">Regime · 成長 × 通膨四象限</span>
+      <svg viewBox="0 0 320 300" width="100%" role="img" aria-label="成長與通膨四象限，目前位置在成長放緩且通膨回升的區域邊界">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker></defs>
+        <rect x="40" y="20" width="120" height="120" fill="var(--warn-soft)"/>
+        <rect x="160" y="20" width="120" height="120" fill="var(--good-soft)"/>
+        <rect x="40" y="140" width="120" height="120" fill="var(--crit-soft)"/>
+        <rect x="160" y="140" width="120" height="120" fill="var(--flow-soft)"/>
+        <text x="100" y="42" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">滯脹 Stagflation</text>
+        <text x="100" y="58" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">黃金・現金・原物料</text>
+        <text x="100" y="71" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">股債雙弱</text>
+        <text x="220" y="42" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">過熱 Reflation</text>
+        <text x="220" y="58" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">能源・原物料・價值股</text>
+        <text x="220" y="71" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">短債優於長債</text>
+        <text x="100" y="228" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">衰退 Bust</text>
+        <text x="100" y="244" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">長天期公債・防禦股</text>
+        <text x="220" y="228" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">金髮女孩 Goldilocks</text>
+        <text x="220" y="244" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">股票・信用債・成長股</text>
+        <line x1="40" y1="140" x2="280" y2="140" stroke="var(--line-strong)"/>
+        <line x1="160" y1="20" x2="160" y2="260" stroke="var(--line-strong)"/>
+        <line x1="40" y1="262" x2="280" y2="262" stroke="var(--muted)" marker-end="url(#ah)"/>
+        <text x="160" y="282" text-anchor="middle" font-size="10" fill="var(--muted)">成長 →（GDP、非農、GDPNow）</text>
+        <line x1="36" y1="260" x2="36" y2="20" stroke="var(--muted)" marker-end="url(#ah)"/>
+        <text x="14" y="140" text-anchor="middle" font-size="10" fill="var(--muted)" transform="rotate(-90 14 140)">通膨 →（CPI、PCE）</text>
+        <circle cx="150" cy="78" r="7" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>
+        <text x="150" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="var(--accent-ink)">現在（2026-09）</text>
+        <circle cx="205" cy="128" r="4" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <text x="205" y="118" text-anchor="middle" font-size="9" fill="var(--muted)">2025 年底</text>
+      </svg>
+      <p class="small muted" style="margin-top:6px">象限告訴你「這種環境歷史上誰受惠」，不是預測。目前在過熱與滯脹的交界：物價往上、成長訊號分歧。今年領漲板塊是能源 +42～47%、科技 +28%、原物料 +16%，落後的是通訊 −5.6%、非必需消費 −3.7%、公用 −1.4%（Select Sector SPDR，8/31–9/2）——能源與原物料領漲符合象限的教科書答案，科技是 AI 資本支出的獨立故事。</p>
+      <div class="how"><span class="lbl">怎麼定位</span>橫軸看「成長是加速還是減速」（GDP 對比前季、非農三個月平均、GDPNow 方向），縱軸看「通膨是升還是降」（核心 PCE 三個月年化對比六個月）。先問方向，再問水準。</div>
+    </div>
+  </div>
+  <div class="kpis" style="margin-top:16px">
+    <div class="kpi hot"><span class="k">Fed 目標利率</span><span class="v">3.50–3.75%</span><span class="d">7/29 維持，3 票主張升息；9 月升息機率 68%</span></div>
+    <div class="kpi hot"><span class="k">CPI / PCE 年增</span><span class="v">3.4% / 3.7%</span><span class="d">7 月；核心 CPI 2.5%</span></div>
+    <div class="kpi down"><span class="k">非農就業 7 月</span><span class="v">−23k</span><span class="d">前兩月下修 −103k；失業率 4.1%</span></div>
+    <div class="kpi hot"><span class="k">10 年期美債</span><span class="v">4.79%</span><span class="d">9/2；30 年期 5.27%</span></div>
+    <div class="kpi up"><span class="k">S&amp;P 500 今年</span><span class="v">+12%</span><span class="d">7,668（9/3）；預估本益比 19.6</span></div>
+    <div class="kpi hot"><span class="k">黃金</span><span class="v">$4,336</span><span class="d">9/2 現貨；8 月 +9.7%，今年約持平（去年 +65%）</span></div>
+    <div class="kpi down"><span class="k">比特幣年變動</span><span class="v">−29%</span><span class="d">$76,597（9/2）；ETF 今年淨流出</span></div>
+    <div class="kpi"><span class="k">貨幣市場基金</span><span class="v">$7.93T</span><span class="d">8/26；仍在增加</span></div>
+  </div>
+</section>
+
+<!-- ===== 思考主軸 ===== -->
+<section id="spine">
+  <div class="sec-head">
+    <span class="eyebrow">The spine · 每一層都問同四個問題</span>
+    <h2>釣魚的竿子：四個問題，從總體問到個股</h2>
+    <p>不管看 Fed、看黃金、還是看一檔個股，順序都一樣：錢有多少 → 錢為什麼想去 → 錢真的去了嗎 → 下一層誰在動。前三個答完才算一次判斷；只有價格在動而資金流與部位沒動，那是敘事（narrative），不是流向。</p>
+  </div>
+  <div class="spine">
+    <div class="card">
+      <h3>錢有多少？<span class="en">liquidity</span></h3>
+      <p class="small" style="margin-top:6px">新增的錢從五個來源進入市場：Fed（印或收）、財政部（赤字＝發債＝把錢從買債者手上轉給支出對象）、家庭（儲蓄率、薪資）、企業（現金、庫藏股、資本支出）、海外（貿易順差國回流）。</p>
+      <div class="now"><b>現在</b>：Fed 已停止縮表（2025/12/1），短債補水 8/14 起暫停一個月；財政赤字 10 個月 $1.8 兆；家庭儲蓄率只剩 3.0%；企業庫藏股估 $1.4 兆；海外持有美債 $9.3 兆。</div>
+      <div class="how"><span class="lbl">怎麼看</span>看 Fed H.4.1（週四）的準備金 reserves 與 TGA、月度財政收支表 MTS、BEA 儲蓄率、TIC 海外持有。這一問的關鍵詞是「淨」——財政放錢、Fed 收錢，要合起來算。</div>
+    </div>
+    <div class="card">
+      <h3>錢為什麼想去那裡？<span class="en">relative return</span></h3>
+      <p class="small" style="margin-top:6px">每一塊錢都在跟「放在貨幣市場基金拿約 3.9%」比。無風險利率越高，其他資產要給的補償就越多；這就是為什麼利率是所有資產的地心引力。</p>
+      <div class="now"><b>現在</b>：3 個月國庫券 3.92%，所以股票的盈餘殖利率（本益比 19.6 的倒數約 5.1%）只比無風險多 1.2 個百分點；高收益債利差 265bp 是歷史偏窄；黃金不生息卻漲 20%，代表買家要的是保險，不是報酬。</div>
+      <div class="how"><span class="lbl">怎麼看</span>把每個資產換算成「相對無風險利率多給多少」：股票用盈餘殖利率減 10 年期（股權風險溢酬 ERP）、信用債用利差 OAS、房地產用租金收益率減房貸利率。溢酬被壓到很薄＝擁擠。</div>
+    </div>
+    <div class="card">
+      <h3>錢真的去了嗎？<span class="en">evidence</span></h3>
+      <p class="small" style="margin-top:6px">三種證據要分開看：<b>價格</b>（漲跌、殖利率、利差）、<b>資金流</b>（基金與 ETF 申贖、國債標售、穩定幣供給、外資買賣超）、<b>部位</b>（融資餘額、COT 期貨持倉、機構集中度）。三者一致才算確認。</p>
+      <div class="now"><b>現在</b>：黃金三者一致（8 月 +9.7%、ETF 8 月流入 $171 億、央行 Q2 買 289 噸）。比特幣不一致（價格跌、ETF 今年淨流出約 $23 億，但 8 月單月流入 $30 億）。台股最矛盾：外資賣超 NT$2.28 兆，指數卻 +59%。</div>
+      <div class="how"><span class="lbl">怎麼看</span>價格先動、資金流後到是常態；資金流先動、價格沒跟是警訊（有人在出貨）。部位極端（融資餘額創高後下滑、Mag-7 佔 33.9%）是「擁擠」的證據，擁擠不代表會跌，但代表跌的時候會很快。</div>
+    </div>
+    <div class="card">
+      <h3>下一層是誰在動？<span class="en">drill down</span></h3>
+      <p class="small" style="margin-top:6px">總體 → 資產類別 → 資產內部（風格、板塊、曲線）→ 個體（公司、家庭）。每往下一層，就用上面三個問題再問一次；到個股層，「錢有多少」變成公司的現金流，「為什麼想去」變成資本報酬率，「真的去了嗎」變成資本支出與庫存。</p>
+      <div class="now"><b>現在</b>：股市裡的錢往能源、科技、原物料、小型股與價值股走，離開通訊、非必需消費、公用事業；債市裡的錢往短端走、離開 7–10 年（TLT 反而有人撿）；台股裡外資出、內資進。L2 拆到池子、L3 拆到池子內部、L4 拆到公司與家庭——AI 資本支出鏈是把四層串起來的案例。</div>
+      <div class="how"><span class="lbl">怎麼看</span>用「相對強弱」而不是絕對漲跌：板塊對指數、小型股對大型股、長債對短債、白銀對黃金。相對線的方向就是池子裡錢在流的方向。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== L0 ===== -->
+<section id="l0">
+  <div class="sec-head">
+    <span class="eyebrow">L0 · Time horizon</span>
+    <h2>先定位時間尺度，再決定看哪些指標</h2>
+    <p>同一個指標在不同尺度上意義不同：非農在近期是「Fed 下週會不會升息」，在中期是「就業週期是否轉折」，在拉遠是「人口與生產力」。頂端的尺度切換會同步這一區與資金地圖。</p>
+  </div>
+  <div class="tabs" role="tablist" aria-label="時間尺度">
+    <button role="tab" data-scale="near" aria-selected="true">近期 · 週～月</button>
+    <button role="tab" data-scale="mid" aria-selected="false">中期 · 半年～兩年</button>
+    <button role="tab" data-scale="far" aria-selected="false">拉遠 · 5～20 年</button>
+  </div>
+  <div class="scale-pane" data-pane="near">
+    <div class="grid g2">
+      <div class="card">
+        <h3>近期在動什麼</h3>
+        <p class="small" style="margin-top:6px">主導變數是<b>資金面與事件</b>：Fed 會不會在 9/17 升息、財政部 9 月減發短債同時把現金拉到 $1 兆以上（等於抽走銀行準備金）、能源價格與美伊衝突、財報季結束後的庫藏股禁售期（blackout）解除。</p>
+        <div class="how"><span class="lbl">近期看什麼</span>CME FedWatch、SOFR−IORB 利差、TGA 週變化、初領失業金、原油、VIX、ETF 週流量。不看 GDP（太慢）、不看本益比（近期不會因為貴而跌）。</div>
+      </div>
+      <div class="card">
+        <h3>接下來的事件</h3>
+        <div class="timeline">
+          <div class="ev"><span class="dt">09/04 五</span><span>8 月非農就業報告——7 月 −23k 之後，這份決定 9 月 FOMC 的方向</span></div>
+          <div class="ev"><span class="dt">09/10 四</span><span>8 月 CPI（能源分項是重點；7 月能源年增 +14.7%）</span></div>
+          <div class="ev"><span class="dt">09/16–17</span><span>FOMC 會議與點陣圖；市場定價升息機率 59%→66%（8/28→8/31）</span></div>
+          <div class="ev"><span class="dt">9 月中</span><span>企業季度稅繳款：TGA 上升、準備金下降；季末銀行縮表壓力</span></div>
+          <div class="ev"><span class="dt">10 月初</span><span>財政部依 8 月 refunding 聲明開始增發短債；Q3 財報季開跑</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scale-pane" data-pane="mid" hidden>
+    <div class="grid g2">
+      <div class="card">
+        <h3>中期在動什麼</h3>
+        <p class="small" style="margin-top:6px">主導變數是<b>三個週期</b>：Fed 政策週期（2024–25 降到 3.50–3.75% 後，2026 可能重新升息）、盈餘週期（FactSet 估 2026 年 S&amp;P 500 EPS +31.2%、2027 年 +14.4%——這是股市撐住的理由，也是最脆弱的假設）、信用週期（高收益利差 265bp 很窄，但私募信貸違約率 6.0% 創紀錄）。</p>
+        <div class="how"><span class="lbl">中期看什麼</span>核心 PCE 三個月年化、失業率的三個月移動平均對比 12 個月最低點（Sahm 規則）、ISM 新訂單減庫存、銀行放款標準 SLOOS、盈餘修正廣度。這些每月更新一次就夠。</div>
+      </div>
+      <div class="card">
+        <h3>中期的關鍵假設</h3>
+        <div class="timeline">
+          <div class="ev"><span class="dt">通膨</span><span>能源推升的 3.4% 會不會傳到核心？核心 CPI 2.5% 還在降，核心 PCE 3.3% 沒降——Fed 內部三票主張升息就是看後者</span></div>
+          <div class="ev"><span class="dt">就業</span><span>非農轉負且連續下修，失業率 4.1%。若升到 4.5% 以上，象限會從「過熱」滑向「滯脹／衰退」</span></div>
+          <div class="ev"><span class="dt">盈餘</span><span>+31% 的 EPS 預估幾乎全靠 AI 供應鏈；四大雲端商 2026 資本支出 $7,200–7,450 億</span></div>
+          <div class="ev"><span class="dt">關稅</span><span>IEEPA 關稅被最高法院推翻（2/20）後改走 Section 122、再改 Section 301；有效稅率 11.0%，年底 11.8%</span></div>
+          <div class="ev"><span class="dt">赤字</span><span>CBO 估 FY2026 赤字 $1.9 兆（GDP 5.8%），公眾持有債務 101% GDP——長端殖利率的地板</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scale-pane" data-pane="far" hidden>
+    <div class="grid g2">
+      <div class="card">
+        <h3>拉遠在動什麼</h3>
+        <p class="small" style="margin-top:6px">主導變數是<b>結構</b>：財政主導（fiscal dominance，債務太大讓 Fed 不敢真的緊）、AI 資本支出循環（每年 $7,000 億以上，堪比 1990 年代電信光纖）、去美元化與央行購金（2022 年後每年 1,000 噸級）、幣圈法制化（GENIUS Act 穩定幣法，2027/1/18 發行商須取得執照）、人口老化與移民政策對勞動供給的影響。</p>
+        <div class="how"><span class="lbl">拉遠看什麼</span>利息支出佔財政收入比、實質利率（10 年期減通膨預期）、美元在央行準備的佔比、黃金對 M2 的比率、生產力成長率。這些一季看一次就好，但它們決定了「近期」的地板與天花板。</div>
+      </div>
+      <div class="card">
+        <h3>拉遠的幾條線</h3>
+        <div class="timeline">
+          <div class="ev"><span class="dt">財政</span><span>30 年期標售 5.216%（8/13）是 2001 年以來最高，市場要求更高的期限溢酬 term premium 才肯借長錢給美國</span></div>
+          <div class="ev"><span class="dt">黃金</span><span>金價 $4,400 上下的背後是央行需求（Q2 289 噸、波蘭今年 82 噸）；這是儲備多元化，不是通膨交易</span></div>
+          <div class="ev"><span class="dt">AI</span><span>資本支出集中在四家公司，意味股市集中度（Mag-7 33.9%）是結構，不是泡沫的充分證據，也不是安全的證據</span></div>
+          <div class="ev"><span class="dt">幣圈</span><span>穩定幣 $3,080 億、六成是 USDT；GENIUS Act 讓穩定幣成為美債的新買家——幣圈與美債開始連動</span></div>
+          <div class="ev"><span class="dt">台灣</span><span>台灣持有美債 $3,025 億、壽險美元資產避險比率 42.89%（歷史新低）——台幣匯率成為美債風險的傳導管</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== L1 總體 ===== -->
+<section id="l1">
+  <div class="sec-head">
+    <span class="eyebrow">L1 · Macro</span>
+    <h2>總體指標：每張卡都是「是什麼、怎麼讀、現在多少」</h2>
+    <p>點開卡片看機制與判讀法。讀數旁的日期是資料期間或公布日；沒有日期的數字不要相信，包括本頁的。</p>
+  </div>
+
+  <h3 style="margin:4px 0 10px">成長 <span class="en">growth</span></h3>
+  <div class="grid g3">
+    <details class="card ind">
+      <summary><span class="t">實質 GDP 年化季增<small>Real GDP, SAAR</small></span><span class="v">1.5%<small>Q2 二次估計 · 8/26</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：一季的經濟產出，把季增率乘成年率（SAAR）。第一季是 2.1%。</p>
+        <p><b>為什麼看</b>：它是最慢、最全面的成長指標；市場早在公布前就靠非農與 PMI 猜到了，所以 GDP 本身很少「意外」，意外的是內容。</p>
+        <p><b>怎麼讀</b>：看「對民間國內買者的實質最終銷售」（+4.2%）而不是頭條數字——它剔除庫存、貿易與政府，代表民間真實需求。頭條 1.5% 與內需 4.2% 的落差，就是進口與庫存在拉低。</p>
+        <p class="src">來源：<a href="https://www.bea.gov/news/2026/gdp-second-estimate-and-corporate-profits-2nd-quarter-2026">BEA Q2 2026 second estimate</a></p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">GDPNow 即時估計<small>Atlanta Fed nowcast</small></span><span class="v">4.8%<small>Q3 估計 · 9/1</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：亞特蘭大聯儲用已公布的月資料，即時推估本季 GDP。本季開局 5.0%，範圍 4.8–6.2%。</p>
+        <p><b>怎麼讀</b>：看方向不看水準——季初的估計誤差很大。若非農、零售一路下修而 GDPNow 還在 4% 以上，通常是淨出口或庫存在灌水（關稅前搶進口的反向）。</p>
+        <p class="src">來源：<a href="https://www.atlantafed.org/research-and-data/data/gdpnow">Atlanta Fed GDPNow</a></p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">個人儲蓄率<small>Personal saving rate</small></span><span class="v">3.0%<small>7 月 · 8/26</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：家庭可支配所得裡沒花掉的比例。疫情前常態約 6–7%。</p>
+        <p><b>怎麼讀</b>：3.0% 表示消費是「花儲蓄」撐出來的，不是「薪資成長」撐出來的（時薪年增 3.2%，實質接近零）。搭配紐約聯儲 Q2 家庭債務：信用卡餘額 $1.26 兆、90 天以上逾期轉入率 6.97%。這是「家庭」這個資金來源正在變薄。</p>
+        <p class="src">來源：<a href="https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026">BEA Personal Income and Outlays</a>、<a href="https://www.newyorkfed.org/newsevents/news/research/2026/20260811">NY Fed Household Debt Q2 2026</a></p>
+      </div>
+    </details>
+  </div>
+
+  <h3 style="margin:22px 0 10px">通膨 <span class="en">inflation</span></h3>
+  <div class="grid g3">
+    <details class="card ind">
+      <summary><span class="t">消費者物價 CPI<small>headline / core, YoY</small></span><span class="v">3.4% / 2.5%<small>7 月 · 8/12</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：一籃子消費品價格的年增率。核心 core 剔除食物與能源。</p>
+        <p><b>怎麼讀</b>：頭條 3.4% 與核心 2.5% 的差距全是能源（年增 +14.7%，但 7 月月減 1.5%）。判讀順序：① 能源是一次性衝擊還是持續？② 有沒有傳到核心（運輸服務、航空票價）？③ 住房 shelter（+0.1% 月增）是核心最大權重，它在降，所以核心還在往下。</p>
+        <p class="src">來源：<a href="https://www.bls.gov/news.release/cpi.nr0.htm">BLS CPI July 2026</a></p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">個人消費支出物價 PCE<small>headline / core, YoY</small></span><span class="v">3.7% / 3.3%<small>7 月 · 8/26</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：Fed 正式盯的通膨指標，權重比 CPI 更偏向醫療與服務，住房權重較低。</p>
+        <p><b>怎麼讀</b>：核心 PCE 3.3% 比核心 CPI 2.5% 高很多，這個落差正是 Fed 內部鷹派的依據——CPI 看起來在降，Fed 的尺看起來沒降。目標是 2%，距離還有 1.3 個百分點。</p>
+        <p class="src">來源：<a href="https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026">BEA PCE July 2026</a></p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">Q2 GDP 平減指數<small>PCE price index, SAAR</small></span><span class="v">5.3%<small>Q2 · 8/26 上修</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：第二季的物價季增年化，核心 3.6%，二次估計都上修 0.2 個百分點。</p>
+        <p><b>怎麼讀</b>：季度年化把最近三個月的動能放大給你看。5.3% 對比年增 3.7%，表示「最近」比「過去一年」更熱——這就是「回溫」的定義。</p>
+        <p class="src">來源：<a href="https://www.bea.gov/sites/default/files/2026-08/gdp2q26-2nd.pdf">BEA GDP Q2 2026 release (PDF)</a></p>
+      </div>
+    </details>
+  </div>
+
+  <h3 style="margin:22px 0 10px">就業 <span class="en">labor</span></h3>
+  <div class="grid g3">
+    <details class="card ind">
+      <summary><span class="t">非農就業變動<small>Nonfarm payrolls</small></span><span class="v">−23k<small>7 月 · 8/7</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：每月新增的非農業受薪職位數。正常擴張期約 +100k 到 +200k。</p>
+        <p><b>怎麼讀</b>：單月數字雜訊很大，要看①三個月平均、②修正方向（5 月 +129k→+63k、6 月 +57k→+20k，共下修 103k——連續大幅下修是週期轉折的典型特徵）、③ 8 月報告 9/4 公布。就業是「家庭」資金來源的水龍頭。</p>
+        <p class="src">來源：<a href="https://www.bls.gov/news.release/empsit.nr0.htm">BLS Employment Situation</a></p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">失業率<small>Unemployment rate</small></span><span class="v">4.1%<small>7 月 · 8/7</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：勞動力裡沒工作但在找的比例；勞動參與率 61.4%。</p>
+        <p><b>怎麼讀</b>：Sahm 規則——三個月平均失業率比過去 12 個月最低點高 0.5 個百分點以上，歷史上幾乎都是衰退開始。現在還沒觸發，但方向要盯。參與率下降會讓失業率「好看」，所以兩個要一起看。</p>
+        <p class="src">來源：同上</p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">平均時薪年增<small>Avg hourly earnings YoY</small></span><span class="v">3.2%<small>7 月 · 8/7</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：名目薪資成長。減掉通膨（CPI 3.4%）就是實質薪資，現在約 −0.2%。</p>
+        <p><b>怎麼讀</b>：實質薪資轉負＋儲蓄率 3.0% ＝消費靠借。這對「錢為什麼想去那裡」的答案是：家庭沒有新錢可以進市場，股市的邊際買家是企業（庫藏股）與海外，不是散戶。</p>
+        <p class="src">來源：同上</p>
+      </div>
+    </details>
+  </div>
+
+  <h3 style="margin:22px 0 10px">Fed 與利率 <span class="en">policy &amp; rates</span></h3>
+  <div class="grid g3">
+    <details class="card ind">
+      <summary><span class="t">聯邦資金利率目標<small>Fed funds target range</small></span><span class="v">3.50–3.75%<small>7/29 FOMC 維持</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：銀行間隔夜借錢的利率區間，所有美元利率的錨。</p>
+        <p><b>現況</b>：7 月以 9–3 維持，Hammack、Kashkari、Logan 三票主張升息一碼。新主席 Kevin Warsh 5/22 就任，8/28 Jackson Hole 說通膨「broad and stubborn」，升息機率從 35% 跳到 59%（8/28）、66%（8/31）、68%（9/2）。下次會議 9/16–17。</p>
+        <p><b>怎麼讀</b>：看 CME FedWatch 的機率變化而不是水準；看點陣圖 dot plot 的中位數移動；看會議聲明裡「風險平衡」那句話的改動。</p>
+        <p class="src">來源：<a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260729.htm">FOMC minutes July 2026</a>、<a href="https://www.forbes.com/sites/digital-assets/2026/08/31/cme-fedwatch-provides-a-66-chance-fed-will-hike-rates-in-september/">Forbes 8/31 FedWatch</a></p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">殖利率曲線<small>2y / 10y / 30y</small></span><span class="v">4.39 / 4.79 / 5.27<small>% · 9/2</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：不同到期日的美債利率排成一條線。短端跟著 Fed，長端跟著成長、通膨預期與「期限溢酬」（借長錢要多少補償）。</p>
+        <p><b>怎麼讀</b>：2s10s 利差 +40bp 為正斜率（2022–24 曾倒掛），但今年是從 +71bp <b>收窄</b>到 +40bp：2 年期升 92bp、30 年期只升 43bp，這叫<b>熊平 bear flattening</b>——短端在定價 Fed 升息，長端的高水準（30 年期標售 5.216%，2001 年來最高）是去年就在的財政問題。看斜率的變化方向，不看斜率本身正負。（第 3 輪修正，詳見 L3。）</p>
+        <div id="yc-chart"></div>
+        <p class="src">來源：<a href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609">Treasury daily par yield curve</a></p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">美元指數<small>DXY</small></span><span class="v">99.56<small>9/2 收盤</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：美元對六種主要貨幣（歐元佔 58%）的加權指數。</p>
+        <p><b>怎麼讀</b>：美元強＝全球流動性緊（美元債務國要用更多本幣還債）；美元弱＝資金往新興市場與原物料。現在 99.5 是持平（4 週 −0.34%，年增 +1.4%），配合黃金大漲，代表「美元沒崩，但大家在找美元以外的儲備」。台幣的部分見下方台灣連動。</p>
+        <p class="src">來源：<a href="https://tradingeconomics.com/dxy:cur">Trading Economics DXY</a></p>
+      </div>
+    </details>
+  </div>
+
+  <h3 style="margin:22px 0 10px">財政與關稅 <span class="en">fiscal</span></h3>
+  <div class="grid g3">
+    <details class="card ind">
+      <summary><span class="t">聯邦赤字 FY2026 累計<small>10 個月 · MTS</small></span><span class="v">$1.8T<small>10 月–7 月 · 8/12</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：財政年度（10 月起）累計收支差額。7 月單月 $4,320 億，是史上最大的 7 月赤字。CBO 全年基線 $1.9 兆，佔 GDP 5.8%。</p>
+        <p><b>怎麼讀</b>：赤字＝發債＝有人要買。買家是誰決定了利率：海外（TIC）、MMF（買短債）、Fed（已停止 QT，改買短債補準備金）、銀行。8 月 refunding：3 年 $580 億、10 年 $420 億、30 年 $250 億，「未來幾季維持」。9 月減發短債、10 月加發。</p>
+        <p class="src">來源：<a href="https://www.crfb.org/press-releases/treasury-confirms-18-trillion-deficit-first-10-months-fy-2026">CRFB 8/12</a>、<a href="https://www.cbo.gov/publication/61882">CBO Feb 2026</a>、<a href="https://home.treasury.gov/news/press-releases/sb0590">Treasury refunding 8/5</a></p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">有效關稅稅率<small>Yale Budget Lab</small></span><span class="v">11.0%<small>8/24；年底 11.8%</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：所有進口的平均實際稅率。2025 年初約 2.5%。</p>
+        <p><b>時間線</b>：最高法院 2/20 推翻 IEEPA 關稅 → 2/24 改用 Section 122 全面 10%→15%（150 天上限）→ 貿易法院 5/7 判 S122 違法（上訴中）→ 7/24 到期，改用 Section 301「強迫勞動」名義對約 60 個經濟體課 10–12.5%（中國 12.5% 加原有 25%）。</p>
+        <p><b>怎麼讀</b>：關稅同時是通膨（核心商品）與財政收入；FOMC 幕僚把核心商品通膨「主要歸因於關稅與 AI 相關價格壓力」。法律途徑一直在換，代表這個變數的不確定性比稅率本身高。</p>
+        <p class="src">來源：<a href="https://budgetlab.yale.edu/research/state-us-tariffs">Yale Budget Lab</a>、<a href="https://www.congress.gov/crs-product/LSB11398">CRS LSB11398</a></p>
+      </div>
+    </details>
+    <details class="card ind">
+      <summary><span class="t">海外持有美債<small>TIC, total foreign</small></span><span class="v">$9.30T<small>6 月 · TIC</small></span></summary>
+      <div class="body">
+        <p><b>是什麼</b>：外國官方與民間持有的美國公債總額。前五：日本 $1.117T、英國 $940B、中國 $633B、比利時 $483B、台灣 $302.5B。</p>
+        <p><b>怎麼讀</b>：月減 $720 億（5 月 $9.371T）要配合標售的「間接投標比例」看——8/12 十年期標售間接投標 76.7% 創新高，表示海外<b>還在買新債</b>，減少的是存量估值（殖利率升、價格跌）。存量與流量分開讀，這是新手最常混淆的地方。</p>
+        <p class="src">來源：<a href="https://ticdata.treasury.gov/resource-center/data-chart-center/tic/Documents/slt_table5.html">Treasury TIC</a>、<a href="https://acidcapitalist.com/macro/auctions/2026-08-12-10-year">10y auction 8/12</a></p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== 流動性管道 ===== -->
+<section id="plumb">
+  <div class="sec-head">
+    <span class="eyebrow">L1 · Liquidity plumbing</span>
+    <h2>流動性管道：Fed 的浴缸、三個排水口</h2>
+    <p>這是入門最容易跳過、卻最能解釋「近期為什麼突然緊」的一層。Fed 資產負債表的負債面就是一個浴缸，水（Fed 創造的美元）只能待在三個地方：銀行準備金、逆回購 RRP、財政部帳戶 TGA。浴缸總量不變時，一個口漲另一個口就降。</p>
+  </div>
+  <div class="grid g2">
+    <div class="card lift">
+      <div id="tub-chart"></div>
+      <p class="small muted" style="margin-top:8px">寬度依 8/26 H.4.1 數字按比例繪製（RRP 已接近零，畫成細線）。「其他」含流通現金與其他負債。</p>
+      <div class="how"><span class="lbl">怎麼讀</span>2022–23 年 RRP 有 $2 兆的緩衝，財政部收稅時 TGA 上升，抽的是 RRP 而不是準備金。現在 RRP 只剩 $5 億，緩衝沒了：TGA 每升 $1，準備金就降 $1。財政部把 TGA 從 $9,507 億拉到 $1 兆以上，就是直接從銀行抽水——2025 年 9–10 月回購市場緊張（Fed 常備回購 SRF 被動用）就是這個機制。</div>
+    </div>
+    <div class="grid" style="gap:12px">
+      <details class="card ind" open>
+        <summary><span class="t">銀行準備金<small>Reserve balances</small></span><span class="v">$2.92T<small>8/26 H.4.1</small></span></summary>
+        <div class="body">
+          <p>7/8 是 $3.14T，兩個月減了約 $2,200 億。FOMC 2025/12 宣告準備金已從「充裕 abundant」降到「足夠 ample」，並在 12/1 停止縮表 QT，2026 年 1 月起用「準備金管理購買 RMP」買短債補水，4 月從每月 $400 億減到 $100 億，8/14–9/14 更暫停歸零（MBS 到期款約 $170 億仍轉買短債）。</p>
+          <p><b>怎麼讀</b>：準備金佔 GDP 約 10% 是多數研究認為的「足夠」下限；再往下，隔夜利率就開始不聽 Fed 的話。</p>
+          <p class="src">來源：<a href="https://www.federalreserve.gov/releases/h41/current/">Fed H.4.1</a>、<a href="https://www.federalreserve.gov/monetarypolicy/2026-07-mpr-part2.htm">Monetary Policy Report July 2026</a></p>
+        </div>
+      </details>
+      <details class="card ind">
+        <summary><span class="t">SOFR − IORB 利差<small>funding stress gauge</small></span><span class="v">+1bp<small>3.66% vs 3.65% · 9/1–9/2</small></span></summary>
+        <div class="body">
+          <p><b>是什麼</b>：SOFR 是市場上用美債抵押借隔夜錢的利率；IORB 是 Fed 付給銀行準備金的利率。正常時 SOFR 略低於 IORB（銀行有多餘的錢願意便宜借出）。</p>
+          <p><b>怎麼讀</b>：SOFR 升到 IORB 之上且持續擴大＝市場上的錢比 Fed 給的利率還貴＝準備金「緊」。7 月還是負的，現在轉正 1bp，是早期訊號。這是最便宜、最快的流動性溫度計，FRED 每天有。</p>
+          <p class="src">來源：<a href="https://fred.stlouisfed.org/series/SOFR">FRED SOFR</a>、<a href="https://fred.stlouisfed.org/series/IORB">FRED IORB</a></p>
+        </div>
+      </details>
+      <details class="card ind">
+        <summary><span class="t">貨幣市場基金總資產<small>MMF assets, ICI</small></span><span class="v">$7.93T<small>8/26 · 週增 $61 億</small></span></summary>
+        <div class="body">
+          <p><b>是什麼</b>：投資人放在貨幣市場基金的錢，其中政府型 $6.55T。這些基金主要買短期國庫券與回購。</p>
+          <p><b>怎麼讀</b>：這是「場邊資金 cash on the sidelines」的來源，也是財政部短債的最大買家。歷史上 MMF 資產在 Fed 降息之後才會流出到股債；現在 Fed 可能升息，所以這池子只會更大。它不是等著進股市的錢，是嫌股市不夠便宜的錢。</p>
+          <p class="src">來源：<a href="https://www.ici.org/research/stats/mmf">ICI Money Market Fund Assets</a></p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+<!-- ===== L2 資產池 ===== -->
+<section id="l2">
+  <div class="sec-head">
+    <span class="eyebrow">L2 · Asset pools · 第 2 輪</span>
+    <h2>九個池子：驅動因子 → 三種證據 → 判讀 → 你能用的工具</h2>
+    <p>每個池子用同一張表拆。「三種證據」對應主軸第三問；「判讀方法」與「常見誤讀」只在釣魚模式顯示；工具表列的是 Schwab 帳戶能直接買到、而且能拿來<b>驗證流向</b>的代表 ETF——不是推薦清單。</p>
+  </div>
+  <div class="pool-tabs" role="tablist" aria-label="資產池">
+    <button role="tab" data-pool="cash" aria-selected="true"><i style="background:var(--flow)"></i>現金</button>
+    <button role="tab" data-pool="eq" aria-selected="false"><i style="background:var(--warn)"></i>股票</button>
+    <button role="tab" data-pool="ust" aria-selected="false"><i style="background:var(--warn)"></i>美債</button>
+    <button role="tab" data-pool="cr" aria-selected="false"><i style="background:var(--warn)"></i>信用債</button>
+    <button role="tab" data-pool="au" aria-selected="false"><i style="background:var(--flow)"></i>貴金屬</button>
+    <button role="tab" data-pool="btc" aria-selected="false"><i style="background:var(--crit)"></i>幣圈</button>
+    <button role="tab" data-pool="re" aria-selected="false"><i style="background:var(--line-strong)"></i>房地產</button>
+    <button role="tab" data-pool="pc" aria-selected="false"><i style="background:var(--warn)"></i>私募信貸</button>
+    <button role="tab" data-pool="fx" aria-selected="false"><i style="background:var(--flow)"></i>海外</button>
+  </div>
+
+  <!-- 現金 -->
+  <div class="pool" data-pool="cash">
+    <div class="pool-head"><h3>現金 · 貨幣市場基金 <span class="en">cash / MMF</span></h3><span class="pill flow">流入 · 三證據一致</span>
+      <p class="lede2">$7.93 兆還在長（8/26 週增 $61 億，機構 +$95 億、零售 −$34 億）。Fed 可能升息，這池子的「地板」不會降，錢沒有理由離開。</p></div>
+    <div class="pool-grid">
+      <div class="card"><span class="eyebrow">驅動因子</span>
+        <p class="small" style="margin-top:6px">只有一個：<b>無風險利率相對其他資產的吸引力</b>。MMF 殖利率約 3.55%，超短債 ETF 約 3.6%；Fed 若升息，兩者一起升。歷史上 MMF 資產要在 Fed <b>降息後 6–12 個月</b>才會流出（2019、2024 都是），因為降息初期 MMF 殖利率降得比長債慢。現在市場定價的是升息，所以流出條件根本不成立。</p>
+        <p class="small" style="margin-top:6px">另一個結構因素：財政部 9 月減發短債、Fed 8/14–9/14 暫停買短債（RMP 歸零），短債供給少、買家多——短債殖利率被壓低到比 Fed 利率下限（3.50%）只高一點，這就是 3 個月國庫券 3.78% 的原因。</p></div>
+      <div class="card"><span class="eyebrow">三種證據</span>
+        <dl class="ev3">
+          <div><dt>價格</dt><dd>3 個月國庫券 3.78%、6 個月 3.90%（H.15，9/1）；SGOV 30 日殖利率 3.61%、BIL 3.59%（8/31–9/1）。</dd></div>
+          <div><dt>資金流</dt><dd>MMF 週增 $61 億（8/26）；7 月創紀錄 $7.95 兆。超短債 ETF 7 月 +$128 億、3 月創紀錄 +$240 億；SGOV 一個月 +$52.5 億、三個月 +$132 億（9/2）。</dd></div>
+          <div><dt>部位</dt><dd>政府型 $6.55 兆、優質型 $1.24 兆；機構 $4.83 兆、零售 $3.10 兆。SGOV 規模 $1,049 億（9/1），已是最大的短債 ETF。</dd></div>
+        </dl></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">判讀方法</span>
+      <ol class="steps">
+        <li>先看<b>零售</b> MMF 的週變化，不看總額——機構的錢是企業營運現金與抵押品，本來就不會進股市；零售的錢才是「場邊資金」。</li>
+        <li>零售 MMF 流出 <b>同時</b> 股票基金流入，才叫風險偏好上升；只有一邊動都不算。</li>
+        <li>把 MMF 殖利率跟 2 年期美債比：2 年期（4.39%）明顯高於 MMF（3.55%）時，錢會從 MMF 移到短債 ETF——這是「池子內部」的流動，不是離開現金。</li>
+      </ol>
+      <div class="mis"><b>常見誤讀</b>「$7.9 兆場邊資金隨時會進股市。」MMF 的組成六成是機構，且 2009 年以來 MMF 總額與股市是同漲的——它是財富增加的結果，不是等進場的子彈。</div></div>
+    <div class="card"><span class="eyebrow">Schwab 可用工具</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="tools">
+        <thead><tr><th>代號</th><th>是什麼</th><th>怎麼用它驗證流向</th></tr></thead>
+        <tbody>
+          <tr><td>SGOV</td><td>0–3 個月美債 ETF（iShares），規模 $1,049 億</td><td>看 iShares 頁面的「資產規模」週變化；一週增減 $20 億以上就是明確訊號</td></tr>
+          <tr><td>BIL</td><td>1–3 個月美債 ETF（SPDR）</td><td>與 SGOV 同向可互相確認；殖利率差反映費用率，不是流向</td></tr>
+          <tr><td>SCHO</td><td>1–3 年美債 ETF（Schwab 自家，免佣）</td><td>8/28 當週 +$18 億：錢從 0–3 月移到 1–3 年 = 開始鎖利率，是「Fed 不會再升」的押注</td></tr>
+          <tr><td>SWVXX</td><td>Schwab 自家貨幣市場基金</td><td>你的現金部位本身；它的 7 日殖利率就是你所有投資的比較基準</td></tr>
+        </tbody></table></div></div>
+    <p class="src">來源：<a href="https://www.ici.org/research/stats/mmf">ICI MMF</a>、<a href="https://www.federalreserve.gov/releases/h15/">Fed H.15</a>、<a href="https://www.ishares.com/us/products/314116/ishares-0-3-month-treasury-bond-etf">iShares SGOV</a>、<a href="https://etfdb.com/etf/SGOV/">ETFdb SGOV</a>、<a href="https://www.thestreet.com/investing/ultra-short-bond-etfs-12-billion-july-inflows">TheStreet 8/18</a>、<a href="https://wolfstreet.com/2026/08/13/fed-cuts-reserve-management-purchases-rmps-to-zero-starting-august-14/">Wolf Street 8/13（RMP）</a></p>
+  </div>
+
+  <!-- 股票 -->
+  <div class="pool" data-pool="eq" hidden>
+    <div class="pool-head"><h3>股票 <span class="en">US equities</span></h3><span class="pill warn">流入但擁擠 · 內部在輪動</span>
+      <p class="lede2">S&amp;P 500 今年 +12.3%，但等權 +14.5%、小型股 +18.5～22.5%、價值 +22～23% 都贏過市值加權——錢不是離開股市，是從大型成長股往外擴散。ETF 8 月流入 $1,800 億（8 月均值的 3.8 倍），可是槓桿基金淨空 31.5 萬口、AAII 空方 44%。</p></div>
+    <div class="pool-grid">
+      <div class="card"><span class="eyebrow">驅動因子</span>
+        <p class="small" style="margin-top:6px"><b>盈餘</b>：Q2 盈餘年增 +50.4%，但扣掉 Alphabet 與 Amazon 的投資收益後只剩 +10.9%——一半是帳面投資利得，不是營運。Q3 估 +27.4%，淨利率 15.7% 是 2009 年以來最高。<b>利率</b>：10 年期 4.79%，盈餘殖利率（本益比 20 的倒數 5.0%）只多 0.2 個百分點，股權風險溢酬幾乎是零——股票是在「賭盈餘成長」，不是「便宜」。<b>企業買盤</b>：庫藏股授權今年 $1.1 兆；財報季前的禁售期（blackout）約 9/12 開始，9 月又是散戶季節性最弱的月份。</p></div>
+      <div class="card"><span class="eyebrow">三種證據</span>
+        <dl class="ev3">
+          <div><dt>價格</dt><dd>板塊今年：能源 +42～47%、科技 +28%、原物料 +16%、工業 +13%；通訊 −5.6%、非必需消費 −3.7%、公用 −1.4%（8/31–9/2）。風格：小型 IWM +18.5～22.5%、價值 IWD +22～23%、成長 IWF +2.5～5%（iShares 與 etfdb 數字略異）；動能 MTUM 3 個月 −6%。VIX 16.3。</dd></div>
+          <div><dt>資金流</dt><dd>ETF 8 月總流入 $1,800 億、今年 >$1.4 兆；股票 ETF 連五個月 >$1,000 億；VOO 今年 +$1,060 億。但 8 月科技 −$60 億、金融 −$50 億；8/28 當週國際股票 $91 億 &gt; 美股 $23 億。</dd></div>
+          <div><dt>部位</dt><dd>COT（8/25）：槓桿基金 E-mini 淨空約 −31.5 萬口且續加空；資產管理人淨多 +95.3 萬口。AAII 空方 44.4%（8/26）。融資餘額 $1.417 兆從 6 月高點降 5.7%。Mag-7 佔 33.9%。</dd></div>
+        </dl></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">判讀方法</span>
+      <ol class="steps">
+        <li>先畫三條<b>相對線</b>（A 除以 B 的價格比）：RSP/SPY 看廣度、IWM/SPY 看風險偏好、IWD/IWF 看風格。三條現在都向上——這是「輪動」的定義，不是「撤出」。</li>
+        <li>資金流分成「進場的錢」（ETF 淨流入）與「換位置的錢」（板塊之間）。8 月科技 −$60 億但總流入 $1,800 億：進場的錢在買整體市場（VOO），離開的錢在減科技。</li>
+        <li>部位是反向指標：槓桿基金淨空 + AAII 空 44% = 空頭擁擠，任何好消息都會軋空。但融資餘額下降 = 散戶已經在去槓桿。兩者並存時，市場「不容易大跌、也不容易大漲」。</li>
+        <li>危險組合要三個同時：ETF 流入創高（有）＋ 庫藏股禁售期（9/12 起）＋ 盈餘預估被下修（目前沒有）。第三個出現才算。</li>
+      </ol>
+      <div class="mis"><b>常見誤讀</b>「AI 資本支出＝科技股全面受惠。」XLK +28% 但通訊服務 −5.6%——Alphabet、Meta 也在通訊裡；同一個 Mag-7 拆在兩個板塊，方向相反。另外 Q2 +50% 的盈餘有一半是投資利得，看營運要看 +10.9%。</div></div>
+    <div class="card"><span class="eyebrow">Schwab 可用工具</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="tools">
+        <thead><tr><th>代號</th><th>是什麼</th><th>怎麼用它驗證流向</th></tr></thead>
+        <tbody>
+          <tr><td>VOO / VTI</td><td>S&amp;P 500 / 全市場（市值加權）</td><td>「進場的錢」的主要落點；VOO 今年 +$1,060 億是最大單一流入</td></tr>
+          <tr><td>RSP</td><td>S&amp;P 500 等權</td><td>RSP/SPY 相對線向上 = 廣度改善、集中度下降（現在向上）</td></tr>
+          <tr><td>IWM</td><td>羅素 2000 小型股</td><td>IWM/SPY 向上 = 風險偏好與國內景氣押注（現在向上）</td></tr>
+          <tr><td>VTV / VUG</td><td>價值 / 成長</td><td>VTV/VUG 向上 = 利率高、估值收斂（現在向上）</td></tr>
+          <tr><td>MTUM</td><td>動能因子</td><td>今年 +37%：動能過強時通常在季末再平衡被迫賣出，看 11 月底</td></tr>
+          <tr><td>XLK XLE XLB XLI XLV XLP XLF XLRE XLU XLY XLC</td><td>11 個 GICS 板塊</td><td>各板塊對 SPY 的相對線就是第 3 輪的內容；先建好圖表清單</td></tr>
+        </tbody></table></div></div>
+    <p class="src">來源：<a href="https://insight.factset.com/sp-500-earnings-season-update-august-7-2026">FactSet 8/7</a>、<a href="https://etfexpress.com/2026/09/02/us-etf-inflows-close-to-four-times-the-historical-average-for-august-state-street-im/">ETF Express 9/2</a>、<a href="https://www.cftc.gov/dea/futures/financial_lf.htm">CFTC TFF</a>、<a href="https://www.aaii.com/sentimentsurvey">AAII</a>、<a href="https://etfdb.com/etf/XLE/">ETFdb XLE</a>、<a href="https://www.ishares.com/us/products/239710/ishares-russell-2000-etf">iShares IWM</a>、<a href="https://www.citadelsecurities.com/news-and-insights/global-market-intelligence/september-setup/">Citadel Securities 8/31</a></p>
+  </div>
+
+  <!-- 美債 -->
+  <div class="pool" data-pool="ust" hidden>
+    <div class="pool-head"><h3>美國公債 <span class="en">Treasuries</span></h3><span class="pill warn">短端流入、長端流出 · 看哪一段</span>
+      <p class="lede2">同一個池子兩種天氣：3 個月到 2 年有人搶（MMF、短債 ETF），30 年期沒人要（8 月最後一週盤中 5.33%，2007 年以來最高）。10 年期實質利率 2.44% 是 2008 年以來最高——這對所有不生息資產都是逆風，只有黃金無視它。</p></div>
+    <div class="pool-grid">
+      <div class="card"><span class="eyebrow">驅動因子</span>
+        <p class="small" style="margin-top:6px">把曲線切三段：<b>3 個月～2 年</b>跟 Fed 路徑走（升息預期 68% → 2 年期 4.39%）；<b>5～10 年</b>跟成長與通膨預期走（損益兩平通膨 2.35%，實質 2.44%）；<b>30 年</b>跟財政與「期限溢酬」走（Kim-Wright 估 0.875%，借長錢給美國要多要的補償）。</p>
+        <p class="small" style="margin-top:6px">供需結構在變：買家端，海外官方佔比降到 13%（30 年低）、日本壽險回頭買 30 年 JGB（4.18%）、Fed 8/14–9/14 停買短債；賣家端，赤字 $1.9 兆、refunding 維持 coupon 規模、槓桿基金基差交易在期貨端持有巨量空單。財政部 9/9 起把 10–30 年的買回加倍到每次 ≥$40 億，就是在替長端補買盤。</p></div>
+      <div class="card"><span class="eyebrow">三種證據</span>
+        <dl class="ev3">
+          <div><dt>價格</dt><dd>3m 3.78 / 2y 4.39 / 5y 4.55 / 10y 4.79 / 30y 5.27%（H.15，9/1）；10y TIPS 實質 2.44%、損益兩平 2.35%；MOVE 73（54 百分位）。</dd></div>
+          <div><dt>資金流</dt><dd>TLT 一個月 +$56 億 vs IEF −$52.5 億（9/2）——有人開始撿 20 年以上、賣 7–10 年。TIC 6 月：官方 −$98 億、民間 +$166 億。10y 標售間接投標 76.7% 新高（8/12）。下次標售：3y 9/8、10y 9/9（$390 億）、30y 9/10（$220 億）。</dd></div>
+          <div><dt>部位</dt><dd>槓桿基金期貨淨空：2y 186 萬口、5y 262 萬口、10y 245 萬口（8/25）＝基差交易 basis trade；資產管理人在另一邊做多。這種部位解除時（2020/3、2025/4）波動會放大。</dd></div>
+        </dl></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">判讀方法</span>
+      <ol class="steps">
+        <li>先問「哪一段在動」：今年 2 年期 +92bp、10 年 +61bp、30 年 +43bp → 短端領漲的<b>熊平 bear flattening</b>，主角是 Fed 升息預期；長端的絕對高水準是財政問題，兩個故事要分開講（第 3 輪修正）。</li>
+        <li>標售是最直接的資金流：看尾差 tail（得標利率高於發行前交易 = 需求弱）與間接投標比例（海外）。8/12 十年期 tail 1.7bp 但間接 76.7% → 「價格要讓、但海外還在買」。</li>
+        <li>TLT/SHY 相對線 = 市場願意承擔多少存續期間。它反轉向上（TLT 開始流入）通常在長端見頂前後 1–2 個月。</li>
+        <li>實質利率 2.44% 高於名目 GDP 成長的預期時，是緊縮；它跟金價脫鉤，代表金價的買家在看別的東西（財政）。</li>
+      </ol>
+      <div class="mis"><b>常見誤讀</b>「殖利率升＝外資在賣美債。」6 月 TIC 民間外資是淨買的，減少的是官方存量與估值；殖利率升是因為供給多、期限溢酬升、Fed 不再吸收，不是「拋售」。</div></div>
+    <div class="card"><span class="eyebrow">Schwab 可用工具</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="tools">
+        <thead><tr><th>代號</th><th>是什麼</th><th>怎麼用它驗證流向</th></tr></thead>
+        <tbody>
+          <tr><td>SHY / SCHO</td><td>1–3 年美債</td><td>短端流入的落點；SCHO 8/28 當週 +$18 億</td></tr>
+          <tr><td>IEF / SCHR</td><td>7–10 年美債</td><td>IEF 一個月 −$52.5 億：中段被賣，資金往兩端走</td></tr>
+          <tr><td>TLT / SCHQ</td><td>20 年以上美債</td><td>TLT/SHY 相對線；TLT 一個月 +$56 億是逆勢買盤的證據</td></tr>
+          <tr><td>TIP / STIP</td><td>抗通膨債（長 / 短）</td><td>TIP/IEF 相對線向上 = 通膨預期升；現在損益兩平 2.35% 偏低</td></tr>
+          <tr><td>GOVT</td><td>全期限美債</td><td>不用來判讀，用來當「整條曲線」的基準</td></tr>
+        </tbody></table></div></div>
+    <p class="src">來源：<a href="https://www.federalreserve.gov/releases/h15/">Fed H.15</a>、<a href="https://fred.stlouisfed.org/series/T10YIE">FRED 損益兩平</a>、<a href="https://fred.stlouisfed.org/series/THREEFYTP10">FRED Kim-Wright</a>、<a href="https://www.cftc.gov/dea/futures/financial_lf.htm">CFTC TFF</a>、<a href="https://etfdb.com/etf/TLT/">ETFdb TLT</a>、<a href="https://etfdb.com/etf/IEF/">ETFdb IEF</a>、<a href="https://home.treasury.gov/news/press-releases/sb0607">Treasury 買回 8/19</a>、<a href="https://home.treasury.gov/news/press-releases/sb0606">TIC 6 月</a>、<a href="https://www.cboe.com/insights/posts/week-of-8-24-2026-cross-asset-volatilities-rise-as-treasury-endeavors-to-avert-yield-contagion/">Cboe 8/24 當週</a></p>
+  </div>
+
+  <!-- 信用債 -->
+  <div class="pool" data-pool="cr" hidden>
+    <div class="pool-head"><h3>信用債 <span class="en">IG / HY / leveraged loans</span></h3><span class="pill warn">價格說沒事、資金流轉出、私募端有事</span>
+      <p class="lede2">投資級利差 80bp、高收益 265bp，都在歷史偏窄區；投資級發行今年 $1.4 兆創紀錄、8 月單月也創紀錄，利差還是不動。但 HYG 一個月流出 $13.7 億，私募信貸違約率 6.1% 創新高——壓力在看不到價格的地方。</p></div>
+    <div class="pool-grid">
+      <div class="card"><span class="eyebrow">驅動因子</span>
+        <p class="small" style="margin-top:6px"><b>絕對殖利率</b>是現在最大的驅動：投資級全殖利率 5.5% 以上，保險公司、退休金、海外機構在「鎖利率」，所以公司拼命發債（$1.4 兆）市場也吃得下——這是<b>買盤充足</b>，不是<b>風險偏好高</b>，兩者在利差上長得一樣。<b>違約率</b>分三層：高收益債 2.7%、槓桿貸款 3.8%、私募信貸 6.1%——風險越往不透明的地方越高。<b>銀行放款標準</b>（SLOOS 7 月）：企業貸款標準不變、需求增加；商用不動產略鬆。銀行沒收緊，所以壓力沒有傳到公開市場。</p></div>
+      <div class="card"><span class="eyebrow">三種證據</span>
+        <dl class="ev3">
+          <div><dt>價格</dt><dd>IG OAS 80bp（8/31）、HY OAS 265bp（9/1）。Fitch 12 個月違約率（7 月）：HY 2.7%、槓桿貸款 3.8%、私募 6.1%（單月 17 家）。</dd></div>
+          <div><dt>資金流</dt><dd>IG 發行 $1.4 兆 YTD 紀錄；HY 1–4 月 $1,197 億（2021 年來最快）；ETF：HYG 一個月 −$13.7 億、LQD −$8 億（三個月 +$34.8 億）、JNK ≈0、BKLN −$0.4 億（9/1–9/2）。</dd></div>
+          <div><dt>部位</dt><dd>私募端代理：BDC 利息收入的 PIK（以債付息）佔 8.2%；ARCC 股價溢價 NAV 3.5% 但非應計 2.4%（2021 年後最高）；BDC 板塊約 20% 折價、部分 50%；贖回閘門：HPS $260 億（3 月）、BCRED、Blue Owl；$140 億贖回被鎖（7/2）。</dd></div>
+        </dl></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">判讀方法</span>
+      <ol class="steps">
+        <li>HY OAS 是全市場最好的領先指標之一。定三個門檻：<b>265 → 350bp</b> 警戒（股市通常同步回檔）、<b>&gt;500bp</b> 是衰退定價、<b>&lt;300bp</b> 是自滿區。</li>
+        <li>IG 發行創高 + 利差不動 = 有人在買。要問買家是誰：保險與退休金鎖利率是「慢錢」，撐得久；如果是 ETF 流入撐的，會快進快出。現在 LQD 一個月流出、發行卻創高 → 買家是慢錢。</li>
+        <li>私募信貸沒有市價，用四個代理：BDC 折溢價、非應計比率、PIK 佔比、贖回閘門新聞。四個同時惡化才算「傳導」開始。</li>
+        <li>HYG/LQD 相對線向下 = 市場在避開低評等。它比 HY OAS 早一點。</li>
+      </ol>
+      <div class="mis"><b>常見誤讀</b>「利差窄＝信用市場健康。」利差反映的是買盤與絕對殖利率的吸引力；違約在私募端已經 6%，只是不會出現在 OAS 裡。另一個：「私募信貸跟我無關」——銀行對私募的曝險 $3,000–3,220 億，壽險是最大 LP，傳導管道是銀行與保險，不是利差。</div></div>
+    <div class="card"><span class="eyebrow">Schwab 可用工具</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="tools">
+        <thead><tr><th>代號</th><th>是什麼</th><th>怎麼用它驗證流向</th></tr></thead>
+        <tbody>
+          <tr><td>LQD</td><td>投資級公司債</td><td>LQD/IEF 相對線 = IG 利差方向（比 FRED 早一天看到）</td></tr>
+          <tr><td>HYG / JNK</td><td>高收益債</td><td>HYG/LQD 向下 = 避開低評等；HYG 流量看 ETFdb</td></tr>
+          <tr><td>BKLN</td><td>槓桿貸款（浮動利率）</td><td>Fed 升息預期升時 BKLN 應相對 HYG 走強；沒走強 = 市場在擔心違約不是利率</td></tr>
+          <tr><td>BIZD</td><td>BDC（上市私募信貸放款機構）ETF，殖利率 7.2%</td><td>私募信貸唯一的市價代理；折價擴大是壓力訊號</td></tr>
+          <tr><td>ARCC / OBDC</td><td>最大的兩家 BDC</td><td>季報看非應計 non-accrual 與 PIK；股價 vs 公告 NAV</td></tr>
+        </tbody></table></div></div>
+    <p class="src">來源：<a href="https://fred.stlouisfed.org/series/BAMLC0A0CM">FRED IG OAS</a>、<a href="https://fred.stlouisfed.org/series/BAMLH0A0HYM2">FRED HY OAS</a>、<a href="https://cryptobriefing.com/fitch-us-corporate-default-rates-july-2026/">Fitch 7 月違約率</a>、<a href="https://www.bloomberg.com/news/articles/2026-08-17/us-high-grade-bond-sales-set-august-record-in-year-full-of-them">Bloomberg 8/17</a>、<a href="https://www.federalreserve.gov/data/sloos/sloos-202607.htm">Fed SLOOS 7 月</a>、<a href="https://pitchbook.com/news/articles/interest-from-pik-loans-at-bdcs-dips-amid-concerns-over-credit-quality-ai-disruption">PitchBook PIK</a>、<a href="https://www.bloomberg.com/news/articles/2026-07-02/private-credit-keeps-14-billion-trapped-in-bid-to-outlast-storm">Bloomberg 7/2</a>、<a href="https://etfdb.com/etf/HYG/">ETFdb HYG</a></p>
+  </div>
+  <!-- 貴金屬 -->
+  <div class="pool" data-pool="au" hidden>
+    <div class="pool-head"><h3>貴金屬 <span class="en">gold / silver / platinum</span></h3><span class="pill flow">流入 · 三證據一致，9 月初回檔</span>
+      <p class="lede2">金價 8 月 +9.7%（7 月底不到 $4,100 → 月中 $4,650–4,700 → 月底約 $4,400），9/2 十二月期貨 $4,377。買家是央行與 ETF，不是通膨交易；珠寶需求掉到疫情以來最低，說明價格已高到把消費者擠出去。</p></div>
+    <div class="pool-grid">
+      <div class="card"><span class="eyebrow">驅動因子</span>
+        <p class="small" style="margin-top:6px">三種買家、三種邏輯。<b>央行</b>：儲備多元化，慢、穩、不看價——Q2 買 289 噸（+62%）、中國人行 7 月 +20 噸連 21 個月、WGC 調查 45% 央行計畫再增持（紀錄）。<b>ETF／西方投資人</b>：快、看實質利率與美元——但 10 年期實質利率 2.44%（2008 年來最高）金價卻站穩 $4,200，四十年的負相關失效了，因為他們買的是「財政與貨幣信用的保險」。<b>亞洲實體</b>：看價，高價縮手——珠寶 278 噸（−17%）、印度白銀進口 −66%（關稅提高到 15%）。</p>
+        <p class="small" style="margin-top:6px">白銀多一層工業需求（太陽能、電子），今年工業需求在退（太陽能減量），所以白銀今年 −11%、金銀比從 60 升到 68（白銀落後）；8 月才單月補漲 15.6%。白金 $1,730（+20.5% YoY）。</p></div>
+      <div class="card"><span class="eyebrow">三種證據</span>
+        <dl class="ev3">
+          <div><dt>價格</dt><dd>金 $4,336（9/2 現貨；2025 年底 $4,310 → 今年約 +0.6%，去年 +65%）；銀 $63.9（2025 年底 $72 → 今年 −11%，年增仍 +61%）；金銀比 59.9 → 67.9；白金 $1,730。第 1 輪的「+20%」與 Yahoo 的「+30.6%」都不對，已在 L3 修正。</dd></div>
+          <div><dt>資金流</dt><dd>黃金 ETF 8 月全球 +$171 億、美國掛牌 +$79 億；今年全球 +$277 億，但北美今年淨額仍是 −$1.2 億（上半年贖回、8 月才回來）。央行 Q2 289 噸、H1 345 噸。中國黃金 ETF 今年 +34 噸。</dd></div>
+          <div><dt>部位</dt><dd>COT 管理基金（8/25）：黃金淨多 144,747 口（+3,099）、白銀 14,073 口（+2,378）。GLD $1,529 億（1,042 噸）、IAU $675 億、SLV $347 億（8/31）。</dd></div>
+        </dl></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">判讀方法</span>
+      <ol class="steps">
+        <li>先分買家：央行買盤看 WGC 季報與人行月報（慢變數，決定地板）；ETF 買盤看 GLD 噸數週變化（快變數，決定波動）；實體需求看 SGE 出庫、印度進口（決定回檔深度）。</li>
+        <li>央行買、ETF 買、實體退 = <b>金融需求主導</b>的上漲，回檔會快而深（8/31–9/2 隨美伊衝突與升息機率回落就是例子），但地板不會破。</li>
+        <li>實質利率與金價脫鉤時，不要用「利率會升所以金會跌」推論；改看財政（赤字、期限溢酬）與美元指數。</li>
+        <li>金銀比下降 + 銅創紀錄 = 工業需求在推白銀；金銀比上升（今年 60 → 68）= 避險主導、工業缺席。</li>
+      </ol>
+      <div class="mis"><b>常見誤讀</b>「通膨高所以金漲。」2022 年 CPI 9% 時金價全年下跌（實質利率升）；今年 CPI 3.4% 金價卻大漲。驅動是儲備多元化與財政疑慮，不是 CPI。</div></div>
+    <div class="card"><span class="eyebrow">Schwab 可用工具</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="tools">
+        <thead><tr><th>代號</th><th>是什麼</th><th>怎麼用它驗證流向</th></tr></thead>
+        <tbody>
+          <tr><td>GLD / IAU</td><td>實體黃金 ETF（GLD 較大、IAU 費用較低）</td><td>SPDR 頁面每天公布 GLD 持有噸數；噸數週變化就是西方 ETF 資金流</td></tr>
+          <tr><td>SLV</td><td>實體白銀 ETF</td><td>SLV/GLD 相對線 = 金銀比的倒數；向上 = 工業與補漲</td></tr>
+          <tr><td>PPLT</td><td>實體白金 ETF</td><td>同上，白金更偏工業（汽車觸媒、氫能）</td></tr>
+          <tr><td>GDX / GDXJ</td><td>金礦股（大 / 小）</td><td>GDX/GLD 相對線向上 = 市場相信金價會持續（礦商是槓桿）；向下 = 只是避險、不相信持續</td></tr>
+        </tbody></table></div></div>
+    <p class="src">來源：<a href="https://www.ssga.com/library-content/products/fund-docs/etfs/us/insights-investment-ideas/monthly-gold-monitor.pdf">SSGA Gold Monitor 8 月</a>、<a href="https://www.gold.org/goldhub/research/gold-demand-trends/gold-demand-trends-q2-2026">WGC GDT Q2 2026</a>、<a href="https://www.gold.org/goldhub/gold-focus/2026/08/china-gold-market-update-strong-official-sector-buying-july">WGC 中國 7 月</a>、<a href="https://www.kitco.com/news/article/2026-06-16/record-45-central-banks-plan-increase-gold-holdings-wgc-survey-finds">WGC 央行調查</a>、<a href="https://smartflow.trading/cftc-cot-report-analysis-august-25-2026/">COT 8/25</a>、<a href="https://finance.yahoo.com/personal-finance/investing/article/gold-price-today-wednesday-september-2-2026-gold-slips-further-as-military-actions-escalate-in-iran-104514058.html">Yahoo 9/2</a></p>
+  </div>
+
+  <!-- 幣圈 -->
+  <div class="pool" data-pool="btc" hidden>
+    <div class="pool-head"><h3>幣圈 <span class="en">crypto</span></h3><span class="pill crit">流出／矛盾 · 8 月回流、9 月又出</span>
+      <p class="lede2">比特幣 $76,597（9/2，年減 29%）、以太幣 $2,374（年減 44%）。現貨 ETF 今年淨流出 $22.6 億，8 月單月 +$30 億是唯一反彈，9/1 又流出 $2.37 億。比特幣現在的行為像高 beta 科技股：油價衝擊、升息機率上升就跌。</p></div>
+    <div class="pool-grid">
+      <div class="card"><span class="eyebrow">驅動因子</span>
+        <p class="small" style="margin-top:6px"><b>流動性與風險偏好</b>：跟納斯達克同向，跟黃金反向——今年黃金大漲、比特幣下跌，「數位黃金」敘事在數據上不成立。<b>ETF 買盤</b>：現貨 BTC ETF 規模 $990 億、累積流入 $543.6 億，是邊際定價者；<b>穩定幣</b>是幣圈的 M2，總量 $3,039 億（USDT $1,833 億、USDC $737 億），7 天只增 $1.76 億 = 沒有新錢進來。<b>法制化</b>：GENIUS Act 穩定幣法，財政部 8/17 發布草案，2027/1/18 發行商須取得執照，2028/7/18 起平台只能提供持照穩定幣——這讓穩定幣變成美債的法定買家（Tether Q1 持有美債 $1,410 億、黃金 146 噸）。<b>企業金庫</b>：Strategy 持有 840,447 BTC，均價 $75,385，現價已低於成本；8 月賣 1,690 BTC 回購優先股——最大的買家開始變賣家。</p></div>
+      <div class="card"><span class="eyebrow">三種證據</span>
+        <dl class="ev3">
+          <div><dt>價格</dt><dd>BTC $76,597、ETH $2,374（9/2）；總市值 $2.695 兆；BTC 佔比 57.6%（CoinGecko 9/3；4 月曾破 60%）。30 日實現波動 27%（極低），DVOL 35。</dd></div>
+          <div><dt>資金流</dt><dd>BTC ETF：8 月 +$30 億、今年 −$22.6 億（8/27）；8/28 −$2.02 億、8/31 +$2.17 億、9/1 −$2.37 億。ETH ETF：8 月 +$14.2 億、11 連日流入約 $16 億（至 8/31）。穩定幣 7 天 +$1.76 億。</dd></div>
+          <div><dt>部位</dt><dd>期貨未平倉 587,584 BTC（5 個月低）；資金費率年化 &lt;10%（8/25 $62k→$80k 軋空之後）。Strategy 均價 $75,385，Q2 帳面虧損 $83.2 億，今年賣幣約 $2.18 億付優先股股息。</dd></div>
+        </dl></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">判讀方法</span>
+      <ol class="steps">
+        <li>順序：<b>穩定幣總供給</b>（新錢有沒有進來）→ <b>ETF 淨流</b>（傳統資金有沒有進來）→ <b>BTC 佔比</b>（進來的錢敢不敢往山寨幣走）。三個現在分別是：持平、微出、偏 BTC——典型的「沒有新錢、存量在避險」。</li>
+        <li>把 BTC 跟 QQQ 畫相對線：相關性高時，它就是流動性指標，不用另外判讀；相關性斷掉才有幣圈自己的故事。</li>
+        <li>企業金庫是本輪特有的風險：Strategy 現價低於成本 + 靠賣幣付優先股股息。看它每月 8-K 的買賣。</li>
+        <li>ETH ETF 連續流入 + ETH/BTC 比率回升，才是「風險偏好回來」；只有 BTC 漲是避險內縮。</li>
+      </ol>
+      <div class="mis"><b>常見誤讀</b>「比特幣是數位黃金，會跟金價一起漲。」今年金 +、幣 −；比特幣的相關對象是納斯達克與美元流動性。另一個：「ETF 流入 = 新錢」——很多 ETF 流入是從 GBTC 與交易所搬過來的存量。</div></div>
+    <div class="card"><span class="eyebrow">Schwab 可用工具</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="tools">
+        <thead><tr><th>代號</th><th>是什麼</th><th>怎麼用它驗證流向</th></tr></thead>
+        <tbody>
+          <tr><td>IBIT / FBTC</td><td>現貨比特幣 ETF（BlackRock / Fidelity）</td><td>Farside 或 tftc 每日流量表；IBIT 單日 ±$2 億是常態，±$5 億以上才算訊號</td></tr>
+          <tr><td>ETHA</td><td>現貨以太幣 ETF</td><td>ETHA 連續流入 + ETHA/IBIT 相對線向上 = 風險偏好擴散</td></tr>
+          <tr><td>MSTR</td><td>Strategy（比特幣槓桿代理）</td><td>MSTR 對 BTC 的溢價（mNAV）縮到 1 以下 = 企業金庫模式失靈；不建議當部位，只當指標</td></tr>
+          <tr><td>COIN</td><td>Coinbase（交易量代理）</td><td>COIN/IBIT 相對線 = 散戶交易活動 vs 機構持有</td></tr>
+        </tbody></table></div></div>
+    <p class="src">來源：<a href="https://www.coingecko.com/en/charts/bitcoin-dominance">CoinGecko</a>、<a href="https://defillama.com/stablecoins">DefiLlama</a>、<a href="https://cointelegraph.com/news/bitcoin-etf-august-inflows-surge-past-3-billion">Cointelegraph 8 月 ETF</a>、<a href="https://hedgeco.net/news/09/2026/spot-bitcoin-etfs-posted-a-236-5-million-net-outflow-on-september-1.html">9/1 流量</a>、<a href="https://home.treasury.gov/news/press-releases/sb0605">Treasury GENIUS 草案 8/17</a>、<a href="https://www.coindesk.com/markets/2026/08/10/strategy-sells-1-690-bitcoin-raises-usd653-million-from-mstr-shares">CoinDesk 8/10 Strategy</a>、<a href="https://www.coindesk.com/markets/2026/08/25/a-bitcoin-short-squeeze-for-the-ages-as-futures-open-interest-collapses">CoinDesk 8/25</a>、<a href="https://tether.io/news/tether-posts-strong-q2-performance-generates-1-5b-net-operating-profit-maintains-4-11b-reserve-buffer-and-expands-gold-holdings-to-more-than-146-tons/">Tether Q2</a></p>
+  </div>
+
+  <!-- 房地產 -->
+  <div class="pool" data-pool="re" hidden>
+    <div class="pool-head"><h3>房地產 <span class="en">housing / CRE / REITs</span></h3><span class="pill neutral">住宅凍結 · 商用分化 · REIT 是股票</span>
+      <p class="lede2">房貸 6.66%（8/27）把住宅市場鎖住：成屋成交 406 萬戶年率是 1995 年的水準，價格年增 1.5–2% 不是因為需求強，是沒人賣。供給端開始裂：7 月開工 −12.4%、新屋銷售 −10.5%、新屋供給 9.6 個月、35% 建商在降價。商用：CMBS 違約率 7.86%，辦公室 11.9% 是舊問題，多戶 7.69%（+46bp）是新問題。</p></div>
+    <div class="pool-grid">
+      <div class="card"><span class="eyebrow">驅動因子</span>
+        <p class="small" style="margin-top:6px"><b>房貸利率</b>＝10 年期美債 + MBS 利差（約 1.9 個百分點），所以住宅是美債長端的下游。<b>鎖定效應</b>：存量屋主多數是 3–4% 的房貸，不願換成 6.66%，所以庫存 1.54 萬戶（4.6 個月）只是勉強正常。<b>建商</b>是唯一有彈性的供給方：新屋供給 9.6 個月已經是壓力區，降價 35% 是他們在替整個市場「降價」。<b>租金</b>：空置率 7.1%、租金年減 0.8%——這是 CPI 住房分項（核心通膨最大權重）持續下降的來源，也是通膨往下最可靠的力量。<b>商用</b>：辦公室空置 18.3%（CBRE Q2）；多戶違約升是因為 2021–22 年高價買進、浮動利率、供給潮三件事碰在一起。</p></div>
+      <div class="card"><span class="eyebrow">三種證據</span>
+        <dl class="ev3">
+          <div><dt>價格</dt><dd>Case-Shiller 全國 +1.5%、20 城 +2.1%（6 月）；成屋中位數 $434,100（+2.0%，7 月）；新屋中位數 $393,800；租金 $1,390（−0.8% YoY）。REIT：FTSE EPRA Nareit USA 今年 +19.5%，資料中心 +33%、旅館 +40%。</dd></div>
+          <div><dt>資金流</dt><dd>MBA 購屋申請年減 5%、再融資年減 17%（8/21 當週）；成屋 406 萬戶（+0.7% YoY）；新屋 607k（−10.5% m/m）；開工 1.239M（−13.5% YoY）、許可 1.443M（+5%）。VNQ 規模 $386 億。</dd></div>
+          <div><dt>部位</dt><dd>庫存 1.54M 戶／4.6 個月；新屋供給 9.6 個月；NAHB 建商信心 35、35% 降價；CMBS 違約：整體 7.86%（+51bp）、辦公室 11.91%、多戶 7.69%、零售 6.96%、工業 1.13%（7 月）。</dd></div>
+        </dl></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">判讀方法</span>
+      <ol class="steps">
+        <li>住宅看<b>量</b>不看<b>價</b>：成交量、申請量、開工量先動，價格最後動。轉折訊號：庫存 &gt;6 個月、Case-Shiller 年增轉負、建商降價比例 &gt;40%。</li>
+        <li>建商股（XHB、ITB）對 SPY 的相對線是房市最領先的市場指標，通常比成交數據早 3–6 個月。</li>
+        <li>商用看 CMBS 違約「按類型」：辦公室是結構問題（遠距工作），多戶與零售的變化才是週期訊號；工業 1.13% 說明物流沒事。</li>
+        <li>REIT 是股票不是房地產：資料中心 REIT 走 AI 敘事、旅館走消費，跟住宅無關。用 REIT 判讀房市會錯。</li>
+      </ol>
+      <div class="mis"><b>常見誤讀</b>「房價沒跌所以房市健康。」成交量在 30 年低點，價格是流動性枯竭的結果。另一個：「Fed 降息房市就回來」——房貸跟 10 年期走，Fed 降短端時長端可能因財政疑慮不降（2024 年 9 月降息後房貸反而升）。</div></div>
+    <div class="card"><span class="eyebrow">Schwab 可用工具</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="tools">
+        <thead><tr><th>代號</th><th>是什麼</th><th>怎麼用它驗證流向</th></tr></thead>
+        <tbody>
+          <tr><td>XHB / ITB</td><td>建商與住宅相關股</td><td>XHB/SPY 相對線是最領先的房市指標；向下時不要相信「房價很穩」</td></tr>
+          <tr><td>VNQ / XLRE / SCHH</td><td>REIT 綜合（SCHH 是 Schwab 自家）</td><td>只用來看「REIT 這個股票板塊」的資金流，不用來判讀房市</td></tr>
+          <tr><td>DLR / EQIX</td><td>資料中心 REIT</td><td>AI 資本支出的另一個代理；跟 SMH 相關性高於跟 VNQ</td></tr>
+          <tr><td>MBB / VMBS</td><td>機構 MBS ETF</td><td>MBB/IEF 相對線 = MBS 利差；收窄時房貸利率會比 10 年期降得快</td></tr>
+        </tbody></table></div></div>
+    <p class="src">來源：<a href="https://www.freddiemac.com/pmms">Freddie Mac</a>、<a href="https://www.mortgagenewsdaily.com/news/08282026-mortgage-applications-mba">MBA 8/26</a>、<a href="https://www.nar.realtor/newsroom/nar-existing-home-sales-report-shows-1-7-decrease-in-july">NAR 7 月</a>、<a href="https://www.housingwire.com/articles/july-2026-housing-starts-drop-permits-rise/">HousingWire 開工</a>、<a href="https://press.spglobal.com/2026-08-25-S-P-Cotality-Case-Shiller-Index-Reports-Annual-Gain-in-June-2026">Case-Shiller 6 月</a>、<a href="https://www.nahb.org/news-and-economics/press-releases/2026/08/affordability-pressures-keep-builder-confidence-low">NAHB 8 月</a>、<a href="https://www.apartmentlist.com/research/national-rent-data">Apartment List</a>、<a href="https://www.multihousingnews.com/cmbs-delinquency-rates/">Trepp CMBS 7 月</a>、<a href="https://www.cbre.com/insights/figures/q2-2026-us-office-market-report">CBRE Q2 辦公室</a>、<a href="https://www.ssga.com/us/en/institutional/insights/mind-on-the-market-31-august-2026">SSGA 8/31（REIT）</a></p>
+  </div>
+
+  <!-- 私募信貸 -->
+  <div class="pool" data-pool="pc" hidden>
+    <div class="pool-head"><h3>私募信貸 <span class="en">private credit</span></h3><span class="pill warn">看不到價格的池子 · 壓力在累積</span>
+      <p class="lede2">規模約 $1.34 兆（2024 年基準），Fitch 違約率 6.1% 創紀錄（7 月單月 17 家）、Blue Owl Q2 違約 2.8% 五年新高，$140 億贖回被閘門鎖住。它沒有市價，所以「資金流出」不會出現在利差，會出現在贖回被鎖的新聞裡。</p></div>
+    <div class="pool-grid">
+      <div class="card"><span class="eyebrow">驅動因子</span>
+        <p class="small" style="margin-top:6px"><b>監管套利</b>：2010 年後銀行放款受限，私募基金補位放款給中型企業，利率浮動、條款寬鬆。<b>高利率</b>：浮動利率讓借款人利息負擔倍增，付不出現金就用 PIK（以債付息）——BDC 利息收入 8.2% 是 PIK，代表那些利息其實沒收到。<b>AI 顛覆</b>：PitchBook 指出軟體類借款人受 AI 衝擊是新的違約來源。<b>半流動結構</b>：投資人以為能季度贖回，基金卻只承諾贖回 5%，一旦超額就啟動閘門（HPS $260 億、BCRED、Blue Owl 都發生了）。<b>傳導管道</b>：銀行曝險 $3,000–3,220 億，壽險是最大 LP——FSB、OCC、Fed 在 5 月同時警告。</p></div>
+      <div class="card"><span class="eyebrow">三種證據</span>
+        <dl class="ev3">
+          <div><dt>價格</dt><dd>沒有。唯一市價代理是上市 BDC：板塊約 20% 折價 NAV、部分 50%；ARCC 反而溢價 3.5%（NAV $19.35 vs 股價 $20.02）但非應計 2.4%（2021 年後最高）。BIZD 今年 −0.15%、殖利率 7.2%。</dd></div>
+          <div><dt>資金流</dt><dd>贖回請求：BCRED $38 億；HPS 閘門 $260 億（3 月）；$140 億被鎖（7/2）。新募資仍在進來（規模持續成長），但半流動基金的淨流量已經轉負。</dd></div>
+          <div><dt>部位</dt><dd>Fitch 違約率 6.1%（HY 2.7%、槓桿貸款 3.8%）；PIK 佔 BDC 利息 8.2%；Blue Owl Q2 違約 2.8%；銀行曝險 $3,000–3,220 億。</dd></div>
+        </dl></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">判讀方法</span>
+      <ol class="steps">
+        <li>四個代理一起看：BDC 折溢價（市場的意見）、非應計比率（已經壞的）、PIK 佔比（快壞的）、閘門新聞（投資人在逃）。四個同向惡化才算傳導開始；現在是三個惡化、折價收斂中（矛盾）。</li>
+        <li>把私募信貸違約率跟 HY 違約率的差（6.1 − 2.7 = 3.4 個百分點）當壓力計；差距擴大 = 壓力被關在私募端；差距縮小可能是私募改善，也可能是傳到公開市場，要配 HY OAS 看。</li>
+        <li>看銀行財報的「對非銀金融機構放款」（NDFI lending）科目——那是私募信貸的槓桿來源，也是傳導管道。</li>
+      </ol>
+      <div class="mis"><b>常見誤讀</b>「BDC 溢價＝沒問題。」ARCC 溢價是因為 7–9% 殖利率吸引散戶，跟資產品質無關；非應計升才是品質。另一個：「私募信貸違約不會影響股市」——2007 年的 CDO 也沒有市價。</div></div>
+    <div class="card"><span class="eyebrow">Schwab 可用工具</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="tools">
+        <thead><tr><th>代號</th><th>是什麼</th><th>怎麼用它驗證流向</th></tr></thead>
+        <tbody>
+          <tr><td>BIZD</td><td>BDC ETF（VanEck），規模 $17 億</td><td>價格 vs 成分 BDC 公告 NAV 的折價；折價擴大是市場在定價未來損失</td></tr>
+          <tr><td>ARCC / OBDC / BXSL</td><td>三大上市 BDC</td><td>季報三個數：非應計、PIK 佔比、新增放款利差；三個同時惡化就是警訊</td></tr>
+          <tr><td>KBWB / KRE</td><td>大型銀行 / 區域銀行 ETF</td><td>私募信貸出事的傳導終點；KRE/SPY 相對線向下配 BIZD 折價擴大 = 傳導中</td></tr>
+          <tr><td>—</td><td>私募信貸本身</td><td>Schwab 帳戶買不到；這池子只能「觀察」，不能直接參與，這是正常的</td></tr>
+        </tbody></table></div></div>
+    <p class="src">來源：<a href="https://cryptobriefing.com/fitch-us-corporate-default-rates-july-2026/">Fitch 7 月</a>、<a href="https://www.nasdaq.com/press-release/ares-capital-corporation-announces-june-30-2026-financial-results-and-declares-third">ARCC Q2</a>、<a href="https://www.vaneck.com/us/en/investments/bdc-income-etf-bizd/">VanEck BIZD</a>、<a href="https://pitchbook.com/news/articles/interest-from-pik-loans-at-bdcs-dips-amid-concerns-over-credit-quality-ai-disruption">PitchBook PIK</a>、<a href="https://www.matterfact.com/newsletter/2026-08-26-private-credit-default-data-bear-case">Matterfact 8/26</a>、<a href="https://fortune.com/2026/03/14/private-credit-meltdown-how-wall-streets-blackstone-kkr-apollo-ares-blue-owl-investment-craze-panic/">Fortune 3/14</a>、<a href="https://www.fsb.org/uploads/P060526.pdf">FSB 5/6</a></p>
+  </div>
+
+  <!-- 海外 -->
+  <div class="pool" data-pool="fx" hidden>
+    <div class="pool-head"><h3>海外 <span class="en">international / EM / commodities / Taiwan</span></h3><span class="pill flow">美國投資人往外走 · 台股例外在內資</span>
+      <p class="lede2">今年最大的資金流變化之一：美國人開始分散到海外——已開發市場（美國以外）ETF 今年 $1,290 億、新興市場 $500 億，都是紀錄；8/28 當週國際股票流入 $91 億是美股的四倍。EEM +22.9%、日經 +30%、EFA +13.7%。商品跟著美伊衝突：Brent $94、銅創紀錄 $5.64/lb、BCOM +23%。</p></div>
+    <div class="pool-grid">
+      <div class="card"><span class="eyebrow">驅動因子</span>
+        <p class="small" style="margin-top:6px"><b>美元</b>：DXY 99.5 持平，但 8 月底是 3.5 個月低點；美元弱 = 海外資產換回美元多賺一段。<b>利差收斂</b>：ECB 2.25%（9/10 升息機率 90%）、BoJ 1.00%（9/17 升息 58%）、JGB 30 年 4.18%——海外自己的利率變高，錢就不必跑來美國；日本壽險已經在回流。<b>商品週期</b>：能源（美伊）、銅（關稅威脅吃掉全球過剩）推動資源國。<b>AI 供應鏈</b>：台灣、韓國、日本是 AI 資本支出的另一端，這解釋了台股 +59%、日經 +30%。</p>
+        <p class="small" style="margin-top:6px"><b>台灣的三條管子</b>：①壽險美元資產（避險比率 42.89% 歷史新低，台幣升值直接受傷）；②外資在台股（今年賣超 NT$2.28 兆，但指數 +59%，接手的是內資 ETF、當沖、投信）；③你這種用美國券商買美股的個人（匯率風險是台幣對美元）。USD/TWD 31.75，跟 10 年期美債和壽險避險行為同步。</p></div>
+      <div class="card"><span class="eyebrow">三種證據</span>
+        <dl class="ev3">
+          <div><dt>價格</dt><dd>EFA +13.7%、EEM +22.9%、日經 +30.2%、Stoxx 600 +7.8%、CSI 300 +2.0%、Nifty −0.35%（8/24–9/2）。USD/JPY 159.6、EUR/USD 1.157、USD/CNY 6.72、USD/TWD 31.75。Brent $94.2、WTI $89.6（WTI 週漲 9%）、銅 $5.64、BCOM +23%。</dd></div>
+          <div><dt>資金流</dt><dd>美國掛牌：DM ex-US ETF 今年 $1,290 億、EM $500 億（紀錄）；VXUS 今年 +$156 億、IEMG +$108 億；商品 ETF +$60 億。但 IIF：非居民對 EM 股票今年 −$860 億、EM 債 +$2,144 億——美國散戶在買 EM ETF，全球機構在賣 EM 本地股票。台股外資 −NT$2.28 兆。</dd></div>
+          <div><dt>部位</dt><dd>外資台指期淨空 85,329 口（9/2）；台灣壽險避險比率 42.89%（6 月）；海外官方持美債佔比 13%（30 年低）。</dd></div>
+        </dl></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">判讀方法</span>
+      <ol class="steps">
+        <li>三條線：DXY（方向）、EEM/SPY 相對線（海外 vs 美國）、JGB 30 年（吸走日本資金的競爭者）。DXY 跌 + EEM/SPY 升 = 資金往外走的確認。</li>
+        <li>ETF 流入與 IIF 流出矛盾時，問「誰在買」：ETF 是美國散戶，IIF 是全球非居民對本地市場。兩者可以同時為真——美國人在分散、機構在減。</li>
+        <li>台股：外資賣、指數漲 = 內資接手；判讀要問內資的錢從哪來（ETF 申購、融資）、能撐多久。EWT（美國掛牌台灣 ETF）與加權指數的差就是匯率。</li>
+        <li>商品用 BCOM 看整體、銅/金比看「成長 vs 避險」：銅/金比升 = 成長押注；現在銅創高、金也高 → 兩邊都有人買，這是「通膨 + 避險」的組合。</li>
+      </ol>
+      <div class="mis"><b>常見誤讀</b>「EM ETF 流入創紀錄＝外資看好新興市場。」IIF 顯示非居民今年淨賣 EM 股票 $860 億；流入的是美國散戶的分散配置。台股同理：外資賣超創紀錄與指數創高並存，不矛盾，是買家換人。</div></div>
+    <div class="card"><span class="eyebrow">Schwab 可用工具</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="tools">
+        <thead><tr><th>代號</th><th>是什麼</th><th>怎麼用它驗證流向</th></tr></thead>
+        <tbody>
+          <tr><td>VXUS / VEA / VWO</td><td>全海外 / 已開發 / 新興</td><td>VXUS/VTI 相對線 = 「美國 vs 世界」；今年向上</td></tr>
+          <tr><td>EEM / IEMG</td><td>新興市場（iShares）</td><td>EEM/SPY 相對線；IEMG 今年 +$108 億</td></tr>
+          <tr><td>EWT</td><td>台灣（美國掛牌）</td><td>EWT 對加權指數的差 = 匯率；EWT 流量 = 美國人怎麼看台灣</td></tr>
+          <tr><td>EWJ / DXJ</td><td>日本（不避險 / 避險日圓）</td><td>DXJ/EWJ 相對線 = 日圓方向的市場看法</td></tr>
+          <tr><td>DBC / USO / CPER</td><td>商品綜合 / 原油 / 銅</td><td>CPER/GLD 相對線 = 銅金比（成長 vs 避險）</td></tr>
+          <tr><td>FXI / MCHI / INDA</td><td>中國 / 印度</td><td>今年落後（CSI +2%、Nifty −0.35%）；相對線轉強是「EM 內部輪動」訊號</td></tr>
+        </tbody></table></div></div>
+    <p class="src">來源：<a href="https://etfexpress.com/2026/09/02/us-etf-inflows-close-to-four-times-the-historical-average-for-august-state-street-im/">ETF Express 9/2</a>、<a href="https://www.ishares.com/us/products/239637/ishares-msci-emerging-markets-etf">iShares EEM</a>、<a href="https://www.ishares.com/us/products/239623/ishares-msci-eafe-etf">iShares EFA</a>、<a href="https://www.etftrends.com/equity-etf-content-hub/2026-etf-inflows-leading-group/">ETF Trends 流量</a>、<a href="https://tradingeconomics.com/japan/30-year-bond-yield">TE JGB</a>、<a href="https://centralbank.watch/">centralbank.watch</a>、<a href="https://www.mining.com/copper-price-sets-fresh-record-as-us-tariff-threat-wipes-out-global-surplus/comex-copper-price-ytd-aug-25-2026/">Mining.com 銅</a>、<a href="https://assets.bbhub.io/professional/sites/27/BCOM.pdf">BCOM</a>、<a href="https://udn.com/news/story/7252/9678829">經濟日報 外資賣超</a>、<a href="https://finance.biggo.com/news/e8dd0d1a-391c-4983-ad68-1686136ce92d">壽險避險比率</a></p>
+  </div>
+</section>
+
+<!-- ===== L3 池子內部 ===== -->
+<section id="l3">
+  <div class="sec-head">
+    <span class="eyebrow">L3 · Inside the pools · 第 3 輪</span>
+    <h2>池子內部：錢從哪一格流到哪一格</h2>
+    <p>L2 回答「錢有沒有進這個池子」，L3 回答「進了池子之後往哪一格去」。工具是<b>相對線</b>（A 的價格除以 B 的價格）：它把「大盤漲跌」抵銷掉，剩下的就是池子內部的流向。每一格都同時列價格與資金流，因為兩者不一致的地方最有訊息。</p>
+  </div>
+  <div class="pool-tabs" role="tablist" aria-label="池子內部">
+    <button role="tab" data-l3="eq" aria-selected="true">股市內部</button>
+    <button role="tab" data-l3="ust" aria-selected="false">曲線與信用內部</button>
+    <button role="tab" data-l3="au" aria-selected="false">貴金屬內部</button>
+    <button role="tab" data-l3="btc" aria-selected="false">幣圈內部</button>
+    <button role="tab" data-l3="re" aria-selected="false">房地產內部</button>
+    <button role="tab" data-l3="tw" aria-selected="false">台股內部</button>
+  </div>
+
+  <!-- 股市內部 -->
+  <div class="l3" data-l3="eq">
+    <div class="pool-head"><h3>股市內部 <span class="en">sectors · styles · breadth · crowding</span></h3><span class="pill warn">輪動中 · 廣度在收窄</span>
+      <p class="lede2">價格說錢往能源、原物料、健康醫療走；資金流說錢從科技、半導體、金融、動能流出、往等權與價值流入；廣度說 8 月下半月只剩大型科技在撐指數。三者合起來：這是<b>部位驅動</b>的輪動（油價、升息預期、擁擠），不是盈餘驅動——Q3 盈餘預估反而從 +27.4% 上修到 +28.2%。</p></div>
+
+    <div class="card"><span class="eyebrow">11 個板塊 · 價格 vs 資金流（etfdb，9/1–9/2）</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table style="min-width:700px">
+        <thead><tr><th>板塊 ETF</th><th>今年</th><th class="bars">今年（±50%）</th><th>1 個月</th><th>3 個月</th><th>1 個月資金流</th><th>價格 vs 資金流</th></tr></thead>
+        <tbody id="sector-rows"></tbody>
+      </table></div>
+      <p class="small muted" style="margin-top:6px">SPY 今年 +12.30%（1 個月 +1.97%、資金流 −$39.5 億）；RSP 等權 +14.51%（1 個月 +1.20%、+$15.3 億）。SPY 權重（9/1）：科技 37.8%、金融 12.3%、通訊 9.5%、健康 9.4%、非必需 9.0%、工業 8.3%、必需 4.6%、能源 3.6%、公用 2.0%、原物料 1.8%、不動產 1.8%。</p>
+      <div class="how"><span class="lbl">怎麼讀這張表</span>最後一欄是重點。「漲但流出」＝獲利了結（能源 1 個月 +8.8% 卻 −$4.75 億；金融 3 個月 +11.3% 卻 −$37.4 億）；「跌但流入」＝逢低承接（非必需消費 −1.3% 但 +$1.5 億）；「漲且流入」才是新錢（原物料、工業小額）。科技 1 個月 +4.7% 但 −$12.1 億、半導體 SMH −$22.6 億，是全表最大的「漲但流出」——擁擠部位在減碼，價格還沒反映。</div></div>
+
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">風格與因子 · 相對線的方向</span>
+        <div class="rel" style="margin-top:8px">
+          <div class="r up"><span class="k">RSP / SPY · 廣度</span><span class="v">向上</span><span class="d">等權 +14.5% vs 市值 +12.3%；3 個月 +4.6% vs +1.0%；RSP 1 個月 +$15.3 億</span></div>
+          <div class="r up"><span class="k">IWD / IWF · 價值 vs 成長</span><span class="v">強烈向上</span><span class="d">價值 +22～23% vs 成長 +2.5～5%（來源略有差異）；8 月成長短暫贏回</span></div>
+          <div class="r up"><span class="k">IWM / SPY · 小型 vs 大型</span><span class="v">向上</span><span class="d">小型 +18.5～22.5%；但 1 個月 −0.2%、−$4.3 億——動能減弱</span></div>
+          <div class="r flat"><span class="k">MTUM · 動能</span><span class="v">3 個月 −6.0%</span><span class="d">1 個月 −$11.8 億流出；今年漲幅兩個來源差很大（etfdb +18.7%、iShares +37.4%），方向一致：動能在退</span></div>
+          <div class="r up"><span class="k">QUAL · 品質</span><span class="v">+$4.2 億</span><span class="d">今年 +11.7%；資金在往「不便宜但穩」的地方躲</span></div>
+          <div class="r down"><span class="k">USMV · 低波動</span><span class="v">−$2.75 億</span><span class="d">今年 +8.2%，1 個月 +3.3% 但流出——不是避險模式</span></div>
+        </div>
+        <div class="how"><span class="lbl">判讀</span>三條主相對線（廣度、價值、小型）都向上 = 教科書的「輪動」，但小型與動能 1 個月都轉弱、低波動沒人買——市場既不在冒險也不在避險，在「換到便宜的地方等」。</div></div>
+      <div class="card"><span class="eyebrow">廣度 · 指數下面的地基</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>200 日線上</dt><dd>S&amp;P 500 成分股 71.0%（8/28，兩週前 75.2%）；那斯達克綜合只有 49.1%；羅素 2000 65.3%。</dd></div>
+          <div><dt>50 日線上</dt><dd>54%，8 月中還有 70%——短期廣度在快速收窄。</dd></div>
+          <div><dt>新高新低</dt><dd>8/28 NYSE 52 週新高 66 檔 vs 新低 65 檔；S&amp;P 500 成分股創新高比例 1–4%，健康多頭通常 10–12%。</dd></div>
+          <div><dt>漲跌線</dt><dd>NYSE 累積漲跌線 7 月創歷史新高，8/28 回到 50 日線；中小型股的漲跌線已跌破。McClellan 震盪指標 8 月中起為負。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>指數靠 NVDA（SPY 權重 8.0%）與 Mag-7（約 32–34%）在 8 月底撐住，成分股多數在跌——「指數漲、廣度縮」是最常見的頂部前結構，但它可以持續很久；轉折確認要看 200 日線上比例跌破 60%。</div></div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">子產業 · 板塊裡再切一刀</span>
+        <div class="tbl-wrap" style="border:0;margin-top:6px"><table style="min-width:560px">
+          <thead><tr><th>ETF</th><th>今年</th><th>1 個月</th><th>3 個月</th><th>1 個月資金流</th><th>意義</th></tr></thead>
+          <tbody>
+            <tr><td class="name">SMH <small>半導體</small></td><td class="n">+51.4%</td><td class="n">+0.9%</td><td class="n">−9.0%</td><td class="n">−$22.6 億</td><td>AI 鏈最擁擠的一格，3 個月已在退</td></tr>
+            <tr><td class="name">IGV <small>軟體</small></td><td class="n">+0.5%</td><td class="n">+12.3%</td><td class="n">+4.5%</td><td class="n">+$2.1 億</td><td>「賣軟體買能源」是今年上半年最大輪動，8 月軟體反彈</td></tr>
+            <tr><td class="name">XOP / OIH <small>油氣探採 / 油服</small></td><td class="n">+54.0% / +50.7%</td><td class="n">+8.6% / +14.2%</td><td class="n">+18.1% / +2.6%</td><td class="n">+$0.1 億 / −$1.0 億</td><td>價格由油價（美伊）推，資金流沒跟上</td></tr>
+            <tr><td class="name">XBI <small>生技</small></td><td class="n">+34.1%</td><td class="n">+11.2%</td><td class="n">+19.7%</td><td class="n">+$7.8 億</td><td>漲且流入——少數有「新錢」的地方</td></tr>
+            <tr><td class="name">GDX <small>金礦</small></td><td class="n">+10.4%</td><td class="n">+27.8%</td><td class="n">+5.8%</td><td class="n">+$1.6 億</td><td>金價 8 月 +9.7%，礦商 +27.8%：槓桿倍數約 3</td></tr>
+            <tr><td class="name">COPX / URA <small>銅礦 / 鈾</small></td><td class="n">+24.7% / +2.8%</td><td class="n">+13.2% / +12.5%</td><td class="n">+1.6% / −13.4%</td><td class="n">−$2.2 億 / +$0.8 億</td><td>硬資產 1 個月全面漲，但銅礦流出</td></tr>
+            <tr><td class="name">KRE / KBE <small>區域銀行 / 銀行</small></td><td class="n">+13.4% / +14.5%</td><td class="n">−4.5% / −1.0%</td><td class="n">+4.9% / +8.7%</td><td class="n">−$4.7 億 / +$0.5 億</td><td>升息預期升反而流出：市場擔心的是信用不是利差</td></tr>
+            <tr><td class="name">XHB <small>建商</small></td><td class="n">−2.0%</td><td class="n">−3.0%</td><td class="n">−1.9%</td><td class="n">−$1.1 億</td><td>房市最領先指標，三個期間都是負的</td></tr>
+            <tr><td class="name">ITA / PAVE <small>國防 / 基建</small></td><td class="n">+5.2% / +13.0%</td><td class="n">−5.9% / −4.3%</td><td class="n">−4.2% / −4.1%</td><td class="n">+$2.2 億 / −$6.2 億</td><td>去年的主題，今年被丟掉</td></tr>
+          </tbody></table></div></div>
+      <div class="card"><span class="eyebrow">Mag-7 拆開看 · 擁擠度</span>
+        <p class="small" style="margin-top:6px">今年（至 9/1）：AAPL +19.9%、NVDA +16.8%、AMZN +10.4%、GOOGL +7.2%、MSFT +4.3%、<b>META −12.2%、TSLA −20.8%</b>。七檔合計 SPY 權重 33.6%（NVDA 8.0%、AAPL 7.3%、MSFT 5.7%）；Micron 已進前十（1.6%）。同一個「Mag-7」內部差 40 個百分點——它不是一個交易，是七個。</p>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>BofA 基金經理人調查</dt><dd>8/20：「做多全球半導體」仍是最擁擠交易（53%，7 月紀錄 82%）；「做多 Mag-7」只剩 11%；現金 3.5% 是 1998 年來第六低，觸發「賣出訊號」；加碼最多的是能源與商品。</dd></div>
+          <div><dt>Goldman 對沖基金部位</dt><dd>7/24：高 beta 動能籃子從高點 −32%、TMT 動能多空對 −40%（五年最深）；對沖基金半導體配置 6 月高峰 24% → 18%；賣壓順序：雲端巨頭 → 半導體 → 硬體與基建。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>「擁擠」是部位指標，不是價格指標：從 82% 降到 53% 表示減碼已經進行兩個月，價格（SMH 今年 +51%）還沒跟——這就是「資金流先動、價格沒跟」的警訊型態（主軸第三問）。BofA 現金 3.5% 的賣出訊號歷史上平均對應之後 1–3 個月的回檔，不是熊市。</div></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">怎麼在 Schwab 自己看</span>
+      <p class="small" style="margin-top:6px">建一張圖表清單，每檔用「比率」而不是價格：RSP/SPY、IWM/SPY、VTV/VUG、SMH/SPY、XLE/SPY、XHB/SPY、GDX/GLD。每週看一次方向，不看數值。資金流用 etfdb.com 各 ETF 頁面的 1 個月 fund flow；廣度用 StockCharts 的 $SPXA200R（200 日線上比例）。三個東西湊齊，就是這一頁。</p></div>
+    <p class="src">來源：<a href="https://etfdb.com/etf/XLE/">etfdb（各 ETF 頁）</a>、<a href="https://www.ssga.com/us/en/intermediary/etfs/spdr-sp-500-etf-trust-spy">SSGA SPY 持股</a>、<a href="https://chartrow.com/lists/magnificent-7">chartrow Mag-7</a>、<a href="https://www.schwab.com/learn/story/weekly-traders-outlook">Schwab Weekly Traders Outlook 8/28</a>、<a href="https://articles.stockcharts.com/article/mindfulinvestor-2026-08-weakening-market-breadth-could-signal-trouble-ahead/">StockCharts 廣度 8/28</a>、<a href="https://advantage.factset.com/hubfs/Website/Resources%20Section/Research%20Desk/Earnings%20Insight/EarningsInsight_082826.pdf">FactSet 8/28</a>、<a href="https://atranicapital.substack.com/p/august-2026-bank-of-america-global">BofA FMS 8 月（轉載）</a>、<a href="https://www.goldmansachs.com/insights/the-markets/are-hedge-funds-still-bullish-on-ai-stocks">Goldman 7/24</a>、<a href="https://www.nasdaq.com/articles/august-2026-review-and-outlook">Nasdaq 8 月回顧</a></p>
+  </div>
+  <!-- 曲線與信用內部 -->
+  <div class="l3" data-l3="ust" hidden>
+    <div class="pool-head"><h3>曲線與信用內部 <span class="en">curve segments · duration · ratings</span></h3><span class="pill warn">槓鈴：兩端有人買、中段被賣</span>
+      <p class="lede2">拆開四個日期的曲線，答案跟第 1 輪寫的不一樣：今年是 2 年期升 92bp、30 年期升 43bp 的<b>熊平 bear flattening</b>（Fed 升息預期把短端拉上來），長端絕對水準高（30 年 5.27%）是 2025 年就在的財政問題，不是今年才變糟。資金流是槓鈴：0–3 個月與 20 年以上各流入 $50 億以上，7–10 年流出 $75 億。</p></div>
+    <div class="fix"><b>修正</b>第 1 輪與第 2 輪把曲線描述成「熊陡 bear steepening」，依據是 2s10s 由倒掛轉正。但把 12/31 → 9/2 拆開看：2s10s 是從 +71bp 收窄到 +40bp，5s30s 從 +111 收到 +73——是變平不是變陡。錯在只看「現在是正斜率」，沒看「斜率的變化方向」。這是主軸第一問的教訓：看方向，不看水準。</div>
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">殖利率曲線 · 四個時點（財政部 par 殖利率，%）</span>
+        <div id="yc4-chart" style="margin-top:6px"></div>
+        <div class="tbl-wrap" style="border:0;margin-top:6px"><table style="min-width:520px;font-size:.82rem">
+          <thead><tr><th>期限</th><th>12/31/25</th><th>6/2</th><th>8/3</th><th>9/2</th><th>Δ1 月</th><th>Δ3 月</th><th>Δ今年</th></tr></thead>
+          <tbody>
+            <tr><td>3 個月</td><td class="n">3.67</td><td class="n">3.77</td><td class="n">3.91</td><td class="n">3.92</td><td class="n">+1</td><td class="n">+15</td><td class="n">+25</td></tr>
+            <tr><td>2 年</td><td class="n">3.47</td><td class="n">4.05</td><td class="n">4.25</td><td class="n">4.39</td><td class="n">+14</td><td class="n">+34</td><td class="n">+92</td></tr>
+            <tr><td>5 年</td><td class="n">3.73</td><td class="n">4.17</td><td class="n">4.40</td><td class="n">4.54</td><td class="n">+14</td><td class="n">+37</td><td class="n">+81</td></tr>
+            <tr><td>10 年</td><td class="n">4.18</td><td class="n">4.46</td><td class="n">4.70</td><td class="n">4.79</td><td class="n">+9</td><td class="n">+33</td><td class="n">+61</td></tr>
+            <tr><td>30 年</td><td class="n">4.84</td><td class="n">4.97</td><td class="n">5.23</td><td class="n">5.27</td><td class="n">+4</td><td class="n">+30</td><td class="n">+43</td></tr>
+            <tr><td>2s10s</td><td class="n">+71</td><td class="n">+41</td><td class="n">+45</td><td class="n">+40</td><td class="n">−5</td><td class="n">−1</td><td class="n">−31</td></tr>
+            <tr><td>5s30s</td><td class="n">+111</td><td class="n">+80</td><td class="n">+83</td><td class="n">+73</td><td class="n">−10</td><td class="n">−7</td><td class="n">−38</td></tr>
+          </tbody></table></div>
+        <p class="small muted" style="margin-top:6px">Δ 單位 bp。TIPS（9/1）：5 年損益兩平 2.37%、10 年 2.35%；5 年實質 2.18%、10 年實質 2.44%。</p></div>
+      <div class="card"><span class="eyebrow">存續期間 · 錢在曲線上的位置（etfdb 1 個月資金流，9/2）</span>
+        <div class="tbl-wrap" style="border:0;margin-top:6px"><table style="min-width:420px">
+          <thead><tr><th>ETF</th><th>區段</th><th>1 個月</th><th>3 個月</th></tr></thead>
+          <tbody>
+            <tr><td class="name">SGOV</td><td>0–3 個月</td><td class="n" style="color:var(--good)">+$52.5 億</td><td class="n">+$132.4 億</td></tr>
+            <tr><td class="name">SHY</td><td>1–3 年</td><td class="n" style="color:var(--good)">+$8.3 億</td><td class="n">+$6.0 億</td></tr>
+            <tr><td class="name">IEI</td><td>3–7 年</td><td class="n">−$0.2 億</td><td class="n">−$5.7 億</td></tr>
+            <tr><td class="name">VGIT</td><td>3–10 年</td><td class="n" style="color:var(--crit)">−$23.0 億</td><td class="n">−$5.3 億</td></tr>
+            <tr><td class="name">IEF</td><td>7–10 年</td><td class="n" style="color:var(--crit)">−$52.5 億</td><td class="n">−$55.6 億</td></tr>
+            <tr><td class="name">TLH</td><td>10–20 年</td><td class="n">+$2.2 億</td><td class="n">+$0.7 億</td></tr>
+            <tr><td class="name">VGLT</td><td>10 年以上</td><td class="n">+$2.6 億</td><td class="n">+$6.0 億</td></tr>
+            <tr><td class="name">TLT</td><td>20 年以上</td><td class="n" style="color:var(--good)">+$56.0 億</td><td class="n">+$60.1 億</td></tr>
+          </tbody></table></div>
+        <div class="how"><span class="lbl">判讀</span>槓鈴 barbell：短端是「等升息」的錢，長端是「賭升息會把景氣壓壞、長債會反彈」的錢；中段（5–10 年）兩邊不討好——它對 Fed 路徑最敏感（5 年 3 個月 +37bp 是全曲線最大），又沒有長端的反彈空間。TLT 流入 + 30 年殖利率還在升 = 資金流先動、價格沒跟，長端可能接近見頂區，但「接近」可以很久。房貸利率 6.66% 減 10 年 4.67% = 199bp，MBS 利差仍寬，所以 10 年期就算降、房貸也不會馬上降。</div></div>
+    </div>
+    <div class="card"><span class="eyebrow">信用內部 · 評等之間的流動（ICE BofA OAS，%）</span>
+      <div class="grid g2" style="margin-top:8px">
+        <div class="tbl-wrap" style="border:0"><table style="min-width:360px">
+          <thead><tr><th>評等</th><th>9/1</th><th>7/31</th><th>Δ bp</th></tr></thead>
+          <tbody>
+            <tr><td>BBB（投資級最低）</td><td class="n">0.99</td><td class="n">0.99</td><td class="n">0</td></tr>
+            <tr><td>BB（高收益最高）</td><td class="n">1.52</td><td class="n">1.73</td><td class="n" style="color:var(--good)">−21</td></tr>
+            <tr><td>B</td><td class="n">2.75</td><td class="n">3.04</td><td class="n" style="color:var(--good)">−29</td></tr>
+            <tr><td>CCC 以下</td><td class="n">10.49</td><td class="n">10.34</td><td class="n" style="color:var(--crit)">+15</td></tr>
+            <tr><td><b>CCC − BB</b></td><td class="n">8.97</td><td class="n">8.61</td><td class="n" style="color:var(--crit)">+36</td></tr>
+          </tbody></table></div>
+        <div><p class="small">高收益債裡的錢在<b>往上爬評等</b>：BB、B 利差收窄，CCC 反而擴大——買盤要「高殖利率」但不要「真的會倒的」。CCC−BB 差距 897bp 擴大 36bp，是 HY 內部的風險胃納在縮，整體 HY OAS 265bp 看不出來。</p>
+          <div class="how"><span class="lbl">判讀</span>CCC 利差擴大通常領先整體 HY 利差 1–3 個月；配合私募信貸違約 6.1%（L2），壓力是從最弱的借款人往上爬。追蹤 FRED 的 BAMLH0A3HYC 減 BAMLH0A1HYBB。</div></div>
+      </div></div>
+    <p class="src">來源：<a href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609">Treasury 曲線（各月）</a>、<a href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_real_yield_curve&field_tdr_date_value_month=202609">Treasury 實質曲線</a>、<a href="https://fred.stlouisfed.org/series/T5YIE">FRED T5YIE</a>、<a href="https://fred.stlouisfed.org/data/BAMLH0A3HYC.txt">FRED CCC OAS</a>、<a href="https://fred.stlouisfed.org/data/BAMLH0A1HYBB.txt">FRED BB OAS</a>、<a href="https://etfdb.com/etf/IEF/">etfdb（各 ETF 頁）</a>、<a href="https://fred.stlouisfed.org/series/MORTGAGE30US">FRED 房貸</a></p>
+  </div>
+
+  <!-- 貴金屬內部 -->
+  <div class="l3" data-l3="au" hidden>
+    <div class="pool-head"><h3>貴金屬內部 <span class="en">east vs west · central banks · gold vs silver</span></h3><span class="pill flow">東方與央行買、西方賣、白銀落後</span>
+      <p class="lede2">拆開之後第 1、2 輪的另一個錯誤浮出來：黃金<b>今年其實接近持平</b>（2025 年底倫敦定價 $4,310，9/2 現貨 $4,336），去年才是漲 65% 的一年；今年的故事是「上半年西方贖回、7 月底跌破 $4,100、8 月 +9.7% 拉回」。白銀更弱：$72 → $64，今年 −11%，金銀比從 60 升到 68。</p></div>
+    <div class="fix"><b>修正</b>第 1 輪寫「黃金今年 +20%」、第 2 輪寫「金銀比從高位降到 68 = 白銀補漲」，都錯。金銀比是從 59.9 <b>升</b>到 67.9（7 月一度 70），代表白銀今年落後黃金；「補漲」只發生在 8 月單月（銀 +15.6% vs 金 +9.7%）。錯因：把「年增率 YoY」（銀 +61%）當成「今年累計 YTD」，兩者差了 2025 年那段大漲。</div>
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">誰在買、誰在賣（噸）</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>央行 Q2</dt><dd>合計 289 噸（+62% YoY）。買方：波蘭 51、中國 33、烏茲別克 16、哈薩克 15、約旦 6、捷克 6。賣方：俄羅斯 22、土耳其 4、德國 1。波蘭今年累計 82 噸。</dd></div>
+          <div><dt>中國</dt><dd>人行 7 月 +20 噸至 2,366 噸（2023/10 以來最大單月，連 21 個月）；淨進口 1–7 月約 1,000 噸（+78%）；上海出庫 7 月 80 噸（−15% YoY）；中國黃金 ETF 今年 +34 噸。上海對倫敦價差 ≈0（9/2）。</dd></div>
+          <div><dt>印度</dt><dd>7 月進口 40–45 噸（6 月 20 噸）；國內折價 $45/oz（8 月中）——高價下實體需求靠折價成交。</dd></div>
+          <div><dt>西方 ETF</dt><dd>全球黃金 ETF 今年 +$277 億，但北美今年淨額 −$1.2 億（上半年贖回、8 月 +$79 億才拉回）；歐洲約 +$50 億；亞洲最大。持有量 4,068 噸（7/31）。</dd></div>
+          <div><dt>投機部位</dt><dd>COT 8/25：黃金管理基金淨多 144,747 口＝未平倉 33.8%；白銀 14,073 口＝12.4%。</dd></div>
+        </dl></div>
+      <div class="card"><span class="eyebrow">金 vs 銀 vs 白金 vs 礦商</span>
+        <div class="rel" style="margin-top:8px">
+          <div class="r flat"><span class="k">黃金今年</span><span class="v">≈ +0.6%</span><span class="d">$4,310 → $4,336；8 月 +9.7%，7 月底曾 &lt;$4,100</span></div>
+          <div class="r down"><span class="k">白銀今年</span><span class="v">≈ −11%</span><span class="d">$72 → $64；8 月 +15.6%；年增仍 +61%</span></div>
+          <div class="r up"><span class="k">金銀比</span><span class="v">59.9 → 67.9</span><span class="d">7 月高點 70；52 週區間 46–89</span></div>
+          <div class="r up"><span class="k">白金</span><span class="v">+20.5% YoY</span><span class="d">$1,730；金白金比 2.49</span></div>
+          <div class="r up"><span class="k">GDX 金礦 · 1 個月</span><span class="v">+27.8%</span><span class="d">金 +9.7% → 礦商槓桿約 3 倍；今年 +10.4%</span></div>
+          <div class="r flat"><span class="k">白銀供需 2026</span><span class="v">短缺 67 Moz</span><span class="d">連六年；工業需求 650 Moz（−2%，太陽能減量）；投資 +20%</span></div>
+        </div>
+        <div class="how"><span class="lbl">判讀</span>黃金今年持平但央行與東方一路買，說明「上半年西方賣得比東方買得多」。8 月西方回來（美國 ETF +$79 億）價格才動——邊際定價者是西方 ETF，地板是東方與央行。白銀落後是因為工業需求（太陽能減量）在退、投資需求撐不起金融屬性；金銀比 68 回到 60 需要工業週期，不是避險。GDX/GLD 相對線 1 個月大幅向上 = 市場開始相信金價能站穩（礦商是對「持續性」的押注）。</div></div>
+    </div>
+    <p class="src">來源：<a href="https://www.bullionvault.com/gold-news/gold-price-news/gold-silver-2025-record-price-123120251">BullionVault 12/31/25</a>、<a href="https://www.usagold.com/daily-precious-metals-market-report-september-1-2026/">USAGOLD 9/1</a>、<a href="https://www.gold.org/goldhub/research/gold-demand-trends/gold-demand-trends-q2-2026/central-banks">WGC 央行 Q2</a>、<a href="https://www.gold.org/goldhub/gold-focus/2026/08/china-gold-market-update-strong-official-sector-buying-july">WGC 中國 7 月</a>、<a href="https://www.gold.org/goldhub/gold-focus/2026/08/india-gold-market-update-recovery-taking-shape">WGC 印度 8 月</a>、<a href="https://www.gold.org/goldhub/research/gold-etfs-holdings-and-flows/2026/08">WGC ETF 7 月</a>、<a href="https://www.cftc.gov/dea/futures/other_lf.htm">CFTC COT</a>、<a href="https://silverinstitute.org/global-silver-investment-to-remain-strong-in-2026-against-the-backdrop-of-a-sixth-consecutive-annual-market-deficit/">Silver Institute</a>、<a href="https://etfdb.com/etf/GDX/">etfdb GDX</a></p>
+  </div>
+
+  <!-- 幣圈內部 -->
+  <div class="l3" data-l3="btc" hidden>
+    <div class="pool-head"><h3>幣圈內部 <span class="en">dominance · stablecoins · holders · miners</span></h3><span class="pill crit">全面下跌中往 BTC 與穩定幣縮</span>
+      <p class="lede2">今年每一種主要幣都跌，只是比特幣跌最少：BTC −11.6%、ETH −19.6%、SOL −19.5%、BNB −21%、XRP −26.6%（Coinlore，12/31 → 9/2）。所以 BTC 佔比從 55%（3 個月前）回到 57.6%，4 月曾到 60.7%。穩定幣總量從 5 月高峰 $3,224 億縮到 $3,039 億——幣圈的 M2 在收縮。長期持有者一個月減持 35.6 萬 BTC，接手的是 ETF 與企業金庫。</p></div>
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">幣與幣之間</span>
+        <div class="rel" style="margin-top:8px">
+          <div class="r up"><span class="k">BTC 佔比</span><span class="v">57.6%</span><span class="d">3 個月前 55.1%、1 個月前 56.2%；4/24 高點 60.7%</span></div>
+          <div class="r down"><span class="k">ETH / BTC</span><span class="v">0.0339 → 0.031</span><span class="d">6 月低點 0.0253、8 月底 0.0334 反彈後回落</span></div>
+          <div class="r down"><span class="k">山寨幣今年</span><span class="v">−19% ～ −27%</span><span class="d">ETH −19.6、SOL −19.5、BNB −21.0、XRP −26.6</span></div>
+          <div class="r down"><span class="k">穩定幣總量</span><span class="v">$3,039 億</span><span class="d">1 月 $2,662 億 → 5/17 高峰 $3,224 億 → 現在；USDT 60.3%、USDC 24.2%</span></div>
+          <div class="r flat"><span class="k">穩定幣所在鏈</span><span class="v">Tron 升、以太坊降</span><span class="d">以太坊 $1,478 億（1 月 $1,534 億）、Tron $937 億（1 月 $835 億）、Solana $155 億</span></div>
+          <div class="r flat"><span class="k">USDC</span><span class="v">$733 億（6/30）</span><span class="d">年增 19%；GENIUS 法案後受監管美元穩定幣的成長主力</span></div>
+        </div>
+        <div class="how"><span class="lbl">判讀</span>BTC 佔比升 + 穩定幣縮 + 山寨全跌 = 「避險內縮」：留下來的錢往最安全的幣躲，離開的錢直接換回法幣。穩定幣從以太坊移到 Tron 是新興市場支付需求（USDT on Tron 是跨境匯款的主要管道），跟投機無關——這是幣圈裡少數與景氣正相關的「真實需求」訊號。</div></div>
+      <div class="card"><span class="eyebrow">誰持有、誰在賣</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>ETF</dt><dd>美國現貨 ETF 持有 124.4 萬 BTC（約總量 5.9%）、規模 $964 億；IBIT 76.4 萬、FBTC 17.4 萬、GBTC 13.1 萬（9/1）。30 天淨流入 $22.8 億。</dd></div>
+          <div><dt>企業金庫</dt><dd>Strategy 845,050 BTC（8/31 又買 4,603）；上市公司合計 127 萬 BTC；ETF 與交易所合計 155 萬。</dd></div>
+          <div><dt>長期持有者</dt><dd>持有超過 1 年的供給 1,184 萬 BTC（59.1%），一個月減 35.6 萬——老錢在派發。交易所餘額 2025/12 曾至 2017 年來最低（約 180 萬），8 月回到月度高點（有人把幣搬回交易所準備賣）。</dd></div>
+          <div><dt>衍生品</dt><dd>永續資金費率年化 +4.7%、未平倉 $307 億；賣權／買權溢價比 2.30（99 百分位：避險需求極高）；1 個月買權隱含波動 32.7%（0 百分位：沒人在追漲）。</dd></div>
+          <div><dt>礦工</dt><dd>算力 915 EH/s；hashprice $39.4/PH/天；礦工收入年減 46%；Puell 0.73；CryptoQuant：礦工在「必要性賣出」不是恐慌。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>供給端三個賣家（長期持有者、礦工、部分企業金庫）對上兩個買家（ETF、Strategy）。買家是「慢錢」但也是「集中的錢」——IBIT 一家持有 3.6% 的比特幣。選擇權的賣權溢價在 99 百分位、買權波動在 0 百分位，是典型的「大家都在避險、沒人在追」的底部區結構，但底部區可以拖很久；確認訊號是穩定幣總量重新擴張。</div></div>
+    </div>
+    <p class="src">來源：<a href="https://www.coingecko.com/en/charts/bitcoin-dominance">CoinGecko 佔比</a>、<a href="https://www.coinlore.com/coin/bitcoin/historical-data">Coinlore 歷史價格（各幣）</a>、<a href="https://defillama.com/stablecoins/chains">DefiLlama 各鏈</a>、<a href="https://www.circle.com/pressroom/circle-reports-second-quarter-2026-results">Circle Q2</a>、<a href="https://www.walletpilot.com/bitcoin-tracker/etfs">walletpilot ETF 持有</a>、<a href="https://www.coingecko.com/en/treasuries/companies/strategy">CoinGecko Strategy</a>、<a href="https://www.vaneck.com/us/en/blogs/digital-assets/matthew-sigel-vaneck-mid-august-2026-bitcoin-chaincheck/">VanEck ChainCheck 8 月</a>、<a href="https://hashrateindex.com/blog/hashrate-index-roundup-august-17-2026-2/">Hashrate Index 8/17</a>、<a href="https://www.tradingview.com/news/newsbtc:56dcbe1c6094b:0-bitcoin-miners-warn-no-bottom-yet-cryptoquant-says-what-on-chain-metrics-reveal/">CryptoQuant 礦工</a></p>
+  </div>
+  <!-- 房地產內部 -->
+  <div class="l3" data-l3="re" hidden>
+    <div class="pool-head"><h3>房地產內部 <span class="en">regions · SF vs MF · REIT sub-sectors · CRE by type</span></h3><span class="pill neutral">陽光帶跌、東北中西漲；多戶壓力、旅館與資料中心在飛</span>
+      <p class="lede2">「美國房市」是十幾個互相反向的市場加總。價格：芝加哥 +6.9%、紐約 +4.8% vs 西雅圖 −2.0%、拉斯維加斯 −1.9%、丹佛與坦帕 −1.2%。供給：單戶開工年減 15.7%、五戶以上完工年減 25.6%——供給潮正在結束。新屋中位數 $393,800 已經比成屋 $434,100 <b>低 9%</b>，建商用降價與 63% 的優惠在替整個市場找價格。</p></div>
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">住宅：地區與型態</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>城市分化</dt><dd>Case-Shiller 6 月前五：芝加哥 +6.9、紐約 +4.8、克里夫蘭 +4.1、舊金山 +3.2、波士頓 +2.7；後五：西雅圖 −1.95、拉斯維加斯 −1.9、丹佛 −1.2、坦帕 −1.2、鳳凰城 −0.9。NAR 地區中位數：東北 +5.2%、中西 +2.8%、南部 +0.9%、西部 +0.2%。</dd></div>
+          <div><dt>庫存與降價</dt><dd>Realtor.com 8 月：待售 +3.6% YoY，中西 +10.5%、東北 +9.1%、南部只 +1.1%；降價比例 20.4%（西部 22.0%、東北 14.1%）；坦帕掛牌價 −6.0%（25.5% 降價）、奧斯汀每呎 −8.1%（27.6%）。</dd></div>
+          <div><dt>單戶 vs 多戶</dt><dd>7 月開工：單戶 808k（−15.7% YoY）、五戶以上 421k（−7.1%）；完工：單戶 −12.8%、多戶 −25.6%；多戶在建 666k（−4.4%）。許可反而 +5.0%（多戶 +9.1%）——建商在等利率。</dd></div>
+          <div><dt>租金</dt><dd>Zillow 7 月：掛牌租金 $1,962（+2.3%），單戶出租 +3.0% vs 公寓 +1.7%；39.8% 掛牌附優惠（夏洛特 68%、丹佛 67%、達拉斯 66%）。Apartment List 8 月：公寓中位數 −0.8% YoY、空置 7.1%（2021 年來首次下降）。兩者方法不同（掛牌價 vs 實際成交），方向一致：單戶強、公寓弱、優惠多。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>陽光帶（佛州、德州、亞利桑那、內華達）是 2020–22 年漲最多、2023–25 年蓋最多的地方，現在供給在消化；東北與中西部沒蓋、庫存低，所以漲。這不是「房市回暖」也不是「房市崩」，是供給週期的地區時間差。多戶完工 −25.6% 意味 2027 年公寓供給會明顯減少，租金弱勢是暫時的。</div></div>
+      <div class="card"><span class="eyebrow">REIT 子類 · 今年（FTSE Nareit，9/1）</span>
+        <div class="tbl-wrap" style="border:0;margin-top:6px"><table style="min-width:380px">
+          <thead><tr><th>子類</th><th>今年</th><th class="bars">（±40%）</th></tr></thead>
+          <tbody id="reit-rows"></tbody>
+        </table></div>
+        <div class="how"><span class="lbl">判讀</span>REIT 的排序跟「房地產」幾乎無關：旅館走消費與旅遊、資料中心走 AI 資本支出、健康照護走人口老化；真正跟利率與住宅有關的公寓 +3.0%、電塔 −2.2% 墊底。所以用 VNQ 判讀房市會被資料中心與旅館誤導——要用 XHB。</div></div>
+    </div>
+    <div class="card"><span class="eyebrow">商用不動產 · 按類型</span>
+      <div class="tbl-wrap" style="border:0;margin-top:6px"><table style="min-width:640px">
+        <thead><tr><th>類型</th><th>CMBS 違約率（7 月）</th><th>特別服務率（7 月）</th><th>Q2 交易量 YoY</th><th>價格指數 YoY</th><th>解讀</th></tr></thead>
+        <tbody>
+          <tr><td class="name">辦公室</td><td class="n" style="color:var(--crit)">11.91%</td><td class="n">16.58%（−53bp）</td><td class="n">−9%</td><td class="n">+2.2%</td><td>舊問題在觸底：特別服務率降、頂級空置只 12.3%、曼哈頓中城 2.2%；全國空置 18.3%（CBRE Q2，2015 年來最大季降）</td></tr>
+          <tr><td class="name">多戶</td><td class="n" style="color:var(--warn)">7.69%（+46bp）</td><td class="n">8.39%（+16bp）</td><td class="n">持平</td><td class="n">−1.7%</td><td>新問題：2021–22 高價買進 + 浮動利率 + 供給潮；違約在升</td></tr>
+          <tr><td class="name">零售</td><td class="n">6.96%</td><td class="n">13.28%（+33bp）</td><td class="n">+13%</td><td class="n">−0.1%</td><td>特別服務升但交易量增，資本回來撿便宜</td></tr>
+          <tr><td class="name">旅館</td><td class="n">5.35%</td><td class="n">8.63%（−26bp）</td><td class="n">+27%</td><td class="n">−9.3%</td><td>價格跌 9% 但交易 +27%、REIT +34%：資產面與股票面反向</td></tr>
+          <tr><td class="name">工業／物流</td><td class="n" style="color:var(--good)">1.13%</td><td class="n">1.34%</td><td class="n">+27%</td><td class="n">−0.4%</td><td>最健康；交易量增最快</td></tr>
+        </tbody></table></div>
+      <p class="small muted" style="margin-top:6px">整體：CMBS 違約 7.86%（+51bp，66% 的新違約是到期還不出來的氣球型貸款）；特別服務 11.09%；Q2 交易量 $1,137 億（+9%，連三季增）；CBRE 今年至今 $2,503 億（+21%）；整體資本化率 6.3%（去年 6.0%）。</p>
+      <div class="how"><span class="lbl">判讀</span>商用不動產的錢在「從辦公室的股權端流出、從信用端與工業／零售的交易端流入」。判讀三個數要分開：違約率（過去的貸款）、特別服務率（正在處理的）、交易量（新錢）。辦公室三者都在改善、多戶三者都在惡化——2026 年的 CRE 問題已經從辦公室換成公寓。</div></div>
+    <p class="src">來源：<a href="https://press.spglobal.com/2026-08-25-S-P-Cotality-Case-Shiller-Index-Reports-Annual-Gain-in-June-2026">Case-Shiller 6 月</a>、<a href="https://www.census.gov/construction/nrc/pdf/newresconst.pdf">Census 新建住宅 7 月</a>、<a href="https://www.census.gov/construction/nrs/pdf/newressales.pdf">Census 新屋銷售</a>、<a href="https://www.nar.realtor/newsroom/nar-existing-home-sales-report-shows-1-7-decrease-in-july">NAR 7 月</a>、<a href="https://www.nahb.org/news-and-economics/press-releases/2026/08/affordability-pressures-keep-builder-confidence-low">NAHB 8 月</a>、<a href="https://www.prnewswire.com/news-releases/delistings-trend-below-last-years-pace-as-summer-comes-to-an-end-realtorcom-august-housing-report-302866775.html">Realtor.com 8 月</a>、<a href="https://zillow.mediaroom.com/2026-08-18-Rents-near-2,000,-rising-at-the-fastest-pace-in-over-a-year">Zillow 租金</a>、<a href="https://www.apartmentlist.com/research/national-rent-data">Apartment List</a>、<a href="https://www.reit.com/sites/default/files/returns/DomesticReturns.pdf">Nareit 報酬</a>、<a href="https://newslink.mba.org/mba-newslinks/2026/august/mba-newslink-thursday-august-6-2026/trepp-cmbs-delinquency-rate-up-51-basis-points-in-july/">Trepp 7 月</a>、<a href="https://www.credaily.com/briefs/cmbs-special-servicing-rate-falls-as-office-lodging-recover/">特別服務 7 月</a>、<a href="https://www.cbre.com/insights/figures/q2-2026-us-office-market-report">CBRE Q2</a>、<a href="https://knowledge-leader.colliers.com/steig_seaward/msci-q2-2026-entity-deals-lift-volume-as-sector-recoveries-diverge/">MSCI Q2 交易量</a></p>
+  </div>
+
+  <!-- 台股內部 -->
+  <div class="l3" data-l3="tw" hidden>
+    <div class="pool-head"><h3>台股內部 <span class="en">foreign vs domestic · TSMC · ETFs · leverage</span></h3><span class="pill warn">外資從結構性賣家變成戰術性買賣家；內資是新地基</span>
+      <p class="lede2">今年的台股是一檔股票加一群 ETF：台積電權重 41.5%、今年 +54%（1,550 → 2,385）；加權 +59%、櫃買約 +45%。外資今年至 7 月賣超 NT$2.28 兆（TWSE 口徑），8 月卻<b>單月買超 3,568 億創紀錄</b>，9/2 又賣 914 億——外資變成隨美股與匯率進出的短線資金。接手的是內資：0050 規模 2.4 兆（7 月單月申購 1,766 億）、主動式 ETF 一年 5 倍、融資餘額從 3,466 億增到 5,781 億（+68%）。</p></div>
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">誰在買、誰在賣</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>外資</dt><dd>今年至 7/31 賣超 2.28 兆（TWSE 日資料）；金管會口徑 1–7 月淨賣 1.49 兆，其中 7 月 6,529 億是股利匯出。8 月買超 3,568 億（紀錄）；9/2 賣超 914 億、期貨淨空 85,329 口。外資持股比率約 48.7%、持股市值 12.72 兆（7 月底紀錄）；1–7 月淨匯入 $739 億（去年全年 2 倍）——賣股但沒匯出，錢留在台幣。</dd></div>
+          <div><dt>投信</dt><dd>8 月買超 516 億。主動式 ETF 規模 5 月 7,717 億（2025 年底 1,303 億）；8/1–8/12 主動式台股 ETF 淨申購 1,636 億（7 月 −744 億）。</dd></div>
+          <div><dt>散戶 · ETF</dt><dd>7 月台股 ETF 淨申購 >5,500 億；0050 7 月 1,766 億（紀錄），規模 2.4 兆、296 萬受益人、101 萬定期定額戶；規模（億，8/31）：0050 23,973、0056 7,635、00878 6,247、00919 5,720、006208 4,569、00981A 2,956、00631L 2,690。</dd></div>
+          <div><dt>散戶 · 槓桿</dt><dd>上市融資餘額 9/1 5,781 億（1/2 3,466 億，+68%；兩市 6/22 紀錄 8,135 億）；當沖佔比 18.6%（9/1）、20.9%（8/31）、22.6%（8/28）；成交值 9/2 0.92 兆、8/31 1.29 兆。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>「外資賣超 2.28 兆但指數 +59%」的答案：買家換成內資 ETF 與融資。這個結構的意義是——台股的邊際定價者從「看美股與匯率的外資」變成「定期定額的台灣家庭」，所以跌的時候有人接（定期定額不停扣），但融資 +68% 也代表跌深時會有斷頭壓力。看兩個數：0050 月申購是否轉負、融資餘額是否連續兩週下降。</div></div>
+      <div class="card"><span class="eyebrow">台積電 · 匯率 · 央行</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>台積電</dt><dd>權重 41.48%（聯發科 4.19、台達電 3.18、鴻海 2.33、日月光 1.74）；今年 +54%；ADR 溢價 9–14%（8/12 13.8%、8/28 約 9.1%）。7/16 法說：2026 資本支出上修到 $600–640 億、美元營收成長「略高於 40%」、Q3 指引 $446–458 億。</dd></div>
+          <div><dt>出口與 GDP</dt><dd>7 月出口 $753 億（+32.9%，連 33 個月），電子 +50.5%，對美 $233 億（+25.2%，佔 31.0%）；1–7 月 +44.7%。Q2 GDP +12.93%（Q1 上修 15.43%）；主計總處 2026 全年 11.05%（39 年新高）。</dd></div>
+          <div><dt>匯率</dt><dd>USD/TWD 8/31 31.666（8 月台幣 +1.94%，央行「調節」匯出）；9/2 31.753；7/29 盤中 32.528 低點後央行尾盤進場。月均：1 月 31.54 → 7 月 32.21 → 8 月 32.04。外匯存底 7 月底 $5,943 億（月減 $29 億；外資資產 = 存底 280%）。</dd></div>
+          <div><dt>央行 9/17</dt><dd>市場共識「連十凍」（2.00%）：實質利率 −0.37%、11/28 選舉；但 7 月 CPI 2.54%、6 月理監事會已有 2 位主張升息——鷹派尾巴存在。壽險避險比率 42.89%（6 月，紀錄低），外匯價格變動準備金 + 特別盈餘公積 1.0648 兆，可吸收約 3.8 元的台幣升值。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>台股是 AI 資本支出的另一端：台積電資本支出 $600–640 億對應美國四大雲端商 $7,200 億以上——這條線斷不斷，看的是美國 L4（第 4 輪）的企業行為，不是台灣的數據。匯率的傳導：美債長端升 → 壽險美元資產帳面虧 → 避險比率降 → 台幣一升值就是未避險部位直接受傷 → 央行在 32.5 附近防守。ADR 溢價 9–14% 是「美國投資人比台灣投資人更看好台積電」的價差，也是外資 8 月回補的動機。</div></div>
+    </div>
+    <div class="card fish-only"><span class="eyebrow">怎麼看台股內部</span>
+      <p class="small" style="margin-top:6px">四條線：①三大法人日報（TWSE）看外資方向；②投信投顧公會月報看 ETF 規模；③ goodinfo 看融資餘額與當沖比；④ 台積電 ADR 溢價（Yahoo 每晚有）。在 Schwab 可以看 EWT（台灣 ETF）與 TSM（ADR）：EWT 對加權指數的差是匯率，TSM 對 2330 的差是溢價——兩個差同時擴大，表示美國人比台灣人更急著買。</p></div>
+    <p class="src">來源：<a href="https://newtalk.tw/news/view/2026-09-02/1057389">Newtalk 9/2</a>、<a href="https://udn.com/news/story/7252/9678829">經濟日報 外資賣超</a>、<a href="https://udn.com/news/story/7239/9673286">經濟日報 外資持股</a>、<a href="https://www.chinatimes.com/newspapers/20260806000539-260110">工商時報 7 月匯出</a>、<a href="https://stock.may.tw/2026/monthly/08/">三大法人 8 月（彙整）</a>、<a href="https://www.taifex.com.tw/cht/2/weightedPropertion">期交所 權重</a>、<a href="https://tw.stock.yahoo.com/tw-etf/total-assets">Yahoo ETF 規模</a>、<a href="https://news.cnyes.com/news/id/6479632">鉅亨 0050</a>、<a href="https://newtalk.tw/news/view/2026-08-06/1051641">Newtalk ETF 申購</a>、<a href="https://goodinfo.tw/tw/ShowMarginChart.asp?STOCK_ID=加權指數&CHT_CAT=DATE">goodinfo 融資</a>、<a href="https://goodinfo.tw/tw/DayTrading.asp?STOCK_ID=加權指數&CHT_CAT=DATE">goodinfo 當沖</a>、<a href="https://www.cbc.gov.tw/tw/cp-863-189625-f6780-1.html">央行 匯率月均</a>、<a href="https://udn.com/news/story/7239/9673502">經濟日報 外匯存底</a>、<a href="https://udn.com/news/story/7238/9709582">經濟日報 央行 9 月</a>、<a href="https://newtalk.tw/news/view/2026-07-16/1047555">Newtalk 台積電法說</a>、<a href="https://www.cna.com.tw/news/afe/202608070250.aspx">中央社 出口</a>、<a href="https://money.udn.com/money/story/10869/9692587">經濟日報 GDP</a>、<a href="https://udn.com/news/story/6811/9685810">經濟日報 ADR 溢價</a></p>
+  </div>
+
+</section>
+
+<!-- ===== L4 個體 ===== -->
+<section id="l4">
+  <div class="sec-head">
+    <span class="eyebrow">L4 · Micro · 第 4 輪</span>
+    <h2>個體：公司與家庭的錢怎麼動，怎麼接回總體</h2>
+    <p>到這一層，四問換了外皮但沒換骨：「錢有多少」變成公司的營運現金流與家庭的可支配所得；「為什麼想去」變成資本報酬率與利率；「真的去了嗎」變成資本支出、庫存、應收、信用卡餘額；「下一層」變成供應鏈的月營收。用 AI 資本支出鏈當案例，因為它同時是美國股市、台股、美債供給（發債）三個池子的共同來源。</p>
+  </div>
+  <div class="pool-tabs" role="tablist" aria-label="個體">
+    <button role="tab" data-l4="ai" aria-selected="true">企業 · AI 資本支出鏈</button>
+    <button role="tab" data-l4="corp" aria-selected="false">企業 · AI 以外</button>
+    <button role="tab" data-l4="hh" aria-selected="false">家庭</button>
+    <button role="tab" data-l4="tpl" aria-selected="false">個股判讀模板</button>
+  </div>
+
+  <!-- AI 鏈 -->
+  <div class="l3" data-l4="ai">
+    <div class="pool-head"><h3>AI 資本支出鏈 <span class="en">hyperscalers → NVIDIA → TSMC → Taiwan ODMs</span></h3><span class="pill warn">需求真實、資金鏈開始拉緊</span>
+      <p class="lede2">四大雲端商 2026 年資本支出約 $7,600 億（2025 年 $4,130 億），其中 Alphabet、Amazon、Oracle 的資本支出已經<b>超過營運現金流</b>，自由現金流轉負；缺口用發債補（今年至 8/10 約 $2,200 億）與合資公司（Meta–BlackRock $140 億）補。需求端還在飛（Azure +43%、Google Cloud +82%、AWS +37%，各家積壓訂單 $5,000 億上下），但市場開始用股價懲罰現金流轉負的公司。</p></div>
+    <div class="chain-wrap"><div id="chain"></div>
+      <p class="small muted" style="margin-top:8px">箭頭上的數字是該環節最新一季或最新月份的讀數；括號是市場對財報的反應。資料期間 2026 年 6–8 月。</p></div>
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">雲端四巨頭 + Oracle · 錢從哪來（最新一季）</span>
+        <div class="tbl-wrap" style="border:0;margin-top:6px"><table style="min-width:640px;font-size:.84rem">
+          <thead><tr><th>公司</th><th>季資本支出</th><th>季營運現金流</th><th>自由現金流</th><th>2026 資本支出指引</th><th>財報後股價</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Microsoft <small>FY26Q4，7/29</small></td><td class="n">$410 億</td><td class="n">$554 億</td><td class="n" style="color:var(--good)">+$196 億（−23%）</td><td class="n">FY27 $2,550–2,600 億</td><td class="n" style="color:var(--good)">+8%</td></tr>
+            <tr><td class="name">Alphabet <small>Q2，7/22</small></td><td class="n">$449 億</td><td class="n">—</td><td class="n" style="color:var(--crit)">−$59 億（20 年來首次）</td><td class="n">$1,950–2,050 億（上修）</td><td class="n" style="color:var(--crit)">−4～5%</td></tr>
+            <tr><td class="name">Amazon <small>Q2，7/30</small></td><td class="n">$542 億</td><td class="n">TTM $1,614 億</td><td class="n" style="color:var(--crit)">TTM −$76 億</td><td class="n">$2,200 億（上修）</td><td class="n" style="color:var(--good)">+9%</td></tr>
+            <tr><td class="name">Meta <small>Q2，7/29</small></td><td class="n">$311 億</td><td class="n">$319 億</td><td class="n" style="color:var(--warn)">+$7.8 億；庫藏股歸零</td><td class="n">$1,300–1,450 億</td><td class="n" style="color:var(--crit)">−9.6%</td></tr>
+            <tr><td class="name">Oracle <small>FY26，6/10</small></td><td class="n">全年 $557 億</td><td class="n">全年 $320 億</td><td class="n" style="color:var(--crit)">−$237 億</td><td class="n">FY27 毛額 $900–950 億</td><td class="n" style="color:var(--crit)">−9.3%</td></tr>
+          </tbody></table></div>
+        <div class="how"><span class="lbl">怎麼讀</span>「資本支出 &gt; 營運現金流」是這條鏈的分水嶺：之前 AI 是用「賺來的錢」蓋，之後是用「借來的錢」蓋——錢的來源從企業現金流變成債券市場，AI 就從股市的故事變成信用市場的故事。Goldman 估 2027 年資本支出 $1.1 兆、超過營運現金流約 $1,500 億。今年 91 檔雲端商債券有 78 檔利差走寬（中位數 +22bp）：債市已經開始要價。</div></div>
+      <div class="card"><span class="eyebrow">鏈上三種證據</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>價格</dt><dd>市場獎勵「有現金流的資本支出」（MSFT +8%、AMZN +9%）、懲罰「沒有的」（GOOGL、META、ORCL 各 −4～10%）。NVDA 財報後反應各來源不一致（+7% 與 −1.6% 都有報導），不採用。</dd></div>
+          <div><dt>資金流</dt><dd>雲端商發債今年約 $2,200 億（Amazon $250 億、Meta $250 億、Alphabet $200 億美元 + 8/6 再 $200–250 億）；AI 相關債佔投資級發行約 15%；Oracle FY26 借 $430 億 + 增資 $50 億。Meta–BlackRock El Paso 合資：$140 億、Meta 只出 20%、租約附約 $130 億殘值保證——資本支出搬到表外。</dd></div>
+          <div><dt>部位</dt><dd>NVIDIA Q2 FY27（8/26）：營收 $962 億（+106%）、資料中心 $890 億（+117%）、毛利 75%；但<b>存貨 $316 億（上季 $214 億）、採購承諾 $2,790 億（上季 $1,190 億）、應收 $631 億（DSO 60 天）、自由現金流 $213 億（上季 $486 億）</b>。積壓訂單：Microsoft RPO $6,780 億、Google Cloud $5,140 億、AWS $4,960 億、Oracle $6,380 億。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>NVIDIA 的存貨與採購承諾翻倍、應收拉長、自由現金流腰斬——這是「賣方在替買方墊資金」的典型型態，在需求週期頂部前 2–4 季常見。它不代表需求假，代表<b>鏈上的資金壓力正在往上游（NVIDIA、TSMC）移動</b>。要盯的三個數：NVDA 的 DSO 是否繼續拉長、雲端商債券利差、以及 Oracle 9/10 的財報。</div></div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">台灣端 · 鏈的下游</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>台積電</dt><dd>2026 資本支出 $600–640 億（原 $520–560 億）；7 月營收 NT$4,676 億（+44.7% YoY）；Q3 指引 $446–458 億、毛利 65–67%；CoWoS 月產能約 9 萬片 → 年底 12 萬片。8 月營收約 9/10 公布。</dd></div>
+          <div><dt>組裝廠</dt><dd>7 月營收：鴻海 NT$9,465 億（+54.2%）、廣達 3,663 億（+131%）、緯創 3,082 億（+60.8%）。7 月台灣出口 +32.9%（電子 +50.5%）。</dd></div>
+          <div><dt>二階供應鏈</dt><dd>記憶體 Micron FQ3 營收 $415 億（+346%）、毛利 84.6%；網通 Broadcom FQ3 AI 營收 $167 億（+221%）、FQ4 指引 $217 億；光通訊 Lumentum FQ4 +109%、Coherent 資料中心 +59%；電力 GE Vernova 訂單 +88%、燃氣渦輪積壓 116 GW；PJM 2028/29 容量缺口 6.8 GW，9/30 補救拍賣。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>下游的月營收是這條鏈最快、最硬的資料（每月 10 日前公布），比雲端商季報早一到兩個月。判讀順序：雲端商資本支出指引（意圖）→ NVDA 採購承諾（訂單）→ 台積電月營收（出貨）→ 組裝廠月營收（交機）。四個同向就是鏈在轉；台積電營收年增率從 +44% 開始收斂、而 NVDA 存貨還在升，就是「上游塞車」的第一個訊號。電力是物理天花板：燃氣渦輪與電網容量排到 2028 年以後。</div></div>
+      <div class="card"><span class="eyebrow">這條鏈怎麼接回總體</span>
+        <p class="small" style="margin-top:6px">往上接三個池子。<b>股市</b>：Q2 S&amp;P 500 盈餘 +52%，Mag-7 +118.5%、其餘 493 家 +31.8%（FactSet 8/28）——指數的盈餘成長一半以上來自這條鏈，所以 L3 的「廣度收窄」與 L2 的「盈餘預估是唯一支柱」都是它。<b>美債</b>：$2,200 億雲端商債券跟財政部在搶同一批投資級買家，是長端殖利率的次要供給壓力。<b>台股</b>：台積電權重 41.5%、組裝廠營收 +54～131%，台股今年 +59% 的地基就是這條鏈；鏈上任何一環的訂單修正，會先反映在台股而不是美股（外資 9/2 賣超 914 億就是例子）。</p>
+        <div class="how"><span class="lbl">往下再一層</span>個股層的問題變成：誰是「付錢的人」（雲端商）、誰是「墊錢的人」（NVIDIA、供應鏈）、誰是「借錢的人」（Oracle、Meta 的合資）。三種角色在週期轉折時的下場不同——付錢的人先減單、墊錢的人先看到應收壞帳、借錢的人先看到利差走寬。</div></div>
+    </div>
+    <p class="src">來源：<a href="https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4">Microsoft FY26Q4</a>、<a href="https://finance.yahoo.com/markets/stocks/articles/alphabet-q2-2026-earnings-revenue-203058727.html">Alphabet Q2</a>、<a href="https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260630xex991.htm">Amazon Q2 8-K</a>、<a href="https://s21.q4cdn.com/399680738/files/doc_financials/2026/q2/META-Q2-2026-Earnings-Call-Transcript.pdf">Meta Q2 逐字稿</a>、<a href="https://mlq.ai/news/oracle-reports-557b-fy2026-capex-guides-to-70b-net-outlay-in-fy2027/">Oracle FY26</a>、<a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027">NVIDIA Q2 FY27</a>、<a href="https://www.stocktitan.net/sec-filings/NVDA/10-q-nvidia-corp-quarterly-earnings-report-ba2938ed4873.html">NVIDIA 10-Q</a>、<a href="https://mlq.ai/news/hyperscaler-bond-issuance-reaches-about-220-billion-as-ai-financing-costs-rise/">雲端商發債</a>、<a href="https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-New-Strategic-Venture-with-BlackRock-to-Develop-Data-Center-in-El-Paso/default.aspx">Meta–BlackRock</a>、<a href="https://finance.yahoo.com/markets/stocks/articles/goldman-sachs-sees-1-4-143200767.html">Goldman 8/15</a>、<a href="https://mlq.ai/news/tsmc-july-revenue-jumps-447-to-nt4676-billion/">台積電 7 月</a>、<a href="https://focustaiwan.tw/business/202608050015">鴻海 7 月</a>、<a href="https://www.globenewswire.com/news-release/2026/06/24/3317151/14450/en/micron-technology-inc-reports-record-results-for-the-third-quarter-of-fiscal-2026.html">Micron</a>、<a href="https://www.stocktitan.net/news/AVGO/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial-whx14hf9tuuz.html">Broadcom</a>、<a href="https://www.gevernova.com/news/press-releases/ge-vernova-reports-second-quarter-2026-financial-results-raises-2026-financial">GE Vernova</a>、<a href="https://www.utilitydive.com/news/pjm-board-backstop-capacity-auction-data-center-curtailment/826347/">PJM</a>、<a href="https://advantage.factset.com/hubfs/Website/Resources%20Section/Research%20Desk/Earnings%20Insight/EarningsInsight_082826.pdf">FactSet 8/28</a></p>
+  </div>
+  <!-- 企業 AI 以外 -->
+  <div class="l3" data-l4="corp" hidden>
+    <div class="pool-head"><h3>企業 · AI 以外 <span class="en">buybacks · capex · inventories · credit · layoffs</span></h3><span class="pill neutral">庫存在消化、資本支出溫和、弱者在倒</span>
+      <p class="lede2">扣掉 AI，美國企業在做四件事：把關稅前搶進的庫存消化掉（進口 7 月 −7.6%，庫存銷售比 1.30 vs 去年 1.39）、溫和增加設備投資（核心資本財訂單 +10% YoY）、繼續買回股票（全年估 $1.4 兆，但 Meta 歸零）、以及最弱的一層在倒（上半年大型破產 372 件，2010 年來最高；小企業破產 +50%）。裁員反而少（Challenger 今年 −41%）。</p></div>
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">投資與庫存</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>資本財</dt><dd>7 月核心資本財訂單（非國防、扣飛機）+1.7% MoM、+10.0% YoY；出貨 +1.4% MoM（Census 8/26）。這是「AI 以外的資本支出」最乾淨的月指標。</dd></div>
+          <div><dt>庫存</dt><dd>ISM 8 月：庫存 50.6、客戶庫存 42.8（「太低」）、新訂單 53.7、物價 71.1；29% 的負面評論提到關稅。庫存銷售比 6 月 1.30（去年 1.39）；批發 7 月 +5.7% YoY。進口 6 月 +13.2% → 7 月 −7.6% → 8 月估 −4.2%：關稅切換（7/23–24）後的搶進口反轉。</dd></div>
+          <div><dt>庫藏股與發行</dt><dd>Goldman：2026 庫藏股約 $1.4 兆；Q2 股票發行創紀錄 $2,520 億、全年初級發行約 $7,000 億——企業整體仍是淨買方。Meta 庫藏股歸零（去年 $263 億）以支應資本支出。S&amp;P DJI 的 Q2 官方庫藏股數字尚未公布。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>客戶庫存 42.8「太低」+ 新訂單 53.7 = 補庫存的條件在，但物價 71.1 表示補庫存的成本很高。庫存週期的順序：客戶庫存太低 → 新訂單升 → 生產升 → 庫存升 → 物價降。現在在第一、二步；這一段通常對工業與原物料股有利（對照 L3：XLB、XLI 是少數「流入」的板塊）。</div></div>
+      <div class="card"><span class="eyebrow">信用與存續</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>利息保障</dt><dd>Fed 金融穩定報告（5/28）：投資級公司「穩健」；非投資級的中位數利息保障倍數在歷史最低四分位。非金融企業債務 Q1 年化 +8.8%。</dd></div>
+          <div><dt>破產</dt><dd>S&amp;P Global：上半年大型破產 372 件（去年同期 371，2010 年以來最高）；小企業破產 1,663 件（+50% YoY）。</dd></div>
+          <div><dt>小企業</dt><dd>NFIB 7 月樂觀指數 99.8（+2.4）；不確定指數 91；淨 20% 計畫增聘、36% 有職缺補不到、25% 計畫資本支出。</dd></div>
+          <div><dt>裁員</dt><dd>Challenger 8 月 52,900 人（−41% YoY），歸因 AI 的 3,462 人（去年底以來最低）；今年累計 477,033（−41%），AI 歸因累計 112,713（約 24%）。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>「破產創高但裁員創低」看起來矛盾，其實是同一件事的兩面：高利率在淘汰資產負債表最弱的公司（小企業 +50%），存活的公司因為缺工（36% 職缺補不到）而不裁員。這解釋了非農 −23k 與初領失業金 203k 的組合——沒人被裁，但也沒人被雇。這對應 L2 信用債的「CCC 擴大、BB 收窄」：壓力在最弱的一層。</div></div>
+    </div>
+    <p class="src">來源：<a href="https://www.census.gov/manufacturing/m3/adv/pdf/durgd.pdf">Census 耐久財 7 月</a>、<a href="https://www.prnewswire.com/news-releases/manufacturing-pmi-at-54-6-august-2026-ism-manufacturing-pmi-report-302865127.html">ISM 8 月</a>、<a href="https://www.census.gov/mtis/www/data/pdf/mtis_current.pdf">Census 庫存銷售比</a>、<a href="https://www.truckingdive.com/news/early-peak-season-retailers-stocked-up-for-upcoming-holiday-season/827511/">NRF 進口 8/12</a>、<a href="https://www.federalreserve.gov/publications/2026-may-financial-stability-report-borrowing.htm">Fed FSR 5 月</a>、<a href="https://finance.yahoo.com/economy/articles/us-corporate-bankruptcies-hover-16-162903005.html">S&amp;P Global 破產</a>、<a href="https://www.nfib.com/news/press-release/new-nfib-survey-small-business-optimism-continues-to-rise-11/">NFIB 7 月</a>、<a href="https://finance.yahoo.com/economy/article/layoff-plans-trended-down-in-august-and-fewer-companies-are-blaming-ai-093000703.html">Challenger 8 月</a></p>
+  </div>
+
+  <!-- 家庭 -->
+  <div class="l3" data-l4="hh" hidden>
+    <div class="pool-head"><h3>家庭 <span class="en">income · credit · spending · labor</span></h3><span class="pill warn">靠儲蓄與信用撐消費；有股票的人在花，沒有的人在縮</span>
+      <p class="lede2">家庭這個資金來源正在變薄：儲蓄率 3.0%、實質零售銷售 7 月 −0.7%、循環信用年化 +3.9%、信用卡利率 22.15%。但分層看不是一個故事：BofA 卡數據顯示低收入支出 +5.4% 追上高收入（薪資 +5.2%），而密西根信心 51.7 的下滑集中在「沒有股票的人」。前 10% 的家庭貢獻超過 45% 的消費。</p></div>
+    <div class="grid g2">
+      <div class="card"><span class="eyebrow">收入、儲蓄、信用</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>所得</dt><dd>7 月實質可支配所得 +0.4% MoM；儲蓄率 3.0%；實質消費 &lt;+0.1%。時薪年增 3.2% vs CPI 3.4%。</dd></div>
+          <div><dt>債務</dt><dd>紐約聯儲 Q2：家庭總債務 $18.77 兆（季減 $130 億）；信用卡 $1.263 兆（+$210 億）、車貸 $1.713 兆、學貸 $1.651 兆；4.7% 逾期。90 天以上逾期轉入率：信用卡 6.97%、車貸 3.00%、學貸 7.83%（去年 12.88%）、房貸 1.52%。紐約聯儲另文指出信用卡「存量」12.8% 的高逾期率是舊呆帳未清，「流量」自 2024 年以來持平。</dd></div>
+          <div><dt>利率</dt><dd>信用卡 APR 22.15%（計息帳戶）、60 個月車貸 7.14%（G.19 6 月）。BNPL：16% 成人使用、26% 曾遲繳；緊急存款不到 $100 的人 31%。次級車貸 60 天以上逾期 5.67%（6 月，1 月高點 6.90%）。</dd></div>
+          <div><dt>財富</dt><dd>Z.1 Q1 家庭淨值 $183.0 兆（股票 −$1.8 兆、房地產 +$0.8 兆）；Q2 約 9 月公布。62% 家庭持有股票（Gallup 2025）。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>三個數一起看：儲蓄率（3.0%，往下＝在吃老本）、循環信用年化（+3.9%，往上＝在借）、逾期轉入率（信用卡 6.97%，持平＝還付得起）。現在是「吃老本 + 借，但還付得起」——消費可以撐，前提是就業不惡化。非農轉負之後，第三個數是下一個要動的。</div></div>
+      <div class="card"><span class="eyebrow">消費與就業</span>
+        <dl class="ev3" style="margin-top:8px">
+          <div><dt>分層消費</dt><dd>BofA 7 月：卡支出 +5.0%；低收入 +5.4%、中收入 +4.9%、前 5% 高於整體（「大收斂」）；稅後薪資低收入 +5.2%、中收入 +4.2%。Moody's：前 10% 家庭貢獻 &gt;45% 消費（CE 調查口徑 23%）。</dd></div>
+          <div><dt>零售</dt><dd>7 月零售 −0.6% MoM、控制組 −0.4%、實質 −0.7%。Walmart FQ2 美國同店 +2.6%，「各收入層都在搶市佔」，$29 億關稅退稅轉為降價；Target Q2 同店 +3.8%；Costco 8 月美國同店 +5.6%。</dd></div>
+          <div><dt>信心</dt><dd>Conference Board 8 月 89.4、預期指數 68.2（2025/2 以來都低於 80 的衰退門檻）；密西根 8 月 51.7（−6.3%），下滑集中在中低收入與不持股者。</dd></div>
+          <div><dt>就業微觀</dt><dd>JOLTS 7 月：職缺 730 萬（4.4%）、雇用 510 萬（3.2%）、離職率 1.9%、裁員率 1.0%。初領 203k、續領 178 萬。長期失業佔 25.5%、失業中位數 10.5 週。</dd></div>
+        </dl>
+        <div class="how"><span class="lbl">判讀</span>離職率 1.9% 是 2020 年以來最低——勞工不敢換工作，代表議價力消失、薪資成長會續降；但裁員率 1.0% 也低，所以失業率 4.1% 不會跳升。這是「凍結」的勞動市場，跟房市一樣：沒人動。零售商同店都在漲、總零售在跌，表示大型折扣通路在吃小型通路的份額——這對應 L3 的「必需消費流出、非必需承接」，家庭在往便宜的地方走。</div></div>
+    </div>
+    <p class="src">來源：<a href="https://www.bea.gov/news/2026/personal-income-and-outlays-july-2026">BEA 7 月</a>、<a href="https://www.newyorkfed.org/newsevents/news/research/2026/20260811">NY Fed 家庭債務 Q2</a>、<a href="https://libertystreeteconomics.newyorkfed.org/2026/08/how-distressed-are-consumers-reconciling-diverging-credit-card-delinquency-measures/">Liberty Street 8 月</a>、<a href="https://www.federalreserve.gov/releases/g19/current/default.htm">Fed G.19</a>、<a href="https://www.federalreserve.gov/publications/2026-august-consumer-community-context.htm">Fed SHED BNPL</a>、<a href="https://wolfstreet.com/2026/08/13/the-state-of-americans-auto-debt/">車貸逾期</a>、<a href="https://institute.bankofamerica.com/content/dam/economic-insights/consumer-checkpoint-august-2026.pdf">BofA Consumer Checkpoint 8 月</a>、<a href="https://www.minneapolisfed.org/article/2026/have-us-consumers-gone-k-shaped-a-review-of-the-data">Minneapolis Fed K 型</a>、<a href="https://economics.td.com/us-retail-sales">零售 7 月</a>、<a href="https://corporate.walmart.com/news/2026/08/20/walmart-releases-q2-fy27-earnings">Walmart</a>、<a href="https://www.globenewswire.com/news-release/2026/09/02/3355518/0/en/costco-wholesale-corporation-reports-august-sales-results.html">Costco 8 月</a>、<a href="https://www.advisorperspectives.com/dshort/updates/2026/08/28/consumer-sentiment-falls-in-august">密西根 8 月</a>、<a href="https://www.bls.gov/news.release/jolts.nr0.htm">JOLTS</a>、<a href="https://www.dol.gov/ui/data.pdf">初領失業金</a></p>
+  </div>
+
+  <!-- 個股判讀模板 -->
+  <div class="l3" data-l4="tpl" hidden>
+    <div class="pool-head"><h3>個股判讀模板 <span class="en">the four questions, applied to one company</span></h3><span class="pill acc">釣魚模式的最後一層</span>
+      <p class="lede2">同一根竿子用到個股：四問加一問「誰在買它的股票」。下面用 NVIDIA 與台積電示範讀法，每一格都告訴你數字在財報的哪一張表。</p></div>
+    <div class="card">
+      <div class="tbl-wrap" style="border:0"><table style="min-width:760px;font-size:.86rem">
+        <thead><tr><th>問題</th><th>看哪裡</th><th>NVIDIA（Q2 FY27，8/26）</th><th>台積電（Q2 / 7 月）</th><th>警訊型態</th></tr></thead>
+        <tbody>
+          <tr><td class="name">① 錢有多少 <small>誰付錢給它</small></td><td>客戶的資本支出指引；客戶的自由現金流</td><td>雲端四巨頭 2026 資本支出 $7,600 億；其中三家 FCF 轉負、改靠發債</td><td>客戶是 NVIDIA／AMD／Apple；上游客戶的採購承諾 $2,790 億</td><td>客戶從「用現金流付」變成「用債付」→ 需求的信用風險上升</td></tr>
+          <tr><td class="name">② 為什麼想去 <small>報酬率</small></td><td>毛利率、營業利益率、資本報酬率（損益表 + 資產負債表）</td><td>毛利 75%，指引 Q4 降到 71–72%（記憶體成本）</td><td>毛利 65–67%；資本支出 $600–640 億對應營收成長 &gt;40%</td><td>毛利率見頂回落 + 資本支出加速 = 報酬率開始被稀釋</td></tr>
+          <tr><td class="name">③ 真的去了嗎 <small>訂單、庫存、應收</small></td><td>現金流量表（FCF）、資產負債表（存貨、應收）、附註（採購承諾、RPO）</td><td>存貨 $214 → 316 億；採購承諾 $1,190 → 2,790 億；應收 $631 億、DSO 60 天；FCF $486 → 213 億</td><td>7 月營收 +44.7% YoY；CoWoS 9 萬 → 12 萬片</td><td>存貨與應收升得比營收快；FCF 與淨利脫鉤 → 賣方在替買方墊錢</td></tr>
+          <tr><td class="name">④ 下一層 <small>供應鏈</small></td><td>供應商與客戶的月營收（台灣每月 10 日前）</td><td>台積電 +44.7%、鴻海 +54%、廣達 +131%、Micron +346%</td><td>鴻海／廣達／緯創月營收；設備商（ASML）訂單</td><td>下游月營收年增率開始收斂、上游存貨還在升 = 塞車</td></tr>
+          <tr><td class="name">⑤ 誰在買股票 <small>部位</small></td><td>庫藏股金額、內部人申報、ETF 權重、對沖基金部位調查</td><td>SPY 權重 8.0%；對沖基金半導體配置 24% → 18%；FMS「做多半導體」擁擠 82% → 53%</td><td>台股權重 41.5%；外資 8 月買超創紀錄、9/2 賣超 914 億；ADR 溢價 9–14%</td><td>擁擠度下降但價格沒跌 = 有人在接（誰？）；擁擠度上升且價格漲 = 追價</td></tr>
+        </tbody></table></div>
+      <div class="how"><span class="lbl">讀財報的順序</span>先看現金流量表（自由現金流 = 營運現金流 − 資本支出），再看資產負債表（存貨、應收的變化率 vs 營收變化率），再看附註裡的採購承諾與積壓訂單，最後才看損益表。損益表是結果，前三張是原因。台灣公司多一個免費的領先指標：月營收。</div>
+      <div class="mis"><b>常見誤讀</b>「營收 +106% 所以沒問題。」NVIDIA 營收翻倍的同時 FCF 腰斬、存貨翻倍——營收是損益表的數字，錢在資產負債表上被卡住了。另一個：「台積電資本支出上修 = 看好」——上修是「客戶要求」的結果，客戶用借來的錢下單，風險在客戶那邊，但先看到的是台積電。</div></div>
+  </div>
+</section>
+
+<!-- ===== 資金地圖 ===== -->
+<section id="map">
+  <div class="sec-head">
+    <span class="eyebrow">Money map · 來源 → 池子</span>
+    <h2>資金地圖：錢從哪裡來、往哪裡去</h2>
+    <p>左邊五個來源、右邊九個池子。線的粗細是<b>目前證據強度</b>（價格、資金流、部位三種訊號有幾種一致），不是金額比例；顏色是方向。切換頂端的時間尺度，會換成該尺度的主導流向。點任一池子看它的判讀。</p>
+  </div>
+  <div class="map-wrap">
+    <p class="map-hint">手機上可左右滑動看完整地圖</p>
+    <div id="money-map"></div>
+    <div class="legend"><span><i style="background:var(--flow)"></i>流入（證據一致）</span><span><i style="background:var(--crit)"></i>流出</span><span><i style="background:var(--warn)"></i>矛盾／不確定</span><span><i style="background:var(--line-strong)"></i>微弱</span></div>
+  </div>
+  <div class="note map-note" id="map-note"><b>點一個池子</b>看它現在的三種證據與判讀。</div>
+</section>
+
+<!-- ===== 指標地圖 ===== -->
+<section id="indmap">
+  <div class="sec-head">
+    <span class="eyebrow">Indicator map</span>
+    <h2>指標地圖：哪裡看、多久看一次、屬於哪種訊號</h2>
+    <p>用篩選器按訊號種類看。「領先／同時／落後」是相對景氣的位置；「價格／資金流／部位／硬數據／軟數據」是證據種類。這張表是以後自己釣魚時的書籤列。</p>
+  </div>
+  <div class="filters" id="ind-filters">
+    <button aria-pressed="true" data-f="all">全部</button>
+    <button aria-pressed="false" data-f="hard">硬數據</button>
+    <button aria-pressed="false" data-f="policy">政策</button>
+    <button aria-pressed="false" data-f="liq">流動性</button>
+    <button aria-pressed="false" data-f="price">價格訊號</button>
+    <button aria-pressed="false" data-f="flow">資金流</button>
+    <button aria-pressed="false" data-f="pos">部位</button>
+    <button aria-pressed="false" data-f="tw">台灣</button>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>指標</th><th>位置</th><th>訊號</th><th>頻率</th><th>哪裡看</th><th>現在讀數</th></tr></thead>
+      <tbody id="ind-rows">
+        <tr data-f="hard"><td class="name">非農就業 <small>Nonfarm payrolls</small></td><td>同時</td><td>硬數據</td><td>月・第一個週五</td><td><a href="https://www.bls.gov/news.release/empsit.nr0.htm">BLS</a></td><td class="n">−23k（7 月）</td></tr>
+        <tr data-f="hard"><td class="name">初領失業金 <small>Initial claims</small></td><td>領先</td><td>硬數據</td><td>週・週四</td><td><a href="https://fred.stlouisfed.org/series/ICSA">FRED ICSA</a></td><td class="n">203k（8/22 當週）</td></tr>
+        <tr data-f="hard"><td class="name">CPI <small>headline / core</small></td><td>落後</td><td>硬數據</td><td>月・中旬</td><td><a href="https://www.bls.gov/cpi/">BLS</a></td><td class="n">3.4% / 2.5%（7 月）</td></tr>
+        <tr data-f="hard"><td class="name">核心 PCE <small>Fed 的尺</small></td><td>落後</td><td>硬數據</td><td>月・月底</td><td><a href="https://www.bea.gov/data/personal-consumption-expenditures-price-index">BEA</a></td><td class="n">3.3%（7 月）</td></tr>
+        <tr data-f="hard"><td class="name">GDP / GDPNow</td><td>落後／同時</td><td>硬數據</td><td>季／每週更新</td><td><a href="https://www.atlantafed.org/research-and-data/data/gdpnow">Atlanta Fed</a></td><td class="n">1.5%（Q2）/ 4.8%（Q3 估）</td></tr>
+        <tr data-f="hard"><td class="name">ISM 製造業 PMI <small>新訂單−庫存</small></td><td>領先</td><td>軟數據</td><td>月・第一個工作日</td><td><a href="https://www.ismworld.org/">ISM</a></td><td class="n">54.6；新訂單 53.7、價格 71.1（8 月）</td></tr>
+        <tr data-f="policy"><td class="name">FOMC 利率機率 <small>CME FedWatch</small></td><td>—</td><td>價格（期貨）</td><td>即時</td><td><a href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html">CME</a></td><td class="n">9 月升息 68%（9/2）</td></tr>
+        <tr data-f="policy"><td class="name">FOMC 聲明／點陣圖</td><td>—</td><td>政策</td><td>年 8 次</td><td><a href="https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm">Fed</a></td><td class="n">3.50–3.75%，9/16–17</td></tr>
+        <tr data-f="policy"><td class="name">財政收支 <small>MTS</small></td><td>—</td><td>政策</td><td>月・第 8 個工作日</td><td><a href="https://fiscaldata.treasury.gov/">Fiscal Data</a></td><td class="n">10 個月 −$1.8T</td></tr>
+        <tr data-f="policy"><td class="name">季度再融資聲明 <small>Refunding</small></td><td>—</td><td>政策（供給）</td><td>季・2/5/8/11 月初</td><td><a href="https://home.treasury.gov/policy-issues/financing-the-government/quarterly-refunding">Treasury</a></td><td class="n">3y 58 / 10y 42 / 30y 25（$B）</td></tr>
+        <tr data-f="liq"><td class="name">Fed H.4.1 <small>準備金・TGA・RRP</small></td><td>—</td><td>流動性</td><td>週・週四 16:30</td><td><a href="https://www.federalreserve.gov/releases/h41/current/">Fed</a></td><td class="n">$2.92T / $951B / ≈0</td></tr>
+        <tr data-f="liq"><td class="name">SOFR − IORB</td><td>領先（近期）</td><td>流動性（價格）</td><td>日</td><td><a href="https://fred.stlouisfed.org/series/SOFR">FRED</a></td><td class="n">+1bp</td></tr>
+        <tr data-f="liq"><td class="name">MMF 總資產 <small>ICI</small></td><td>—</td><td>流動性／資金流</td><td>週・週四</td><td><a href="https://www.ici.org/research/stats/mmf">ICI</a></td><td class="n">$7.93T</td></tr>
+        <tr data-f="price"><td class="name">殖利率曲線 <small>2s10s、30y</small></td><td>領先</td><td>價格</td><td>日</td><td><a href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates/">Treasury</a></td><td class="n">+40bp；30y 5.27%</td></tr>
+        <tr data-f="price"><td class="name">信用利差 <small>IG / HY OAS</small></td><td>領先</td><td>價格</td><td>日</td><td><a href="https://fred.stlouisfed.org/series/BAMLH0A0HYM2">FRED</a></td><td class="n">80bp / 265bp</td></tr>
+        <tr data-f="price"><td class="name">預估本益比 <small>S&amp;P 500 fwd P/E</small></td><td>—</td><td>價格（估值）</td><td>週・FactSet 週五</td><td><a href="https://advantage.factset.com/">FactSet</a></td><td class="n">19.6（8/28）</td></tr>
+        <tr data-f="price"><td class="name">美元指數 DXY・金價・BTC</td><td>同時</td><td>價格</td><td>日</td><td>券商／Trading Economics</td><td class="n">99.6 / $4,336 / $76.6k</td></tr>
+        <tr data-f="flow"><td class="name">基金與 ETF 週流量 <small>ICI combined flows</small></td><td>同時</td><td>資金流</td><td>週・週三</td><td><a href="https://www.ici.org/research/stats/combined_flows">ICI</a></td><td class="n">週 +$342 億（8/19）</td></tr>
+        <tr data-f="flow"><td class="name">現貨 BTC ETF 流量</td><td>同時</td><td>資金流</td><td>日</td><td><a href="https://www.tftc.io/bitcoin-etf-flows">tftc / Farside</a></td><td class="n">8 月 +$30 億；今年 −$23 億</td></tr>
+        <tr data-f="flow"><td class="name">黃金 ETF 流量・央行購金 <small>WGC</small></td><td>同時</td><td>資金流</td><td>月／季</td><td><a href="https://www.gold.org/goldhub">Gold Hub</a></td><td class="n">8 月 +$171 億；Q2 央行 289 噸</td></tr>
+        <tr data-f="flow"><td class="name">國債標售 <small>bid-to-cover・間接投標</small></td><td>同時</td><td>資金流</td><td>依標售日程</td><td><a href="https://www.treasurydirect.gov/auctions/announcements-data-results/">TreasuryDirect</a></td><td class="n">10y BTC 2.53、間接 76.7%</td></tr>
+        <tr data-f="flow"><td class="name">海外持有美債 <small>TIC</small></td><td>落後</td><td>資金流（存量）</td><td>月・約 6 週後</td><td><a href="https://home.treasury.gov/data/treasury-international-capital-tic-system">Treasury</a></td><td class="n">$9.30T（6 月）</td></tr>
+        <tr data-f="pos"><td class="name">融資餘額 <small>FINRA margin debt</small></td><td>同時</td><td>部位</td><td>月</td><td><a href="https://www.finra.org/investors/learn-to-invest/advanced-investing/margin-statistics">FINRA</a></td><td class="n">$1.417T（7 月，月減 5.7%）</td></tr>
+        <tr data-f="pos"><td class="name">CFTC 持倉 <small>COT</small></td><td>同時</td><td>部位</td><td>週・週五</td><td><a href="https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC</a></td><td class="n">E-mini 槓桿基金淨空 −31.5 萬口；金淨多 14.5 萬口（8/25）</td></tr>
+        <tr data-f="pos"><td class="name">市場集中度 <small>Mag-7 佔比</small></td><td>—</td><td>部位</td><td>月</td><td>S&amp;P DJI／券商研究</td><td class="n">33.9%</td></tr>
+        <tr data-f="tw"><td class="name">USD/TWD</td><td>同時</td><td>價格</td><td>日</td><td><a href="https://www.cbc.gov.tw/">中央銀行</a></td><td class="n">31.753（9/2）</td></tr>
+        <tr data-f="tw"><td class="name">外資買賣超・期貨淨部位</td><td>同時</td><td>資金流／部位</td><td>日</td><td><a href="https://www.twse.com.tw/">TWSE</a>／期交所</td><td class="n">今年賣超 NT$2.28 兆（至 7 月）</td></tr>
+        <tr data-f="tw"><td class="name">壽險避險比率</td><td>落後</td><td>部位</td><td>月／季</td><td>金管會／各壽險月報</td><td class="n">42.89%（6 月，歷史新低）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== 方法論 ===== -->
+<section id="method">
+  <div class="sec-head">
+    <span class="eyebrow">Method · 判讀流程 · 第 4 輪收尾</span>
+    <h2>判讀流程：四輪收成一套你自己能跑的程序</h2>
+    <p>八個步驟，每步標示對應哪一層與多久做一次。走完一輪大約 40 分鐘（每週），其中步驟 1–2 每月一次就夠、步驟 7 每季。右邊的計分表是步驟 5 的工具，現在填的是本頁的讀數。</p>
+  </div>
+  <div class="grid g2">
+    <div class="card flow">
+      <div class="st"><div><h4>定時間尺度<span class="lv">L0 · 每次</span></h4><p>先說清楚你要判斷的是幾週、幾季、還是幾年的事。同一個指標在不同尺度意義不同；沒定尺度的判斷不算判斷。</p></div></div>
+      <div class="st"><div><h4>定象限<span class="lv">L1 · 每月</span></h4><p>成長是加速還是減速（GDP 對前季、非農三個月平均、GDPNow 方向）× 通膨是升還是降（核心 PCE 三個月年化對六個月）。答案決定「這種環境誰受惠」，只是起點。</p></div></div>
+      <div class="st"><div><h4>算錢有多少<span class="lv">L1 · 每週</span></h4><p>H.4.1 的準備金與 TGA、MMF 總資產、財政赤字、SOFR−IORB。問「淨」：財政放的、Fed 收的、家庭存的、海外回流的，合起來是多還是少。</p></div></div>
+      <div class="st"><div><h4>比池子的相對吸引力<span class="lv">L2 · 每週</span></h4><p>每個池子相對無風險利率多給多少：股權風險溢酬、信用利差、租金收益率減房貸利率。溢酬被壓薄的池子是擁擠的池子。</p></div></div>
+      <div class="st"><div><h4>三種證據打分<span class="lv">L2 · 每週</span></h4><p>每個池子填價格、資金流、部位三格：同向記「一致」，不同向記「矛盾」。矛盾的格子不是壞事，是下週要追的問題。只有價格在動的池子，先當敘事。</p></div></div>
+      <div class="st"><div><h4>往下鑽<span class="lv">L3 → L4 · 每週／每月</span></h4><p>矛盾的池子往內拆：用相對線找池子內部的方向，再找哪一家公司、哪一群家庭在動。月營收、財報三張表、家庭債務報告是這一步的原料。</p></div></div>
+      <div class="st"><div><h4>寫下預期與驗證日<span class="lv">每季</span></h4><p>用一句話寫「如果我對，X 會在 Y 日前變成 Z」。例如：「如果 AI 資金鏈在拉緊，NVDA 的 DSO 在 11 月財報會超過 65 天。」沒有驗證日的預期不能被證偽，也就學不到東西。</p></div></div>
+      <div class="st"><div><h4>回看與記錯<span class="lv">每週</span></h4><p>每週末三行：哪個池子三證據一致、哪個矛盾、下週哪個事件會改答案。錯了就寫進錯誤紀錄（下方），標明錯在哪一問。這一頁前三輪的錯誤都留著。</p></div></div>
+    </div>
+    <div class="grid" style="gap:12px;align-content:start">
+      <div class="card"><span class="eyebrow">步驟 5 · 三種證據計分表（2026-09-03）</span>
+        <div class="tbl-wrap" style="border:0;margin-top:6px"><table class="score" style="min-width:520px;font-size:.86rem">
+          <thead><tr><th>池子</th><th>價格</th><th>資金流</th><th>部位</th><th>結論</th></tr></thead>
+          <tbody>
+            <tr><td>現金 MMF</td><td class="s ok">↑</td><td class="s ok">↑</td><td class="s ok">↑</td><td>一致 · 流入</td></tr>
+            <tr><td>股票</td><td class="s ok">↑</td><td class="s ok">↑（總量）</td><td class="s bad">擁擠、廣度縮</td><td>矛盾 · 內部輪動</td></tr>
+            <tr><td>美債 短端</td><td class="s bad">殖利率↑</td><td class="s ok">↑</td><td class="s mix">基差空單</td><td>矛盾 · 等升息</td></tr>
+            <tr><td>美債 長端</td><td class="s bad">殖利率↑</td><td class="s ok">TLT↑</td><td class="s mix">海外官方↓</td><td>矛盾 · 逆勢承接</td></tr>
+            <tr><td>信用債</td><td class="s ok">利差窄</td><td class="s bad">HYG↓</td><td class="s bad">CCC↑、私募 6%</td><td>矛盾 · 價格落後</td></tr>
+            <tr><td>黃金</td><td class="s mix">今年平、8 月↑</td><td class="s ok">央行、亞洲↑</td><td class="s ok">COT 淨多</td><td>大致一致 · 東買西賣</td></tr>
+            <tr><td>幣圈</td><td class="s bad">↓</td><td class="s bad">ETF 今年↓</td><td class="s bad">長期持有者派發</td><td>一致 · 流出</td></tr>
+            <tr><td>房地產</td><td class="s mix">價平量縮</td><td class="s bad">申請↓、開工↓</td><td class="s mix">庫存 4.6 月</td><td>一致 · 凍結</td></tr>
+            <tr><td>台股</td><td class="s ok">↑</td><td class="s bad">外資今年↓（8 月↑）</td><td class="s mix">融資 +68%</td><td>矛盾 · 買家換人</td></tr>
+          </tbody></table></div>
+        <p class="small muted" style="margin-top:6px">↑↓ 是方向不是好壞。三格同向才寫「一致」；「矛盾」的池子是下週的功課。</p></div>
+      <div class="card"><span class="eyebrow">七個最常見的誤讀（本頁自己犯過三個）</span>
+        <ol class="steps" style="margin-top:6px">
+          <li><b>看水準不看方向</b>——2s10s 為正就叫「陡」；其實今年在變平。（第 1 輪犯）</li>
+          <li><b>年增率當今年累計</b>——白銀 +61% YoY 寫成今年漲；其實今年 −11%。（第 2 輪犯）</li>
+          <li><b>讀錯表格的欄</b>——把 S&amp;P DJI 表格的欄位對錯，板塊漲幅全錯。（第 1 輪犯）</li>
+          <li><b>存量當流量</b>——海外持有美債減少 ≠ 海外在賣；6 月民間外資是淨買。</li>
+          <li><b>ETF 流入當外資看好</b>——EM ETF 流入是美國散戶；IIF 顯示非居民淨賣。台股同理。</li>
+          <li><b>利差窄當安全</b>——HY 265bp 反映買盤與絕對殖利率；違約在私募端 6.1%、CCC 在擴大。</li>
+          <li><b>指數當市場</b>——S&amp;P +12% 靠 NVDA 8% 權重；200 日線上比例從 75% 降到 71%。</li>
+        </ol></div>
+      <div class="card road errlog"><span class="eyebrow">錯誤紀錄</span>
+        <div class="r"><b>第 1 輪</b><span>板塊漲幅引用錯欄（原物料 +48.5% → 實際 +15.9%）；「熊陡」誤判；黃金「+20%」無來源</span></div>
+        <div class="r"><b>第 2 輪</b><span>沿用熊陡；白銀「補漲」把 YoY 當 YTD；黃金 YTD 標「待核」但未解決</span></div>
+        <div class="r"><b>第 3 輪</b><span>發現並修正以上三項；因子 ETF 兩來源差異（MTUM 18.7% vs 37.4%）未解，改用方向</span></div>
+        <div class="r"><b>第 4 輪</b><span>NVDA 財報後股價反應兩來源相反（+7% / −1.6%），不採用；Alphabet 6 月增資 $496 億只有單一次級來源，未採用</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:12px"><span class="eyebrow">節奏表 · 什麼時候看什麼</span>
+    <div class="tbl-wrap" style="border:0;margin-top:6px"><table style="min-width:640px;font-size:.86rem">
+      <thead><tr><th>頻率</th><th>看什麼</th><th>對應步驟</th><th>大約時間</th></tr></thead>
+      <tbody>
+        <tr><td class="name">每週</td><td>H.4.1、MMF、SOFR−IORB、殖利率曲線、HY 利差、ETF 週流量、COT、外資買賣超、USD/TWD、相對線圖表清單</td><td>3、4、5、8</td><td class="n">40 分鐘</td></tr>
+        <tr><td class="name">每月</td><td>非農、CPI、核心 PCE、FOMC、MTS、融資餘額、TIC、台灣月營收（10 日前）、Case-Shiller、Challenger、JOLTS</td><td>2、6</td><td class="n">60 分鐘</td></tr>
+        <tr><td class="name">每季</td><td>財報季（現金流量表優先）、WGC 央行購金、refunding、NY Fed 家庭債務、FactSet 盈餘修正、BofA FMS、Fed SLOOS</td><td>6、7</td><td class="n">2 小時</td></tr>
+        <tr><td class="name">每年</td><td>重寫 L0「拉遠」那一格：財政、AI 資本支出週期、去美元化、人口。這一格一年只該改一次。</td><td>1</td><td class="n">半天</td></tr>
+      </tbody></table></div></div>
+</section>
+
+<!-- ===== 台灣連動 ===== -->
+<section id="tw">
+  <div class="sec-head">
+    <span class="eyebrow">Taiwan linkage · 第 1 輪先放骨架</span>
+    <h2>台灣連動：美元流向怎麼傳到台幣與台股</h2>
+    <p>台灣的資金與美國連在三條管子上：壽險的美元資產、外資在台股的部位、以及你我用美國券商買美股的錢。這一輪先放讀數與傳導路徑，第 3 輪拆台股內部。</p>
+  </div>
+  <div class="grid g3">
+    <div class="card">
+      <span class="eyebrow">匯率</span>
+      <p class="num" style="font-size:1.4rem;margin-top:4px">USD/TWD 31.753</p>
+      <p class="small muted">9/2；今年弱點 32.438（8/3），2025 年那波大升值已大致回吐</p>
+      <div class="how"><span class="lbl">傳導</span>美債殖利率升 → 壽險美元資產帳面虧 → 避險成本高（台美利差約 1.5–1.75 個百分點）→ 避險比率降到 42.89% 歷史新低 → 台幣一升值就是未避險部位直接受傷。看 USD/TWD 的同時要看 10 年期美債，兩者現在是同一件事。</div>
+    </div>
+    <div class="card">
+      <span class="eyebrow">外資 vs 台股</span>
+      <p class="num" style="font-size:1.4rem;margin-top:4px">賣超 NT$2.28 兆 / 指數 +59%</p>
+      <p class="small muted">外資今年至 7 月累計賣超，但 8 月單月買超 3,568 億創紀錄；加權指數 46,164.72（9/2），2025 年底 28,963。完整拆解見 L3「台股內部」。</p>
+      <div class="how"><span class="lbl">判讀</span>外資賣、指數漲，代表買盤來自內資（ETF 申購、當沖、壽險與投信）。這種結構下，價格與外資資金流訊號分歧——就是主軸的第三問「錢真的去了嗎」的教材：要看誰在接，而不是只看誰在賣。9/2 單日賣超 NT$914 億、期貨淨空單 85,329 口，是近期倉位訊號。</div>
+    </div>
+    <div class="card">
+      <span class="eyebrow">你的管道 · Charles Schwab</span>
+      <p class="small" style="margin-top:6px">美國券商帳戶可以直接買到本頁所有池子的代表工具：短債（SGOV／BIL）、長債（TLT）、黃金（GLD／IAU）、比特幣現貨 ETF（IBIT）、REITs（VNQ）、各板塊 ETF（XL 系列）。第 2 輪每個池子會附「代表工具＋怎麼用它驗證流向」。</p>
+      <div class="how"><span class="lbl">提醒</span>用美國券商買，匯率風險是台幣對美元；上面「匯率」卡的傳導路徑對你也適用。台灣掛牌的美債／黃金 ETF 有另一層折溢價，之後再比。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 每週檢查 ===== -->
+<section id="weekly">
+  <div class="sec-head">
+    <span class="eyebrow">Weekly routine · 15 分鐘</span>
+    <h2>每週檢查清單：以後你自己釣</h2>
+    <p>勾選狀態只存在你這台裝置的瀏覽器裡。順序按公布時間排；每一項都對應主軸的其中一問。</p>
+  </div>
+  <div class="card check" id="checklist">
+    <label><input type="checkbox" data-k="c1"><span><span class="w">週三</span>ICI 基金／ETF 週流量——錢真的去了嗎（股／債／MMF 三個方向）</span></label>
+    <label><input type="checkbox" data-k="c2"><span><span class="w">週四</span>Fed H.4.1：準備金、TGA、RRP 各自的週變化——錢有多少</span></label>
+    <label><input type="checkbox" data-k="c3"><span><span class="w">週四</span>ICI MMF 總資產、Freddie Mac 30 年房貸利率、初領失業金</span></label>
+    <label><input type="checkbox" data-k="c4"><span><span class="w">週五</span>CFTC COT：美債、黃金、S&amp;P 期貨的投機淨部位——部位訊號</span></label>
+    <label><input type="checkbox" data-k="c5"><span><span class="w">週五</span>殖利率曲線 3m／2y／10y／30y 與 SOFR−IORB——價格訊號＋流動性溫度</span></label>
+    <label><input type="checkbox" data-k="c6"><span><span class="w">週五</span>HY 利差、金價、BTC ETF 週流量、DXY——各池子的相對吸引力</span></label>
+    <label><input type="checkbox" data-k="c7"><span><span class="w">週五</span>外資週買賣超、USD/TWD 週變化——台灣傳導</span></label>
+    <label><input type="checkbox" data-k="c8"><span><span class="w">週末</span>寫三行：這週哪個池子的三種證據一致？哪個矛盾？下週哪個事件會改變答案？</span></label>
+  </div>
+  <div class="note fish-only" style="margin-top:12px"><b>每月加做</b>：非農（第一個週五）、CPI（中旬）、核心 PCE（月底）、FOMC（年 8 次）、財政收支 MTS、FINRA 融資餘額、TIC（約 6 週後）。<b>每季</b>：WGC 央行購金、refunding 聲明、NY Fed 家庭債務、FactSet 盈餘預估修正。</div>
+</section>
+
+<!-- ===== 後續輪次 ===== -->
+<section id="road">
+  <div class="sec-head">
+    <span class="eyebrow">Roadmap</span>
+    <h2>後續輪次與這一輪的缺口</h2>
+  </div>
+  <div class="grid g2">
+    <div class="card road">
+      <div class="r done"><b>第 1 輪</b><span>骨架、思考主軸、L0 時間尺度、L1 總體與流動性管道、資金地圖、指標地圖、台灣骨架、每週清單（本頁）</span></div>
+      <div class="r done"><b>第 2 輪</b><span>L2 九個池子逐一拆：驅動因子 → 三種證據 → 判讀方法 → Schwab 可用的代表工具；補上初領失業金、ISM、COT、FedWatch；修正第 1 輪的板塊漲幅（原引用的 S&amp;P DJI 表格欄位讀錯）</span></div>
+      <div class="r done"><b>第 3 輪</b><span>L3 池子內部：11 個板塊的價格 vs 資金流、風格相對線、廣度、擁擠度；曲線四時點與存續期間槓鈴、評等間利差；東西方與央行、金銀比；BTC 佔比、穩定幣、持有者、礦工；房市地區與型態、REIT 子類、CRE 按類型；台股外資／內資／ETF／融資。修正了兩個前輪錯誤（曲線是熊平不是熊陡；黃金今年持平不是 +20%）</span></div>
+      <div class="r done"><b>第 4 輪</b><span>L4 個體：AI 資本支出鏈（資金來源 → 雲端商 → NVIDIA → 台積電 → 組裝廠 → 二階）、企業 AI 以外的行為、家庭收入／信用／消費／就業微觀、個股判讀模板；「判讀流程」把四輪收成八步驟、計分表、七個誤讀、錯誤紀錄與節奏表</span></div>
+      <div class="r"><b>之後</b><span>維護模式：9/4 非農、9/10 Oracle 與台積電 8 月營收、9/16–17 FOMC 之後各更新一次「現在在哪」與計分表；每次更新把上一版的預期拿出來對答案</span></div>
+    </div>
+    <div class="card">
+      <h3>這一輪沒查到或沒放的</h3>
+      <p class="small" style="margin-top:6px">因子 ETF 的今年報酬在 etfdb 與 iShares 之間差很大（MTUM 18.7% vs 37.4%），只用方向不用數值；FactSet 各板塊的 Q3 盈餘修正只有圖沒有文字；台股 8 月日均成交值、壽險 7 月避險比率、投信與自營商今年累計；ICI 今年累計股票基金流量；ISM 服務業 8 月（9/3 公布）；台灣壽險 7 月避險比率；各大銀行 8 月的衰退機率更新（Goldman 6/22 為 15%，JPMorgan 3 月為 35%）；各 ETF 的「今年累計」流量多數只找得到 1／3／12 個月數字。</p>
+      <h3 style="margin-top:14px">用這頁的方式</h3>
+      <p class="small" style="margin-top:6px">第一次先用<b>吃魚模式</b>掃一遍結論；第二次切<b>釣魚模式</b>，只看每張卡的「怎麼讀」與 L2 的「判讀方法」；第三次挑一個你不同意的結論，去指標地圖找原始資料驗證；第四次不看這頁，照「判讀流程」八步自己跑一遍，再回來比對。L2 每個池子的工具表，可以先在 Schwab 建一組「相對線」圖表清單（RSP/SPY、TLT/SHY、HYG/LQD、GDX/GLD、EEM/SPY），以後每週看一眼。三次之後，這頁就不是我的判斷，是你的。</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer>讀數為查證時的快照，標示日期為資料期間或公布日；本頁是判讀框架與練習工具，不是投資建議。資料來源：BEA、BLS、Federal Reserve（H.4.1、FOMC）、U.S. Treasury（TIC、Refunding）、ICI、FactSet、S&amp;P DJI、FINRA、WGC、Freddie Mac、NAR、中央銀行、TWSE 及所列新聞連結。</footer>
+<script>
+(function(){
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const NS='http://www.w3.org/2000/svg';
+  const el=(n,a={},t)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;return e;};
+
+  /* ---------- 模式 ---------- */
+  const body=document.body; body.classList.add('fish');
+  let savedMode=null; try{savedMode=localStorage.getItem('mf-mode');}catch(e){}
+  function setMode(m){body.classList.remove('fish','eat');body.classList.add(m);
+    $('#mode-fish').setAttribute('aria-pressed',m==='fish');$('#mode-eat').setAttribute('aria-pressed',m==='eat');
+    try{localStorage.setItem('mf-mode',m);}catch(e){}}
+  $('#mode-fish').addEventListener('click',()=>setMode('fish'));
+  $('#mode-eat').addEventListener('click',()=>setMode('eat'));
+  if(savedMode==='eat'||savedMode==='fish')setMode(savedMode);
+
+  /* ---------- 時間尺度 ---------- */
+  let scale='near';
+  function setScale(s){scale=s;
+    $$('[data-scale]').forEach(b=>{const on=b.dataset.scale===s;b.setAttribute(b.getAttribute('role')==='tab'?'aria-selected':'aria-pressed',on);});
+    $$('.scale-pane').forEach(p=>p.hidden=p.dataset.pane!==s);
+    drawMap();}
+  $$('[data-scale]').forEach(b=>b.addEventListener('click',()=>setScale(b.dataset.scale)));
+
+  /* ---------- 殖利率曲線 ---------- */
+  (function(){
+    const pts=[['3m',3.92],['2y',4.39],['5y',4.54],['10y',4.79],['30y',5.27]];
+    const W=300,H=150,L=36,R=12,T=14,B=28,y0=3.5,y1=5.5;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'2026-09-02 美債殖利率曲線'});
+    const x=i=>L+i*(W-L-R)/(pts.length-1), y=v=>T+(y1-v)/(y1-y0)*(H-T-B);
+    for(let v=3.5;v<=5.5;v+=0.5){svg.appendChild(el('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'var(--line)'}));svg.appendChild(el('text',{x:L-6,y:y(v)+3.5,'text-anchor':'end','font-size':'9','fill':'var(--muted)','font-family':'var(--font-mono)'},v.toFixed(1)));}
+    const d=pts.map((p,i)=>(i?'L':'M')+x(i)+','+y(p[1])).join(' ');
+    svg.appendChild(el('path',{d:d+` L${x(pts.length-1)},${y(y0)} L${x(0)},${y(y0)} Z`,fill:'var(--flow-soft)',opacity:'.7'}));
+    svg.appendChild(el('path',{d,fill:'none',stroke:'var(--flow)','stroke-width':'2'}));
+    pts.forEach((p,i)=>{svg.appendChild(el('circle',{cx:x(i),cy:y(p[1]),r:i===pts.length-1?4:3,fill:i===pts.length-1?'var(--accent)':'var(--flow)'}));
+      svg.appendChild(el('text',{x:x(i),y:y(p[1])-8,'text-anchor':'middle','font-size':'9.5','fill':'var(--ink)','font-family':'var(--font-mono)'},p[1].toFixed(2)));
+      svg.appendChild(el('text',{x:x(i),y:H-10,'text-anchor':'middle','font-size':'9.5','fill':'var(--muted)','font-family':'var(--font-mono)'},p[0]));});
+    svg.appendChild(el('text',{x:W-R,y:T-3,'text-anchor':'end','font-size':'8.5','fill':'var(--muted)'},'% · 9/2 · 橫軸為到期別，非等距'));
+    $('#yc-chart').appendChild(svg);
+  })();
+
+  /* ---------- 浴缸圖 ---------- */
+  (function(){
+    const total=6730.9, segs=[['銀行準備金',2924.9,'var(--flow)'],['TGA 財政部帳戶',950.7,'var(--accent)'],['RRP 逆回購',0.5,'var(--crit)'],['流通現金與其他',6730.9-2924.9-950.7-0.5,'var(--muted)']];
+    const W=520,H=190,L=10,R=10,barY=62,barH=44;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'Fed 負債面組成：準備金、TGA、RRP、其他'});
+    svg.appendChild(el('text',{x:L,y:16,'font-size':'11','font-weight':'700','fill':'var(--ink)'},'Fed 總資產 $6,731B（8/26）＝浴缸總水量'));
+    svg.appendChild(el('text',{x:L,y:32,'font-size':'9.5','fill':'var(--muted)'},'負債面：水只能待在這幾格；一格漲，另一格就降'));
+    let x=L; segs.forEach(s=>{const w=s[1]/total*(W-L-R); svg.appendChild(el('rect',{x,y:barY,width:Math.max(w,2),height:barH,fill:s[2]}));
+      if(w>60){svg.appendChild(el('text',{x:x+8,y:barY+18,'font-size':'10','fill':'#fff','font-weight':'600'},s[0]));svg.appendChild(el('text',{x:x+8,y:barY+34,'font-size':'11','fill':'#fff','font-family':'var(--font-mono)'},'$'+Math.round(s[1]).toLocaleString()+'B'));}
+      x+=w;});
+    svg.appendChild(el('text',{x:L+ (2924.9/total)*(W-L-R)+ (950.7/total)*(W-L-R)+4,y:barY+barH+14,'font-size':'9','fill':'var(--crit)'},'RRP ≈ $0.5B'));
+    const rw=(2924.9/total)*(W-L-R), tx=L+rw;
+    svg.appendChild(el('path',{d:`M${tx+40},${barY-6} L${tx-60},${barY-6}`,stroke:'var(--accent)','stroke-width':'1.5',fill:'none','marker-end':'url(#ah2)'}));
+    const defs=el('defs');const m=el('marker',{id:'ah2',viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'6',markerHeight:'6',orient:'auto'});m.appendChild(el('path',{d:'M0,0 L10,5 L0,10 z',fill:'var(--accent)'}));defs.appendChild(m);svg.appendChild(defs);
+    svg.appendChild(el('text',{x:tx-66,y:barY-2,'text-anchor':'end','font-size':'9.5','fill':'var(--accent-ink)'},'財政部收稅／發債 → TGA 漲 → 準備金被抽'));
+    const rows=[['2023 年中','RRP 約 $2.2T：TGA 重建時抽的是 RRP，準備金沒事'],['2025 年 9–10 月','RRP 見底，TGA 重建直接抽準備金 → SOFR 飆過 IORB，SRF 被動用'],['現在（9 月）','TGA $951B 要拉到 >$1T，且季度稅款進來——同一劇本，緩衝更少']];
+    rows.forEach((r,i)=>{const y=barY+barH+38+i*16;svg.appendChild(el('text',{x:L,y,'font-size':'9.5','fill':'var(--accent-ink)','font-family':'var(--font-mono)'},r[0]));svg.appendChild(el('text',{x:L+110,y,'font-size':'9.5','fill':'var(--ink-2)'},r[1]));});
+    $('#tub-chart').appendChild(svg);
+  })();
+
+  /* ---------- 資金地圖 ---------- */
+  const SRC=[
+    {id:'fed',n:'Fed',s:'停止 QT；短債補水 8/14 起暫停'},
+    {id:'fis',n:'財政部',s:'赤字 10 個月 $1.8T；發債'},
+    {id:'hh',n:'家庭',s:'儲蓄率 3.0%；MMF 週增'},
+    {id:'corp',n:'企業',s:'庫藏股 $1.4T；AI capex $720B+'},
+    {id:'fx',n:'海外',s:'持美債 $9.3T；央行買金'}];
+  const POOL=[
+    {id:'cash',n:'現金 MMF',s:'$7.93T · 仍在增'},
+    {id:'eq',n:'股票',s:'S&P +12% · 等權 +14.5%'},
+    {id:'ust',n:'美債',s:'10y 4.79% · 30y 5.27%'},
+    {id:'cr',n:'信用債',s:'IG 80bp · HY 265bp'},
+    {id:'au',n:'黃金／白銀',s:'$4,336 · 8 月 +9.7%，今年持平'},
+    {id:'btc',n:'幣圈',s:'BTC $76.6k · 年減 29%'},
+    {id:'re',n:'房地產',s:'房貸 6.66% · 銷售持平'},
+    {id:'pc',n:'私募信貸',s:'違約率 6.0% 新高'},
+    {id:'tw',n:'台股／台幣',s:'外資賣超 · 指數 +59%'}];
+  const EDGES={
+    near:[['hh','cash','in',3],['fed','ust','in',1],['fis','ust','mix',2],['fx','ust','in',2],['corp','eq','in',2],['hh','eq','weak',1],['fx','au','in',3],['hh','btc','mix',2],['hh','re','weak',1],['corp','cr','in',1],['fx','tw','out',3],['corp','pc','mix',1]],
+    mid:[['hh','cash','in',2],['fed','cash','mix',2],['corp','eq','in',3],['fis','ust','mix',3],['fx','ust','in',2],['fx','au','in',3],['hh','btc','mix',1],['hh','re','weak',1],['corp','pc','mix',2],['fx','tw','mix',2],['corp','cr','in',1]],
+    far:[['fis','ust','mix',3],['fx','au','in',3],['corp','eq','in',2],['fed','cash','weak',1],['fx','btc','in',1],['fx','tw','in',2],['hh','re','weak',1],['corp','pc','in',2],['fx','ust','mix',2]]};
+  const COL={in:'var(--flow)',out:'var(--crit)',mix:'var(--warn)',weak:'var(--line-strong)'};
+  const NOTES={
+    cash:{t:'現金（貨幣市場基金）',p:'價格：3 個月國庫券 3.92%，比大多數資產的「安全報酬」都高。資金流：MMF $7.93T，8/26 當週再增 $61 億。部位：政府型基金 $6.55T 是短債最大買家。',j:'三種證據一致向內。Fed 若升息，這池子只會更大；它是「嫌別的資產不夠便宜的錢」，不是隨時要進股市的錢。要看它流出，先等 Fed 轉向降息。'},
+    eq:{t:'股票',p:'價格：S&P 500 今年 +12%，預估本益比 19.6（五年均值 19.9）。資金流：8/19 當週國內股票基金 +$87 億，ETF 進、共同基金出；庫藏股估全年 $1.4T。部位：融資餘額 $1.417T 從 6 月高點降 5.7%；Mag-7 佔 33.9%。',j:'價格與企業買盤一致，散戶部位在退，但等權、小型、價值都贏過大盤——錢在股市內部往外擴散，不是離開。買家是企業自己（庫藏股）與 AI 資本支出鏈，不是家庭。EPS +30% 的預估是撐住估值的唯一支柱——這是中期最該質疑的假設。'},
+    ust:{t:'美債',p:'價格：10y 4.79%、30y 5.27%（標售 5.216% 為 2001 年來最高）——長端被賣。資金流：10y 標售間接投標 76.7% 創高（海外還在買）；Fed 每月買 $100 億短債。部位：TIC 存量月減 $720 億，但那是估值下跌。',j:'矛盾的池子：短端有人搶（MMF、Fed），長端沒人想要（赤字＋通膨＋期限溢酬）。判讀重點是「曲線在哪一段」，不是「美債」兩個字。'},
+    cr:{t:'信用債',p:'價格：IG 利差 80bp、HY 265bp，都在歷史偏窄區。資金流：8/19 當週債券基金 +$206 億，是所有類別最大。部位：本輪未查。',j:'利差窄＝市場不擔心違約；但私募信貸違約率 6.0% 創紀錄，代表壓力在公開市場看不到的地方。利差是領先指標，一旦 HY 利差從 265 跳過 350，通常股市也會跟著。'},
+    au:{t:'黃金／白銀',p:'價格：金 $4,336（9/2）、8 月 +9.7% 但今年約持平、銀 $63.9（今年 −11%）。資金流：黃金 ETF 8 月 +$171 億、今年 +$277 億；央行 Q2 買 289 噸（+62%）。部位：本輪未查 COT。',j:'三種證據最一致的池子。買家是央行與避險需求，不是通膨交易——所以金價與實質利率的舊關係暫時失效。留意 8/31–9/2 的回檔：擁擠的池子回檔很快。'},
+    btc:{t:'幣圈',p:'價格：BTC $76.6k（9/2），年減 29%。資金流：現貨 ETF 8 月 +$30 億，但今年累計約 −$23 億，9/1 又流出 $2.37 億。部位：BTC 佔比 57.6%；期貨未平倉 5 個月低。',j:'價格與年度資金流一致向外；8 月單月轉入是唯一的反向證據。錢沒往幣圈去。結構面的變化在穩定幣（$3,080 億）與 GENIUS Act——它讓穩定幣變成美債買家，這條線第 2 輪拆。'},
+    re:{t:'房地產',p:'價格：Case-Shiller 全國年增 1.5%，成屋中位數 $434,100（+2.0%）。資金流：成屋銷售 406 萬戶年率，持平；房貸申請本輪未查。部位：庫存 4.6 個月。',j:'被 6.66% 房貸利率鎖住——賣方不賣（換屋要換高利率）、買方買不起。價格不跌是因為沒有成交，不是因為需求強。商用不動產：辦公室 CMBS 違約率 8.89% 歷史新高，是壓力所在。REITs 今年 +17.7% 是例外。'},
+    pc:{t:'私募信貸',p:'價格：不公開交易，沒有價格訊號——這正是問題。資金流：規模約 $1.34T（2024 基準），仍在成長。部位：銀行對私募信貸曝險 $3,000–3,220 億；FSB、OCC、Fed 在 5 月警告 PIK 與估值不透明。',j:'違約率 6.0% 創紀錄但利差沒反應，因為它沒有市價。這是「看不到的池子」，判讀靠監理報告與銀行財報的曝險揭露，不靠行情。'},
+    tw:{t:'台股／台幣',p:'價格：加權指數 46,165（+59%），USD/TWD 31.753。資金流：外資今年賣超 NT$2.28 兆（至 7 月）、9/2 單日賣 NT$914 億。部位：期貨淨空單 85,329 口；壽險避險比率 42.89% 歷史新低。',j:'價格與外資資金流方向相反，這是全頁最大的矛盾。接手的是內資（ETF、當沖、投信）。判讀要問：內資的錢從哪來、能撐多久？台幣則跟著美債長端與壽險避險行為走。第 3 輪拆。'}};
+  function drawMap(){
+    const host=$('#money-map'); host.innerHTML='';
+    const W=780,H=560,NW=180,NH=44,SX=16,PX=W-NW-16;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'資金來源到資產池的流向圖'});
+    const sy=i=>40+i*((H-100)/(SRC.length-1)), py=i=>14+i*((H-28-NH)/(POOL.length-1));
+    const posS={},posP={}; SRC.forEach((s,i)=>posS[s.id]=sy(i)); POOL.forEach((p,i)=>posP[p.id]=py(i));
+    const g=el('g');
+    EDGES[scale].forEach(([a,b,dir,st])=>{
+      const y1=posS[a]+NH/2,y2=posP[b]+NH/2,x1=SX+NW,x2=PX,mx=(x1+x2)/2;
+      const p=el('path',{d:`M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`,fill:'none',stroke:COL[dir],'stroke-width':1.5+st*2.2,opacity:dir==='weak'?.7:.8,'stroke-linecap':'round'});
+      const t=el('title',{},`${SRC.find(s=>s.id===a).n} → ${POOL.find(q=>q.id===b).n}：${{in:'流入',out:'流出',mix:'矛盾／不確定',weak:'微弱'}[dir]}，證據強度 ${st}/3`);
+      p.appendChild(t); g.appendChild(p);});
+    svg.appendChild(g);
+    const node=(x,y,n,s,id,isPool)=>{const gg=el('g',{class:'node',tabindex:'0','data-id':id,role:isPool?'button':'img'});
+      gg.appendChild(el('rect',{x,y,width:NW,height:NH,rx:'7',fill:'var(--surface-2)',stroke:'var(--line-strong)'}));
+      gg.appendChild(el('text',{x:x+10,y:y+18,'font-size':'12','font-weight':'700',fill:'var(--ink)'},n));
+      gg.appendChild(el('text',{x:x+10,y:y+34,'font-size':'9.5',fill:'var(--ink-2)','font-family':'var(--font-mono)'},s));
+      if(isPool){gg.addEventListener('click',()=>showNote(id));gg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();showNote(id);}});}
+      return gg;};
+    SRC.forEach((s,i)=>svg.appendChild(node(SX,sy(i),s.n,s.s,s.id,false)));
+    POOL.forEach((p,i)=>svg.appendChild(node(PX,py(i),p.n,p.s,p.id,true)));
+    svg.appendChild(el('text',{x:SX,y:H-6,'font-size':'10',fill:'var(--muted)'},'來源'));
+    svg.appendChild(el('text',{x:PX,y:H-6,'font-size':'10',fill:'var(--muted)'},'池子（點擊看判讀）· 尺度：'+{near:'近期',mid:'中期',far:'拉遠'}[scale]));
+    host.appendChild(svg);}
+  function showNote(id){const n=NOTES[id];const box=$('#map-note');
+    box.innerHTML=`<b>${n.t}</b><p class="small" style="margin-top:6px">${n.p}</p><p class="small" style="margin-top:6px"><b>判讀：</b>${n.j}</p><p class="small" style="margin-top:8px"><a href="#l2" data-goto-pool="${id}">→ 到 L2 看這個池子的完整拆解</a></p>`;
+    box.querySelector('[data-goto-pool]').addEventListener('click',e=>{e.preventDefault();showPool(id);document.getElementById('l2').scrollIntoView({behavior:'smooth'});});
+    box.scrollIntoView({behavior:'smooth',block:'nearest'});}
+  drawMap();
+
+  /* ---------- 資產池分頁 ---------- */
+  const POOLMAP={cash:'cash',eq:'eq',ust:'ust',cr:'cr',au:'au',btc:'btc',re:'re',pc:'pc',tw:'fx',fx:'fx'};
+  function showPool(id){const p=POOLMAP[id]||id;
+    $$('.pool-tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.pool===p));
+    $$('.pool').forEach(x=>x.hidden=x.dataset.pool!==p);}
+  $$('.pool-tabs button').forEach(b=>b.addEventListener('click',()=>showPool(b.dataset.pool)));
+
+  /* ---------- L3 分頁 ---------- */
+  $$('.pool-tabs button[data-l3]').forEach(b=>b.addEventListener('click',()=>{
+    $$('.pool-tabs button[data-l3]').forEach(x=>x.setAttribute('aria-selected',x===b));
+    $$('.l3').forEach(x=>x.hidden=x.dataset.l3!==b.dataset.l3);}));
+
+  /* ---------- 板塊表 ---------- */
+  (function(){
+    const rows=[['XLE 能源',46.86,8.77,15.89,'−$4.75 億','漲但流出 · 獲利了結'],['XLK 科技',27.86,4.73,-3.75,'−$12.1 億','漲但流出 · 減碼擁擠部位'],['XLB 原物料',15.75,3.25,2.17,'+$1.2 億','漲且流入'],['XLI 工業',11.94,-3.95,0.01,'+$1.1 億','跌但流入 · 承接'],['XLV 健康醫療',11.84,5.61,15.36,'−$0.5 億','漲，流量持平'],['XLP 必需消費',11.12,0.24,3.53,'−$3.5 億','平但流出'],['XLRE 不動產',10.83,-2.29,0.99,'−$1.2 億','跌且流出'],['XLF 金融',5.34,0.46,11.28,'−$37.4 億','3 個月大漲後最大流出'],['XLU 公用',1.03,-4.04,-3.58,'+$0.2 億','跌，沒人買'],['XLY 非必需',-3.65,-1.29,-5.01,'+$1.5 億','跌但流入 · 逢低承接'],['XLC 通訊',-5.27,2.44,-3.91,'−$0.2 億','反彈，流量持平']];
+    const tb=$('#sector-rows'); const f=v=>(v>0?'+':'')+v.toFixed(1)+'%';
+    rows.forEach(r=>{const tr=document.createElement('tr');const w=Math.min(Math.abs(r[1]),50)/50*50;
+      tr.innerHTML=`<td class="name">${r[0]}</td><td class="n" style="color:${r[1]>=0?'var(--good)':'var(--crit)'}">${f(r[1])}</td><td class="bars"><span class="bar"><b></b><i class="${r[1]<0?'neg':''}" style="${r[1]>=0?'left:50%':'right:50%'};width:${w}%"></i></span></td><td class="n">${f(r[2])}</td><td class="n">${f(r[3])}</td><td class="n">${r[4]}</td><td class="small">${r[5]}</td>`;tb.appendChild(tr);});
+    const reit=[['旅館／度假',34.2],['特殊',31.9],['資料中心',31.0],['健康照護',25.1],['自助倉儲',16.2],['零售',15.3],['全體權益 REIT',14.5],['多元',13.9],['工業',11.1],['辦公室',10.4],['公寓',3.0],['林地',-0.1],['電塔',-2.2]];
+    const rb=$('#reit-rows');
+    reit.forEach(r=>{const tr=document.createElement('tr');const w=Math.min(Math.abs(r[1]),40)/40*50;
+      tr.innerHTML=`<td class="name">${r[0]}</td><td class="n" style="color:${r[1]>=0?'var(--good)':'var(--crit)'}">${f(r[1])}</td><td class="bars"><span class="bar"><b></b><i class="${r[1]<0?'neg':''}" style="${r[1]>=0?'left:50%':'right:50%'};width:${w}%"></i></span></td>`;rb.appendChild(tr);});
+  })();
+
+  /* ---------- 四時點曲線 ---------- */
+  (function(){
+    const ten=['1m','3m','6m','1y','2y','3y','5y','7y','10y','20y','30y'];
+    const series=[['12/31/25',[3.74,3.67,3.59,3.48,3.47,3.55,3.73,3.94,4.18,4.79,4.84],'var(--line-strong)',''],['6/2',[3.72,3.77,3.78,3.82,4.05,4.09,4.17,4.31,4.46,4.97,4.97],'var(--flow)','4 2'],['8/3',[3.79,3.91,4.02,4.07,4.25,4.32,4.40,4.54,4.70,5.23,5.23],'var(--warn)',''],['9/2',[3.83,3.92,4.00,4.16,4.39,4.45,4.54,4.66,4.79,5.27,5.27],'var(--accent)','']];
+    const W=520,H=230,L=36,R=14,T=16,B=30,y0=3.3,y1=5.5;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',role:'img','aria-label':'四個時點的美債殖利率曲線'});
+    const x=i=>L+i*(W-L-R)/(ten.length-1), y=v=>T+(y1-v)/(y1-y0)*(H-T-B);
+    for(let v=3.5;v<=5.5;v+=0.5){svg.appendChild(el('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'var(--line)'}));svg.appendChild(el('text',{x:L-6,y:y(v)+3.5,'text-anchor':'end','font-size':'9','fill':'var(--muted)','font-family':'var(--font-mono)'},v.toFixed(1)));}
+    ten.forEach((t,i)=>svg.appendChild(el('text',{x:x(i),y:H-12,'text-anchor':'middle','font-size':'9.5','fill':'var(--muted)','font-family':'var(--font-mono)'},t)));
+    series.forEach(([n,v,c,d],k)=>{const p=v.map((q,i)=>(i?'L':'M')+x(i)+','+y(q)).join(' ');
+      svg.appendChild(el('path',{d:p,fill:'none',stroke:c,'stroke-width':k===3?2.4:1.6,'stroke-dasharray':d}));
+      svg.appendChild(el('text',{x:W-R-2,y:y(v[10])+[13,5,10,-4][k],'text-anchor':'end','font-size':'9','fill':c,'font-weight':'700'},n));});
+    svg.appendChild(el('text',{x:x(4),y:y(3.47)+14,'text-anchor':'middle','font-size':'9','fill':'var(--accent-ink)'},'2 年 +92bp'));
+    svg.appendChild(el('text',{x:x(8)+10,y:y(4.18)+16,'text-anchor':'middle','font-size':'9','fill':'var(--accent-ink)'},'10 年 +61bp · 30 年 +43bp'));
+    $('#yc4-chart').appendChild(svg);
+  })();
+
+  /* ---------- L4 分頁 ---------- */
+  $$('.pool-tabs button[data-l4]').forEach(b=>b.addEventListener('click',()=>{
+    $$('.pool-tabs button[data-l4]').forEach(x=>x.setAttribute('aria-selected',x===b));
+    $$('[data-l4]').forEach(x=>{if(x.tagName!=='BUTTON')x.hidden=x.dataset.l4!==b.dataset.l4;});}));
+
+  /* ---------- AI 鏈圖 ---------- */
+  (function(){
+    const W=900,H=330;const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'AI 資本支出鏈：資金來源到台灣供應鏈'});
+    const defs=el('defs');const m=el('marker',{id:'ah3',viewBox:'0 0 10 10',refX:'9',refY:'5',markerWidth:'7',markerHeight:'7',orient:'auto'});m.appendChild(el('path',{d:'M0,0 L10,5 L0,10 z',fill:'var(--flow)'}));defs.appendChild(m);
+    const m2=el('marker',{id:'ah4',viewBox:'0 0 10 10',refX:'9',refY:'5',markerWidth:'7',markerHeight:'7',orient:'auto'});m2.appendChild(el('path',{d:'M0,0 L10,5 L0,10 z',fill:'var(--accent)'}));defs.appendChild(m2);svg.appendChild(defs);
+    const box=(x,y,w,h,t,sub,strong)=>{svg.appendChild(el('rect',{x,y,width:w,height:h,rx:'7',fill:strong?'var(--accent-soft)':'var(--surface-2)',stroke:strong?'var(--accent)':'var(--line-strong)'}));
+      svg.appendChild(el('text',{x:x+10,y:y+19,'font-size':'12','font-weight':'700',fill:'var(--ink)'},t));
+      sub.forEach((l,i)=>svg.appendChild(el('text',{x:x+10,y:y+36+i*14,'font-size':'9.5',fill:'var(--ink-2)','font-family':'var(--font-mono)'},l)));};
+    const arrow=(x1,y1,x2,y2,label,acc)=>{svg.appendChild(el('path',{d:`M${x1},${y1} L${x2},${y2}`,stroke:acc?'var(--accent)':'var(--flow)','stroke-width':'2',fill:'none','marker-end':acc?'url(#ah4)':'url(#ah3)'}));
+      if(label)svg.appendChild(el('text',{x:(x1+x2)/2,y:Math.min(y1,y2)-6,'text-anchor':'middle','font-size':'9','fill':acc?'var(--accent-ink)':'var(--flow)'},label));};
+    // main row
+    const y=70,h=78;
+    box(10,y,150,h,'資金來源',['營運現金流','債券 ≈$2,200 億（今年）','合資／表外 $140 億'],false);
+    box(200,y,160,h,'雲端商資本支出',['2026 ≈$7,600 億','GOOGL/AMZN/ORCL FCF 轉負','RPO 各 ≈$5,000 億'],true);
+    box(400,y,150,h,'NVIDIA',['資料中心 $890 億/季','存貨 $214→316 億','採購承諾 $2,790 億'],true);
+    box(590,y,140,h,'台積電',['7 月營收 +44.7%','資本支出 $600–640 億','CoWoS 9→12 萬片'],true);
+    box(770,y,120,h,'台灣組裝廠',['鴻海 +54%','廣達 +131%','緯創 +61%'],false);
+    arrow(160,y+h/2,200,y+h/2,'',false);arrow(360,y+h/2,400,y+h/2,'下單',false);arrow(550,y+h/2,590,y+h/2,'投片',false);arrow(730,y+h/2,770,y+h/2,'交機',false);
+    // second-order row
+    const y2=200,h2=62;
+    box(200,y2,150,h2,'記憶體 Micron',['FQ3 營收 +346%','HBM4 量產'],false);
+    box(370,y2,150,h2,'網通 Broadcom',['AI 營收 +221%','FQ4 指引 $217 億'],false);
+    box(540,y2,150,h2,'光通訊',['Lumentum +109%','Coherent DC +59%'],false);
+    box(710,y2,170,h2,'電力',['GE Vernova 訂單 +88%','PJM 缺口 6.8 GW'],false);
+    [275,445,615,795].forEach(x=>arrow(x,y+h,x,y2,'',false));
+    svg.appendChild(el('text',{x:10,y:y2+20,'font-size':'10','fill':'var(--muted)'},'二階供應鏈'));
+    svg.appendChild(el('text',{x:10,y:y2+34,'font-size':'9','fill':'var(--muted)'},'（同一筆資本支出的'));
+    svg.appendChild(el('text',{x:10,y:y2+46,'font-size':'9','fill':'var(--muted)'},'其他去向）'));
+    // back to macro
+    svg.appendChild(el('text',{x:10,y:24,'font-size':'10','font-weight':'700','fill':'var(--accent-ink)'},'接回總體 →'));
+    svg.appendChild(el('text',{x:90,y:24,'font-size':'9.5','fill':'var(--ink-2)'},'股市：Q2 盈餘 Mag-7 +118.5% vs 其餘 +31.8%　美債：AI 債 ≈ 投資級發行 15%　台股：台積電權重 41.5%'));
+    svg.appendChild(el('text',{x:10,y:H-12,'font-size':'9.5','fill':'var(--muted)'},'錢的流向：左 → 右。壓力的流向：右 → 左（下游先看到營收放緩，上游先看到應收與存貨堆高）。'));
+    $('#chain').appendChild(svg);
+  })();
+
+  /* ---------- 指標表篩選 ---------- */
+  $$('#ind-filters button').forEach(b=>b.addEventListener('click',()=>{
+    $$('#ind-filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    const f=b.dataset.f; $$('#ind-rows tr').forEach(tr=>tr.hidden=f!=='all'&&tr.dataset.f!==f);}));
+
+  /* ---------- 檢查清單 ---------- */
+  $$('#checklist input').forEach(c=>{try{c.checked=localStorage.getItem('mf-'+c.dataset.k)==='1';}catch(e){}
+    c.addEventListener('change',()=>{try{localStorage.setItem('mf-'+c.dataset.k,c.checked?'1':'0');}catch(e){}});});
+})();
+</script>
+
+</body></html>
